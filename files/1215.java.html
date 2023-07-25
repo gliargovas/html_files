@@ -196,106 +196,198 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
-<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.alibaba.ttl3.executor</span><span class="p">;</span><span class="w"></span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2014, 2015 Cisco Systems, Inc. and others.  All rights reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This program and the accompanying materials are made available under the</span>
+<span class="cm"> * terms of the Eclipse Public License v1.0 which accompanies this distribution,</span>
+<span class="cm"> * and is available at http://www.eclipse.org/legal/epl-v10.html</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.example</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.alibaba.ttl3.TransmittableThreadLocal</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.alibaba.ttl3.TtlCallable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.alibaba.ttl3.TtlRunnable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.alibaba.ttl3.spi.TtlEnhanced</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.NonNull</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.ActorRef</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.Cancellable</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.Props</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.common.actor.AbstractUntypedActor</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.example.messages.RegisterListener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.notifications.RegisterRoleChangeListener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.notifications.RegisterRoleChangeListenerReply</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.notifications.RoleChangeNotification</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scala.concurrent.Await</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scala.concurrent.duration.FiniteDuration</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * {@link TransmittableThreadLocal} Wrapper of {@link ExecutorService},</span>
-<span class="cm"> * transmit the {@link TransmittableThreadLocal} from the task submit time of {@link Runnable} or {@link Callable}</span>
-<span class="cm"> * to the execution time of {@link Runnable} or {@link Callable}.</span>
+<span class="cm"> * This is a sample implementation of a Role Change Listener which is an actor, which registers itself</span>
+<span class="cm"> * to the ClusterRoleChangeNotifier.</span>
 <span class="cm"> *</span>
-<span class="cm"> * @author Jerry Lee (oldratlee at gmail dot com)</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * The Role Change listener receives a SetNotifiers message with the notifiers to register itself with.</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * It kicks of a scheduler which sends registration messages to the notifiers, till it gets a</span>
+<span class="cm"> *  RegisterRoleChangeListenerReply.</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * If all the notifiers have been regsitered with, then it cancels the scheduler.</span>
+<span class="cm"> * It starts the scheduler again when it receives a new registration</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="kd">class</span> <span class="nc">ExecutorServiceTtlWrapper</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ExecutorTtlWrapper</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ExecutorService</span><span class="p">,</span><span class="w"> </span><span class="n">TtlEnhanced</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executorService</span><span class="p">;</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExampleRoleChangeListener</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractUntypedActor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AutoCloseable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// the akka url should be set to the notifiers actor-system and domain.</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">NOTIFIER_AKKA_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;akka://raft-test@127.0.0.1:2550/user/&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">ExecutorServiceTtlWrapper</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executorService</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">idempotent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">executorService</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">executorService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">executorService</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">notifierRegistrationStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Cancellable</span><span class="w"> </span><span class="n">registrationSchedule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FiniteDuration</span><span class="w"> </span><span class="n">DURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FiniteDuration</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FiniteDuration</span><span class="w"> </span><span class="n">SCHEDULER_DURATION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FiniteDuration</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">SHARDS_TO_MONITOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;example&quot;</span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ExampleRoleChangeListener</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">memberName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">scheduleRegistrationListener</span><span class="p">(</span><span class="n">SCHEDULER_DURATION</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">populateRegistry</span><span class="p">(</span><span class="n">memberName</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Props</span><span class="w"> </span><span class="nf">getProps</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">memberName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Props</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">ExampleRoleChangeListener</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">memberName</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">executorService</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleReceive</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">RegisterListener</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// called by the scheduler at intervals to register any unregistered notifiers</span><span class="w"></span>
+<span class="w">            </span><span class="n">sendRegistrationRequests</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">RegisterRoleChangeListenerReply</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// called by the Notifier</span><span class="w"></span>
+<span class="w">            </span><span class="n">handleRegisterRoleChangeListenerReply</span><span class="p">(</span><span class="n">getSender</span><span class="p">().</span><span class="na">path</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">message</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">RoleChangeNotification</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// called by the Notifier</span><span class="w"></span>
+<span class="w">            </span><span class="n">RoleChangeNotification</span><span class="w"> </span><span class="n">notification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">RoleChangeNotification</span><span class="p">)</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Role Change Notification received for member:{}, old role:{}, new role:{}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">notification</span><span class="p">.</span><span class="na">getMemberId</span><span class="p">(),</span><span class="w"> </span><span class="n">notification</span><span class="p">.</span><span class="na">getOldRole</span><span class="p">(),</span><span class="w"> </span><span class="n">notification</span><span class="p">.</span><span class="na">getNewRole</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">// the apps dependent on such notifications can be called here</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//TODO: add implementation here</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">shutdownNow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">scheduleRegistrationListener</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">FiniteDuration</span><span class="w"> </span><span class="n">interval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;---&gt;scheduleRegistrationListener called.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">registrationSchedule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getContext</span><span class="p">().</span><span class="na">system</span><span class="p">().</span><span class="na">scheduler</span><span class="p">().</span><span class="na">schedule</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="n">interval</span><span class="p">,</span><span class="w"> </span><span class="n">getSelf</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RegisterListener</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">getContext</span><span class="p">().</span><span class="na">system</span><span class="p">().</span><span class="na">dispatcher</span><span class="p">(),</span><span class="w"> </span><span class="n">getSelf</span><span class="p">());</span><span class="w"></span>
+
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isShutdown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">isShutdown</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">populateRegistry</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">memberName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">notifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">().</span><span class="na">append</span><span class="p">(</span><span class="n">NOTIFIER_AKKA_URL</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">memberName</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">memberName</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;-notifier&quot;</span><span class="p">).</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">notifier</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">notifier</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">registrationSchedule</span><span class="p">.</span><span class="na">isCancelled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">scheduleRegistrationListener</span><span class="p">(</span><span class="n">SCHEDULER_DURATION</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isTerminated</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">isTerminated</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:IllegalCatch&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRegistrationRequests</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;{} registering with {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getSelf</span><span class="p">().</span><span class="na">path</span><span class="p">().</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">());</span><span class="w"></span>
+<span class="w">                    </span><span class="n">ActorRef</span><span class="w"> </span><span class="n">notifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Await</span><span class="p">.</span><span class="na">result</span><span class="p">(</span><span class="w"></span>
+<span class="w">                        </span><span class="n">getContext</span><span class="p">().</span><span class="na">actorSelection</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">()).</span><span class="na">resolveOne</span><span class="p">(</span><span class="n">DURATION</span><span class="p">),</span><span class="w"> </span><span class="n">DURATION</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">notifier</span><span class="p">.</span><span class="na">tell</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RegisterRoleChangeListener</span><span class="p">(),</span><span class="w"> </span><span class="n">getSelf</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;ERROR!! Unable to send registration request to notifier {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">awaitTermination</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">awaitTermination</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleRegisterRoleChangeListenerReply</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">senderId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">senderId</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">senderId</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1">//cancel the schedule when listener is registered with all notifiers</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">registrationSchedule</span><span class="p">.</span><span class="na">isCancelled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="kt">boolean</span><span class="w"> </span><span class="n">cancelScheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">notifierRegistrationStatus</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">cancelScheduler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cancelScheduler</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cancelScheduler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">registrationSchedule</span><span class="p">.</span><span class="na">cancel</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="w"></span>
+<span class="w">                </span><span class="s">&quot;Unexpected, RegisterRoleChangeListenerReply received from notifier which is not known to Listener:{}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">senderId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="n">TtlCallable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">submit</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="n">TtlRunnable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">),</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Future</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">submit</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">submit</span><span class="p">(</span><span class="n">TtlRunnable</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">invokeAll</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tasks</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">invokeAll</span><span class="p">(</span><span class="n">TtlCallable</span><span class="p">.</span><span class="na">gets</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Future</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">invokeAll</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">invokeAll</span><span class="p">(</span><span class="n">TtlCallable</span><span class="p">.</span><span class="na">gets</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">),</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">invokeAny</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tasks</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">,</span><span class="w"> </span><span class="n">ExecutionException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">invokeAny</span><span class="p">(</span><span class="n">TtlCallable</span><span class="p">.</span><span class="na">gets</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">invokeAny</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">,</span><span class="w"> </span><span class="n">ExecutionException</span><span class="p">,</span><span class="w"> </span><span class="n">TimeoutException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">.</span><span class="na">invokeAny</span><span class="p">(</span><span class="n">TtlCallable</span><span class="p">.</span><span class="na">gets</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">idempotent</span><span class="p">),</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ExecutorService</span><span class="w"> </span><span class="nf">unwrap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">executorService</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">registrationSchedule</span><span class="p">.</span><span class="na">cancel</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

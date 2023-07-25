@@ -202,148 +202,112 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.alibaba.dcm</span><span class="p">;</span><span class="w"></span>
+<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.ReturnValuesAreNonnullByDefault</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.ParametersAreNonnullByDefault</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.concurrent.Immutable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.Serializable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.text.SimpleDateFormat</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * DNS cache entry(DNS record).</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Jerry Lee (oldratlee at gmail dot com)</span>
-<span class="cm"> * @see DnsCache</span>
+<span class="cm"> * Removes the specified item listener. If there is no such listener added before, this call does no change in the</span>
+<span class="cm"> * cluster and returns false.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@Immutable</span><span class="w"></span>
-<span class="nd">@ParametersAreNonnullByDefault</span><span class="w"></span>
-<span class="nd">@ReturnValuesAreNonnullByDefault</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DnsCacheEntry</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">7476648934387757732L</span><span class="p">;</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;bbb90c0be873f388ef26676feace4272&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">QueueRemoveListenerCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x031200</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">201216</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x031201</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">201217</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BOOLEAN_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">ips</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">expiration</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">QueueRemoveListenerCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * get host name/domain name of DNS cache entry(DNS record).</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getHost</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">host</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of the Queue</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Id of the listener registration.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">registrationId</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">registrationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;Queue.RemoveListener&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">registrationId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">QueueRemoveListenerCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">registrationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * get ips of DNS cache entry(DNS record).</span>
+<span class="cm">     * True if the item listener is removed, false otherwise</span>
 <span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">getIps</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ips</span><span class="p">.</span><span class="na">clone</span><span class="p">();</span><span class="w"> </span><span class="c1">// defensive copy</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * get the first ip of {@link #getIps()}</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getIp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ips</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * get the expiration of DNS cache entry(DNS record).</span>
-<span class="cm">     * &lt;p&gt;</span>
-<span class="cm">     * return value {@link Long#MAX_VALUE} means &quot;never expiration&quot;.</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="nf">getExpiration</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">expiration</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Construct a {@link DnsCacheEntry}.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @deprecated use {@link #DnsCacheEntry(String, String[], long)} instead</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Deprecated</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DnsCacheEntry</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">ips</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="n">expiration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">host</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ips</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ips</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">expiration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expiration</span><span class="p">.</span><span class="na">getTime</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Construct a {@link DnsCacheEntry}.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @since 1.6.0</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DnsCacheEntry</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">ips</span><span class="p">,</span><span class="w"></span>
-<span class="w">                         </span><span class="kt">long</span><span class="w"> </span><span class="n">expiration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">host</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ips</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ips</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">expiration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expiration</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * {@inheritDoc}</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="w"> </span><span class="n">dateFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&quot;yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;DnsCacheEntry{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;host=&#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;\&#39;&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;, ips=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">ips</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;, expiration=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dateFormat</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">expiration</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">                </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * {@inheritDoc}</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">DnsCacheEntry</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DnsCacheEntry</span><span class="p">)</span><span class="w"> </span><span class="n">o</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">expiration</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">expiration</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">host</span><span class="p">))</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">ips</span><span class="p">,</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">ips</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * {@inheritDoc}</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">host</span><span class="p">.</span><span class="na">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">31</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">hashCode</span><span class="p">(</span><span class="n">ips</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">31</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">expiration</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">expiration</span><span class="w"> </span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="mi">32</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">decodeResponse</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">decodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

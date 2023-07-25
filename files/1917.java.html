@@ -253,164 +253,482 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">156</span>
 <span class="normal">157</span>
 <span class="normal">158</span>
-<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
-<span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
-<span class="cm"> * distributed with this work for additional information</span>
-<span class="cm"> * regarding copyright ownership.  The ASF licenses this file</span>
-<span class="cm"> * to you under the Apache License, Version 2.0 (the</span>
-<span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
-<span class="cm"> * with the License.  You may obtain a copy of the License at</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
 <span class="cm"> *</span>
-<span class="cm"> *   https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *  * Copyright (c) 2016. David Sowerby</span>
+<span class="cm"> *  *</span>
+<span class="cm"> *  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm"> *  * the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *  *</span>
+<span class="cm"> *  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on</span>
+<span class="cm"> *  * an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the</span>
+<span class="cm"> *  * specific language governing permissions and limitations under the License.</span>
 <span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing,</span>
-<span class="cm"> * software distributed under the License is distributed on an</span>
-<span class="cm"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="cm"> * KIND, either express or implied.  See the License for the</span>
-<span class="cm"> * specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.harness</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.collect.MoreCollectors.onlyElement</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.ui</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.SecureRandom</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map.Entry</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.Scanner</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Key</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Value</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.FileUtils</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.extension.RegisterExtension</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Provider</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.server.ErrorHandler</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.AbstractOrderedLayout</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.ComboBox</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Component</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.HorizontalLayout</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.HorizontalSplitPanel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Panel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.VerticalLayout</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">net.engio.mbassy.listener.Handler</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">net.engio.mbassy.listener.Listener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.i18n.DescriptionKey</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.i18n.I18NProcessor</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.i18n.LabelKey</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.navigate.Navigator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.option.VaadinOptionContext</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.push.Broadcaster</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.push.KrailPushConfiguration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.push.PushMessageRouter</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.user.notify.VaadinNotification</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.ApplicationHeader</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.ApplicationLogo</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.LocaleSelector</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.MessageBar</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.PageNavigationPanel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.UserNavigationMenu</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.UserNavigationTree</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.view.component.UserStatusPanel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.eventbus.GlobalMessageBus</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.eventbus.SubscribeTo</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.i18n.CurrentLocale</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.i18n.Translate</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.Option</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.OptionChangeMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.OptionKey</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.util.guice.SerializationSupport</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * Methods, setup and/or infrastructure which are common to any Accumulo integration test.</span>
+<span class="cm"> * A common layout for a business-type application. This is a good place to start even if you replace it eventually.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author David Sowerby</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AccumuloITBase</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">WithTestNames</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SecureRandom</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AccumuloITBase</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@Listener</span><span class="w"></span>
+<span class="nd">@SubscribeTo</span><span class="p">(</span><span class="n">GlobalMessageBus</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultApplicationUI</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ScopedUI</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">VaadinOptionContext</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">STANDALONE_CAPABLE_CLUSTER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;StandaloneCapableCluster&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">SUNNY_DAY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SunnyDay&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">MINI_CLUSTER_ONLY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MiniClusterOnly&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ZOOKEEPER_TESTING_SERVER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ZooKeeperTestingServer&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionBreadcrumbVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultApplicationUI</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LabelKey</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">Breadcrumb_is_Visible</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">DescriptionKey</span><span class="p">.</span><span class="na">Breadcrumb_is_Visible</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionNavTreeVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultApplicationUI</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LabelKey</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">Navigation_Tree_is_Visible</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">DescriptionKey</span><span class="p">.</span><span class="na">Navigation_Tree_is_Visible</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionMenuVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultApplicationUI</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LabelKey</span><span class="p">.</span><span class="na">Navigation_Menu_is_Visible</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">DescriptionKey</span><span class="p">.</span><span class="na">Navigation_Menu_is_Visible</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionMessageBarVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultApplicationUI</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LabelKey</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">Message_bar_is_Visible</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">DescriptionKey</span><span class="p">.</span><span class="na">MessageBar_is_Visible</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionSubPagePanelVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OptionKey</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">Boolean</span><span class="p">.</span><span class="na">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultApplicationUI</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LabelKey</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">SubPage_Panel_is_Visible</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">DescriptionKey</span><span class="p">.</span><span class="na">SubPage_Panel_is_Visible</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getOnlyElement</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">onlyElement</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserNavigationTree</span><span class="w"> </span><span class="n">navTree</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PageNavigationPanel</span><span class="w"> </span><span class="n">breadcrumb</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserStatusPanel</span><span class="w"> </span><span class="n">userStatus</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserNavigationMenu</span><span class="w"> </span><span class="n">menu</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PageNavigationPanel</span><span class="w"> </span><span class="n">subpage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MessageBar</span><span class="w"> </span><span class="n">messageBar</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ApplicationLogo</span><span class="w"> </span><span class="n">logo</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ApplicationHeader</span><span class="w"> </span><span class="n">header</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">LocaleSelector</span><span class="w"> </span><span class="n">localeSelector</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// this appears not to be used but does receive bus messages</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">VaadinNotification</span><span class="w"> </span><span class="n">vaadinNotification</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">VerticalLayout</span><span class="w"> </span><span class="n">baseLayout</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="n">headerRow</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">VerticalLayout</span><span class="w"> </span><span class="n">mainArea</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">Panel</span><span class="w"> </span><span class="n">nonSplitPanel</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">HorizontalSplitPanel</span><span class="w"> </span><span class="n">splitPanel</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ComboBox</span><span class="o">&lt;</span><span class="n">Locale</span><span class="o">&gt;</span><span class="w"> </span><span class="n">localeCombo</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Option</span><span class="w"> </span><span class="n">option</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Key</span><span class="p">,</span><span class="n">Value</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getOnlyElement</span><span class="p">(</span><span class="n">Scanner</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">collect</span><span class="p">(</span><span class="n">onlyElement</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">getUniqueNames</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="n">num</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">names</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">testName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">names</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * Determines an appropriate directory name for holding generated ssl files for a test. The</span>
-<span class="cm">   * directory returned will have the same name as the provided directory, but with the suffix</span>
-<span class="cm">   * &quot;-ssl&quot; appended. This new directory is not created here, but is expected to be created as</span>
-<span class="cm">   * needed.</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param baseDir</span>
-<span class="cm">   *          the original directory, which the new directory will be created next to; it should</span>
-<span class="cm">   *          exist</span>
-<span class="cm">   * @return the new directory (is not created)</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="nf">getSslDir</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">baseDir</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">baseDir</span><span class="p">.</span><span class="na">exists</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">baseDir</span><span class="p">.</span><span class="na">isDirectory</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">baseDir</span><span class="p">.</span><span class="na">getParentFile</span><span class="p">(),</span><span class="w"> </span><span class="n">baseDir</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-ssl&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="nf">createTestDir</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">baseDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;user.dir&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/target/mini-tests&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">baseDir</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">baseDir</span><span class="p">.</span><span class="na">isDirectory</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">baseDir</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">testDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">baseDir</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">FileUtils</span><span class="p">.</span><span class="na">deleteQuietly</span><span class="p">(</span><span class="n">testDir</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">testDir</span><span class="p">.</span><span class="na">mkdir</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">testDir</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * If a given IT test has a method that takes longer than a class-set default timeout, declare it</span>
-<span class="cm">   * failed.</span>
-<span class="cm">   * &lt;p&gt;</span>
-<span class="cm">   * Note that this provides an upper bound on test times, even in the presence of Test annotations</span>
-<span class="cm">   * with a timeout. That is, the Test annotation can make the timing tighter but will not be able</span>
-<span class="cm">   * to allow a timeout that takes longer.</span>
-<span class="cm">   * &lt;p&gt;</span>
-<span class="cm">   * Defaults to no timeout and can be changed via two mechanisms</span>
-<span class="cm">   * &lt;p&gt;</span>
-<span class="cm">   * 1) A given IT class can override the defaultTimeoutSeconds method if test methods in that class</span>
-<span class="cm">   * should have a timeout. 2) The system property &quot;timeout.factor&quot; is used as a multiplier for the</span>
-<span class="cm">   * class provided default</span>
-<span class="cm">   * &lt;p&gt;</span>
-<span class="cm">   * Note that if either of these values is &#39;0&#39; tests will run with (effectively) no timeout (a</span>
-<span class="cm">   * timeout of 5 days will be applied). The default class level timeout is set to 0.</span>
-<span class="cm">   *</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@RegisterExtension</span><span class="w"></span>
-<span class="w">  </span><span class="n">Timeout</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Timeout</span><span class="p">.</span><span class="na">from</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">defaultTimeout</span><span class="p">().</span><span class="na">isZero</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;defaultTimeout should not return 0&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">timeoutFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">timeoutString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;timeout.factor&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeoutString</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">timeoutString</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">timeoutFactor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">timeoutString</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NumberFormatException</span><span class="w"> </span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Could not parse timeout.factor, defaulting to no timeout.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;FCBL_FIELD_COULD_BE_LOCAL&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">DefaultApplicationUI</span><span class="p">(</span><span class="n">Navigator</span><span class="w"> </span><span class="n">navigator</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorHandler</span><span class="w"> </span><span class="n">errorHandler</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationLogo</span><span class="w"> </span><span class="n">logo</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationHeader</span><span class="w"></span>
+<span class="w">            </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">UserStatusPanel</span><span class="w"> </span><span class="n">userStatusPanel</span><span class="p">,</span><span class="w"> </span><span class="n">UserNavigationMenu</span><span class="w"> </span><span class="n">menu</span><span class="p">,</span><span class="w"> </span><span class="n">UserNavigationTree</span><span class="w"> </span><span class="n">navTree</span><span class="p">,</span><span class="w"> </span><span class="n">Provider</span><span class="o">&lt;</span><span class="n">PageNavigationPanel</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pageNavigationPanelProvider</span><span class="p">,</span><span class="w"> </span><span class="n">MessageBar</span><span class="w"> </span><span class="n">messageBar</span><span class="p">,</span><span class="w"> </span><span class="n">Broadcaster</span><span class="w"> </span><span class="n">broadcaster</span><span class="p">,</span><span class="w"> </span><span class="n">PushMessageRouter</span><span class="w"> </span><span class="n">pushMessageRouter</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationTitle</span><span class="w"> </span><span class="n">applicationTitle</span><span class="p">,</span><span class="w"> </span><span class="n">Translate</span><span class="w"> </span><span class="n">translate</span><span class="p">,</span><span class="w"> </span><span class="n">CurrentLocale</span><span class="w"> </span><span class="n">currentLocale</span><span class="p">,</span><span class="w"> </span><span class="n">I18NProcessor</span><span class="w"> </span><span class="n">translator</span><span class="p">,</span><span class="w"> </span><span class="n">LocaleSelector</span><span class="w"> </span><span class="n">localeSelector</span><span class="p">,</span><span class="w"> </span><span class="n">VaadinNotification</span><span class="w"> </span><span class="n">vaadinNotification</span><span class="p">,</span><span class="w"> </span><span class="n">Option</span><span class="w"> </span><span class="n">option</span><span class="p">,</span><span class="w"> </span><span class="n">SerializationSupport</span><span class="w"> </span><span class="n">serializationSupport</span><span class="p">,</span><span class="w"> </span><span class="n">KrailPushConfiguration</span><span class="w"> </span><span class="n">pushConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">navigator</span><span class="p">,</span><span class="w"> </span><span class="n">errorHandler</span><span class="p">,</span><span class="w"> </span><span class="n">broadcaster</span><span class="p">,</span><span class="w"> </span><span class="n">pushMessageRouter</span><span class="p">,</span><span class="w"> </span><span class="n">applicationTitle</span><span class="p">,</span><span class="w"> </span><span class="n">translate</span><span class="p">,</span><span class="w"> </span><span class="n">currentLocale</span><span class="p">,</span><span class="w"> </span><span class="n">translator</span><span class="p">,</span><span class="w"> </span><span class="n">serializationSupport</span><span class="p">,</span><span class="w"> </span><span class="n">pushConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">navTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navTree</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">breadcrumb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pageNavigationPanelProvider</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">userStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userStatusPanel</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">menu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">menu</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">subpage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pageNavigationPanelProvider</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">messageBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">messageBar</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">logo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logo</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">localeSelector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localeSelector</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">vaadinNotification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaadinNotification</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">option</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// if the user sets a timeout factor of 0, apply a very long timeout (effectively no timeout)</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeoutFactor</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">AbstractOrderedLayout</span><span class="w"> </span><span class="nf">screenLayout</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">buildPage</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">baseLayout</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">defaultTimeout</span><span class="p">().</span><span class="na">multipliedBy</span><span class="p">(</span><span class="n">timeoutFactor</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">buildPage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">localeCombo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ComboBox</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">localeCombo</span><span class="p">.</span><span class="na">setEmptySelectionAllowed</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">localeCombo</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="mi">250</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;px&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">localeSelector</span><span class="p">.</span><span class="na">setCombo</span><span class="p">(</span><span class="n">localeCombo</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">headerRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">headerRow</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">messageBar</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">subPagePanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">getBaseLayout</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">mainArea</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">navTree</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">navMenu</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">breadcrumb</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">splitPanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">nonSplitPanel</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * Time to wait per-method before declaring a timeout, in seconds.</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="nf">defaultTimeout</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">setSizesForInjectComponents</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">headerRow</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">menu</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">splitPanel</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">nonSplitPanel</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UI_INHERITANCE_UNSAFE_GETRESOURCE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;for testing&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="nf">initJar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">jarResourcePath</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">namePrefix</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">testDir</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">testFileDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">testDir</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">jar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="na">createTempFile</span><span class="p">(</span><span class="n">namePrefix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">testFileDir</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getResource</span><span class="p">(</span><span class="n">jarResourcePath</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">url</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Can&#39;t find the jar: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">jarResourcePath</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionNavTreeVisible</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">splitPanel</span><span class="p">,</span><span class="w"> </span><span class="mf">1f</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">nonSplitPanel</span><span class="p">,</span><span class="w"> </span><span class="mf">0f</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">nonSplitPanel</span><span class="p">,</span><span class="w"> </span><span class="mf">1f</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">splitPanel</span><span class="p">,</span><span class="w"> </span><span class="mf">0f</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">messageBar</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">FileUtils</span><span class="p">.</span><span class="na">copyInputStreamToFile</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="na">openStream</span><span class="p">(),</span><span class="w"> </span><span class="n">jar</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">jar</span><span class="p">.</span><span class="na">deleteOnExit</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">jar</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">headerRow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">HorizontalLayout</span><span class="w"> </span><span class="n">headerRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HorizontalLayout</span><span class="p">(</span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">localeCombo</span><span class="p">,</span><span class="w"> </span><span class="n">userStatus</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">headerRow</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="s">&quot;100%&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">headerRow</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="mf">1f</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">headerRow</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSizesForInjectComponents</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">logo</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="s">&quot;100px&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">logo</span><span class="p">.</span><span class="na">setHeight</span><span class="p">(</span><span class="s">&quot;100px&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">header</span><span class="p">.</span><span class="na">setHeight</span><span class="p">(</span><span class="s">&quot;100%&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">userStatus</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">navTree</span><span class="p">.</span><span class="na">setSizeFull</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">breadcrumb</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">menu</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">menu</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="s">&quot;100%&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">subpage</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">messageBar</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">messageBar</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="s">&quot;100%&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">messageBar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">messageBar</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionMessageBarVisible</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">subPagePanel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">subpage</span><span class="p">.</span><span class="na">configureAsSubPagePanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">subpage</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionSubPagePanelVisible</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">breadcrumb</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">breadcrumb</span><span class="p">.</span><span class="na">configureAsBreadcrumb</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">breadcrumb</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionBreadcrumbVisible</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">navTree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionNavTreeVisible</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">navTree</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">navTree</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">navTree</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">navMenu</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionMenuVisible</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">menu</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">menu</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">menu</span><span class="p">.</span><span class="na">getMenuBar</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">menu</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mainArea</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mainArea</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">mainArea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VerticalLayout</span><span class="p">(</span><span class="n">breadcrumb</span><span class="p">,</span><span class="w"> </span><span class="n">getViewDisplayPanel</span><span class="p">(),</span><span class="w"> </span><span class="n">subpage</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">mainArea</span><span class="p">.</span><span class="na">setSizeFull</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">mainArea</span><span class="p">.</span><span class="na">setExpandRatio</span><span class="p">(</span><span class="n">getViewDisplayPanel</span><span class="p">(),</span><span class="w"> </span><span class="mf">1f</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">splitPanel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">splitPanel</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HorizontalSplitPanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setWidth</span><span class="p">(</span><span class="s">&quot;100%&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setSplitPosition</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">Unit</span><span class="p">.</span><span class="na">PIXELS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionNavTreeVisible</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setFirstComponent</span><span class="p">(</span><span class="n">navTree</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setSecondComponent</span><span class="p">(</span><span class="n">mainArea</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">splitPanel</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * used wqhen nav tree not required, and split panel also therefore not required</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">nonSplitPanel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nonSplitPanel</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">nonSplitPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">nonSplitPanel</span><span class="p">.</span><span class="na">setSizeFull</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">option</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">optionNavTreeVisible</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">nonSplitPanel</span><span class="p">.</span><span class="na">setContent</span><span class="p">(</span><span class="n">mainArea</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">nonSplitPanel</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">nonSplitPanel</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">VerticalLayout</span><span class="w"> </span><span class="nf">getBaseLayout</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">baseLayout</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">baseLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">VerticalLayout</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">baseLayout</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MessageBar</span><span class="w"> </span><span class="nf">getMessageBar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">messageBar</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserNavigationTree</span><span class="w"> </span><span class="nf">getNavTree</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">navTree</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PageNavigationPanel</span><span class="w"> </span><span class="nf">getBreadcrumb</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">breadcrumb</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserStatusPanel</span><span class="w"> </span><span class="nf">getUserStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">userStatus</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserNavigationMenu</span><span class="w"> </span><span class="nf">getMenu</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">menu</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PageNavigationPanel</span><span class="w"> </span><span class="nf">getSubpage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">subpage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ApplicationLogo</span><span class="w"> </span><span class="nf">getLogo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">logo</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ApplicationHeader</span><span class="w"> </span><span class="nf">getHeader</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">header</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Returns the {@link Option} instance being used by this context</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return the {@link Option} instance being used by this context</span>
+<span class="cm">     */</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Option</span><span class="w"> </span><span class="nf">optionInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">option</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Handler</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">optionValueChanged</span><span class="p">(</span><span class="n">OptionChangeMessage</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">msg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="na">getOptionKey</span><span class="p">().</span><span class="na">getContext</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//this causes random elements to disappear - better to need manual browser refresh for now</span><span class="w"></span>
+<span class="w">            </span><span class="c1">//        super.doLayout();</span><span class="w"></span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">markAsDirtyRecursive</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ComboBox</span><span class="o">&lt;</span><span class="n">Locale</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getLocaleCombo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">localeCombo</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

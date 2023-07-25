@@ -397,308 +397,544 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">300</span>
 <span class="normal">301</span>
 <span class="normal">302</span>
-<span class="normal">303</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.hubspot.singularity.api</span><span class="p">;</span><span class="w"></span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright 2014 (C) Tom Parker &lt;thpr@users.sourceforge.net&gt;</span>
+<span class="cm"> * </span>
+<span class="cm"> * This library is free software; you can redistribute it and/or modify it under</span>
+<span class="cm"> * the terms of the GNU Lesser General Public License as published by the Free</span>
+<span class="cm"> * Software Foundation; either version 2.1 of the License, or (at your option)</span>
+<span class="cm"> * any later version.</span>
+<span class="cm"> * </span>
+<span class="cm"> * This library is distributed in the hope that it will be useful, but WITHOUT</span>
+<span class="cm"> * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</span>
+<span class="cm"> * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more</span>
+<span class="cm"> * details.</span>
+<span class="cm"> * </span>
+<span class="cm"> * You should have received a copy of the GNU Lesser General Public License</span>
+<span class="cm"> * along with this library; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="cm"> * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">pcgen.base.solver</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.annotation.JsonCreator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.annotation.JsonProperty</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.MoreObjects</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.mesos.Resources</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.mesos.SingularityMesosArtifact</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.SingularityS3UploaderFile</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.v3.oas.annotations.media.Schema</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span><span class="w"></span>
 
-<span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Settings for a specific run of a request&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SingularityRunNowRequest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAt</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.base.DependencyManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.base.EvaluationManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.base.FormulaSemantics</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.base.Identified</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.base.ScopeInstance</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.formula.exception.SemanticsException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.spotbugs.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.util.FormatManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.util.HashMapToList</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pcgen.base.util.TreeMapToList</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_NONVIRTUAL&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityRunNowRequest</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">(),</span><span class="w"></span>
-<span class="w">      </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">(),</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * A Solver manages a series of Modifiers in order to &quot;solve&quot; those Modifiers to</span>
+<span class="cm"> * produce the result for a single &quot;variable&quot; (specifically identified by a</span>
+<span class="cm"> * VariableID).</span>
+<span class="cm"> * </span>
+<span class="cm"> * The primary role of a Solver is to process the priority of each Modifier</span>
+<span class="cm"> * added to the Solver (both user priority and inherent priority) in order to</span>
+<span class="cm"> * &quot;schedule&quot; each Modifier (to put them in an ordered list for how they will be</span>
+<span class="cm"> * processed).</span>
+<span class="cm"> * </span>
+<span class="cm"> * Note that a Solver makes NO attempt to understand whether it is behaving</span>
+<span class="cm"> * correctly relative to other Solver instances. That cross-variable resolution</span>
+<span class="cm"> * is done by a SolverSystem.</span>
+<span class="cm"> * </span>
+<span class="cm"> * @param &lt;T&gt;</span>
+<span class="cm"> *            The format of object that this Solver operates on (e.g.</span>
+<span class="cm"> *            java.lang.Number)</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Solver</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Deprecated</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_NONVIRTUAL&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityRunNowRequest</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAt</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">(),</span><span class="w"></span>
-<span class="w">      </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">(),</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runAt</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * The &quot;starting&quot; or &quot;default&quot; value for this Solver. This is the value the Solver has</span>
+<span class="cm">	 * if no Modifier was added to the Solver.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_NONVIRTUAL&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityRunNowRequest</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAt</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">runAt</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * The format for this Solver.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FormatManager</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">formatManager</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@JsonCreator</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityRunNowRequest</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;skipHealthchecks&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;runId&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;commandLineArgs&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;resources&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;s3UploaderAdditionalFiles&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;runAsUserOverride&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;envOverrides&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;requiredSlaveAttributeOverrides&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredSlaveAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;allowedSlaveAttributeOverrides&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedSlaveAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;extraArtifacts&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;runAt&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAt</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;requiredAgentAttributeOverrides&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;allowedAgentAttributeOverrides&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">commandLineArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">skipHealthchecks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * The list of Modifiers for this Solver. This is maintained as an ordered</span>
+<span class="cm">	 * list: TreeMap sorts the Modifiers by their priority.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TreeMapToList</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">modifierList</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">TreeMapToList</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">s3UploaderAdditionalFiles</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * A map of sources to the Modifiers provided by that source. This is used</span>
+<span class="cm">	 * for tracing responsibility for modification as well as allowing a</span>
+<span class="cm">	 * &quot;global remove&quot; of Modifiers from a given source.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HashMapToList</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">sourceList</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">HashMapToList</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runAsUserOverride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Constructs a new Solver with the given default Value.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param formatManager</span>
+<span class="cm">	 *            The FormatManager for this Solver</span>
+<span class="cm">	 * @param defaultValue</span>
+<span class="cm">	 *            The &quot;starting&quot; or &quot;default&quot; value for this Solver</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">Solver</span><span class="p">(</span><span class="n">FormatManager</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">formatManager</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">formatManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">formatManager</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;FormatManager cannot be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">defaultValue</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;Default Value cannot be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">envOverrides</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">envOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">envOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Add a Modifier (from the given source) to this Solver. The Modifier will</span>
+<span class="cm">	 * be processed in the order defined by the priority of the Modifier.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * null is not a valid source.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param modifier</span>
+<span class="cm">	 *            The Modifier to be added to this Solver</span>
+<span class="cm">	 * @param source</span>
+<span class="cm">	 *            The source object for the given Modifier</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addModifier</span><span class="p">(</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">ScopeInstance</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="c1">//Ensure someone isn&#39;t playing fast and loose with generics</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">modifier</span><span class="p">.</span><span class="na">getVariableFormat</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">formatManager</span><span class="p">))</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Expected Modifier of Process Class: &quot;</span><span class="w"></span>
+<span class="w">				</span><span class="o">+</span><span class="w"> </span><span class="n">formatManager</span><span class="p">.</span><span class="na">getManagedClass</span><span class="p">().</span><span class="na">getCanonicalName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; but got: &quot;</span><span class="w"></span>
+<span class="w">				</span><span class="o">+</span><span class="w"> </span><span class="n">modifier</span><span class="p">.</span><span class="na">getVariableFormat</span><span class="p">().</span><span class="na">getManagedClass</span><span class="p">().</span><span class="na">getCanonicalName</span><span class="p">());</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">modifierList</span><span class="p">.</span><span class="na">addToListFor</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">modifier</span><span class="p">.</span><span class="na">getPriority</span><span class="p">()),</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">ModInfo</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">source</span><span class="p">)));</span><span class="w"></span>
+<span class="w">		</span><span class="n">sourceList</span><span class="p">.</span><span class="na">addToListFor</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">requiredAgentAttributeOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">      </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="n">requiredSlaveAttributeOverrides</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">())</span><span class="w"></span>
-<span class="w">      </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">allowedAgentAttributeOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">      </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="n">allowedSlaveAttributeOverrides</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">())</span><span class="w"></span>
-<span class="w">      </span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Removes the given Modifier (from the given source) from this Solver.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * For this to have any effect, the combination of Modifier and source must</span>
+<span class="cm">	 * be the same (as defined by .equals() equality) as a combination provided</span>
+<span class="cm">	 * to the addModifier method of this Solver.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param modifier</span>
+<span class="cm">	 *            The Modifier to be removed from this Solver</span>
+<span class="cm">	 * @param source</span>
+<span class="cm">	 *            The source object for the Modifier to be removed from this</span>
+<span class="cm">	 *            Solver</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeModifier</span><span class="p">(</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">ScopeInstance</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">modifierList</span><span class="p">.</span><span class="na">removeFromListFor</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">modifier</span><span class="p">.</span><span class="na">getPriority</span><span class="p">()),</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">ModInfo</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">source</span><span class="p">)));</span><span class="w"></span>
+<span class="w">		</span><span class="n">sourceList</span><span class="p">.</span><span class="na">removeFromListFor</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">extraArtifacts</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">extraArtifacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">extraArtifacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Removes all Modifiers from a given source (as defined by .equals()</span>
+<span class="cm">	 * equality for the given source Object).</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param source</span>
+<span class="cm">	 *            The source for which all Modifiers should be removed from this</span>
+<span class="cm">	 *            Solver</span>
+<span class="cm">	 * @throws IllegalArgumentException</span>
+<span class="cm">	 *             if the given source object is null</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeFromSource</span><span class="p">(</span><span class="n">ScopeInstance</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">removed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sourceList</span><span class="p">.</span><span class="na">removeListFor</span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">source</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">removed</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modifier</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">removed</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;PMD.AvoidInstantiatingObjectsInLoops&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">				</span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ModInfo</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="n">modifierList</span><span class="p">.</span><span class="na">removeFromListFor</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="n">Long</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">modifier</span><span class="p">.</span><span class="na">getPriority</span><span class="p">()),</span><span class="w"> </span><span class="n">modInfo</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runAt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runAt</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Process this Solver to provide the value after all Modifiers are processed (in</span>
+<span class="cm">	 * priority order).</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param evalManager</span>
+<span class="cm">	 *            The EvaluationManager used to support evaluation of the Modifiers in</span>
+<span class="cm">	 *            this Solver</span>
+<span class="cm">	 * @return The resulting value after all Modifier objects are processed</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">evalManager</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">assertedManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evalManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="w"></span>
+<span class="w">			</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">ASSERTED</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">formatManager</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="n">T</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getKeySet</span><span class="p">())</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modInfo</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getListFor</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span><span class="w"></span>
+<span class="w">			</span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">thisManager</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">						</span><span class="n">assertedManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">INPUT</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="n">thisManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thisManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">,</span><span class="w"></span>
+<span class="w">					</span><span class="n">modInfo</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span><span class="w"></span>
+<span class="w">				</span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modInfo</span><span class="p">.</span><span class="na">getModifier</span><span class="p">().</span><span class="na">process</span><span class="p">(</span><span class="n">thisManager</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A message to show to users about why this action was taken&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Provides a &quot;debugging&quot; view of the operations taking place in this Solver. This</span>
+<span class="cm">	 * returns a List of ProcessStep objects that are an ordered list of the steps taken</span>
+<span class="cm">	 * and the value after each step.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param evalManager</span>
+<span class="cm">	 *            The EvaluationManager used to support evaluation of the Modifiers in</span>
+<span class="cm">	 *            this Solver</span>
+<span class="cm">	 * @return A list of ProcessStep objects indicating the operations that take place in</span>
+<span class="cm">	 *         this Solver when process() is called</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">diagnose</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">evalManager</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">assertedManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evalManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="w"></span>
+<span class="w">			</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">ASSERTED</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">formatManager</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">T</span><span class="w"> </span><span class="n">stepResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">steps</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">SetModifier</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">formatManager</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">),</span><span class="w"></span>
+<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="n">DefaultValue</span><span class="p">(</span><span class="n">formatManager</span><span class="p">.</span><span class="na">getIdentifierType</span><span class="p">()),</span><span class="w"> </span><span class="n">stepResult</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">modifierList</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getKeySet</span><span class="p">())</span><span class="w"></span>
+<span class="w">			</span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modInfo</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getListFor</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span><span class="w"></span>
+<span class="w">				</span><span class="p">{</span><span class="w"></span>
+<span class="w">					</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">thisManager</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">							</span><span class="n">assertedManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">INPUT</span><span class="p">,</span><span class="w"> </span><span class="n">stepResult</span><span class="p">);</span><span class="w"></span>
+<span class="w">					</span><span class="n">thisManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thisManager</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">,</span><span class="w"></span>
+<span class="w">						</span><span class="n">modInfo</span><span class="p">.</span><span class="na">getInstance</span><span class="p">());</span><span class="w"></span>
+<span class="w">					</span><span class="n">stepResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modInfo</span><span class="p">.</span><span class="na">getModifier</span><span class="p">().</span><span class="na">process</span><span class="p">(</span><span class="n">thisManager</span><span class="p">);</span><span class="w"></span>
+<span class="w">					</span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;PMD.AvoidInstantiatingObjectsInLoops&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">					</span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessStep</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">modInfo</span><span class="p">.</span><span class="na">getModifier</span><span class="p">(),</span><span class="w"></span>
+<span class="w">						</span><span class="n">modInfo</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(),</span><span class="w"> </span><span class="n">stepResult</span><span class="p">);</span><span class="w"></span>
+<span class="w">					</span><span class="n">steps</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">step</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="p">}</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">steps</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;An id to associate with this request which will be associated with the corresponding launched tasks&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRunId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Carries the Default Value information for display in diagnosis.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param &lt;T&gt; The format (class) of object contained in this SetModifier</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SetModifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="cm">/**</span>
+<span class="cm">		 * The FormatManager that this SetModifier is representing.</span>
+<span class="cm">		 */</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FormatManager</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">formatManager</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span>
+<span class="w">		</span><span class="cm">/**</span>
+<span class="cm">		 * The value that this SetModifier contains.</span>
+<span class="cm">		 */</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span>
+<span class="w">		</span><span class="cm">/**</span>
+<span class="cm">		 * Constructs a new SetModifier with the given FormatManager and value.</span>
+<span class="cm">		 * </span>
+<span class="cm">		 * @param formatManager</span>
+<span class="cm">		 *            The FormatManager that this SetModifier is representing</span>
+<span class="cm">		 * @param value</span>
+<span class="cm">		 *            The value that this SetModifier contains</span>
+<span class="cm">		 */</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="nf">SetModifier</span><span class="p">(</span><span class="n">FormatManager</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">formatManager</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">formatManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">formatManager</span><span class="p">;</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Command line arguments to be passed to the task&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">getCommandLineArgs</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">commandLineArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">EvaluationManager</span><span class="w"> </span><span class="n">manager</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;If set to true, healthchecks will be skipped for this task run&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSkipHealthchecks</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">captureDependencies</span><span class="p">(</span><span class="n">DependencyManager</span><span class="w"> </span><span class="n">depManager</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the resources from the active deploy for this run&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getResources</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">isValid</span><span class="p">(</span><span class="n">FormulaSemantics</span><span class="w"> </span><span class="n">semantics</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="kd">throws</span><span class="w"> </span><span class="n">SemanticsException</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Specify additional sandbox files to upload to S3 for this run&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getS3UploaderAdditionalFiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getPriority</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the user under which this task&#39;s command will be launched&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRunAsUserOverride</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">FormatManager</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getVariableFormat</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">formatManager</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the environment variables for launched tasks&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getEnvOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getIdentification</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;DEFAULT&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the required agent attributes for launched tasks&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequiredAgentAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getInstructions</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">formatManager</span><span class="p">.</span><span class="na">unconvert</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the allowed agent attributes for launched tasks&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAllowedAgentAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Carries the Default Value Source information for display in diagnosis.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultValue</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Identified</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="cm">/**</span>
+<span class="cm">		 * The format name of the format that this DefaultValue is representing</span>
+<span class="cm">		 */</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">formatName</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="nf">DefaultValue</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">formatName</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">formatName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">formatName</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getIdentification</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Default Value for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">formatName</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Deprecated</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the required agent attributes for launched tasks&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequiredSlaveAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Constructs a new ModInfo to store information about a Modifier and the</span>
+<span class="cm">	 * source of the modifier</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param &lt;IT&gt;</span>
+<span class="cm">	 *            The format the included Modifier acts upon</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ModInfo</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modifier</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ScopeInstance</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Deprecated</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the allowed agent attributes for launched tasks&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAllowedSlaveAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="nf">ModInfo</span><span class="p">(</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modifier</span><span class="p">,</span><span class="w"> </span><span class="n">ScopeInstance</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">modifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">inst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">source</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Additional artifacts to download for this run&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getExtraArtifacts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">IT</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getModifier</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">modifier</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Schedule this task to run at a specified time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRunAt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runAt</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">ScopeInstance</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">inst</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;SingularityRunNowRequest{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;message=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">message</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, runId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">runId</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, commandLineArgs=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">commandLineArgs</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, skipHealthchecks=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">skipHealthchecks</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, resources=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">resources</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, s3UploaderAdditionalFiles=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, runAsUserOverride=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">runAsUserOverride</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, envOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">envOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, requiredAgentAttributeOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">requiredAgentAttributeOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, allowedAgentAttributeOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, extraArtifacts=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">extraArtifacts</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, runAt=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="n">runAt</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="sc">&#39;}&#39;</span><span class="w"></span>
-<span class="w">    </span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">modifier</span><span class="p">.</span><span class="na">hashCode</span><span class="p">()</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">inst</span><span class="p">.</span><span class="na">hashCode</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">ModInfo</span><span class="p">)</span><span class="w"></span>
+<span class="w">			</span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="n">ModInfo</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ModInfo</span><span class="o">&lt;?&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="n">modifier</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">modifier</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">inst</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">inst</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Creates a replacement Solver for this Solver, giving it independent modifier and</span>
+<span class="cm">	 * source lists.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @return A replacement Solver for this Solver, with independent modifier and source</span>
+<span class="cm">	 *         lists.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">Solver</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">createReplacement</span><span class="p">()</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">Solver</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Solver</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">formatManager</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">replacement</span><span class="p">.</span><span class="na">modifierList</span><span class="p">.</span><span class="na">addAllLists</span><span class="p">(</span><span class="n">modifierList</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">replacement</span><span class="p">.</span><span class="na">sourceList</span><span class="p">.</span><span class="na">addAllLists</span><span class="p">(</span><span class="n">sourceList</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">replacement</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Loads the dependencies for all of the Modifier objects for this Solver into the</span>
+<span class="cm">	 * given DependencyManager.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * The DependencyManager may not be altered if there are no dependencies for this</span>
+<span class="cm">	 * Modifier.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param dependencyManager</span>
+<span class="cm">	 *            The DependencyManager to be notified of dependencies for this all of the</span>
+<span class="cm">	 *            Modifier objects for this Solver</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">captureDependencies</span><span class="p">(</span><span class="n">DependencyManager</span><span class="w"> </span><span class="n">dependencyManager</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getKeySet</span><span class="p">())</span><span class="w"></span>
+<span class="w">		</span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ModInfo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">modInfo</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">modifierList</span><span class="p">.</span><span class="na">getListFor</span><span class="p">(</span><span class="n">priority</span><span class="p">))</span><span class="w"></span>
+<span class="w">			</span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="n">Modifier</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modInfo</span><span class="p">.</span><span class="na">modifier</span><span class="p">;</span><span class="w"></span>
+<span class="w">				</span><span class="n">DependencyManager</span><span class="w"> </span><span class="n">dm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dependencyManager</span><span class="w"></span>
+<span class="w">					</span><span class="p">.</span><span class="na">getWith</span><span class="p">(</span><span class="n">DependencyManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">,</span><span class="w"> </span><span class="n">modInfo</span><span class="p">.</span><span class="na">inst</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="n">mod</span><span class="p">.</span><span class="na">captureDependencies</span><span class="p">(</span><span class="n">dm</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

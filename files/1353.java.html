@@ -262,173 +262,179 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
-<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
 <span class="cm"> *</span>
-<span class="cm"> *  * Copyright (c) 2016. David Sowerby</span>
-<span class="cm"> *  *</span>
-<span class="cm"> *  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm"> *  * the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *  *</span>
-<span class="cm"> *  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on</span>
-<span class="cm"> *  * an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the</span>
-<span class="cm"> *  * specific language governing permissions and limitations under the License.</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.option</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.expression.predicate</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.data.Converter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.server.Sizeable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.AbstractField</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Button</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.FormLayout</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.GridLayout</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Label</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Panel</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.UI</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.vaadin.ui.Window</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataInput</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataOutput</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.serialization.IdentifiedDataSerializable</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.QueryException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.SqlDataSerializerHook</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.expression.BiExpression</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.expression.Expression</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.expression.ExpressionEvalContext</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.row.Row</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.type.QueryDataType</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.sql.impl.type.QueryDataTypeFamily</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.i18n.LabelKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.ui.DataTypeToUI</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.vaadin.DefaultOptionBinder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.core.vaadin.OptionBinder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.i18n.I18NKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.i18n.Translate</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.Option</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.OptionContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.OptionKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">uk.q3c.krail.option.option.OptionKeyLocator</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * Default implementation for {@link OptionPopup}</span>
-<span class="cm"> * &lt;p&gt;</span>
-<span class="cm"> * Created by David Sowerby on 29/05/15.</span>
+<span class="cm"> * Implements evaluation of SQL comparison predicates.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @see ComparisonMode</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;URV_CHANGE_RETURN_TYPE&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// not clear what this is trying to indicate</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DefaultOptionPopup</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">OptionPopup</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">DefaultOptionPopup</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OptionContext</span><span class="w"> </span><span class="n">activeContext</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">OptionKey</span><span class="p">,</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Translate</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OptionKeyLocator</span><span class="w"> </span><span class="n">optionKeyLocator</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OptionBinder</span><span class="w"> </span><span class="n">optionBinder</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DataTypeToUI</span><span class="w"> </span><span class="n">dataTypeToUI</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Window</span><span class="w"> </span><span class="n">window</span><span class="p">;</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ComparisonPredicate</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">BiExpression</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IdentifiedDataSerializable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DefaultOptionPopup</span><span class="p">(</span><span class="n">Translate</span><span class="w"> </span><span class="n">translate</span><span class="p">,</span><span class="w"> </span><span class="n">OptionKeyLocator</span><span class="w"> </span><span class="n">optionKeyLocator</span><span class="p">,</span><span class="w"> </span><span class="n">OptionBinder</span><span class="w"> </span><span class="n">optionBinder</span><span class="p">,</span><span class="w"> </span><span class="n">DataTypeToUI</span><span class="w"> </span><span class="n">dataTypeToUI</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">translate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">translate</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">optionKeyLocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optionKeyLocator</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">optionBinder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optionBinder</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">dataTypeToUI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataTypeToUI</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ComparisonMode</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ComparisonPredicate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// No-op.</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * The context is scanned for {@link OptionKey} instances.  If none are found a message is displayed saying there are no options.  A context is loaded</span>
-<span class="cm">     * only once - the {@link OptionKey} instances are cached. The {@link DefaultOptionBinder} binds a UI Field with an {@link Option} value, combined with a {@link Converter} instance to enable conversion to and from the type needed for presentation (usually String).  &lt;p&gt;</span>
-<span class="cm">     * Options are displayed in a grid of 2 columns, the first column containing a Vaadin component to display the option value and the second a button to</span>
-<span class="cm">     * reset the value to default. The component and button are each wrapped in a FormLayout to position the caption to the left of the value&lt;p&gt;</span>
-<span class="cm">     * A value change listener is attached to the Vaadin component to change the option value in response to the user changing the value ion the component.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param context       the context to take the options from</span>
-<span class="cm">     * @param windowCaption the I18NKey to provide a window caption</span>
-<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">ComparisonPredicate</span><span class="p">(</span><span class="n">Expression</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">Expression</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">ComparisonMode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ComparisonPredicate</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">Expression</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">Expression</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">ComparisonMode</span><span class="w"> </span><span class="n">comparisonMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">assert</span><span class="w"> </span><span class="n">left</span><span class="p">.</span><span class="na">getType</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">right</span><span class="p">.</span><span class="na">getType</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ComparisonPredicate</span><span class="p">(</span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">comparisonMode</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
 <span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">popup</span><span class="p">(</span><span class="n">OptionContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">I18NKey</span><span class="w"> </span><span class="n">windowCaption</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getFactoryId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SqlDataSerializerHook</span><span class="p">.</span><span class="na">F_ID</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// changing context, so we need to re-read the context fields</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">activeContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">contextKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">(</span><span class="n">context</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getClassId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SqlDataSerializerHook</span><span class="p">.</span><span class="na">EXPRESSION_COMPARISON</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="s">&quot;rawtypes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;unchecked&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Any SQL expression may return null&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">eval</span><span class="p">(</span><span class="n">Row</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">ExpressionEvalContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operand1</span><span class="p">.</span><span class="na">eval</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">Option</span><span class="w"> </span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">optionInstance</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">window</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">window</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operand2</span><span class="p">.</span><span class="na">eval</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Window</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">setCaption</span><span class="p">(</span><span class="n">windowCaption</span><span class="p">(</span><span class="n">windowCaption</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">operand1</span><span class="p">.</span><span class="na">getType</span><span class="p">().</span><span class="na">getTypeFamily</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">QueryDataTypeFamily</span><span class="p">.</span><span class="na">OBJECT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">leftClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="p">.</span><span class="na">getClass</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">rightClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="na">getClass</span><span class="p">();</span><span class="w"></span>
 
-
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">GridLayout</span><span class="w"> </span><span class="n">baseLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">rows</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
-
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">contextKeys</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Label</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Label</span><span class="p">(</span><span class="n">translate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">LabelKey</span><span class="p">.</span><span class="na">No_Options_to_Show</span><span class="p">));</span><span class="w"></span>
-<span class="w">            </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">calculateWindowSize</span><span class="p">(</span><span class="n">window</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">OptionKey</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">AbstractField</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fieldForKey</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">optionBinder</span><span class="p">.</span><span class="na">bindOption</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">setFieldMetaData</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;option field {} value is at {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">getCaption</span><span class="p">(),</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="n">Button</span><span class="w"> </span><span class="n">defaultsButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="n">translate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">LabelKey</span><span class="p">.</span><span class="na">Reset_to_Default</span><span class="p">));</span><span class="w"></span>
-<span class="w">                </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">optionKeyName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(((</span><span class="n">Enum</span><span class="p">)</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">getKey</span><span class="p">()).</span><span class="na">name</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="n">defaultsButton</span><span class="p">.</span><span class="na">addClickListener</span><span class="p">((</span><span class="n">event</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="c1">// reset to previous level by removing entry for user</span><span class="w"></span>
-<span class="w">                    </span><span class="n">option</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">                    </span><span class="c1">// reset the binding - the option value may be different</span><span class="w"></span>
-<span class="w">                    </span><span class="n">optionBinder</span><span class="p">.</span><span class="na">bindOption</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="p">}));</span><span class="w"></span>
-<span class="w">                </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FormLayout</span><span class="p">(</span><span class="n">field</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">baseLayout</span><span class="p">.</span><span class="na">addComponent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FormLayout</span><span class="p">(</span><span class="n">defaultsButton</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">row</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">leftClass</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">rightClass</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">QueryException</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="w"></span>
+<span class="w">                        </span><span class="s">&quot;Cannot compare two OBJECT values, because &quot;</span><span class="w"></span>
+<span class="w">                                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;left operand has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">leftClass</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; type and &quot;</span><span class="w"></span>
+<span class="w">                                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;right operand has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rightClass</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; type&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">            </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Comparable</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="n">QueryException</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="w"></span>
+<span class="w">                        </span><span class="s">&quot;Cannot compare OBJECT value because &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">leftClass</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; doesn&#39;t implement Comparable interface&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">setClosable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="c1">//use panel to scroll</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">setContent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="n">baseLayout</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">center</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">UI</span><span class="p">.</span><span class="na">getCurrent</span><span class="p">()</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">addWindow</span><span class="p">(</span><span class="n">window</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">activeContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Comparable</span><span class="w"> </span><span class="n">leftComparable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Comparable</span><span class="p">)</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Comparable</span><span class="w"> </span><span class="n">rightComparable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Comparable</span><span class="p">)</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leftComparable</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">rightComparable</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">EQUALS</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">NOT_EQUALS</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">GREATER_THAN</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">GREATER_THAN_OR_EQUAL</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">LESS_THAN</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">LESS_THAN_OR_EQUAL</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;unexpected comparison mode: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="n">AbstractField</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fieldForKey</span><span class="p">(</span><span class="n">OptionKey</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dataTypeToUI</span><span class="p">.</span><span class="na">componentFor</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getDefaultValue</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFieldMetaData</span><span class="p">(</span><span class="n">OptionKey</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">AbstractField</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">uiField</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">uiField</span><span class="p">.</span><span class="na">setCaption</span><span class="p">(</span><span class="n">translate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">        </span><span class="n">uiField</span><span class="p">.</span><span class="na">setDescription</span><span class="p">(</span><span class="n">translate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getDescriptionKey</span><span class="p">()));</span><span class="w"></span>
-<span class="c1">//        Optional&lt;String&gt; optionKeyName = Optional.of(((Enum) key.getKey()).name());</span><span class="w"></span>
-<span class="c1">//        uiField.setId(ID.getId(optionKeyName, this, uiField));</span><span class="w"></span>
-<span class="c1">//        log.debug(&quot;Component id for &#39;{}&#39; set to: &#39;{}&#39;&quot;, uiField.getCaption(), uiField.getId());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">calculateWindowSize</span><span class="p">(</span><span class="n">Sizeable</span><span class="w"> </span><span class="n">window</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">setSizeUndefined</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">window</span><span class="p">.</span><span class="na">setHeight</span><span class="p">(</span><span class="s">&quot;600px&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">windowCaption</span><span class="p">(</span><span class="n">I18NKey</span><span class="w"> </span><span class="n">i18NKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">translate</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">i18NKey</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * {@inheritDoc}</span>
-<span class="cm">     */</span><span class="w"></span>
 
 <span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">OptionKey</span><span class="p">,</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span><span class="w"> </span><span class="n">contextKeys</span><span class="p">(</span><span class="n">OptionContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">optionKeyLocator</span><span class="p">.</span><span class="na">contextKeyMap</span><span class="p">(</span><span class="n">context</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">QueryDataType</span><span class="w"> </span><span class="nf">getType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">QueryDataType</span><span class="p">.</span><span class="na">BOOLEAN</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Window</span><span class="w"> </span><span class="nf">getWindow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">window</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeData</span><span class="p">(</span><span class="n">ObjectDataOutput</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">writeData</span><span class="p">(</span><span class="n">out</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeInt</span><span class="p">(</span><span class="n">mode</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readData</span><span class="p">(</span><span class="n">ObjectDataInput</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">readData</span><span class="p">(</span><span class="n">in</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ComparisonMode</span><span class="p">.</span><span class="na">getById</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">readInt</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">hash</span><span class="p">(</span><span class="n">operand1</span><span class="p">,</span><span class="w"> </span><span class="n">operand2</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ComparisonPredicate</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ComparisonPredicate</span><span class="p">)</span><span class="w"> </span><span class="n">o</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">operand1</span><span class="p">,</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">operand1</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">operand2</span><span class="p">,</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">operand2</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">mode</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;{mode=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, operand1=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">operand1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, operand2=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">operand2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

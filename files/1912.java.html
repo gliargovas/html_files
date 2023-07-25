@@ -205,198 +205,116 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
-<span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
-<span class="cm"> * distributed with this work for additional information</span>
-<span class="cm"> * regarding copyright ownership.  The ASF licenses this file</span>
-<span class="cm"> * to you under the Apache License, Version 2.0 (the</span>
-<span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
-<span class="cm"> * with the License.  You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> *   https://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing,</span>
-<span class="cm"> * software distributed under the License is distributed on an</span>
-<span class="cm"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="cm"> * KIND, either express or implied.  See the License for the</span>
-<span class="cm"> * specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm">	cursus - Race series management program</span>
+<span class="cm">	Copyright 2012-2014  Simon Arlott</span>
+
+<span class="cm">	This program is free software: you can redistribute it and/or modify</span>
+<span class="cm">	it under the terms of the GNU Affero General Public License as published by</span>
+<span class="cm">	the Free Software Foundation, either version 3 of the License, or</span>
+<span class="cm">	(at your option) any later version.</span>
+
+<span class="cm">	This program is distributed in the hope that it will be useful,</span>
+<span class="cm">	but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="cm">	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="cm">	GNU Affero General Public License for more details.</span>
+
+<span class="cm">	You should have received a copy of the GNU Affero General Public License</span>
+<span class="cm">	along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.test.functional</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">uk.uuid.cursus.scoring.scores.impl</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URL</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.KeyManagementException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.NoSuchAlgorithmException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.cert.X509Certificate</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Comparator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.HostnameVerifier</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.HttpsURLConnection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.KeyManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.SSLContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.SSLSession</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.TrustManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.net.ssl.X509TrustManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.Accumulo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.AccumuloClient</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.clientImpl.ClientContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.Property</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.util.MonitorUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.minicluster.ServerType</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.miniclusterImpl.MiniAccumuloConfigImpl</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.conf.Configuration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.BeforeAll</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.db.data.Pilot</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.db.data.Race</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.scoring.data.RaceDiscardsData</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.scoring.data.RacePenaltiesData</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.scoring.data.RacePointsData</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uk.uuid.cursus.scoring.data.ScoredData</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Function</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Predicates</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Supplier</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Suppliers</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.ImmutableMap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Iterables</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Maps</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Ordering</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="cm">/**</span>
-<span class="cm"> * Check SSL for the Monitor</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MonitorSslIT</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ConfigurableMacBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="w"> </span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span><span class="w"> </span><span class="p">})</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PilotRacePlacingComparator</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ScoredData</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RacePointsData</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RacePenaltiesData</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">RaceDiscardsData</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Pilot</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">scores</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PlacingMethod</span><span class="w"> </span><span class="n">method</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Pilot</span><span class="p">,</span><span class="w"> </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">racePlacings</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="nf">defaultTimeout</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">PlacingMethod</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">INCLUDING_DISCARDS</span><span class="p">,</span><span class="w"> </span><span class="n">EXCLUDING_DISCARDS</span><span class="p">,</span><span class="w"> </span><span class="n">INCLUDING_PENALTIES_EXCLUDING_DISCARDS_EXCLUDING_SIMULATED</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@BeforeAll</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initHttps</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="p">,</span><span class="w"> </span><span class="n">KeyManagementException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">SSLContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SSLContext</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;TLSv1.2&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">TrustManager</span><span class="o">[]</span><span class="w"> </span><span class="n">tm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">TestTrustManager</span><span class="p">()};</span><span class="w"></span>
-<span class="w">    </span><span class="n">ctx</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">KeyManager</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">tm</span><span class="p">,</span><span class="w"> </span><span class="n">random</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">SSLContext</span><span class="p">.</span><span class="na">setDefault</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">HttpsURLConnection</span><span class="p">.</span><span class="na">setDefaultSSLSocketFactory</span><span class="p">(</span><span class="n">ctx</span><span class="p">.</span><span class="na">getSocketFactory</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">HttpsURLConnection</span><span class="p">.</span><span class="na">setDefaultHostnameVerifier</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TestHostnameVerifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">PilotRacePlacingComparator</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">scores</span><span class="p">,</span><span class="w"> </span><span class="n">PlacingMethod</span><span class="w"> </span><span class="n">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">scores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;WEAK_TRUST_MANAGER&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;trust manager is okay for testing&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestTrustManager</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">X509TrustManager</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkClientTrusted</span><span class="p">(</span><span class="n">X509Certificate</span><span class="o">[]</span><span class="w"> </span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">arg1</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">		</span><span class="n">ImmutableMap</span><span class="p">.</span><span class="na">Builder</span><span class="o">&lt;</span><span class="n">Pilot</span><span class="p">,</span><span class="w"> </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImmutableMap</span><span class="p">.</span><span class="na">builder</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Pilot</span><span class="w"> </span><span class="n">pilot</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">scores</span><span class="p">.</span><span class="na">getPilots</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">tmp</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">pilot</span><span class="p">,</span><span class="w"> </span><span class="n">Suppliers</span><span class="p">.</span><span class="na">memoize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">RacePlacingSupplier</span><span class="p">(</span><span class="n">pilot</span><span class="p">)));</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">racePlacings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkServerTrusted</span><span class="p">(</span><span class="n">X509Certificate</span><span class="o">[]</span><span class="w"> </span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">arg1</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Pilot</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Pilot</span><span class="w"> </span><span class="n">o2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PlacingMethod</span><span class="p">.</span><span class="na">INCLUDING_PENALTIES_EXCLUDING_DISCARDS_EXCLUDING_SIMULATED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">Ordering</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="n">natural</span><span class="p">().</span><span class="na">reverse</span><span class="p">().</span><span class="na">lexicographical</span><span class="p">().</span><span class="na">reverse</span><span class="p">().</span><span class="na">compare</span><span class="p">(</span><span class="n">racePlacings</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">o1</span><span class="p">).</span><span class="na">get</span><span class="p">(),</span><span class="w"> </span><span class="n">racePlacings</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">o2</span><span class="p">).</span><span class="na">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">Ordering</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="n">natural</span><span class="p">().</span><span class="na">lexicographical</span><span class="p">().</span><span class="na">compare</span><span class="p">(</span><span class="n">racePlacings</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">o1</span><span class="p">).</span><span class="na">get</span><span class="p">(),</span><span class="w"> </span><span class="n">racePlacings</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">o2</span><span class="p">).</span><span class="na">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">X509Certificate</span><span class="o">[]</span><span class="w"> </span><span class="nf">getAcceptedIssuers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RacePlacingSupplier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Supplier</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Pilot</span><span class="w"> </span><span class="n">pilot</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;WEAK_HOSTNAME_VERIFIER&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;okay for test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestHostnameVerifier</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HostnameVerifier</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">hostname</span><span class="p">,</span><span class="w"> </span><span class="n">SSLSession</span><span class="w"> </span><span class="n">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="nf">RacePlacingSupplier</span><span class="p">(</span><span class="n">Pilot</span><span class="w"> </span><span class="n">pilot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">this</span><span class="p">.</span><span class="na">pilot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pilot</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">configure</span><span class="p">(</span><span class="n">MiniAccumuloConfigImpl</span><span class="w"> </span><span class="n">cfg</span><span class="p">,</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">hadoopCoreSite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">super</span><span class="p">.</span><span class="na">configure</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span><span class="w"> </span><span class="n">hadoopCoreSite</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">baseDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createTestDir</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">testName</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">configureForSsl</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span><span class="w"> </span><span class="n">getSslDir</span><span class="p">(</span><span class="n">baseDir</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">siteConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfg</span><span class="p">.</span><span class="na">getSiteConfig</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_KEYSTORE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_KEYSTORE_PATH</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_KEYSTOREPASS</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_KEYSTORE_PASSWORD</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">siteConfig</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_KEYSTORE_TYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_KEYSTORETYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_KEYSTORE_TYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_KEYSTORETYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_KEYSTORE_TYPE</span><span class="p">.</span><span class="na">getDefaultValue</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_TRUSTSTORE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_TRUSTSTORE_PATH</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_TRUSTSTOREPASS</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_TRUSTSTORE_PASSWORD</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">siteConfig</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_TRUSTSTORE_TYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_TRUSTSTORETYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_TRUSTSTORE_TYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">siteConfig</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">MONITOR_SSL_TRUSTSTORETYPE</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="n">Property</span><span class="p">.</span><span class="na">RPC_SSL_TRUSTSTORE_TYPE</span><span class="p">.</span><span class="na">getDefaultValue</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">cfg</span><span class="p">.</span><span class="na">setSiteConfig</span><span class="p">(</span><span class="n">siteConfig</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">case</span><span class="w"> </span><span class="n">INCLUDING_DISCARDS</span><span class="p">:</span><span class="w"></span>
+<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="n">Ordering</span><span class="p">.</span><span class="na">natural</span><span class="p">().</span><span class="na">immutableSortedCopy</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="na">getRacePoints</span><span class="p">(</span><span class="n">pilot</span><span class="p">).</span><span class="na">values</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;URLCONNECTION_SSRF_FD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;url provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Starting Monitor&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">cluster</span><span class="p">.</span><span class="na">getClusterControl</span><span class="p">().</span><span class="na">startAllServers</span><span class="p">(</span><span class="n">ServerType</span><span class="p">.</span><span class="na">MONITOR</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">monitorLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">AccumuloClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Accumulo</span><span class="p">.</span><span class="na">newClient</span><span class="p">().</span><span class="na">from</span><span class="p">(</span><span class="n">getClientProperties</span><span class="p">()).</span><span class="na">build</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">monitorLocation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">monitorLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MonitorUtil</span><span class="p">.</span><span class="na">getLocation</span><span class="p">((</span><span class="n">ClientContext</span><span class="p">)</span><span class="w"> </span><span class="n">client</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="c1">// ignored</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">monitorLocation</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Could not fetch monitor HTTP address from zookeeper&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">URL</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">monitorLocation</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Fetching web page {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FunctionalTestUtils</span><span class="p">.</span><span class="na">readWebPage</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="na">body</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="s">&quot;Accumulo Overview&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">			</span><span class="k">case</span><span class="w"> </span><span class="n">EXCLUDING_DISCARDS</span><span class="p">:</span><span class="w"></span>
+<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="n">Ordering</span><span class="p">.</span><span class="na">natural</span><span class="p">().</span><span class="na">immutableSortedCopy</span><span class="p">(</span><span class="w"></span>
+<span class="w">						</span><span class="n">Maps</span><span class="p">.</span><span class="na">filterKeys</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="na">getRacePoints</span><span class="p">(</span><span class="n">pilot</span><span class="p">),</span><span class="w"> </span><span class="n">Predicates</span><span class="p">.</span><span class="na">not</span><span class="p">(</span><span class="n">Predicates</span><span class="p">.</span><span class="na">in</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="na">getDiscardedRaces</span><span class="p">(</span><span class="n">pilot</span><span class="p">)))).</span><span class="na">values</span><span class="p">());</span><span class="w"></span>
 
+<span class="w">			</span><span class="k">case</span><span class="w"> </span><span class="n">INCLUDING_PENALTIES_EXCLUDING_DISCARDS_EXCLUDING_SIMULATED</span><span class="p">:</span><span class="w"></span>
+<span class="w">				</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Race</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">racePoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores</span><span class="p">.</span><span class="na">getRacePoints</span><span class="p">(</span><span class="n">pilot</span><span class="p">);</span><span class="w"></span>
+<span class="w">				</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Race</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">racePenalties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scores</span><span class="p">.</span><span class="na">getRacePenalties</span><span class="p">(</span><span class="n">pilot</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="n">Ordering</span><span class="p">.</span><span class="na">natural</span><span class="p">().</span><span class="na">immutableSortedCopy</span><span class="p">(</span><span class="w"></span>
+<span class="w">						</span><span class="n">Iterables</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="w"></span>
+<span class="w">								</span><span class="n">Iterables</span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="w"></span>
+<span class="w">										</span><span class="n">scores</span><span class="p">.</span><span class="na">getRaces</span><span class="p">(),</span><span class="w"></span>
+<span class="w">										</span><span class="n">Predicates</span><span class="p">.</span><span class="na">not</span><span class="p">(</span><span class="n">Predicates</span><span class="p">.</span><span class="na">or</span><span class="p">(</span><span class="n">Predicates</span><span class="p">.</span><span class="na">in</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="na">getSimulatedRacePoints</span><span class="p">(</span><span class="n">pilot</span><span class="p">)),</span><span class="w"></span>
+<span class="w">												</span><span class="n">Predicates</span><span class="p">.</span><span class="na">in</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="na">getDiscardedRaces</span><span class="p">(</span><span class="n">pilot</span><span class="p">))))),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Race</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">									</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">									</span><span class="nd">@Nullable</span><span class="w"></span>
+<span class="w">									</span><span class="kd">public</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">Race</span><span class="w"> </span><span class="n">race</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">										</span><span class="k">return</span><span class="w"> </span><span class="n">racePoints</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">race</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">racePenalties</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">race</span><span class="p">);</span><span class="w"></span>
+<span class="w">									</span><span class="p">}</span><span class="w"></span>
+<span class="w">								</span><span class="p">}));</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

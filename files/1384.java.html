@@ -253,164 +253,264 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">156</span>
 <span class="normal">157</span>
 <span class="normal">158</span>
-<span class="normal">159</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright 2010-2014 Ning, Inc.</span>
-<span class="cm"> * Copyright 2014-2020 Groupon, Inc</span>
-<span class="cm"> * Copyright 2020-2020 Equinix, Inc</span>
-<span class="cm"> * Copyright 2014-2020 The Billing Project, LLC</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
 <span class="cm"> *</span>
-<span class="cm"> * The Billing Project licenses this file to you under the Apache License, version 2.0</span>
-<span class="cm"> * (the &quot;License&quot;); you may not use this file except in compliance with the</span>
-<span class="cm"> * License.  You may obtain a copy of the License at:</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> *    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
 <span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span>
-<span class="cm"> * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the</span>
-<span class="cm"> * License for the specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Stream</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.inject.Inject</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.notification.plugin.api.BroadcastMetadata</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.notification.plugin.api.ExtBusEvent</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.notification.plugin.api.ExtBusEventType</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.BundleRegistry.BundleWithMetadata</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.api.DefaultPluginsInfoApi</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.api.DefaultPluginsInfoApi.DefaultPluginInfo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.api.KillbillNodesApiHolder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.api.PluginInfo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.api.PluginsInfoApi</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.osgi.pluginconf.PluginFinder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.util.nodes.DefaultNodeCommandMetadata</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.util.nodes.KillbillNodesApi</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.util.nodes.NodeCommandMetadata</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.util.nodes.PluginNodeCommandMetadata</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.billing.util.nodes.SystemNodeCommandType</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.commons.eventbus.AllowConcurrentEvents</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.killbill.commons.eventbus.Subscribe</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.osgi.framework.BundleException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.SerializationFeature</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.datatype.joda.JodaModule</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.internal.util</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OSGIListener</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.management.MBeanServer</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.management.ObjectName</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.management.openmbean.CompositeDataSupport</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.management.ManagementFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.Buffer</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">OSGIListener</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.internal.memory.impl.UnsafeUtil.UNSAFE</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.internal.memory.impl.UnsafeUtil.UNSAFE_AVAILABLE</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.logging.Logger.getLogger</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">java.lang.Math.abs</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BundleRegistry</span><span class="w"> </span><span class="n">bundleRegistry</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginFinder</span><span class="w"> </span><span class="n">pluginFinder</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginsInfoApi</span><span class="w"> </span><span class="n">pluginsInfoApi</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">KillbillNodesApi</span><span class="w"> </span><span class="n">nodesApi</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">KillbillActivator</span><span class="w"> </span><span class="n">killbillActivator</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * Helper class for retrieving JVM specific information.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:magicnumber&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JVMUtil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">OSGIListener</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">KillbillActivator</span><span class="w"> </span><span class="n">killbillActivator</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BundleRegistry</span><span class="w"> </span><span class="n">bundleRegistry</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginFinder</span><span class="w"> </span><span class="n">pluginFinder</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginsInfoApi</span><span class="w"> </span><span class="n">pluginsInfoApi</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">KillbillNodesApiHolder</span><span class="w"> </span><span class="n">nodesApiHolder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">killbillActivator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">killbillActivator</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">bundleRegistry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bundleRegistry</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">pluginFinder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pluginFinder</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">pluginsInfoApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pluginsInfoApi</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nodesApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nodesApiHolder</span><span class="p">.</span><span class="na">getNodesApi</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">objectMapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">registerModule</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JodaModule</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">disable</span><span class="p">(</span><span class="n">SerializationFeature</span><span class="p">.</span><span class="na">WRITE_DATES_AS_TIMESTAMPS</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Defines the costs for a reference in Bytes.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REFERENCE_COST_IN_BYTES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is32bitJVM</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">isCompressedOops</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">OBJECT_HEADER_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">is32bitJVM</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">isCompressedOops</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">JVMUtil</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@AllowConcurrentEvents</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Subscribe</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleKillbillEvent</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ExtBusEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">BundleException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">getEventType</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ExtBusEventType</span><span class="p">.</span><span class="na">BROADCAST_SERVICE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">BroadcastMetadata</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">getMetaData</span><span class="p">(),</span><span class="w"> </span><span class="n">BroadcastMetadata</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="w"> </span><span class="n">commandType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSystemNodeCommandTypeOrNull</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="na">getCommandType</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">commandType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">commandType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="p">.</span><span class="na">START_PLUGIN</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"></span>
-<span class="w">                                    </span><span class="n">commandType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="p">.</span><span class="na">STOP_PLUGIN</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"></span>
-<span class="w">                                    </span><span class="n">commandType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="p">.</span><span class="na">RESTART_PLUGIN</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginNodeCommandMetadata</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PluginNodeCommandMetadata</span><span class="p">)</span><span class="w"> </span><span class="n">deserializeNodeCommand</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="na">getEventJson</span><span class="p">(),</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="na">getCommandType</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">pluginName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginName</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"></span>
-<span class="w">                                  </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginName</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
-<span class="w">                                  </span><span class="p">(</span><span class="n">pluginFinder</span><span class="p">.</span><span class="na">resolvePluginKey</span><span class="p">(</span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginKey</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">pluginFinder</span><span class="p">.</span><span class="na">resolvePluginKey</span><span class="p">(</span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginKey</span><span class="p">()).</span><span class="na">getPluginName</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pluginName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Failed to dispatch event %s : Input must have a pluginName or a valid pluginKey specified json=%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">commandType</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="na">getEventJson</span><span class="p">()));</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">BundleWithMetadata</span><span class="w"> </span><span class="n">bundleWithMetadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">switch</span><span class="p">(</span><span class="n">commandType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">STOP_PLUGIN</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="n">bundleRegistry</span><span class="p">.</span><span class="na">stopAndUninstallNewBundle</span><span class="p">(</span><span class="n">pluginName</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">START_PLUGIN</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="n">bundleWithMetadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bundleRegistry</span><span class="p">.</span><span class="na">installAndStartNewBundle</span><span class="p">(</span><span class="n">pluginName</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">RESTART_PLUGIN</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="n">bundleRegistry</span><span class="p">.</span><span class="na">stopAndUninstallNewBundle</span><span class="p">(</span><span class="n">pluginName</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="n">bundleWithMetadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bundleRegistry</span><span class="p">.</span><span class="na">installAndStartNewBundle</span><span class="p">(</span><span class="n">pluginName</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">());</span><span class="w"></span>
-<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Unexpected type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">commandType</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">defaultPluginVersion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pluginFinder</span><span class="p">.</span><span class="na">getPluginVersionSelectedForStart</span><span class="p">(</span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginName</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isSelectedForStart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">defaultPluginVersion</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">defaultPluginVersion</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">())</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="cm">/* this is lie, we don&#39;t know */</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">symbolicName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">bundleWithMetadata</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span><span class="n">bundleWithMetadata</span><span class="p">.</span><span class="na">getBundle</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">bundleWithMetadata</span><span class="p">.</span><span class="na">getBundle</span><span class="p">().</span><span class="na">getSymbolicName</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eventProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">eventProperties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;pluginName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pluginName</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">eventProperties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;pluginKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">eventProperties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;symbolicName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">symbolicName</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">killbillActivator</span><span class="p">.</span><span class="na">sendEvent</span><span class="p">(</span><span class="s">&quot;org/killbill/billing/osgi/plugin/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">commandType</span><span class="p">,</span><span class="w"> </span><span class="n">eventProperties</span><span class="p">);</span><span class="w"></span>
-
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">PluginInfo</span><span class="w"> </span><span class="n">pluginInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultPluginInfo</span><span class="p">(</span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginKey</span><span class="p">(),</span><span class="w"> </span><span class="n">symbolicName</span><span class="p">,</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginName</span><span class="p">(),</span><span class="w"> </span><span class="n">nodeCommandMetadata</span><span class="p">.</span><span class="na">getPluginVersion</span><span class="p">(),</span><span class="w"> </span><span class="n">DefaultPluginsInfoApi</span><span class="p">.</span><span class="na">toPluginState</span><span class="p">(</span><span class="n">bundleWithMetadata</span><span class="p">),</span><span class="w"> </span><span class="n">isSelectedForStart</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptySet</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">nodesApi</span><span class="p">.</span><span class="na">notifyPluginChanged</span><span class="p">(</span><span class="n">pluginInfo</span><span class="p">,</span><span class="w"> </span><span class="n">pluginsInfoApi</span><span class="p">.</span><span class="na">getPluginsInfo</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">is32bitJVM</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// sun.arch.data.model is available on Oracle, Zing and (most probably) IBM JVMs</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">architecture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;sun.arch.data.model&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">architecture</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">architecture</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;32&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="w"> </span><span class="nf">getSystemNodeCommandTypeOrNull</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">command</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">SystemNodeCommandType</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">command</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">name</span><span class="p">()))</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">findFirst</span><span class="p">()</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// not private for testing</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isCompressedOops</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// check HotSpot JVM implementation</span><span class="w"></span>
+<span class="w">        </span><span class="n">Boolean</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isHotSpotCompressedOopsOrNull</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">enabled</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">enabled</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// fallback check for other JVM implementations</span><span class="w"></span>
+<span class="w">        </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isObjectLayoutCompressedOopsOrNull</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">enabled</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">enabled</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// accept compressed oops is used by default</span><span class="w"></span>
+<span class="w">        </span><span class="n">getLogger</span><span class="p">(</span><span class="n">JVMUtil</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Could not determine memory cost of reference; setting to default of 4 bytes.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">NodeCommandMetadata</span><span class="w"> </span><span class="nf">deserializeNodeCommand</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nodeCommand</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">SystemNodeCommandType</span><span class="w"> </span><span class="n">systemType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stream</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">SystemNodeCommandType</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">input</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">name</span><span class="p">()))</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">findFirst</span><span class="p">()</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Returns the process ID. The algorithm does not guarantee it will be able</span>
+<span class="cm">     * to get the correct process ID, in which case it returns {@code -1}.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getPid</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ManagementFactory</span><span class="p">.</span><span class="na">getRuntimeMXBean</span><span class="p">().</span><span class="na">getName</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">systemType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"></span>
-<span class="w">               </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">nodeCommand</span><span class="p">,</span><span class="w"> </span><span class="n">systemType</span><span class="p">.</span><span class="na">getCommandMetadataClass</span><span class="p">())</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
-<span class="w">               </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">nodeCommand</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultNodeCommandMetadata</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">separatorIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">separatorIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">potentialPid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">separatorIndex</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">potentialPid</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">NumberFormatException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Returns used memory as reported by the {@link Runtime} and the function (totalMemory - freeMemory)</span>
+<span class="cm">     * It attempts to correct atomicity issues (ie. when totalMemory expands) and reported usedMemory</span>
+<span class="cm">     * results in negative values</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param runtime</span>
+<span class="cm">     * @return an approximation to the total amount of memory currently</span>
+<span class="cm">     * used, measured in bytes.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">usedMemory</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Runtime</span><span class="w"> </span><span class="n">runtime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">totalBegin</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">totalEnd</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">used</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">totalBegin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runtime</span><span class="p">.</span><span class="na">totalMemory</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">used</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totalBegin</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">runtime</span><span class="p">.</span><span class="na">freeMemory</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">totalEnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runtime</span><span class="p">.</span><span class="na">totalMemory</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">totalBegin</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">totalEnd</span><span class="p">);</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">used</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Explicit cast to {@link Buffer} parent buffer type. It resolves issues with covariant return types in Java 9+ for</span>
+<span class="cm">     * {@link java.nio.ByteBuffer} and {@link java.nio.CharBuffer}. Explicit casting resolves the NoSuchMethodErrors (e.g</span>
+<span class="cm">     * java.lang.NoSuchMethodError: java.nio.ByteBuffer.limit(I)Ljava/nio/ByteBuffer) when the project is compiled with newer</span>
+<span class="cm">     * Java version and run on Java 8.</span>
+<span class="cm">     * &lt;p/&gt;</span>
+<span class="cm">     * &lt;a href=&quot;https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html&quot;&gt;Java 8&lt;/a&gt; doesn&#39;t provide override the</span>
+<span class="cm">     * following Buffer methods in subclasses:</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;pre&gt;</span>
+<span class="cm">     * Buffer clear​()</span>
+<span class="cm">     * Buffer flip​()</span>
+<span class="cm">     * Buffer limit​(int newLimit)</span>
+<span class="cm">     * Buffer mark​()</span>
+<span class="cm">     * Buffer position​(int newPosition)</span>
+<span class="cm">     * Buffer reset​()</span>
+<span class="cm">     * Buffer rewind​()</span>
+<span class="cm">     * &lt;/pre&gt;</span>
+<span class="cm">     *</span>
+<span class="cm">     * &lt;a href=&quot;https://docs.oracle.com/javase/9/docs/api/java/nio/ByteBuffer.html&quot;&gt;Java 9&lt;/a&gt; introduces the overrides in child</span>
+<span class="cm">     * classes (e.g the ByteBuffer), but the return type is the specialized one and not the abstract {@link Buffer}. So the code</span>
+<span class="cm">     * compiled with newer Java is not working on Java 8 unless a workaround with explicit casting is used.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param buf buffer to cast to the abstract {@link Buffer} parent type</span>
+<span class="cm">     * @return the provided buffer</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="nf">upcast</span><span class="p">(</span><span class="n">Buffer</span><span class="w"> </span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// not private for testing</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">isHotSpotCompressedOopsOrNull</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">MBeanServer</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ManagementFactory</span><span class="p">.</span><span class="na">getPlatformMBeanServer</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">ObjectName</span><span class="w"> </span><span class="n">mbean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectName</span><span class="p">(</span><span class="s">&quot;com.sun.management:type=HotSpotDiagnostic&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">objects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;UseCompressedOops&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">strings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;java.lang.String&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;getVMOption&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">CompositeDataSupport</span><span class="w"> </span><span class="n">compressedOopsValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CompositeDataSupport</span><span class="p">)</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">mbean</span><span class="p">,</span><span class="w"> </span><span class="n">operation</span><span class="p">,</span><span class="w"> </span><span class="n">objects</span><span class="p">,</span><span class="w"> </span><span class="n">strings</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">compressedOopsValue</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">).</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">getLogger</span><span class="p">(</span><span class="n">JVMUtil</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Failed to read HotSpot specific configuration: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Fallback when checking CompressedOopsEnabled.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="nf">isObjectLayoutCompressedOopsOrNull</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">UNSAFE_AVAILABLE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Integer</span><span class="w"> </span><span class="n">referenceSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReferenceSizeEstimator</span><span class="p">.</span><span class="na">getReferenceSizeOrNull</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">referenceSize</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// when reference size does not equal address size then it&#39;s safe to assume references are compressed</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">referenceSize</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">addressSize</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Estimates the reference by comparing the address offset of two fields.</span>
+<span class="cm">     *</span>
+<span class="cm">     * We can&#39;t rely on Unsafe to get a real reference size when oops compression is enabled.</span>
+<span class="cm">     * Hence we have to do a simple experiment: Let&#39;s have a class with 2 references.</span>
+<span class="cm">     * The difference between address offsets is the reference size in bytes.</span>
+<span class="cm">     *</span>
+<span class="cm">     * It is not bullet-proof, it assumes a certain object layout, but this happens</span>
+<span class="cm">     * to work for all JVMs tested.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="s">&quot;unused&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;checkstyle:visibilitymodifier&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReferenceSizeEstimator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">firstField</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">secondField</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">static</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">getReferenceSizeOrNull</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">Integer</span><span class="w"> </span><span class="n">referenceSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="n">firstFieldOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">objectFieldOffset</span><span class="p">(</span><span class="n">ReferenceSizeEstimator</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getField</span><span class="p">(</span><span class="s">&quot;firstField&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">                </span><span class="kt">long</span><span class="w"> </span><span class="n">secondFieldOffset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UNSAFE</span><span class="p">.</span><span class="na">objectFieldOffset</span><span class="p">(</span><span class="n">ReferenceSizeEstimator</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getField</span><span class="p">(</span><span class="s">&quot;secondField&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">                </span><span class="n">referenceSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">secondFieldOffset</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">firstFieldOffset</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">getLogger</span><span class="p">(</span><span class="n">JVMUtil</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">fine</span><span class="p">(</span><span class="s">&quot;Could not determine cost of reference using field offsets: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">referenceSize</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

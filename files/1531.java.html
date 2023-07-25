@@ -202,27 +202,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2012 Reficio (TM) - Reestablish your software! All Rights Reserved.</span>
+<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
 <span class="cm"> *</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm"> * contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm"> * this work for additional information regarding copyright ownership.</span>
-<span class="cm"> * The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm"> * (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm"> * the License.  You may obtain a copy of the License at</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> *   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
 <span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
 <span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
@@ -230,104 +217,97 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * See the License for the specific language governing permissions and</span>
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.reficio.p2.publisher</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.execution.MavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.BuildPluginManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.MojoExecutionException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.project.MavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.reficio.p2.utils.Utils</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.Objects.requireNonNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.twdata.maven.mojoexecutor.MojoExecutor.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * @author Tom Bujok (tom.bujok@gmail.com)&lt;br&gt;</span>
-<span class="cm"> *         Reficio (TM) - Reestablish your software!&lt;br&gt;</span>
-<span class="cm"> *         http://www.reficio.org</span>
-<span class="cm"> * @since 1.0.0</span>
+<span class="cm"> * Removes the specified entry listener. If there is no such listener added before, this call does no change in the</span>
+<span class="cm"> * cluster and returns false.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BundlePublisher</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;f2d3f36c489c0f878c80050dd7067174&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReplicatedMapRemoveEntryListenerCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0D0E00</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">855552</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0D0E01</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">855553</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BOOLEAN_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">compressSite</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MavenProject</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MavenSession</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BuildPluginManager</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BundlePublisher</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">compressSite</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">,</span><span class="w"></span>
-<span class="w">                           </span><span class="n">MavenProject</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">,</span><span class="w"> </span><span class="n">MavenSession</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">,</span><span class="w"> </span><span class="n">BuildPluginManager</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">compressSite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compressSite</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">additionalArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mavenProject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">mavenSession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">buildPluginManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">ReplicatedMapRemoveEntryListenerCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">executeMojo</span><span class="p">(</span><span class="w"></span>
-<span class="w">                </span><span class="n">plugin</span><span class="p">(</span><span class="w"></span>
-<span class="w">                        </span><span class="n">groupId</span><span class="p">(</span><span class="s">&quot;org.eclipse.tycho.extras&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">                        </span><span class="n">artifactId</span><span class="p">(</span><span class="s">&quot;tycho-p2-extras-plugin&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">                        </span><span class="n">version</span><span class="p">(</span><span class="n">Utils</span><span class="p">.</span><span class="na">TYCHO_VERSION</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="p">),</span><span class="w"></span>
-<span class="w">                </span><span class="n">goal</span><span class="p">(</span><span class="s">&quot;publish-features-and-bundles&quot;</span><span class="p">),</span><span class="w"></span>
-<span class="w">                </span><span class="n">configuration</span><span class="p">(</span><span class="w"></span>
-<span class="w">                        </span><span class="n">element</span><span class="p">(</span><span class="n">name</span><span class="p">(</span><span class="s">&quot;compress&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">Boolean</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">compressSite</span><span class="p">)),</span><span class="w"></span>
-<span class="w">                        </span><span class="n">element</span><span class="p">(</span><span class="n">name</span><span class="p">(</span><span class="s">&quot;additionalArgs&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="p">),</span><span class="w"></span>
-<span class="w">                </span><span class="n">executionEnvironment</span><span class="p">(</span><span class="w"></span>
-<span class="w">                        </span><span class="n">mavenProject</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="n">mavenSession</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="n">buildPluginManager</span><span class="w"></span>
-<span class="w">                </span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of the ReplicatedMap</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * ID of the registered entry listener.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">registrationId</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">builder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Builder</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">registrationId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;ReplicatedMap.RemoveEntryListener&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">registrationId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Builder</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">Boolean</span><span class="w"> </span><span class="n">compressSite</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">MavenProject</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">MavenSession</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">BuildPluginManager</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ReplicatedMapRemoveEntryListenerCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">registrationId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_REGISTRATION_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">compressSite</span><span class="p">(</span><span class="n">Boolean</span><span class="w"> </span><span class="n">compressSite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">compressSite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compressSite</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">additionalArgs</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">additionalArgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">mavenProject</span><span class="p">(</span><span class="n">MavenProject</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">mavenProject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">mavenSession</span><span class="p">(</span><span class="n">MavenSession</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">mavenSession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Builder</span><span class="w"> </span><span class="nf">buildPluginManager</span><span class="p">(</span><span class="n">BuildPluginManager</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">buildPluginManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildPluginManager</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">BundlePublisher</span><span class="w"> </span><span class="nf">build</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BundlePublisher</span><span class="p">(</span><span class="n">compressSite</span><span class="p">,</span><span class="w"> </span><span class="n">additionalArgs</span><span class="p">,</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">mavenProject</span><span class="p">),</span><span class="w"></span>
-<span class="w">                    </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">mavenSession</span><span class="p">),</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">buildPluginManager</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * True if registration is removed, false otherwise.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">decodeResponse</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">decodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

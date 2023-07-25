@@ -216,177 +216,127 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.ektorp</span><span class="p">;</span><span class="w"></span>
+<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.BufferedReader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.Closeable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.InputStreamReader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.Serializable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Iterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.NoSuchElementException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.*</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.ektorp.ViewResult.Row</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.ektorp.http.HttpResponse</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Sverre Kristian Valskrå</span>
+<span class="cm"> * Associates the specified value with the specified key in this map. If the map previously contained a mapping for</span>
+<span class="cm"> * the key, the old value is replaced by the specified value. This method is preferred to #put(Object, Object)</span>
+<span class="cm"> * if the old value is not needed.</span>
+<span class="cm"> * The object to be set will be accessible only in the current transaction context until the transaction is committed.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StreamingViewResult</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Serializable</span><span class="p">,</span><span class="w"> </span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Closeable</span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;a795211fed641800ba5282d1a0058ae6&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TransactionalMapSetCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0E0700</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">919296</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0E0701</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">919297</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_TXN_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_TXN_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">LONG_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">OFFSET_FIELD_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;offset&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">TOTAL_ROWS_FIELD_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;total_rows&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4750290767936801714L</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">totalRows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">TransactionalMapSetCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressWarnings</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">iteratorCalled</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">ignoreNotFound</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of the Transactional Map</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressWarnings</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpResponse</span><span class="w"> </span><span class="n">httpResponse</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * ID of the this transaction operation</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">txnId</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressWarnings</span><span class="p">({</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NP_DEREFERENCE_OF_READLINE_VALUE&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">StreamingViewResult</span><span class="p">(</span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">,</span><span class="w"> </span><span class="n">HttpResponse</span><span class="w"> </span><span class="n">httpResponse</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">ignoreNotFound</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The id of the user thread performing the operation. It is used to guarantee that only the lock holder thread (if a lock exists on the entry) can perform the requested operation.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">objectMapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">httpResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">httpResponse</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ignoreNotFound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ignoreNotFound</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">.</span><span class="na">getContent</span><span class="p">()));</span><span class="w"></span>
-<span class="w">		</span><span class="k">try</span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span><span class="w"></span>
-<span class="w">		</span><span class="n">totalRows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getFieldValue</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="n">TOTAL_ROWS_FIELD_NAME</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getFieldValue</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="n">OFFSET_FIELD_NAME</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The specified key</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">		</span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DbAccessException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The value to associate with key</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 *</span>
-<span class="cm">	 * @return -1 if result did not contain an offset field</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getOffset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">offset</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">txnId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">,</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setContainsSerializedDataInRequest</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;TransactionalMap.Set&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_TXN_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">txnId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 *</span>
-<span class="cm">	 * @return -1 if result did not contain a total_rows field</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getTotalRows</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">totalRows</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">TransactionalMapSetCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">txnId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_TXN_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">threadId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">ViewResult</span><span class="p">.</span><span class="na">Row</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">iterator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iteratorCalled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Iterator can only be called once!&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="n">iteratorCalled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StreamingViewResultIterator</span><span class="p">();</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">abort</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">	    </span><span class="n">httpResponse</span><span class="p">.</span><span class="na">abort</span><span class="p">();</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getFieldValue</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="n">key</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">fromIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fromIndex</span><span class="p">)));</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StreamingViewResultIterator</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="n">Row</span><span class="w"> </span><span class="n">row</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">closed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">hasNext</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">closed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="c1">// The BufferedReader is closed. There can&#39;t be any more rows.</span><span class="w"></span>
-<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">row</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="c1">// We still already have an &#39;uncollected&#39; row from last time.</span><span class="w"></span>
-<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			    </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">node</span><span class="p">;</span><span class="w"></span>
-<span class="w">			    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    				</span><span class="n">String</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span><span class="w"></span>
-<span class="w">    				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">doc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;]}&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    					</span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">					</span><span class="n">closed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">    					</span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">    				</span><span class="p">}</span><span class="w"></span>
-<span class="w">    				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="na">endsWith</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    					</span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">doc</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    				</span><span class="p">}</span><span class="w"></span>
-<span class="w">    				</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readTree</span><span class="p">(</span><span class="n">doc</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			    </span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">ignoreNotFound</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">has</span><span class="p">(</span><span class="n">Row</span><span class="p">.</span><span class="na">ERROR_FIELD_NAME</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">			    </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ViewResult</span><span class="p">.</span><span class="na">Row</span><span class="p">(</span><span class="n">node</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DbAccessException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-
-
-<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">Row</span><span class="w"> </span><span class="nf">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NoSuchElementException</span><span class="p">(</span><span class="s">&quot;Attempt to iterate beyond the result set&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="n">Row</span><span class="w"> </span><span class="n">toReturn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">toReturn</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">remove</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

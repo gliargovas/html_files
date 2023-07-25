@@ -244,50 +244,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2012 Reficio (TM) - Reestablish your software! All Rights Reserved.</span>
+<span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
 <span class="cm"> *</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm"> * contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm"> * this work for additional information regarding copyright ownership.</span>
-<span class="cm"> * The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm"> * (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm"> * the License.  You may obtain a copy of the License at</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> *   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
 <span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
 <span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
@@ -295,169 +259,139 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * See the License for the specific language governing permissions and</span>
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.reficio.p2</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.LinkedHashMap</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Properties</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * Represents one &amp;lt;artifact&amp;gt; section in the plugin configuration.</span>
-<span class="cm"> * This class is mutable only because the values are set by Maven using the setters.</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Tom Bujok (tom.bujok@gmail.com)&lt;br&gt;</span>
-<span class="cm"> *         Reficio (TM) - Reestablish your software!&lt;br&gt;</span>
-<span class="cm"> *         http://www.reficio.org</span>
-<span class="cm"> * @since 1.0.0</span>
+<span class="cm"> * Acquires the requested amount of permits if available, reducing</span>
+<span class="cm"> * the number of available permits. If no enough permits are available,</span>
+<span class="cm"> * then the current thread becomes disabled for thread scheduling purposes</span>
+<span class="cm"> * and lies dormant until other threads release enough permits.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">P2Artifact</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;559510c63f34fb6062b01d795c0a5364&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SemaphoreAcquireCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0C0200</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">786944</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0C0201</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">786945</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_SESSION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_SESSION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">LONG_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INVOCATION_UID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">LONG_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_PERMITS_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_INVOCATION_UID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_TIMEOUT_MS_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_PERMITS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_TIMEOUT_MS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">LONG_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BOOLEAN_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">SemaphoreAcquireCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * CP group id of this ISemaphore instance</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">cp</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">RaftGroupId</span><span class="w"> </span><span class="n">groupId</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of this ISemaphore instance</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Session ID of the caller</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">sessionId</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * ID of the caller thread</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * UID of this invocation</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">invocationUid</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * number of permits to acquire</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">permits</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Duration to wait for permit acquire</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">cp</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">RaftGroupId</span><span class="w"> </span><span class="n">groupId</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">sessionId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">threadId</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">invocationUid</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">permits</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;Semaphore.Acquire&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_SESSION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">sessionId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">threadId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_INVOCATION_UID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">invocationUid</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_PERMITS_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">permits</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_TIMEOUT_MS_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">timeoutMs</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">RaftGroupIdCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">SemaphoreAcquireCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">sessionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_SESSION_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">threadId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_THREAD_ID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">invocationUid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_INVOCATION_UID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">permits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_PERMITS_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">timeoutMs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeLong</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_TIMEOUT_MS_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RaftGroupIdCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Artifact id in the following format &quot;groupId:artifactId:version&quot;</span>
+<span class="cm">     * true if requested permits are acquired,</span>
+<span class="cm">     * false otherwise</span>
 <span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Indicator to include transitive dependencies</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">transitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Indicator to override default manifest</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">override</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Indicator to include source dependencies</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Indicator to generate a singleton bundle</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Specifies transitive dependencies that should be excluded</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">excludes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * The BND instructions for the bundle.</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">instructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * The BND instructions for the bundle.</span>
-<span class="cm">     * These properties complement {@link P2Artifact#instructions} with higher priority on duplicate keys.</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Properties</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Combined BND instructions for the bundle.</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">combinedInstructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">shouldResetCombinedInstructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">P2Artifact</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setId</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getInstructions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instructions</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setInstructions</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">instructions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">instructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instructions</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">markCombinedInstructionsObsolete</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldIncludeTransitive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">transitive</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTransitive</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">transitive</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">transitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transitive</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldOverrideManifest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">override</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOverride</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">override</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">override</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">override</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSingleton</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">singleton</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">singleton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">singleton</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSingleton</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">singleton</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldIncludeSources</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">source</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getExcludes</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">excludes</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setExcludes</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">excludes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">excludes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">excludes</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Properties</span><span class="w"> </span><span class="nf">getInstructionsProperties</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setInstructionsProperties</span><span class="p">(</span><span class="n">Properties</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">instructionsProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">markCombinedInstructionsObsolete</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCombinedInstructions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shouldResetCombinedInstructions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">resetCombinedInstructions</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">shouldResetCombinedInstructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">combinedInstructions</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">markCombinedInstructionsObsolete</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">shouldResetCombinedInstructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">resetCombinedInstructions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">combinedInstructions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instructions</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="n">combinedInstructions</span><span class="p">.</span><span class="na">putAll</span><span class="p">(</span><span class="n">instructions</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instructionsProperties</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="p">.</span><span class="na">stringPropertyNames</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">combinedInstructions</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">instructionsProperties</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">key</span><span class="p">));</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">decodeResponse</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">decodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

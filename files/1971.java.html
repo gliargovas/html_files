@@ -95,427 +95,185 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span></pre></div></td><td class="code"><div><pre><span></span><span class="c1">//</span><span class="w"></span>
-<span class="c1">// Copyright 2014 Mike Friesen</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span><span class="w"></span>
-<span class="c1">// you may not use this file except in compliance with the License.</span><span class="w"></span>
-<span class="c1">// You may obtain a copy of the License at</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// http://www.apache.org/licenses/LICENSE-2.0</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-<span class="c1">// Unless required by applicable law or agreed to in writing, software</span><span class="w"></span>
-<span class="c1">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><span class="w"></span>
-<span class="c1">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><span class="w"></span>
-<span class="c1">// See the License for the specific language governing permissions and</span><span class="w"></span>
-<span class="c1">// limitations under the License.</span><span class="w"></span>
-<span class="c1">//</span><span class="w"></span>
-
-<span class="kn">package</span><span class="w"> </span><span class="nn">ca.gobits.test.dht</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">ca.gobits.dht.DHTIdentifier.NODE_ID_LENGTH</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">ca.gobits.dht.factory.DHTNodeFactory.create</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">ca.gobits.dht.util.DHTConversion.fitToSize</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertArrayEquals</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertEquals</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertFalse</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertNotNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.Assert.assertTrue</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigInteger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.InetAddress</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.Test</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">ca.gobits.dht.DHTNode</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">ca.gobits.dht.DHTNode.State</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Unit Test for DHTNode.</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> *    GeoTools Sample code and Tutorials by Open Source Geospatial Foundation, and others</span>
+<span class="cm"> *    https://docs.geotools.org</span>
+<span class="cm"> *</span>
+<span class="cm"> *    To the extent possible under law, the author(s) have dedicated all copyright</span>
+<span class="cm"> *    and related and neighboring rights to this software to the public domain worldwide.</span>
+<span class="cm"> *    This software is distributed without any warranty.</span>
+<span class="cm"> *</span>
+<span class="cm"> *    You should have received a copy of the CC0 Public Domain Dedication along with this</span>
+<span class="cm"> *    software. If not, see &lt;http://creativecommons.org/publicdomain/zero/1.0/&gt;.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DHTNodeUnitTest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.geotools.api</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testConstructor01().</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testConstructor01</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fitToSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="n">NODE_ID_LENGTH</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.data.DataStore</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.data.DataUtilities</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.data.Query</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.data.ServiceInfo</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.data.simple.SimpleFeatureSource</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.feature.NameImpl</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.filter.text.cql2.CQL</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.geotools.util.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opengis.feature.simple.SimpleFeatureType</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opengis.feature.type.Name</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DataStoreExamples</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertArrayEquals</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getInfoHash</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getAddress</span><span class="p">().</span><span class="na">getHostAddress</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="o">-</span><span class="mi">1430351300</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">hashCode</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">getLastUpdated</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getState</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">DataStore</span><span class="w"> </span><span class="n">dataStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">SimpleFeatureSource</span><span class="w"> </span><span class="n">featureSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleInfo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// exampleInfo start</span><span class="w"></span>
+<span class="w">        </span><span class="n">ServiceInfo</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataStore</span><span class="p">.</span><span class="na">getInfo</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Human readable name and description</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getTitle</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getDescription</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// keywords (dublin core keywords like a web page)</span><span class="w"></span>
+<span class="w">        </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getKeywords</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// formal metadata</span><span class="w"></span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">publisher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getPublisher</span><span class="p">();</span><span class="w"> </span><span class="c1">// authority publishing data</span><span class="w"></span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getSchema</span><span class="p">();</span><span class="w"> </span><span class="c1">// used for data conforming to a standard</span><span class="w"></span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getSource</span><span class="p">();</span><span class="w"> </span><span class="c1">// location where information is published from</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// exampleInfo end</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testConstructor02() - sets IPv4 Address.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testConstructor02</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByName</span><span class="p">(</span><span class="s">&quot;54.23.54.12&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleCreateSchema</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// exampleCreateSchema start</span><span class="w"></span>
+<span class="w">        </span><span class="n">SimpleFeatureType</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">                </span><span class="n">DataUtilities</span><span class="p">.</span><span class="na">createType</span><span class="p">(</span><span class="s">&quot;LINE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;centerline:LineString,name:\&quot;\&quot;,id:0&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DHTNode</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setInfoHash</span><span class="p">(</span><span class="n">nodeId</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setAddress</span><span class="p">(</span><span class="n">address</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setPort</span><span class="p">(</span><span class="n">nodePort</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">dataStore</span><span class="p">.</span><span class="na">createSchema</span><span class="p">(</span><span class="n">schema</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// exampleCreateSchema end</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertArrayEquals</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getInfoHash</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getPort</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testConstructor03() - sets IPv6 Address.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testConstructor03</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">getByName</span><span class="p">(</span><span class="s">&quot;805b:2d9d:dc28:0000:0000:fc57:d4c8:1fff&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleRemoveSchema</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// exampleRemoveSchema start</span><span class="w"></span>
+<span class="w">        </span><span class="n">Name</span><span class="w"> </span><span class="n">schemaName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NameImpl</span><span class="p">(</span><span class="s">&quot;myTable&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">dataStore</span><span class="p">.</span><span class="na">removeSchema</span><span class="p">(</span><span class="n">schemaName</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// exampleRemoveSchema end</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DHTNode</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setInfoHash</span><span class="p">(</span><span class="n">nodeId</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setAddress</span><span class="p">(</span><span class="n">address</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">setPort</span><span class="p">(</span><span class="n">nodePort</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertArrayEquals</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getInfoHash</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getAddress</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">getPort</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testToString01().</span>
-<span class="cm">     * @throws Exception  Eception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testToString01</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="s">&quot;ca.gobits.dht.DHTNode&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;[infohash=&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,123},&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;address=127.0.0.1,&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;port=103,state=UNKNOWN,lastUpdated=&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleAllCount</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// all start</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featureSource</span><span class="p">.</span><span class="na">getCount</span><span class="p">(</span><span class="n">Query</span><span class="p">.</span><span class="na">ALL</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featureSource</span><span class="p">.</span><span class="na">getFeatures</span><span class="p">().</span><span class="na">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// all end</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testEquals01() null object.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testEquals01</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testEquals02() same object.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testEquals02</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">node</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testEquals03() non DHTNode object.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;EC_UNRELATED_CLASS_AND_INTERFACE&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testEquals03</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * testEquals04() equal DHTNode object.</span>
-<span class="cm">     * @throws Exception   Exception</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testEquals04</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// given</span><span class="w"></span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nodeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">).</span><span class="na">toByteArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">InetAddress</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InetAddress</span><span class="p">.</span><span class="na">getByAddress</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="mi">127</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">nodePort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">103</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">DHTNode</span><span class="w"> </span><span class="n">node1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">create</span><span class="p">(</span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">nodePort</span><span class="p">,</span><span class="w"> </span><span class="n">State</span><span class="p">.</span><span class="na">UNKNOWN</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// when</span><span class="w"></span>
-<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">node1</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// then</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">exampleQueryCount</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// count start</span><span class="w"></span>
+<span class="w">        </span><span class="n">Query</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Query</span><span class="p">(</span><span class="s">&quot;typeName&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">CQL</span><span class="p">.</span><span class="na">toFilter</span><span class="p">(</span><span class="s">&quot;REGION = 3&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featureSource</span><span class="p">.</span><span class="na">getCount</span><span class="p">(</span><span class="n">query</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featureSource</span><span class="p">.</span><span class="na">getFeatures</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="na">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// count end</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

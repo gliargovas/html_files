@@ -95,167 +95,241 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">dev.morphia.mapping.validation</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.mapping.codec.pojo.EntityModel</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.mapping.codec.pojo.PropertyModel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * @author Uwe Schaefer, (us@thomas-daily.de)</span>
+<span class="cm"> * Inserts all of the elements in the specified collection into this list at the specified position (optional operation).</span>
+<span class="cm"> * Shifts the element currently at that position (if any) and any subsequent elements to the right (increases their indices).</span>
+<span class="cm"> * The new elements will appear in this list in the order that they are returned by the specified collection&#39;s iterator.</span>
+<span class="cm"> * The behavior of this operation is undefined if the specified collection is modified while the operation is in progress.</span>
+<span class="cm"> * (Note that this will occur if the specified collection is this list, and it&#39;s nonempty.)</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConstraintViolation</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">EntityModel</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ClassConstraint</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Level</span><span class="w"> </span><span class="n">level</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PropertyModel</span><span class="w"> </span><span class="n">property</span><span class="p">;</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;951bbd4e323f0c508dd2f867a2db2574&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ListAddAllWithIndexCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x050E00</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">331264</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x050E01</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">331265</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INDEX_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_INDEX_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BOOLEAN_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Creates a violation instance to record invalid mapping metadata</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param level       the severity of the violation</span>
-<span class="cm">     * @param entityModel the errant class</span>
-<span class="cm">     * @param property    the errant property</span>
-<span class="cm">     * @param validator   the constraint failed</span>
-<span class="cm">     * @param message     the message for the failure</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ConstraintViolation</span><span class="p">(</span><span class="n">Level</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">EntityModel</span><span class="w"> </span><span class="n">entityModel</span><span class="p">,</span><span class="w"> </span><span class="n">PropertyModel</span><span class="w"> </span><span class="n">property</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">Class</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ClassConstraint</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">entityModel</span><span class="p">,</span><span class="w"> </span><span class="n">validator</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">property</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">ListAddAllWithIndexCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of the List</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * index at which to insert the first element from the specified collection.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The list of value to insert into the list.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">List</span><span class="o">&lt;</span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">valueList</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Collection</span><span class="o">&lt;</span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">valueList</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setContainsSerializedDataInRequest</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;List.AddAllWithIndex&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_INDEX_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ListMultiFrameCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">valueList</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">encode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ListAddAllWithIndexCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_INDEX_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">valueList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ListMultiFrameCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">decode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Creates a violation instance to record invalid mapping metadata</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param level       the severity of the violation</span>
-<span class="cm">     * @param entityModel the errant class</span>
-<span class="cm">     * @param validator   the constraint failed</span>
-<span class="cm">     * @param message     the message for the failure</span>
+<span class="cm">     * True if this list changed as a result of the call, false otherwise.</span>
 <span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ConstraintViolation</span><span class="p">(</span><span class="n">Level</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">EntityModel</span><span class="w"> </span><span class="n">entityModel</span><span class="p">,</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ClassConstraint</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">level</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entityModel</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">validator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validator</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * @return the severity of the violation</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Level</span><span class="w"> </span><span class="nf">getLevel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">level</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * @return the qualified name of the failing mapping</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPrefix</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">type</span><span class="p">.</span><span class="na">getType</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">property</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * @return a human friendly version of the violation</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">render</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%s complained about %s : %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">(),</span><span class="w"> </span><span class="n">getPrefix</span><span class="p">(),</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Levels of constraint violations</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Level</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">MINOR</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">INFO</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">WARNING</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">SEVERE</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">FATAL</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">decodeResponse</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">decodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

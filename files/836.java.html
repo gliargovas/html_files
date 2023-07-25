@@ -246,295 +246,157 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.googlecode.cmakemavenproject</span><span class="p">;</span><span class="w"></span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.spf4j.maven.plugin.avro.avscp</span><span class="p">;</span><span class="w"></span>
 
-<span class="cm">/*</span>
-<span class="cm"> * Copyright 2001-2005 The Apache Software Foundation.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except</span>
-<span class="cm"> * in compliance with the License. You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing, software distributed under the License</span>
-<span class="cm"> * is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express</span>
-<span class="cm"> * or implied. See the License for the specific language governing permissions and limitations under</span>
-<span class="cm"> * the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.googlecode.cmakemavenproject.Mojos.VALID_CLASSIFIERS</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map.Entry</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.execution.MavenSession</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.model.Plugin</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.AbstractMojo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.BuildPluginManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.avro.Schema</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.MojoExecutionException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.descriptor.PluginDescriptor</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.MojoFailureException</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugin.logging.Log</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugins.annotations.Component</span><span class="p">;</span><span class="w"></span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugins.annotations.LifecyclePhase</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugins.annotations.Mojo</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.plugins.annotations.Parameter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.project.MavenProject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.codehaus.plexus.util.xml.Xpp3Dom</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.twdata.maven.mojoexecutor.MojoExecutor</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.twdata.maven.mojoexecutor.MojoExecutor.Element</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.twdata.maven.mojoexecutor.MojoExecutor.ExecutionEnvironment</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.shared.model.fileset.FileSet</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.maven.shared.model.fileset.util.FileSetManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.maven.plugin.avro.avscp.validation.Validator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.maven.plugin.avro.avscp.validation.Validators</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * Goal which generates project files.</span>
+<span class="cm"> * &lt;p&gt;Mojo that runs all Schema validators on this project schemas&lt;/p&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;Built in validators:&lt;/p&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;ul&gt;</span>
+<span class="cm"> * &lt;li&gt;docValidator (schema documentation),&lt;/li&gt;</span>
+<span class="cm"> * &lt;li&gt;compatibility (schema compatibility),&lt;/li&gt;</span>
+<span class="cm"> * &lt;li&gt;namesValidator (schema named types and field name validation)&lt;/li&gt;</span>
+<span class="cm"> * &lt;/ul&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;p&gt;By default validation issues will fail the build. This can be disabled at validator level with:&lt;/p&gt;</span>
+<span class="cm"> * &lt;pre&gt;</span>
+<span class="cm"> * &lt;code&gt;</span>
+<span class="cm"> * &amp;lt;validatorConfigs&amp;gt;</span>
+<span class="cm"> *  &amp;lt;[validatorName].failOnIssue&amp;gt;&amp;lt;/[validatorName].failOnIssue&amp;gt;</span>
+<span class="cm"> * &amp;lt;/validatorConfigs&amp;gt;</span>
+<span class="cm"> * &lt;/code&gt;</span>
+<span class="cm"> * &lt;/pre&gt;</span>
+<span class="cm"> * &lt;p&gt;A particular validator can be sckipped at schema level with:&lt;/p&gt;</span>
+<span class="cm"> * &lt;pre&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * {@literal @}ignoreValidators([&quot;validatorname&quot;])</span>
+<span class="cm"> *</span>
+<span class="cm"> * &lt;/pre&gt;</span>
 <span class="cm"> * &lt;p&gt;</span>
-<span class="cm"> * @author Gili Tzabari</span>
+<span class="cm"> * Custom validators can be built and used. A custom validator,</span>
+<span class="cm"> * will need to implement the org.spf4j.maven.plugin.avro.avscp.validation.Validator interface, and will be loaded via</span>
+<span class="cm"> * the java Service Loader api.&lt;/p&gt;</span>
+<span class="cm"> *</span>
+<span class="cm"> * @see org.spf4j.maven.plugin.avro.avscp.validation.Validator Interface to implement a custom validator.</span>
+<span class="cm"> * @see org.spf4j.maven.plugin.avro.avscp.validation.impl Built in validator implementations.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@Mojo</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generate&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">defaultPhase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LifecyclePhase</span><span class="p">.</span><span class="na">PROCESS_SOURCES</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GenerateMojo</span><span class="w"></span>
-<span class="w">	</span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractMojo</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * The classifier of the current platform.</span>
-<span class="cm">	 * &lt;p&gt;</span>
-<span class="cm">	 * One of [windows-x86_32, windows-x86_64, linux-x86_32, linux-x86_64, linux-arm_32, mac-x86_64].</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;classifier&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classifier</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * /**</span>
-<span class="cm">	 * The directory containing CMakeLists.txt.</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="w"></span>
-<span class="w">		</span><span class="p">})</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">sourcePath</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * The output directory.</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="w"></span>
-<span class="w">		</span><span class="p">})</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">targetPath</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * The makefile generator to use.</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">generator</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * The environment variables.</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">environmentVariables</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="cm">/**</span>
-<span class="cm">	 * Extra command-line options to pass to cmake.</span>
-<span class="cm">	 */</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Component</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">BuildPluginManager</span><span class="w"> </span><span class="n">pluginManager</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="w"></span>
-<span class="w">		</span><span class="p">})</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;project&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">MavenProject</span><span class="w"> </span><span class="n">project</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;session&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">MavenSession</span><span class="w"> </span><span class="n">session</span><span class="p">;</span><span class="w"></span>
+<span class="nd">@Mojo</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;avro-validate&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">defaultPhase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LifecyclePhase</span><span class="p">.</span><span class="na">TEST</span><span class="p">,</span><span class="w"> </span><span class="n">requiresProject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SCII_SPOILED_CHILD_INTERFACE_IMPLEMENTOR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SchemaValidatorMojo</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">SchemaMojoBase</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ValidatorMojo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;download.cmake&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">downloadBinaries</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * you can exclude certain validators from execution.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;excludeValidators&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">excludeValidators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">EMPTY_LIST</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cmake.root.dir&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/usr&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cmakeRootDir</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * You can configure validators, see individual validator doc (javadoc) for supported configuration keys.</span>
+<span class="cm">   * @see org.spf4j.maven.plugin.avro.avscp.validation.impl</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;validatorConfigs&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validatorConfigs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">EMPTY_MAP</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">	</span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">property</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cmake.child.dir&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cmakeChildDir</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getValidatorConfigs</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">validatorConfigs</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">	</span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="w"></span>
-<span class="w">	</span><span class="p">{</span><span class="w"></span>
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cmakeChildDir</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span><span class="w"></span>
-<span class="w">			</span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;windows-x86_32&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;windows-x86_64&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">cmakeChildDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bin/cmake.exe&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;linux-x86_32&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;linux-x86_64&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;linux-arm_32&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&quot;mac-x86_64&quot;</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">cmakeChildDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bin/cmake&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">				</span><span class="k">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">				</span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;\&quot;classifier\&quot; must be one of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">VALID_CLASSIFIERS</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">						</span><span class="s">&quot;\nActual: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">classifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="k">try</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">targetPath</span><span class="p">.</span><span class="na">exists</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">targetPath</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">())</span><span class="w"></span>
-<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;Cannot create &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">targetPath</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;PCAIL_POSSIBLE_CONSTANT_ALLOCATION_IN_LOOP&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">,</span><span class="w"> </span><span class="n">MojoFailureException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">super</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">Log</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getLog</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Validating schemas&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">orig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;allowUndefinedLogicalTypes&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;allowUndefinedLogicalTypes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">Validators</span><span class="w"> </span><span class="n">validators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Validators</span><span class="p">(</span><span class="n">excludeValidators</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">getSchemaFiles</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">File</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">generatedAvscTarget</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">Schema</span><span class="p">.</span><span class="na">Parser</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Parser</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">Schema</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">src</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">Result</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vresult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validators</span><span class="p">.</span><span class="na">validate</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">sIdl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">schema</span><span class="p">.</span><span class="na">getProp</span><span class="p">(</span><span class="s">&quot;sourceIdl&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">handleValidation</span><span class="p">(</span><span class="n">vresult</span><span class="p">,</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">schema</span><span class="p">.</span><span class="na">getFullName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="p">(</span><span class="n">sIdl</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot; from &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sIdl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;Cannot validate &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">Result</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vresult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validators</span><span class="p">.</span><span class="na">validate</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">handleValidation</span><span class="p">(</span><span class="n">vresult</span><span class="p">,</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;project&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;Cannot validate &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">orig</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;allowUndefinedLogicalTypes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">orig</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">			</span><span class="n">File</span><span class="w"> </span><span class="n">cmakeDir</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">downloadBinaries</span><span class="p">)</span><span class="w"></span>
-<span class="w">			</span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">getLog</span><span class="p">().</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Downloading binaries&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">cmakeDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">project</span><span class="p">.</span><span class="na">getBuild</span><span class="p">().</span><span class="na">getDirectory</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;dependency/cmake&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">PluginDescriptor</span><span class="w"> </span><span class="n">pluginDescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PluginDescriptor</span><span class="p">)</span><span class="w"> </span><span class="n">getPluginContext</span><span class="p">().</span><span class="w"></span>
-<span class="w">					</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;pluginDescriptor&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">String</span><span class="w"> </span><span class="n">groupId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pluginDescriptor</span><span class="p">.</span><span class="na">getGroupId</span><span class="p">();</span><span class="w"></span>
-<span class="w">				</span><span class="n">String</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pluginDescriptor</span><span class="p">.</span><span class="na">getVersion</span><span class="p">();</span><span class="w"></span>
-<span class="w">				</span><span class="n">String</span><span class="w"> </span><span class="n">binariesArtifact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cmake-binaries&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">groupIdElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;groupId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupId</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">artifactIdElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;artifactId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">binariesArtifact</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">versionElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">classifierElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;classifier&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">classifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">outputDirectoryElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;outputDirectory&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cmakeDir</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">artifactItemElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;artifactItem&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">groupIdElement</span><span class="p">,</span><span class="w"> </span><span class="n">artifactIdElement</span><span class="p">,</span><span class="w"></span>
-<span class="w">					</span><span class="n">versionElement</span><span class="p">,</span><span class="w"> </span><span class="n">classifierElement</span><span class="p">,</span><span class="w"> </span><span class="n">outputDirectoryElement</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Element</span><span class="w"> </span><span class="n">artifactItemsItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="s">&quot;artifactItems&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">artifactItemElement</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Xpp3Dom</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MojoExecutor</span><span class="p">.</span><span class="na">configuration</span><span class="p">(</span><span class="n">artifactItemsItem</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">ExecutionEnvironment</span><span class="w"> </span><span class="n">environment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MojoExecutor</span><span class="p">.</span><span class="na">executionEnvironment</span><span class="p">(</span><span class="n">project</span><span class="p">,</span><span class="w"> </span><span class="n">session</span><span class="p">,</span><span class="w"></span>
-<span class="w">					</span><span class="n">pluginManager</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">Plugin</span><span class="w"> </span><span class="n">dependencyPlugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MojoExecutor</span><span class="p">.</span><span class="na">plugin</span><span class="p">(</span><span class="s">&quot;org.apache.maven.plugins&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">					</span><span class="s">&quot;maven-dependency-plugin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2.8&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">MojoExecutor</span><span class="p">.</span><span class="na">executeMojo</span><span class="p">(</span><span class="n">dependencyPlugin</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;unpack&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">configuration</span><span class="p">,</span><span class="w"> </span><span class="n">environment</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="k">else</span><span class="w"></span>
-<span class="w">			</span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">getLog</span><span class="p">().</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Using local binaries&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">cmakeDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">cmakeRootDir</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleValidation</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">Result</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vresult</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Log</span><span class="w"> </span><span class="n">logger</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">detail</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="kd">throws</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">vresult</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">boolean</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">Result</span><span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">vresult</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Validator</span><span class="p">.</span><span class="na">Result</span><span class="w"> </span><span class="n">vres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vres</span><span class="p">.</span><span class="na">isValid</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">failed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">vName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="na">getKey</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Validator &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; failed with error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vres</span><span class="p">.</span><span class="na">getValidationErrorMessage</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vres</span><span class="p">.</span><span class="na">getValidationException</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ex</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Validator &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; exception&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">failed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Schema validation failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">detail</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;Failed to validate &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">detail</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">			</span><span class="n">ProcessBuilder</span><span class="w"> </span><span class="n">processBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ProcessBuilder</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">cmakeDir</span><span class="p">,</span><span class="w"> </span><span class="n">cmakeChildDir</span><span class="p">).</span><span class="na">getAbsolutePath</span><span class="p">(),</span><span class="w"></span>
-<span class="w">				</span><span class="s">&quot;-G&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">generator</span><span class="p">).</span><span class="na">directory</span><span class="p">(</span><span class="n">targetPath</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">				</span><span class="n">processBuilder</span><span class="p">.</span><span class="na">command</span><span class="p">().</span><span class="na">addAll</span><span class="p">(</span><span class="n">options</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="n">processBuilder</span><span class="p">.</span><span class="na">command</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">sourcePath</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"></span>
-<span class="w">			</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processBuilder</span><span class="p">.</span><span class="na">environment</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">getSchemaFiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">FileSetManager</span><span class="w"> </span><span class="n">fsm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileSetManager</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">FileSet</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileSet</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">fs</span><span class="p">.</span><span class="na">setDirectory</span><span class="p">(</span><span class="n">generatedAvscTarget</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">fs</span><span class="p">.</span><span class="na">addInclude</span><span class="p">(</span><span class="s">&quot;**/*.avsc&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">fs</span><span class="p">.</span><span class="na">setFollowSymlinks</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">fsm</span><span class="p">.</span><span class="na">getIncludedFiles</span><span class="p">(</span><span class="n">fs</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">environmentVariables</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">			</span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="p">:</span><span class="w"> </span><span class="n">environmentVariables</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"></span>
-<span class="w">				</span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">();</span><span class="w"></span>
-<span class="w">					</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"></span>
-<span class="w">					</span><span class="p">{</span><span class="w"></span>
-<span class="w">						</span><span class="c1">// Maven converts empty properties to null and Linux does not support null values,</span><span class="w"></span>
-<span class="w">						</span><span class="c1">// so we convert them back to empty strings:</span><span class="w"></span>
-<span class="w">						</span><span class="c1">// https://github.com/cmake-maven-project/cmake-maven-project/issues/11</span><span class="w"></span>
-<span class="w">						</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">					</span><span class="p">}</span><span class="w"></span>
-<span class="w">					</span><span class="n">env</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="n">Log</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getLog</span><span class="p">();</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">log</span><span class="p">.</span><span class="na">isDebugEnabled</span><span class="p">())</span><span class="w"></span>
-<span class="w">			</span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;sourcePath: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sourcePath</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;targetPath: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">targetPath</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;environment: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">processBuilder</span><span class="p">.</span><span class="na">environment</span><span class="p">());</span><span class="w"></span>
-<span class="w">				</span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;command-line: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">processBuilder</span><span class="p">.</span><span class="na">command</span><span class="p">());</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="kt">int</span><span class="w"> </span><span class="n">returnCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mojos</span><span class="p">.</span><span class="na">waitFor</span><span class="p">(</span><span class="n">processBuilder</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">returnCode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
-<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;Return code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">returnCode</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MojoExecutionException</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;SchemaValidatorMojo{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;excludes=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">excludeValidators</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kd">super</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

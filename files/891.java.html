@@ -142,15 +142,9 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Copyright 2016 Molindo GmbH</span>
+<span class="cm"> *</span>
 <span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="cm"> * you may not use this file except in compliance with the License.</span>
 <span class="cm"> * You may obtain a copy of the License at</span>
@@ -163,48 +157,38 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * See the License for the specific language governing permissions and</span>
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">com.floplizard.guice</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.wicketstuff.mergedresources.resources</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions.checkNotNull</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Injector</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.spi.container.servlet.WebConfig</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">io.dropwizard.setup.Environment</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.wicket.Resource</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.wicket.ResourceReference</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.wicketstuff.mergedresources.preprocess.IResourcePreProcessor</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="cm">/**</span>
-<span class="cm"> * A Guice based Jersey container that can pull resources out of the dropwizard environment.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kd">class</span> <span class="nc">DropwizardGuiceContainer</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GuiceContainer</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;super type is sufficient&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CachedCompressedJsResourceReference</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ResourceReference</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;BAD_PRACTICE&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">_cacheDuration</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IResourcePreProcessor</span><span class="w"> </span><span class="n">_preProcessor</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
-<span class="w">    </span><span class="n">DropwizardGuiceContainer</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Injector</span><span class="w"> </span><span class="n">injector</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">injector</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">CachedCompressedJsResourceReference</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">scope</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">style</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cacheDuration</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">IResourcePreProcessor</span><span class="w"> </span><span class="n">preProcessor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="kd">super</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">_cacheDuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cacheDuration</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">_preProcessor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preProcessor</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">checkNotNull</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;environment is null&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">resourceConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environment</span><span class="p">.</span><span class="na">jersey</span><span class="p">().</span><span class="na">getResourceConfig</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="nf">newResource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CachedCompressedJsResource</span><span class="p">(</span><span class="n">getScope</span><span class="p">(),</span><span class="w"> </span><span class="n">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">getLocale</span><span class="p">(),</span><span class="w"> </span><span class="n">getStyle</span><span class="p">(),</span><span class="w"> </span><span class="n">_cacheDuration</span><span class="p">,</span><span class="w"> </span><span class="n">_preProcessor</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="nf">getDefaultResourceConfig</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">WebConfig</span><span class="w"> </span><span class="n">webConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCacheDuration</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">_cacheDuration</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
+
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

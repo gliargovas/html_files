@@ -95,1016 +95,116 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span>
-<span class="normal">341</span>
-<span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
-<span class="normal">351</span>
-<span class="normal">352</span>
-<span class="normal">353</span>
-<span class="normal">354</span>
-<span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
-<span class="normal">358</span>
-<span class="normal">359</span>
-<span class="normal">360</span>
-<span class="normal">361</span>
-<span class="normal">362</span>
-<span class="normal">363</span>
-<span class="normal">364</span>
-<span class="normal">365</span>
-<span class="normal">366</span>
-<span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
-<span class="normal">414</span>
-<span class="normal">415</span>
-<span class="normal">416</span>
-<span class="normal">417</span>
-<span class="normal">418</span>
-<span class="normal">419</span>
-<span class="normal">420</span>
-<span class="normal">421</span>
-<span class="normal">422</span>
-<span class="normal">423</span>
-<span class="normal">424</span>
-<span class="normal">425</span>
-<span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span>
-<span class="normal">429</span>
-<span class="normal">430</span>
-<span class="normal">431</span>
-<span class="normal">432</span>
-<span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
-<span class="normal">439</span>
-<span class="normal">440</span>
-<span class="normal">441</span>
-<span class="normal">442</span>
-<span class="normal">443</span>
-<span class="normal">444</span>
-<span class="normal">445</span>
-<span class="normal">446</span>
-<span class="normal">447</span>
-<span class="normal">448</span>
-<span class="normal">449</span>
-<span class="normal">450</span>
-<span class="normal">451</span>
-<span class="normal">452</span>
-<span class="normal">453</span>
-<span class="normal">454</span>
-<span class="normal">455</span>
-<span class="normal">456</span>
-<span class="normal">457</span>
-<span class="normal">458</span>
-<span class="normal">459</span>
-<span class="normal">460</span>
-<span class="normal">461</span>
-<span class="normal">462</span>
-<span class="normal">463</span>
-<span class="normal">464</span>
-<span class="normal">465</span>
-<span class="normal">466</span>
-<span class="normal">467</span>
-<span class="normal">468</span>
-<span class="normal">469</span>
-<span class="normal">470</span>
-<span class="normal">471</span>
-<span class="normal">472</span>
-<span class="normal">473</span>
-<span class="normal">474</span>
-<span class="normal">475</span>
-<span class="normal">476</span>
-<span class="normal">477</span>
-<span class="normal">478</span>
-<span class="normal">479</span>
-<span class="normal">480</span>
-<span class="normal">481</span>
-<span class="normal">482</span>
-<span class="normal">483</span>
-<span class="normal">484</span>
-<span class="normal">485</span>
-<span class="normal">486</span>
-<span class="normal">487</span>
-<span class="normal">488</span>
-<span class="normal">489</span>
-<span class="normal">490</span>
-<span class="normal">491</span>
-<span class="normal">492</span>
-<span class="normal">493</span>
-<span class="normal">494</span>
-<span class="normal">495</span>
-<span class="normal">496</span>
-<span class="normal">497</span>
-<span class="normal">498</span>
-<span class="normal">499</span>
-<span class="normal">500</span>
-<span class="normal">501</span>
-<span class="normal">502</span>
-<span class="normal">503</span>
-<span class="normal">504</span>
-<span class="normal">505</span>
-<span class="normal">506</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * Copyright (c) 2000-present Liferay, Inc. All rights reserved.</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> * This library is free software; you can redistribute it and/or modify it under</span>
-<span class="cm"> * the terms of the GNU Lesser General Public License as published by the Free</span>
-<span class="cm"> * Software Foundation; either version 2.1 of the License, or (at your option)</span>
-<span class="cm"> * any later version.</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
-<span class="cm"> * This library is distributed in the hope that it will be useful, but WITHOUT</span>
-<span class="cm"> * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS</span>
-<span class="cm"> * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more</span>
-<span class="cm"> * details.</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.floplizard.guice</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nn">com.liferay.commerce.initializer.util</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions.checkNotNull</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.core.JsonParser</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.core.JsonToken</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.core.TreeNode</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.MappingJsonFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.commerce.account.model.CommerceAccount</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.commerce.account.model.CommerceAccountUserRel</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.commerce.account.service.CommerceAccountLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.commerce.account.service.CommerceAccountUserRelLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.petra.string.StringPool</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.exception.PortalException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.json.JSONArray</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.json.JSONFactory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.json.JSONObject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.language.Language</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.log.Log</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.log.LogFactoryUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.model.Organization</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.model.Role</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.model.User</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.OrganizationLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.RoleLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.ServiceContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.UserGroupRoleLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.UserIdMapperLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.service.UserLocalService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.ArrayUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.CalendarFactoryUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.FileUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.FriendlyURLNormalizer</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.GetterUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.LocaleUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.StringUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.liferay.portal.kernel.util.Validator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Injector</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.spi.container.servlet.WebConfig</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.dropwizard.setup.Environment</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileInputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.InputStream</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URLEncoder</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Calendar</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.TimeZone</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.osgi.service.component.annotations.Component</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.osgi.service.component.annotations.Reference</span><span class="p">;</span><span class="w"></span>
-
 <span class="cm">/**</span>
-<span class="cm"> * @author Alec Sloan</span>
+<span class="cm"> * A Guice based Jersey container that can pull resources out of the dropwizard environment.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="nd">@Component</span><span class="p">(</span><span class="n">service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CommerceUsersImporter</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CommerceUsersImporter</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">importCommerceUsers</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">File</span><span class="w"> </span><span class="n">commerceUsersFile</span><span class="p">,</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="n">classLoader</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">imageDependenciesPath</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">scopeGroupId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">MappingJsonFactory</span><span class="w"> </span><span class="n">mappingJsonFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MappingJsonFactory</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JsonParser</span><span class="w"> </span><span class="n">jsonFactoryParser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappingJsonFactory</span><span class="p">.</span><span class="na">createParser</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">commerceUsersFile</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JsonToken</span><span class="w"> </span><span class="n">jsonToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonFactoryParser</span><span class="p">.</span><span class="na">nextToken</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jsonToken</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JsonToken</span><span class="p">.</span><span class="na">START_ARRAY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s">&quot;JSON Array Expected&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">ServiceContext</span><span class="w"> </span><span class="n">serviceContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getServiceContext</span><span class="p">(</span><span class="n">scopeGroupId</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">importCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">jsonFactoryParser</span><span class="p">.</span><span class="na">nextToken</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JsonToken</span><span class="p">.</span><span class="na">END_ARRAY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">TreeNode</span><span class="w"> </span><span class="n">treeNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonFactoryParser</span><span class="p">.</span><span class="na">readValueAsTree</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">JSONObject</span><span class="w"> </span><span class="n">jsonObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_jsonFactory</span><span class="p">.</span><span class="na">createJSONObject</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">treeNode</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_log</span><span class="p">.</span><span class="na">isDebugEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">_log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="n">jsonObject</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">_importCommerceUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">jsonObject</span><span class="p">,</span><span class="w"> </span><span class="n">classLoader</span><span class="p">,</span><span class="w"> </span><span class="n">imageDependenciesPath</span><span class="p">,</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">importCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_log</span><span class="p">.</span><span class="na">isInfoEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">_log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Imported users count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">importCount</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">jsonFactoryParser</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">importCommerceUsers</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">jsonArray</span><span class="p">,</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="n">classLoader</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">dependenciesPath</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">scopeGroupId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">PortalException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">ServiceContext</span><span class="w"> </span><span class="n">serviceContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServiceContext</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setCompanyId</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">());</span><span class="w"></span>
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setScopeGroupId</span><span class="p">(</span><span class="n">scopeGroupId</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setUserId</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">jsonArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">_importCommerceUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">jsonArray</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">classLoader</span><span class="p">,</span><span class="w"> </span><span class="n">dependenciesPath</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">addOrUpdateUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userReminderQueryQuestion</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">userReminderQueryAnswer</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">screenName</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">emailAddress</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">facebookId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">openId</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="kt">boolean</span><span class="w"> </span><span class="n">portrait</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">portraitBytes</span><span class="p">,</span><span class="w"> </span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">timeZoneId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">greeting</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">comments</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">middleName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="kt">long</span><span class="w"> </span><span class="n">prefixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">suffixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">male</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayMonth</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayDay</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayYear</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">smsSn</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">facebookSn</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">jabberSn</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">skypeSn</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">twitterSn</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">jobTitle</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">groupIds</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">organizationIds</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">roleIds</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">userGroupIds</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">ServiceContext</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">PortalException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">fetchUserByScreenName</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"> </span><span class="n">screenName</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">fetchUserByEmailAddress</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"> </span><span class="n">emailAddress</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">long</span><span class="w"> </span><span class="n">companyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">long</span><span class="w"> </span><span class="n">creatorUserId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getUserId</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">boolean</span><span class="w"> </span><span class="n">autoScreenName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">isNull</span><span class="p">(</span><span class="n">screenName</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="kt">boolean</span><span class="w"> </span><span class="n">autoPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Validator</span><span class="p">.</span><span class="na">isNull</span><span class="p">(</span><span class="n">password</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">addUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">creatorUserId</span><span class="p">,</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span><span class="w"> </span><span class="n">autoPassword</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">autoScreenName</span><span class="p">,</span><span class="w"> </span><span class="n">screenName</span><span class="p">,</span><span class="w"> </span><span class="n">emailAddress</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="p">,</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">middleName</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"> </span><span class="n">prefixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">suffixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">male</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">birthdayMonth</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayDay</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayYear</span><span class="p">,</span><span class="w"> </span><span class="n">jobTitle</span><span class="p">,</span><span class="w"> </span><span class="n">groupIds</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">organizationIds</span><span class="p">,</span><span class="w"> </span><span class="n">roleIds</span><span class="p">,</span><span class="w"> </span><span class="n">userGroupIds</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">groupIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ArrayUtil</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getGroupIds</span><span class="p">(),</span><span class="w"> </span><span class="n">groupIds</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Validator</span><span class="p">.</span><span class="na">isNotNull</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"></span>
-<span class="w">			</span><span class="o">!</span><span class="n">groupIds</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getGroupIds</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">updateUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">(),</span><span class="w"> </span><span class="n">StringPool</span><span class="p">.</span><span class="na">BLANK</span><span class="p">,</span><span class="w"> </span><span class="n">StringPool</span><span class="p">.</span><span class="na">BLANK</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">StringPool</span><span class="p">.</span><span class="na">BLANK</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">userReminderQueryQuestion</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">userReminderQueryAnswer</span><span class="p">,</span><span class="w"> </span><span class="n">screenName</span><span class="p">,</span><span class="w"> </span><span class="n">emailAddress</span><span class="p">,</span><span class="w"> </span><span class="n">portrait</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">portraitBytes</span><span class="p">,</span><span class="w"> </span><span class="n">LocaleUtil</span><span class="p">.</span><span class="na">toLanguageId</span><span class="p">(</span><span class="n">locale</span><span class="p">),</span><span class="w"> </span><span class="n">timeZoneId</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">greeting</span><span class="p">,</span><span class="w"> </span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"> </span><span class="n">middleName</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">prefixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">suffixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">male</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayMonth</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">birthdayDay</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayYear</span><span class="p">,</span><span class="w"> </span><span class="n">smsSn</span><span class="p">,</span><span class="w"> </span><span class="n">facebookSn</span><span class="p">,</span><span class="w"> </span><span class="n">jabberSn</span><span class="p">,</span><span class="w"> </span><span class="n">skypeSn</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">twitterSn</span><span class="p">,</span><span class="w"> </span><span class="n">jobTitle</span><span class="p">,</span><span class="w"> </span><span class="n">groupIds</span><span class="p">,</span><span class="w"> </span><span class="n">organizationIds</span><span class="p">,</span><span class="w"> </span><span class="n">roleIds</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">userGroupIds</span><span class="p">,</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">portrait</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">updatePortrait</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">(),</span><span class="w"> </span><span class="n">portraitBytes</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">protected</span><span class="w"> </span><span class="n">ServiceContext</span><span class="w"> </span><span class="nf">getServiceContext</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">scopeGroupId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">PortalException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">ServiceContext</span><span class="w"> </span><span class="n">serviceContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServiceContext</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setCompanyId</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">());</span><span class="w"></span>
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setScopeGroupId</span><span class="p">(</span><span class="n">scopeGroupId</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">setUserId</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">;</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">_importCommerceUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">JSONObject</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">,</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="n">classLoader</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">dependenciesPath</span><span class="p">,</span><span class="w"> </span><span class="n">ServiceContext</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">)</span><span class="w"></span>
-<span class="w">		</span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">PortalException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">userReminderQueryQuestion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;userReminderQueryQuestion&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">userReminderQueryAnswer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;userReminderQueryAnswer&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">screenName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;screenName&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="kt">long</span><span class="w"> </span><span class="n">facebookId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;facebookId&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">openId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;openId&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">emailAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;emailAddress&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">boolean</span><span class="w"> </span><span class="n">hasPortrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">		</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">portraitBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">portrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;portrait&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Validator</span><span class="p">.</span><span class="na">isBlank</span><span class="p">(</span><span class="n">portrait</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">InputStream</span><span class="w"> </span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">			</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">String</span><span class="w"> </span><span class="n">uriString</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">					</span><span class="n">dependenciesPath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">URLEncoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">portrait</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UTF-8&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">				</span><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">URI</span><span class="p">(</span><span class="n">uriString</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtil</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getScheme</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;file&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getPath</span><span class="p">());</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">				</span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">classLoader</span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="w"></span>
-<span class="w">						</span><span class="n">dependenciesPath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">portrait</span><span class="p">);</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">				</span><span class="n">portraitBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileUtil</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">inputStream</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">				</span><span class="n">hasPortrait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">_log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="n">exception</span><span class="p">);</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inputStream</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">inputStream</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getUserId</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getLocale</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">importedLanguageCode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;languageCode&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Validator</span><span class="p">.</span><span class="na">isBlank</span><span class="p">(</span><span class="n">importedLanguageCode</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_language</span><span class="p">.</span><span class="na">getLocale</span><span class="p">(</span><span class="n">importedLanguageCode</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">TimeZone</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getTimeZone</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">timeZoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;timeZoneId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">.</span><span class="na">getID</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;greeting&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">comments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;comments&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;firstName&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">middleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;middleName&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;lastName&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="kt">long</span><span class="w"> </span><span class="n">prefixListTypeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;prefixListTypeId&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="kt">long</span><span class="w"> </span><span class="n">suffixListTypeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;suffixListTypeId&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="kt">boolean</span><span class="w"> </span><span class="n">male</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="s">&quot;male&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">gender</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;gender&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Validator</span><span class="p">.</span><span class="na">isNotNull</span><span class="p">(</span><span class="n">gender</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">male</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gender</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;male&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">Calendar</span><span class="w"> </span><span class="n">calendar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CalendarFactoryUtil</span><span class="p">.</span><span class="na">getCalendar</span><span class="p">(</span><span class="n">timeZone</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayMonth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calendar</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;birthdayMonth&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Calendar</span><span class="p">.</span><span class="na">MONTH</span><span class="p">));</span><span class="w"></span>
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calendar</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;birthdayDay&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Calendar</span><span class="p">.</span><span class="na">DAY_OF_MONTH</span><span class="p">));</span><span class="w"></span>
-<span class="w">		</span><span class="kt">int</span><span class="w"> </span><span class="n">birthdayYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calendar</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;birthdayYear&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Calendar</span><span class="p">.</span><span class="na">YEAR</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">birthday</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;birthday&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Validator</span><span class="p">.</span><span class="na">isNotNull</span><span class="p">(</span><span class="n">birthday</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">birthdayTokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">birthday</span><span class="p">.</span><span class="na">split</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">birthdayMonth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetterUtil</span><span class="p">.</span><span class="na">getInteger</span><span class="p">(</span><span class="n">birthdayTokens</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">birthdayDay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetterUtil</span><span class="p">.</span><span class="na">getInteger</span><span class="p">(</span><span class="n">birthdayTokens</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">birthdayYear</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetterUtil</span><span class="p">.</span><span class="na">getInteger</span><span class="p">(</span><span class="n">birthdayTokens</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">smsSn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;smsSn&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">facebookSn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;facebookSn&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">jabberSn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;jabberSn&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">skypeSn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;skypeSn&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">twitterSn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;twitterSn&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">jobTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;jobTitle&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="c1">// Collect Organization Role Ids</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">organizationsJSONArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONArray</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="s">&quot;organizations&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">organizationIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">organizationsJSONArray</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">organizationsJSONArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">Organization</span><span class="w"> </span><span class="n">organization</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">					</span><span class="n">_organizationLocalService</span><span class="p">.</span><span class="na">getOrganization</span><span class="p">(</span><span class="w"></span>
-<span class="w">						</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">						</span><span class="n">organizationsJSONArray</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">organization</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">organizationIds</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">organization</span><span class="p">.</span><span class="na">getOrganizationId</span><span class="p">());</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="c1">// Collect Role Ids</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">rolesJSONArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONArray</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">roleIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rolesJSONArray</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rolesJSONArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">Role</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_roleLocalService</span><span class="p">.</span><span class="na">getRole</span><span class="p">(</span><span class="w"></span>
-<span class="w">					</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"> </span><span class="n">rolesJSONArray</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">role</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">roleIds</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="na">getRoleId</span><span class="p">());</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">userGroupIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">addOrUpdateUser</span><span class="p">(</span><span class="w"></span>
-<span class="w">			</span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">userReminderQueryQuestion</span><span class="p">,</span><span class="w"> </span><span class="n">userReminderQueryAnswer</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">screenName</span><span class="p">,</span><span class="w"> </span><span class="n">emailAddress</span><span class="p">,</span><span class="w"> </span><span class="n">facebookId</span><span class="p">,</span><span class="w"> </span><span class="n">openId</span><span class="p">,</span><span class="w"> </span><span class="n">hasPortrait</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">portraitBytes</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="p">,</span><span class="w"> </span><span class="n">timeZoneId</span><span class="p">,</span><span class="w"> </span><span class="n">greeting</span><span class="p">,</span><span class="w"> </span><span class="n">comments</span><span class="p">,</span><span class="w"> </span><span class="n">firstName</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">middleName</span><span class="p">,</span><span class="w"> </span><span class="n">lastName</span><span class="p">,</span><span class="w"> </span><span class="n">prefixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">suffixListTypeId</span><span class="p">,</span><span class="w"> </span><span class="n">male</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">birthdayMonth</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayDay</span><span class="p">,</span><span class="w"> </span><span class="n">birthdayYear</span><span class="p">,</span><span class="w"> </span><span class="n">smsSn</span><span class="p">,</span><span class="w"> </span><span class="n">facebookSn</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="n">jabberSn</span><span class="p">,</span><span class="w"> </span><span class="n">skypeSn</span><span class="p">,</span><span class="w"> </span><span class="n">twitterSn</span><span class="p">,</span><span class="w"> </span><span class="n">jobTitle</span><span class="p">,</span><span class="w"></span>
-<span class="w">			</span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getScopeGroupId</span><span class="p">()},</span><span class="w"></span>
-<span class="w">			</span><span class="n">ArrayUtil</span><span class="p">.</span><span class="na">toLongArray</span><span class="p">(</span><span class="n">organizationIds</span><span class="p">),</span><span class="w"></span>
-<span class="w">			</span><span class="n">ArrayUtil</span><span class="p">.</span><span class="na">toLongArray</span><span class="p">(</span><span class="n">roleIds</span><span class="p">),</span><span class="w"> </span><span class="n">userGroupIds</span><span class="p">,</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="c1">// Add User Group Roles</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">groupRolesJSONArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONArray</span><span class="p">(</span><span class="s">&quot;groupRoles&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">groupRolesJSONArray</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">groupRolesJSONArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">Role</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_roleLocalService</span><span class="p">.</span><span class="na">getRole</span><span class="p">(</span><span class="w"></span>
-<span class="w">					</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">					</span><span class="n">groupRolesJSONArray</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">				</span><span class="n">_userGroupRoleLocalService</span><span class="p">.</span><span class="na">addUserGroupRoles</span><span class="p">(</span><span class="w"></span>
-<span class="w">					</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">(),</span><span class="w"> </span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getScopeGroupId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">					</span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">role</span><span class="p">.</span><span class="na">getRoleId</span><span class="p">()});</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="c1">// Add External ID mapping</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">externalUserId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;externalUserId&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">externalSystemType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;externalSystemType&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Validator</span><span class="p">.</span><span class="na">isNotNull</span><span class="p">(</span><span class="n">externalUserId</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"></span>
-<span class="w">			</span><span class="n">Validator</span><span class="p">.</span><span class="na">isNotNull</span><span class="p">(</span><span class="n">externalSystemType</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">externalSystemDescription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="s">&quot;externalSystemDescription&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">			</span><span class="n">_userIdMapperLocalService</span><span class="p">.</span><span class="na">updateUserIdMapper</span><span class="p">(</span><span class="w"></span>
-<span class="w">				</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">(),</span><span class="w"> </span><span class="n">externalSystemType</span><span class="p">,</span><span class="w"> </span><span class="n">externalSystemDescription</span><span class="p">,</span><span class="w"></span>
-<span class="w">				</span><span class="n">externalUserId</span><span class="p">);</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">		</span><span class="c1">// Add User to Commerce Accounts and Account Roles</span><span class="w"></span>
-
-<span class="w">		</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">accountsJSONArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonObject</span><span class="p">.</span><span class="na">getJSONArray</span><span class="p">(</span><span class="s">&quot;accounts&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">accountsJSONArray</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">accountsJSONArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">				</span><span class="n">JSONObject</span><span class="w"> </span><span class="n">accountJSONObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accountsJSONArray</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="w"></span>
-<span class="w">					</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">				</span><span class="n">JSONArray</span><span class="w"> </span><span class="n">accountRolesJSONArray</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">					</span><span class="n">accountJSONObject</span><span class="p">.</span><span class="na">getJSONArray</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">accountRolesJSONArray</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">					</span><span class="n">CommerceAccount</span><span class="w"> </span><span class="n">commerceAccount</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">						</span><span class="n">_commerceAccountLocalService</span><span class="p">.</span><span class="w"></span>
-<span class="w">							</span><span class="nf">fetchByExternalReferenceCode</span><span class="p">(</span><span class="w"></span>
-<span class="w">								</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">								</span><span class="n">_friendlyURLNormalizer</span><span class="p">.</span><span class="na">normalize</span><span class="p">(</span><span class="w"></span>
-<span class="w">									</span><span class="n">accountJSONObject</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)));</span><span class="w"></span>
-
-<span class="w">					</span><span class="n">CommerceAccountUserRelPK</span><span class="w"> </span><span class="n">commerceAccountUserRelPK</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">						</span><span class="k">new</span><span class="w"> </span><span class="n">CommerceAccountUserRelPK</span><span class="p">(</span><span class="w"></span>
-<span class="w">							</span><span class="n">commerceAccount</span><span class="p">.</span><span class="na">getCommerceAccountId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">							</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">					</span><span class="n">CommerceAccountUserRel</span><span class="w"> </span><span class="n">commerceAccountUserRel</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">						</span><span class="n">_commerceAccountUserRelLocalService</span><span class="p">.</span><span class="w"></span>
-<span class="w">							</span><span class="nf">fetchCommerceAccountUserRel</span><span class="p">(</span><span class="w"></span>
-<span class="w">								</span><span class="n">commerceAccountUserRelPK</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">					</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">commerceAccountUserRel</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">						</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">accountRoleIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">						</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">accountRolesJSONArray</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"></span>
-<span class="w">							 </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">							</span><span class="n">Role</span><span class="w"> </span><span class="n">role</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_roleLocalService</span><span class="p">.</span><span class="na">fetchRole</span><span class="p">(</span><span class="w"></span>
-<span class="w">								</span><span class="n">serviceContext</span><span class="p">.</span><span class="na">getCompanyId</span><span class="p">(),</span><span class="w"></span>
-<span class="w">								</span><span class="n">accountRolesJSONArray</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">j</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">							</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">role</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">								</span><span class="n">accountRoleIds</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">role</span><span class="p">.</span><span class="na">getRoleId</span><span class="p">());</span><span class="w"></span>
-<span class="w">							</span><span class="p">}</span><span class="w"></span>
-<span class="w">						</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">						</span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">userIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">user</span><span class="p">.</span><span class="na">getUserId</span><span class="p">()};</span><span class="w"></span>
-
-<span class="w">						</span><span class="n">_commerceAccountUserRelLocalService</span><span class="p">.</span><span class="w"></span>
-<span class="w">							</span><span class="nf">addCommerceAccountUserRels</span><span class="p">(</span><span class="w"></span>
-<span class="w">								</span><span class="n">commerceAccount</span><span class="p">.</span><span class="na">getCommerceAccountId</span><span class="p">(),</span><span class="w"> </span><span class="n">userIds</span><span class="p">,</span><span class="w"></span>
-<span class="w">								</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">ArrayUtil</span><span class="p">.</span><span class="na">toLongArray</span><span class="p">(</span><span class="n">accountRoleIds</span><span class="p">),</span><span class="w"></span>
-<span class="w">								</span><span class="n">serviceContext</span><span class="p">);</span><span class="w"></span>
-<span class="w">					</span><span class="p">}</span><span class="w"></span>
-<span class="w">				</span><span class="p">}</span><span class="w"></span>
-<span class="w">			</span><span class="p">}</span><span class="w"></span>
-<span class="w">		</span><span class="p">}</span><span class="w"></span>
-<span class="w">	</span><span class="p">}</span><span class="w"></span>
-
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Log</span><span class="w"> </span><span class="n">_log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogFactoryUtil</span><span class="p">.</span><span class="na">getLog</span><span class="p">(</span><span class="w"></span>
-<span class="w">		</span><span class="n">CommerceUsersImporter</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">CommerceAccountLocalService</span><span class="w"> </span><span class="n">_commerceAccountLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">CommerceAccountUserRelLocalService</span><span class="w"></span>
-<span class="w">		</span><span class="n">_commerceAccountUserRelLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">FriendlyURLNormalizer</span><span class="w"> </span><span class="n">_friendlyURLNormalizer</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">JSONFactory</span><span class="w"> </span><span class="n">_jsonFactory</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Language</span><span class="w"> </span><span class="n">_language</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">OrganizationLocalService</span><span class="w"> </span><span class="n">_organizationLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">RoleLocalService</span><span class="w"> </span><span class="n">_roleLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">UserGroupRoleLocalService</span><span class="w"> </span><span class="n">_userGroupRoleLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">UserIdMapperLocalService</span><span class="w"> </span><span class="n">_userIdMapperLocalService</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">	</span><span class="nd">@Reference</span><span class="w"></span>
-<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">UserLocalService</span><span class="w"> </span><span class="n">_userLocalService</span><span class="p">;</span><span class="w"></span>
-
+<span class="kd">class</span> <span class="nc">DropwizardGuiceContainer</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GuiceContainer</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;BAD_PRACTICE&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
+<span class="w">    </span><span class="n">DropwizardGuiceContainer</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Injector</span><span class="w"> </span><span class="n">injector</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">injector</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">checkNotNull</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;environment is null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">resourceConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environment</span><span class="p">.</span><span class="na">jersey</span><span class="p">().</span><span class="na">getResourceConfig</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="nf">getDefaultResourceConfig</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">WebConfig</span><span class="w"> </span><span class="n">webConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

@@ -95,346 +95,75 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span>
-<span class="normal">340</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
 <span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
 <span class="cm"> * distributed with this work for additional information</span>
@@ -443,336 +172,65 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
 <span class="cm"> * with the License.  You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> *   https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *     http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing,</span>
-<span class="cm"> * software distributed under the License is distributed on an</span>
-<span class="cm"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="cm"> * KIND, either express or implied.  See the License for the</span>
-<span class="cm"> * specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.test.util</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileInputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileNotFoundException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileOutputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigInteger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.KeyPair</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.KeyPairGenerator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.KeyStore</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.KeyStoreException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.NoSuchAlgorithmException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.NoSuchProviderException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.PrivateKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.PublicKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.Security</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.UnrecoverableKeyException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.cert.Certificate</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.cert.CertificateException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Calendar</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Enumeration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.falcon.resource</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.cli.Help</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.Property</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.SiteConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.FileExistsException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x500.X500Name</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x500.style.IETFUtils</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x500.style.RFC4519Style</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x509.BasicConstraints</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x509.Extension</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.asn1.x509.KeyUsage</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.cert.CertIOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.cert.X509CertificateHolder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.cert.jcajce.JcaX509CertificateConverter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.cert.jcajce.JcaX509ExtensionUtils</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.jce.provider.BouncyCastleProvider</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.operator.OperatorCreationException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.operator.jcajce.JcaContentSignerBuilder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.xml.bind.annotation.XmlElement</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.xml.bind.annotation.XmlElementWrapper</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.beust.jcommander.JCommander</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.beust.jcommander.Parameter</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * Extension job list used for marshalling / unmarshalling with REST calls.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="c1">//SUSPEND CHECKSTYLE CHECK VisibilityModifierCheck</span><span class="w"></span>
+<span class="nd">@XmlRootElement</span><span class="w"></span>
+<span class="nd">@edu.umd.cs.findbugs.annotations.SuppressWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExtensionJobList</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@XmlElement</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numJobs</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CertUtils</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">CertUtils</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Security</span><span class="p">.</span><span class="na">addProvider</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BouncyCastleProvider</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@XmlElementWrapper</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;jobs&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">job</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Opts</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Help</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generate-all | generate-local | generate-self-trusted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">arity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--local-keystore&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Target path for generated keystore&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">localKeystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--root-keystore&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Path to root truststore,&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; generated with generate-all, or used for signing with generate-local&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--root-truststore&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Target path for generated public root truststore&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">truststore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--keystore-type&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Type of keystore file to use&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">keystoreType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;JKS&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--root-keystore-password&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Password for root keystore,&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; falls back to --keystore-password if not provided&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--keystore-password&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Password used to encrypt keystores.&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; If omitted, the instance-wide secret will be used. If specified, the&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; password must also be explicitly configured in Accumulo.&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">keystorePassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--truststore-password&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Password used to encrypt the truststore. If omitted, empty password is used&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">truststorePassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--key-name-prefix&quot;</span><span class="p">},</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Prefix for names of generated keys&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">keyNamePrefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CertUtils</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;--issuer-rdn&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;RDN string for issuer, for example: &#39;c=US,o=My Organization,cn=My Name&#39;&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">issuerDirString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;o=Apache Accumulo&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;--accumulo-props&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Path to accumulo.properties to load Accumulo configuration from&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">accumuloPropsFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;--signing-algorithm&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Algorithm used to sign certificates&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">signingAlg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SHA512WITHRSA&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;--encryption-algorithm&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Algorithm used to encrypt private keys&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">encryptionAlg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;RSA&quot;</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Parameter</span><span class="p">(</span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;--keysize&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Key size used by encryption algorithm&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">keysize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4096</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SiteConfiguration</span><span class="w"> </span><span class="nf">getSiteConfiguration</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">accumuloPropsFile</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SiteConfiguration</span><span class="p">.</span><span class="na">auto</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">SiteConfiguration</span><span class="p">.</span><span class="na">fromFile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">accumuloPropsFile</span><span class="p">)).</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;paths provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Opts</span><span class="w"> </span><span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Opts</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">opts</span><span class="p">.</span><span class="na">parseArgs</span><span class="p">(</span><span class="n">CertUtils</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">operation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">operation</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">keyPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">keystorePassword</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">keyPassword</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">keyPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">getSiteConfiguration</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">Property</span><span class="p">.</span><span class="na">INSTANCE_SECRET</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeyPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">rootKeystorePassword</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rootKeyPassword</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">rootKeyPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPassword</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ExtensionJobList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">numJobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">CertUtils</span><span class="w"> </span><span class="n">certUtils</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CertUtils</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">keystoreType</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">issuerDirString</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">encryptionAlg</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">opts</span><span class="p">.</span><span class="na">keysize</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">signingAlg</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;generate-all&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">operation</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">certUtils</span><span class="p">.</span><span class="na">createAll</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">rootKeystore</span><span class="p">),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">localKeystore</span><span class="p">),</span><span class="w"></span>
-<span class="w">          </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">truststore</span><span class="p">),</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">keyNamePrefix</span><span class="p">,</span><span class="w"> </span><span class="n">rootKeyPassword</span><span class="p">,</span><span class="w"> </span><span class="n">keyPassword</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">opts</span><span class="p">.</span><span class="na">truststorePassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;generate-local&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">operation</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">certUtils</span><span class="p">.</span><span class="na">createSignedCert</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">localKeystore</span><span class="p">),</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">keyNamePrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-local&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">keyPassword</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">rootKeystore</span><span class="p">,</span><span class="w"> </span><span class="n">rootKeyPassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;generate-self-trusted&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">operation</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">certUtils</span><span class="p">.</span><span class="na">createSelfSignedCert</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">opts</span><span class="p">.</span><span class="na">truststore</span><span class="p">),</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">keyNamePrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-selfTrusted&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">keyPassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">JCommander</span><span class="w"> </span><span class="n">jcommander</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JCommander</span><span class="p">(</span><span class="n">opts</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">jcommander</span><span class="p">.</span><span class="na">setProgramName</span><span class="p">(</span><span class="n">CertUtils</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w"></span>
-<span class="w">      </span><span class="n">jcommander</span><span class="p">.</span><span class="na">usage</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Unrecognized operation: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">opts</span><span class="p">.</span><span class="na">operation</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">issuerDirString</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keystoreType</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">encryptionAlgorithm</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">keysize</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">signingAlgorithm</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">CertUtils</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">keystoreType</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">issuerDirString</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">encryptionAlgorithm</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">keysize</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">signingAlgorithm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">keystoreType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keystoreType</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">issuerDirString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">issuerDirString</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">encryptionAlgorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">encryptionAlgorithm</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">keysize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keysize</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">signingAlgorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">signingAlgorithm</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createAll</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">rootKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">localKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">trustStoreFile</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">keyNamePrefix</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">truststorePassword</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">,</span><span class="w"> </span><span class="n">CertificateException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">NoSuchAlgorithmException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">OperatorCreationException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchProviderException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">UnrecoverableKeyException</span><span class="p">,</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">createSelfSignedCert</span><span class="p">(</span><span class="n">rootKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">keyNamePrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-root&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">createSignedCert</span><span class="p">(</span><span class="n">localKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">keyNamePrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-local&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">rootKeystoreFile</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">(),</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">createPublicCert</span><span class="p">(</span><span class="n">trustStoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">keyNamePrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-public&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rootKeystoreFile</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="n">rootKeystorePassword</span><span class="p">,</span><span class="w"> </span><span class="n">truststorePassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createPublicCert</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">targetKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keyName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeystorePath</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">truststorePassword</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">CertificateException</span><span class="p">,</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">signerKeystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">keystoreType</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">signerPasswordArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rootKeystorePassword</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileInputStream</span><span class="w"> </span><span class="n">fis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">rootKeystorePath</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">signerKeystore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">fis</span><span class="p">,</span><span class="w"> </span><span class="n">signerPasswordArray</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">Certificate</span><span class="w"> </span><span class="n">rootCert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findCert</span><span class="p">(</span><span class="n">signerKeystore</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">keystoreType</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">setCertificateEntry</span><span class="p">(</span><span class="n">keyName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Cert&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rootCert</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">fos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">targetKeystoreFile</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">keystore</span><span class="p">.</span><span class="na">store</span><span class="p">(</span><span class="n">fos</span><span class="p">,</span><span class="w"> </span><span class="n">truststorePassword</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createSignedCert</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">targetKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keyName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">signerKeystorePath</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">signerKeystorePassword</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">,</span><span class="w"> </span><span class="n">CertificateException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">OperatorCreationException</span><span class="p">,</span><span class="w"> </span><span class="n">UnrecoverableKeyException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">signerKeystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">keystoreType</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">signerPasswordArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">signerKeystorePassword</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileInputStream</span><span class="w"> </span><span class="n">fis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="n">signerKeystorePath</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">signerKeystore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">fis</span><span class="p">,</span><span class="w"> </span><span class="n">signerPasswordArray</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">Certificate</span><span class="w"> </span><span class="n">signerCert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findCert</span><span class="p">(</span><span class="n">signerKeystore</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">signerKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findPrivateKey</span><span class="p">(</span><span class="n">signerKeystore</span><span class="p">,</span><span class="w"> </span><span class="n">signerPasswordArray</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">KeyPair</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generateKeyPair</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Certificate</span><span class="w"> </span><span class="n">cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generateCert</span><span class="p">(</span><span class="n">kp</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">signerCert</span><span class="p">.</span><span class="na">getPublicKey</span><span class="p">(),</span><span class="w"> </span><span class="n">signerKey</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">keystoreType</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">setCertificateEntry</span><span class="p">(</span><span class="n">keyName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Cert&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cert</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">setKeyEntry</span><span class="p">(</span><span class="n">keyName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Key&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">kp</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">(),</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Certificate</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">cert</span><span class="p">,</span><span class="w"> </span><span class="n">signerCert</span><span class="p">});</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">fos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">targetKeystoreFile</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">keystore</span><span class="p">.</span><span class="na">store</span><span class="p">(</span><span class="n">fos</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createSelfSignedCert</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">targetKeystoreFile</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keyName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">,</span><span class="w"> </span><span class="n">CertificateException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">OperatorCreationException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">targetKeystoreFile</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileExistsException</span><span class="p">(</span><span class="n">targetKeystoreFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getNumJobs</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">numJobs</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">KeyPair</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generateKeyPair</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">Certificate</span><span class="w"> </span><span class="n">cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generateCert</span><span class="p">(</span><span class="n">kp</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">kp</span><span class="p">.</span><span class="na">getPublic</span><span class="p">(),</span><span class="w"> </span><span class="n">kp</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keystore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyStore</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">keystoreType</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">setCertificateEntry</span><span class="p">(</span><span class="n">keyName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Cert&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cert</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">keystore</span><span class="p">.</span><span class="na">setKeyEntry</span><span class="p">(</span><span class="n">keyName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;Key&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">kp</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">(),</span><span class="w"> </span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Certificate</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">cert</span><span class="p">});</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">fos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">targetKeystoreFile</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">keystore</span><span class="p">.</span><span class="na">store</span><span class="p">(</span><span class="n">fos</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ExtensionJobList</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numJobs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">numJobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numJobs</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">KeyPair</span><span class="w"> </span><span class="nf">generateKeyPair</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">KeyPairGenerator</span><span class="w"> </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyPairGenerator</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="n">encryptionAlgorithm</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">gen</span><span class="p">.</span><span class="na">initialize</span><span class="p">(</span><span class="n">keysize</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Certificate</span><span class="w"> </span><span class="nf">generateCert</span><span class="p">(</span><span class="n">KeyPair</span><span class="w"> </span><span class="n">kp</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isCertAuthority</span><span class="p">,</span><span class="w"> </span><span class="n">PublicKey</span><span class="w"> </span><span class="n">signerPublicKey</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">signerPrivateKey</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">CertIOException</span><span class="p">,</span><span class="w"> </span><span class="n">OperatorCreationException</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">CertificateException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Calendar</span><span class="w"> </span><span class="n">startDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Calendar</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Calendar</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Calendar</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">endDate</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Calendar</span><span class="p">.</span><span class="na">YEAR</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">BigInteger</span><span class="w"> </span><span class="n">serialNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigInteger</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">startDate</span><span class="p">.</span><span class="na">getTimeInMillis</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">X500Name</span><span class="w"> </span><span class="n">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">X500Name</span><span class="p">(</span><span class="n">IETFUtils</span><span class="p">.</span><span class="na">rDNsFromString</span><span class="p">(</span><span class="n">issuerDirString</span><span class="p">,</span><span class="w"> </span><span class="n">RFC4519Style</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">JcaX509v3CertificateBuilder</span><span class="w"> </span><span class="n">certGen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JcaX509v3CertificateBuilder</span><span class="p">(</span><span class="n">issuer</span><span class="p">,</span><span class="w"> </span><span class="n">serialNumber</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">startDate</span><span class="p">.</span><span class="na">getTime</span><span class="p">(),</span><span class="w"> </span><span class="n">endDate</span><span class="p">.</span><span class="na">getTime</span><span class="p">(),</span><span class="w"> </span><span class="n">issuer</span><span class="p">,</span><span class="w"> </span><span class="n">kp</span><span class="p">.</span><span class="na">getPublic</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">JcaX509ExtensionUtils</span><span class="w"> </span><span class="n">extensionUtils</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JcaX509ExtensionUtils</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">certGen</span><span class="p">.</span><span class="na">addExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">.</span><span class="na">subjectKeyIdentifier</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">extensionUtils</span><span class="p">.</span><span class="na">createSubjectKeyIdentifier</span><span class="p">(</span><span class="n">kp</span><span class="p">.</span><span class="na">getPublic</span><span class="p">()));</span><span class="w"></span>
-<span class="w">    </span><span class="n">certGen</span><span class="p">.</span><span class="na">addExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">.</span><span class="na">basicConstraints</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicConstraints</span><span class="p">(</span><span class="n">isCertAuthority</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">certGen</span><span class="p">.</span><span class="na">addExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">.</span><span class="na">authorityKeyIdentifier</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">extensionUtils</span><span class="p">.</span><span class="na">createAuthorityKeyIdentifier</span><span class="p">(</span><span class="n">signerPublicKey</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isCertAuthority</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">certGen</span><span class="p">.</span><span class="na">addExtension</span><span class="p">(</span><span class="n">Extension</span><span class="p">.</span><span class="na">keyUsage</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KeyUsage</span><span class="p">(</span><span class="n">KeyUsage</span><span class="p">.</span><span class="na">keyCertSign</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ExtensionJobList</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">numJobs</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extensionJobNames</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">numJobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numJobs</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extensionJobNames</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">X509CertificateHolder</span><span class="w"> </span><span class="n">cert</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="n">certGen</span><span class="p">.</span><span class="na">build</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JcaContentSignerBuilder</span><span class="p">(</span><span class="n">signingAlgorithm</span><span class="p">).</span><span class="na">build</span><span class="p">(</span><span class="n">signerPrivateKey</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JcaX509CertificateConverter</span><span class="p">().</span><span class="na">getCertificate</span><span class="p">(</span><span class="n">cert</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">Certificate</span><span class="w"> </span><span class="nf">findCert</span><span class="p">(</span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keyStore</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aliases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyStore</span><span class="p">.</span><span class="na">aliases</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Certificate</span><span class="w"> </span><span class="n">cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">aliases</span><span class="p">.</span><span class="na">hasMoreElements</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">alias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aliases</span><span class="p">.</span><span class="na">nextElement</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">keyStore</span><span class="p">.</span><span class="na">isCertificateEntry</span><span class="p">(</span><span class="n">alias</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cert</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">cert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyStore</span><span class="p">.</span><span class="na">getCertificate</span><span class="p">(</span><span class="n">alias</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Found multiple certificates in keystore.  Ignoring {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alias</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">builder</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">numJobs</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extensionJobs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">builder</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">extensionJobs</span><span class="p">.</span><span class="na">getKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extensionJobs</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cert</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">(</span><span class="s">&quot;Could not find cert in keystore&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cert</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">PrivateKey</span><span class="w"> </span><span class="nf">findPrivateKey</span><span class="p">(</span><span class="n">KeyStore</span><span class="w"> </span><span class="n">keyStore</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">UnrecoverableKeyException</span><span class="p">,</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchAlgorithmException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">aliases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyStore</span><span class="p">.</span><span class="na">aliases</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">aliases</span><span class="p">.</span><span class="na">hasMoreElements</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">alias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aliases</span><span class="p">.</span><span class="na">nextElement</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">keyStore</span><span class="p">.</span><span class="na">isKeyEntry</span><span class="p">(</span><span class="n">alias</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PrivateKey</span><span class="p">)</span><span class="w"> </span><span class="n">keyStore</span><span class="p">.</span><span class="na">getKey</span><span class="p">(</span><span class="n">alias</span><span class="p">,</span><span class="w"> </span><span class="n">keystorePassword</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Found multiple keys in keystore.  Ignoring {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alias</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">KeyStoreException</span><span class="p">(</span><span class="s">&quot;Could not find private key in keystore&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">key</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

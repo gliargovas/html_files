@@ -318,33 +318,15 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">221</span>
 <span class="normal">222</span>
 <span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="normal">224</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm"> * contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm"> * this work for additional information regarding copyright ownership.</span>
+<span class="cm"> * The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm"> * (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm"> * the License.  You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *    http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
 <span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
 <span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
@@ -353,232 +335,212 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.gobblin.config.common.impl</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.core.HazelcastInstance</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.core.HazelcastInstanceAware</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.core.IFunction</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.internal.nio.IOUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.internal.serialization.Data</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.internal.serialization.SerializationService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataInput</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataOutput</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.serialization.IdentifiedDataSerializable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.projection.Projection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.ReadResultSet</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.SerializationServiceSupport</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.LinkedList</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ExecutionException</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Optional</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.cache.Cache</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.cache.CacheBuilder</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.ImmutableMultimap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Lists</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.UncheckedExecutionException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.typesafe.config.Config</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.config.store.api.ConfigKeyPath</span><span class="p">;</span><span class="w"></span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.AbstractList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Predicate</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl.RingbufferDataSerializerHook.F_ID</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl.RingbufferDataSerializerHook.READ_RESULT_SET</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * A list for the {@link com.hazelcast.ringbuffer.impl.operations.ReadManyOperation}.</span>
-<span class="cm"> * &lt;p&gt;</span>
-<span class="cm"> * The problem with a regular list is that if you store Data objects, then</span>
-<span class="cm"> * on the receiving side you get a list with data objects. If you hand this</span>
-<span class="cm"> * list out to the caller, you have a problem because he sees data objects</span>
-<span class="cm"> * instead of deserialized objects.</span>
-<span class="cm"> * The predicate, filter and projection may be {@code null} in which case</span>
-<span class="cm"> * all elements are returned and no projection is applied.</span>
+<span class="cm"> * InMemoryTopology will return stale data if the internal config store is Not {@link org.apache.gobblin.config.store.api.ConfigStoreWithStableVersioning}</span>
 <span class="cm"> *</span>
-<span class="cm"> * @param &lt;O&gt; deserialized ringbuffer type</span>
-<span class="cm"> * @param &lt;E&gt; result set type, is equal to {@code O} if the projection</span>
-<span class="cm"> *            is {@code null} or returns the same type as the parameter</span>
+<span class="cm"> * @author ibuenros</span>
+<span class="cm"> *</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReadResultSetImpl</span><span class="o">&lt;</span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractList</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">implements</span><span class="w"> </span><span class="n">IdentifiedDataSerializable</span><span class="p">,</span><span class="w"> </span><span class="n">HazelcastInstanceAware</span><span class="p">,</span><span class="w"> </span><span class="n">ReadResultSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InMemoryTopology</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConfigStoreTopologyInspector</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">SerializationService</span><span class="w"> </span><span class="n">serializationService</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">IFunction</span><span class="o">&lt;</span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">Projection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">projection</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ConfigStoreTopologyInspector</span><span class="w"> </span><span class="n">fallback</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Data</span><span class="o">[]</span><span class="w"> </span><span class="n">items</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">seqs</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">readCount</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// can not use Guava {@link com.google.common.collect.MultiMap} as MultiMap does not store entry pair if the value is empty</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">childrenMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBuilder</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ownImportMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBuilder</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">recursiveImportMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBuilder</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">recursiveImportedByMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBuilder</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Cache</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">ownImportedByMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CacheBuilder</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ReadResultSetImpl</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Access is in fact thread safe.&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">ImmutableMultimap</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fullImportedByMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">InMemoryTopology</span><span class="p">(</span><span class="n">ConfigStoreTopologyInspector</span><span class="w"> </span><span class="n">fallback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">fallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fallback</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">computeImportedByMap</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">fullImportedByMap</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ReadResultSetImpl</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minSize</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                             </span><span class="n">SerializationService</span><span class="w"> </span><span class="n">serializationService</span><span class="p">,</span><span class="w"></span>
-<span class="w">                             </span><span class="n">IFunction</span><span class="o">&lt;</span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">minSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">maxSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">serializationService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">ImmutableMultimap</span><span class="p">.</span><span class="na">Builder</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">importedByBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ImmutableMultimap</span><span class="p">.</span><span class="na">builder</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ReadResultSetImpl</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">readCount</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Data</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">seqs</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">readCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readCount</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Data</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">seqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seqs</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nextSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// breath first search the whole topology to build ownImports map and ownImportedByMap</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// calls to retrieve cache / set cache if not present</span><span class="w"></span>
+<span class="w">    </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">currentLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getChildren</span><span class="p">(</span><span class="n">SingleLinkedListConfigKeyPath</span><span class="p">.</span><span class="na">ROOT</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ReadResultSetImpl</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minSize</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxSize</span><span class="p">,</span><span class="w"></span>
-<span class="w">                             </span><span class="n">SerializationService</span><span class="w"> </span><span class="n">serializationService</span><span class="p">,</span><span class="w"></span>
-<span class="w">                             </span><span class="n">Predicate</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="n">predicate</span><span class="p">,</span><span class="w"></span>
-<span class="w">                             </span><span class="n">Projection</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">O</span><span class="p">,</span><span class="w"> </span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="n">projection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">minSize</span><span class="p">,</span><span class="w"> </span><span class="n">maxSize</span><span class="p">,</span><span class="w"> </span><span class="n">serializationService</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predicate</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">projection</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rootImports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getOwnImports</span><span class="p">(</span><span class="n">SingleLinkedListConfigKeyPath</span><span class="p">.</span><span class="na">ROOT</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Preconditions</span><span class="p">.</span><span class="na">checkArgument</span><span class="p">(</span><span class="n">rootImports</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">rootImports</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;Root can not import other nodes, otherwise circular dependency will happen&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isMaxSizeReached</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isMinSizeReached</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Data</span><span class="o">[]</span><span class="w"> </span><span class="nf">getDataItems</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">readCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">readCount</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setHazelcastInstance</span><span class="p">(</span><span class="n">HazelcastInstance</span><span class="w"> </span><span class="n">hz</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">setSerializationService</span><span class="p">(((</span><span class="n">SerializationServiceSupport</span><span class="p">)</span><span class="w"> </span><span class="n">hz</span><span class="p">).</span><span class="na">getSerializationService</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSerializationService</span><span class="p">(</span><span class="n">SerializationService</span><span class="w"> </span><span class="n">serializationService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">serializationService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">rangeCheck</span><span class="p">(</span><span class="n">index</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">serializationService</span><span class="p">.</span><span class="na">toObject</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getSequence</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">rangeCheck</span><span class="p">(</span><span class="n">index</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">seqs</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">seqs</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">rangeCheck</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;index=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, size=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Applies the {@link Projection} and adds an item to this {@link ReadResultSetImpl} if</span>
-<span class="cm">     * it passes the {@link Predicate} and {@link IFunction} with which it was constructed.</span>
-<span class="cm">     * The {@code item} may be in serialized or deserialized format as this method will</span>
-<span class="cm">     * adapt the parameter if necessary before providing it to the predicate and projection.</span>
-<span class="cm">     * &lt;p&gt;</span>
-<span class="cm">     * If the {@code item} is in {@link Data} format and there is no filter, predicate or projection,</span>
-<span class="cm">     * the item is added to the set without any additional serialization or deserialization.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param seq  the sequence ID of the item</span>
-<span class="cm">     * @param item the item to add to the result set</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">seq</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">assert</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">readCount</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">Data</span><span class="w"> </span><span class="n">resultItem</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">O</span><span class="w"> </span><span class="n">objectItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">.</span><span class="na">toObject</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">passesFilter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">objectItem</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">passesPredicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predicate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">predicate</span><span class="p">.</span><span class="na">test</span><span class="p">(</span><span class="n">objectItem</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">passesFilter</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">passesPredicate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">projection</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">resultItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">.</span><span class="na">toData</span><span class="p">(</span><span class="n">projection</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">objectItem</span><span class="p">));</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">resultItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">.</span><span class="na">toData</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">resultItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serializationService</span><span class="p">.</span><span class="na">toData</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">currentLevel</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nextLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKeyPath</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">currentLevel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// calls to retrieve cache / set cache if not present</span><span class="w"></span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ownImports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getOwnImports</span><span class="p">(</span><span class="n">configKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ownImportMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">configKeyPath</span><span class="p">,</span><span class="w"> </span><span class="n">ownImports</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">importedPath</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ownImports</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">importedByBuilder</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">importedPath</span><span class="p">,</span><span class="w"> </span><span class="n">configKeyPath</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="c1">// lazily create item and seqs arrays</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">items</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Data</span><span class="o">[</span><span class="n">maxSize</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">seqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="o">[</span><span class="n">maxSize</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">items</span><span class="o">[</span><span class="n">size</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resultItem</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">seqs</span><span class="o">[</span><span class="n">size</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">size</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// calls to retrieve cache / set cache if not present</span><span class="w"></span>
+<span class="w">        </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getChildren</span><span class="p">(</span><span class="n">configKeyPath</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">nextLevel</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">currentLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextLevel</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">fullImportedByMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">importedByBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * {@inheritDoc}.</span>
+<span class="cm">   *</span>
+<span class="cm">   * &lt;p&gt;</span>
+<span class="cm">   *   If the result is already in cache, return the result.</span>
+<span class="cm">   *   Otherwise, delegate the functionality to the fallback object</span>
+<span class="cm">   * &lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getChildren</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">childrenMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fallback</span><span class="p">.</span><span class="na">getChildren</span><span class="p">(</span><span class="n">configKey</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutionException</span><span class="w"> </span><span class="n">ee</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">ee</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * {@inheritDoc}.</span>
+<span class="cm">   *</span>
+<span class="cm">   * &lt;p&gt;</span>
+<span class="cm">   *   If the result is already in cache, return the result.</span>
+<span class="cm">   *   Otherwise, delegate the functionality to the fallback object</span>
+<span class="cm">   * &lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getOwnImports</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">getOwnImports</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getOwnImports</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">ownImportMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fallback</span><span class="p">.</span><span class="na">getOwnImports</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutionException</span><span class="w"> </span><span class="n">ee</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">ee</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * {@inheritDoc}.</span>
+<span class="cm">   *</span>
+<span class="cm">   * &lt;p&gt;</span>
+<span class="cm">   *   If the result is already in cache, return the result.</span>
+<span class="cm">   *   Otherwise, delegate the functionality to the fallback object.</span>
+<span class="cm">   *</span>
+<span class="cm">   *   If the fallback did not support this operation, will build the entire topology of the {@link org.apache.gobblin.config.store.api.ConfigStore}</span>
+<span class="cm">   *   using default breath first search.</span>
+<span class="cm">   * &lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportedBy</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">getImportedBy</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportedBy</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">fullImportedByMap</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fullImportedByMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">configKey</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">size</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">ownImportedByMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">fallback</span><span class="p">.</span><span class="na">getImportedBy</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">UncheckedExecutionException</span><span class="w"> </span><span class="n">exc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">exc</span><span class="p">.</span><span class="na">getCause</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">computeImportedByMap</span><span class="p">(</span><span class="n">runtimeConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getImportedBy</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">exc</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutionException</span><span class="w"> </span><span class="n">ee</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">ee</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getFactoryId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">F_ID</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * {@inheritDoc}.</span>
+<span class="cm">   *</span>
+<span class="cm">   * &lt;p&gt;</span>
+<span class="cm">   *   If the result is already in cache, return the result.</span>
+<span class="cm">   *   Otherwise, delegate the functionality to the fallback object.</span>
+<span class="cm">   *</span>
+<span class="cm">   *   If the fallback did not support this operation, will build the entire topology of the {@link org.apache.gobblin.config.store.api.ConfigStore}</span>
+<span class="cm">   *   using default breath first search.</span>
+<span class="cm">   * &lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportsRecursively</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">getImportsRecursively</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getClassId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">READ_RESULT_SET</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportsRecursively</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImportTraverser</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getNextSequenceToReadFrom</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">isRootPath</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNextSequenceToReadFrom</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nextSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextSeq</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="n">imports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Lists</span><span class="p">.</span><span class="na">newArrayList</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">imports</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">Lists</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">getOwnImports</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)));</span><span class="w"></span>
+<span class="w">      </span><span class="n">imports</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">getParent</span><span class="p">());</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeData</span><span class="p">(</span><span class="n">ObjectDataOutput</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeInt</span><span class="p">(</span><span class="n">readCount</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeInt</span><span class="p">(</span><span class="n">size</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">IOUtil</span><span class="p">.</span><span class="na">writeData</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">items</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeLongArray</span><span class="p">(</span><span class="n">seqs</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeLong</span><span class="p">(</span><span class="n">nextSeq</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">imports</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">recursiveImportMap</span><span class="p">).</span><span class="na">traverseGraphRecursively</span><span class="p">(</span><span class="n">configKey</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readData</span><span class="p">(</span><span class="n">ObjectDataInput</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">readCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readInt</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readInt</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Data</span><span class="o">[</span><span class="n">size</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">items</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IOUtil</span><span class="p">.</span><span class="na">readData</span><span class="p">(</span><span class="n">in</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">seqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readLongArray</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">nextSeq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readLong</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * {@inheritDoc}.</span>
+<span class="cm">   *</span>
+<span class="cm">   * &lt;p&gt;</span>
+<span class="cm">   *   If the result is already in cache, return the result.</span>
+<span class="cm">   *   Otherwise, delegate the functionality to the fallback object.</span>
+<span class="cm">   *</span>
+<span class="cm">   *   If the fallback did not support this operation, will build the entire topology of the {@link org.apache.gobblin.config.store.api.ConfigStore}</span>
+<span class="cm">   *   using default breath first search.</span>
+<span class="cm">   * &lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportedByRecursively</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">getImportedByRecursively</span><span class="p">(</span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConfigKeyPath</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getImportedByRecursively</span><span class="p">(</span><span class="n">ConfigKeyPath</span><span class="w"> </span><span class="n">configKey</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImportTraverser</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Lists</span><span class="p">.</span><span class="na">newLinkedList</span><span class="p">(</span><span class="n">getImportedBy</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">runtimeConfig</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">recursiveImportedByMap</span><span class="p">).</span><span class="na">traverseGraphRecursively</span><span class="p">(</span><span class="n">configKey</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

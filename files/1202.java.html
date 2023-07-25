@@ -95,199 +95,763 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.alibaba.ttl.threadpool.agent.transformlet</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2014 Cisco Systems, Inc. and others.  All rights reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This program and the accompanying materials are made available under the</span>
+<span class="cm"> * terms of the Eclipse Public License v1.0 which accompanies this distribution,</span>
+<span class="cm"> * and is available at http://www.eclipse.org/legal/epl-v10.html</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.NonNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.Nullable</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions.checkArgument</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.Objects.requireNonNull</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.ActorRef</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.ActorSystem</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.PoisonPill</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.Props</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.annotations.Beta</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.annotations.VisibleForTesting</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Throwables</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.ListenableFuture</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.SettableFuture</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.Uninterruptibles</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javassist.ClassPool</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javassist.CtClass</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javassist.LoaderClassPath</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.ByteArrayInputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URL</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.alibaba.ttl.threadpool.agent.transformlet.helper.TtlTransformletHelper.getLocationUrlOfClass</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ExecutionException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeoutException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.ClientIdentifier</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.common.actor.Dispatchers</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.databroker.actors.dds.DataStoreClient</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.databroker.actors.dds.DistributedDataStoreClientActor</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.config.Configuration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.identifiers.ShardManagerIdentifier</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.persisted.DatastoreSnapshot</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.shardmanager.AbstractShardManagerCreator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.shardmanager.ShardManagerCreator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.utils.ActorUtils</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.datastore.utils.PrimaryShardInfoFutureCache</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.ClusteredDOMDataTreeChangeListener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.DOMDataTreeChangeListener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.DOMDataTreeCommitCohort</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.DOMDataTreeCommitCohortRegistration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.DOMDataTreeCommitCohortRegistry</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.api.DOMDataTreeIdentifier</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.mdsal.dom.spi.store.DOMStoreTreeChangePublisher</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.concepts.ListenerRegistration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.common.Empty</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.data.api.YangInstanceIdentifier</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.data.tree.api.DataTreeCandidate</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.model.api.EffectiveModelContext</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.model.api.EffectiveModelContextListener</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scala.concurrent.duration.Duration</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * Class Info for {@link TtlTransformlet}.</span>
-<span class="cm"> *</span>
-<span class="cm"> * &lt;B&gt;&lt;I&gt;Caution:&lt;/I&gt;&lt;/B&gt;&lt;br&gt;</span>
-<span class="cm"> * Do &lt;b&gt;NOT&lt;/b&gt; load {@link Class} which is transforming, or the transform will lose effectiveness.</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Jerry Lee (oldratlee at gmail dot com)</span>
-<span class="cm"> * @since 3.0.0</span>
+<span class="cm"> * Base implementation of a distributed DOMStore.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassInfo</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">transformerClassFile</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">className</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">classFileBuffer</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="n">loader</span><span class="p">;</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractDataStore</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">DistributedDataStoreInterface</span><span class="p">,</span><span class="w"> </span><span class="n">EffectiveModelContextListener</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">DatastoreContextPropertiesUpdater</span><span class="p">.</span><span class="na">Listener</span><span class="p">,</span><span class="w"> </span><span class="n">DOMStoreTreeChangePublisher</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">DOMDataTreeCommitCohortRegistry</span><span class="p">,</span><span class="w"> </span><span class="n">AutoCloseable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// SuppressFBWarnings for classFileBuffer/loader parameter:</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//   [ERROR] new com.alibaba.ttl.threadpool.agent.transformlet.ClassInfo(String, byte[], ClassLoader)</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//   may expose internal representation by storing an externally mutable object</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//   into ClassInfo.classFileBuffer/loader</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ClassInfo</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">transformerClassFile</span><span class="p">,</span><span class="w"></span>
-<span class="w">                     </span><span class="nd">@NonNull</span><span class="w"> </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">classFileBuffer</span><span class="p">,</span><span class="w"></span>
-<span class="w">                     </span><span class="nd">@Nullable</span><span class="w"> </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="n">loader</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">transformerClassFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transformerClassFile</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toClassName</span><span class="p">(</span><span class="n">transformerClassFile</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">classFileBuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">classFileBuffer</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">loader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loader</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AbstractDataStore</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getClassName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">className</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SettableFuture</span><span class="o">&lt;</span><span class="n">Empty</span><span class="o">&gt;</span><span class="w"> </span><span class="n">readinessFuture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SettableFuture</span><span class="p">.</span><span class="na">create</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataStoreClient</span><span class="w"> </span><span class="n">client</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ActorUtils</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CtClass</span><span class="w"> </span><span class="n">ctClass</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AutoCloseable</span><span class="w"> </span><span class="n">closeable</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DatastoreConfigurationMXBeanImpl</span><span class="w"> </span><span class="n">datastoreConfigMXBean</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DatastoreInfoMXBeanImpl</span><span class="w"> </span><span class="n">datastoreInfoMXBean</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="nf">getLocationUrl</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getLocationUrlOfClass</span><span class="p">(</span><span class="n">getCtClass</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:IllegalCatch&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Testing overrides&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">AbstractDataStore</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ActorSystem</span><span class="w"> </span><span class="n">actorSystem</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClusterWrapper</span><span class="w"> </span><span class="n">cluster</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">configuration</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DatastoreContextFactory</span><span class="w"> </span><span class="n">datastoreContextFactory</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">DatastoreSnapshot</span><span class="w"> </span><span class="n">restoreFromSnapshot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">actorSystem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;actorSystem should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cluster should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;configuration should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">datastoreContextFactory</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;datastoreContextFactory should not be null&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@NonNull</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// [ERROR] Medium: com.alibaba.ttl.threadpool.agent.transformlet.ClassInfo.getCtClass()</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// may expose internal representation</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// by returning ClassInfo.ctClass [com.alibaba.ttl.threadpool.agent.transformlet.ClassInfo]</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CtClass</span><span class="w"> </span><span class="nf">getCtClass</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ctClass</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ctClass</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">shardManagerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ShardManagerIdentifier</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">type</span><span class="p">(</span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">().</span><span class="na">getDataStoreName</span><span class="p">()).</span><span class="na">build</span><span class="p">().</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">ClassPool</span><span class="w"> </span><span class="n">classPool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPool</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">loader</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">classPool</span><span class="p">.</span><span class="na">appendClassPath</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoaderClassPath</span><span class="p">(</span><span class="n">ClassLoader</span><span class="p">.</span><span class="na">getSystemClassLoader</span><span class="p">()));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">classPool</span><span class="p">.</span><span class="na">appendClassPath</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">LoaderClassPath</span><span class="p">(</span><span class="n">loader</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Creating ShardManager : {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shardManagerId</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">shardDispatcher</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Dispatchers</span><span class="p">(</span><span class="n">actorSystem</span><span class="p">.</span><span class="na">dispatchers</span><span class="p">()).</span><span class="na">getDispatcherPath</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="na">DispatcherType</span><span class="p">.</span><span class="na">Shard</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">PrimaryShardInfoFutureCache</span><span class="w"> </span><span class="n">primaryShardInfoCache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrimaryShardInfoFutureCache</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">AbstractShardManagerCreator</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">creator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getShardManagerCreator</span><span class="p">().</span><span class="na">cluster</span><span class="p">(</span><span class="n">cluster</span><span class="p">).</span><span class="na">configuration</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">datastoreContextFactory</span><span class="p">(</span><span class="n">datastoreContextFactory</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">readinessFuture</span><span class="p">(</span><span class="n">readinessFuture</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">primaryShardInfoCache</span><span class="p">(</span><span class="n">primaryShardInfoCache</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">restoreFromSnapshot</span><span class="p">(</span><span class="n">restoreFromSnapshot</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">distributedDataStore</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">actorUtils</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ActorUtils</span><span class="p">(</span><span class="n">actorSystem</span><span class="p">,</span><span class="w"> </span><span class="n">createShardManager</span><span class="p">(</span><span class="n">actorSystem</span><span class="p">,</span><span class="w"> </span><span class="n">creator</span><span class="p">,</span><span class="w"> </span><span class="n">shardDispatcher</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">shardManagerId</span><span class="p">),</span><span class="w"> </span><span class="n">cluster</span><span class="p">,</span><span class="w"> </span><span class="n">configuration</span><span class="p">,</span><span class="w"> </span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                </span><span class="n">primaryShardInfoCache</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Props</span><span class="w"> </span><span class="n">clientProps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DistributedDataStoreClientActor</span><span class="p">.</span><span class="na">props</span><span class="p">(</span><span class="n">cluster</span><span class="p">.</span><span class="na">getCurrentMemberName</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">().</span><span class="na">getDataStoreName</span><span class="p">(),</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">ActorRef</span><span class="w"> </span><span class="n">clientActor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorSystem</span><span class="p">.</span><span class="na">actorOf</span><span class="p">(</span><span class="n">clientProps</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DistributedDataStoreClientActor</span><span class="p">.</span><span class="na">getDistributedDataStoreClient</span><span class="p">(</span><span class="n">clientActor</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Failed to get actor for {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientProps</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">clientActor</span><span class="p">.</span><span class="na">tell</span><span class="p">(</span><span class="n">PoisonPill</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(),</span><span class="w"> </span><span class="n">ActorRef</span><span class="p">.</span><span class="na">noSender</span><span class="p">());</span><span class="w"></span>
+<span class="w">            </span><span class="n">Throwables</span><span class="p">.</span><span class="na">throwIfUnchecked</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">CtClass</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">classPool</span><span class="p">.</span><span class="na">makeClass</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ByteArrayInputStream</span><span class="p">(</span><span class="n">classFileBuffer</span><span class="p">),</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">clazz</span><span class="p">.</span><span class="na">defrost</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">getIdentifier</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Distributed data store client {} started&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">ctClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clazz</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">datastoreConfigMXBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DatastoreConfigurationMXBeanImpl</span><span class="p">(</span><span class="w"></span>
+<span class="w">                </span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">().</span><span class="na">getDataStoreMXBeanType</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">datastoreConfigMXBean</span><span class="p">.</span><span class="na">setContext</span><span class="p">(</span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">datastoreConfigMXBean</span><span class="p">.</span><span class="na">registerMBean</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">datastoreInfoMXBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DatastoreInfoMXBeanImpl</span><span class="p">(</span><span class="n">datastoreContextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">()</span><span class="w"></span>
+<span class="w">                </span><span class="p">.</span><span class="na">getDataStoreMXBeanType</span><span class="p">(),</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">datastoreInfoMXBean</span><span class="p">.</span><span class="na">registerMBean</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isModified</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">modified</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">AbstractDataStore</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ActorUtils</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">actorUtils</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;actorContext should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setModified</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">AbstractDataStore</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ActorUtils</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="kd">final</span><span class="w"> </span><span class="n">DataStoreClient</span><span class="w"> </span><span class="n">clientActor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">actorUtils</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;actorContext should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientActor</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// [ERROR] Medium: com.alibaba.ttl.threadpool.agent.transformlet.ClassInfo.getClassLoader()</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// may expose internal representation</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// by returning ClassInfo.loader [com.alibaba.ttl.threadpool.agent.transformlet.ClassInfo]</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ClassLoader</span><span class="w"> </span><span class="nf">getClassLoader</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">loader</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">AbstractShardManagerCreator</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">getShardManagerCreator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ShardManagerCreator</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toClassName</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classFile</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">classFile</span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="sc">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;.&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataStoreClient</span><span class="w"> </span><span class="nf">getClient</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">client</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientIdentifier</span><span class="w"> </span><span class="nf">getIdentifier</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">identifier</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCloseable</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AutoCloseable</span><span class="w"> </span><span class="n">closeable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">closeable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">closeable</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">L</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">DOMDataTreeChangeListener</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ListenerRegistration</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">registerTreeChangeListener</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">YangInstanceIdentifier</span><span class="w"> </span><span class="n">treeId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">L</span><span class="w"> </span><span class="n">listener</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">treeId</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;treeId should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;listener should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="cm">/*</span>
+<span class="cm">         * We need to potentially deal with multi-shard composition for registration targeting the root of the data</span>
+<span class="cm">         * store. If that is the case, we delegate to a more complicated setup invol</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">treeId</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// User is targeting root of the datastore. If there is more than one shard, we have to register with them</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// all and perform data composition.</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shardNames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getConfiguration</span><span class="p">().</span><span class="na">getAllShardNames</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shardNames</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">checkArgument</span><span class="p">(</span><span class="n">listener</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">ClusteredDOMDataTreeChangeListener</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s">&quot;Cannot listen on root without non-clustered listener %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">listener</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RootDataTreeChangeListenerProxy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">shardNames</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shardName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getShardStrategyFactory</span><span class="p">().</span><span class="na">getStrategy</span><span class="p">(</span><span class="n">treeId</span><span class="p">).</span><span class="na">findShard</span><span class="p">(</span><span class="n">treeId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Registering tree listener: {} for tree: {} shard: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">treeId</span><span class="p">,</span><span class="w"> </span><span class="n">shardName</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">DataTreeChangeListenerProxy</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&gt;</span><span class="w"> </span><span class="n">listenerRegistrationProxy</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">DataTreeChangeListenerProxy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="n">treeId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">listenerRegistrationProxy</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">shardName</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">listenerRegistrationProxy</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">C</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">DOMDataTreeCommitCohort</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DOMDataTreeCommitCohortRegistration</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">registerCommitCohort</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">DOMDataTreeIdentifier</span><span class="w"> </span><span class="n">subtree</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">cohort</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">YangInstanceIdentifier</span><span class="w"> </span><span class="n">treeId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">subtree</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;subtree should not be null&quot;</span><span class="p">).</span><span class="na">getRootIdentifier</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">cohort</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;listener should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shardName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getShardStrategyFactory</span><span class="p">().</span><span class="na">getStrategy</span><span class="p">(</span><span class="n">treeId</span><span class="p">).</span><span class="na">findShard</span><span class="p">(</span><span class="n">treeId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Registering cohort: {} for tree: {} shard: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cohort</span><span class="p">,</span><span class="w"> </span><span class="n">treeId</span><span class="p">,</span><span class="w"> </span><span class="n">shardName</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">DataTreeCohortRegistrationProxy</span><span class="o">&lt;</span><span class="n">C</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cohortProxy</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">DataTreeCohortRegistrationProxy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="n">subtree</span><span class="p">,</span><span class="w"> </span><span class="n">cohort</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">cohortProxy</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">shardName</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cohortProxy</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onModelContextUpdated</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">EffectiveModelContext</span><span class="w"> </span><span class="n">newModelContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">setSchemaContext</span><span class="p">(</span><span class="n">newModelContext</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDatastoreContextUpdated</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">DatastoreContextFactory</span><span class="w"> </span><span class="n">contextFactory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;DatastoreContext updated for data store {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getDataStoreName</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">setDatastoreContext</span><span class="p">(</span><span class="n">contextFactory</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">datastoreConfigMXBean</span><span class="p">.</span><span class="na">setContext</span><span class="p">(</span><span class="n">contextFactory</span><span class="p">.</span><span class="na">getBaseDatastoreContext</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:IllegalCatch&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Closing data store {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">datastoreConfigMXBean</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">datastoreConfigMXBean</span><span class="p">.</span><span class="na">unregisterMBean</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">datastoreInfoMXBean</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">datastoreInfoMXBean</span><span class="p">.</span><span class="na">unregisterMBean</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">closeable</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">closeable</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Error closing instance&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">client</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">client</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ActorUtils</span><span class="w"> </span><span class="nf">getActorUtils</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// TODO: consider removing this in favor of awaitReadiness()</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">waitTillReady</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Beginning to wait for data store to become ready : {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="n">toWait</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialSettleTime</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">awaitReadiness</span><span class="p">(</span><span class="n">toWait</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Shard leaders failed to settle in {}, giving up&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">toWait</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Interrupted while waiting for shards to settle&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Data store {} is now ready&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Beta</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">awaitReadiness</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">awaitReadiness</span><span class="p">(</span><span class="n">initialSettleTime</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Beta</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">awaitReadiness</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="n">toWait</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">toWait</span><span class="p">.</span><span class="na">isFinite</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">readinessFuture</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">toWait</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(),</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">NANOSECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">TimeoutException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Timed out waiting for shards to settle&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">readinessFuture</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ExecutionException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Unexpected readiness failure, assuming convergence&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Beta</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">awaitReadiness</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="p">,</span><span class="w"> </span><span class="n">TimeoutException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">awaitReadiness</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TimeoutException</span><span class="p">(</span><span class="s">&quot;Shard leaders failed to settle&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:IllegalCatch&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ActorRef</span><span class="w"> </span><span class="nf">createShardManager</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ActorSystem</span><span class="w"> </span><span class="n">actorSystem</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractShardManagerCreator</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">creator</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shardDispatcher</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shardManagerId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Exception</span><span class="w"> </span><span class="n">lastException</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">actorSystem</span><span class="p">.</span><span class="na">actorOf</span><span class="p">(</span><span class="n">creator</span><span class="p">.</span><span class="na">props</span><span class="p">().</span><span class="na">withDispatcher</span><span class="p">(</span><span class="n">shardDispatcher</span><span class="p">),</span><span class="w"> </span><span class="n">shardManagerId</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">lastException</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">Uninterruptibles</span><span class="p">.</span><span class="na">sleepUninterruptibly</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Could not create actor {} because of {} - waiting for sometime before retrying &quot;</span><span class="w"></span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;(retry count = {})&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">shardManagerId</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Failed to create Shard Manager&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lastException</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Future which completes when all shards settle for the first time.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return A Listenable future.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ListenableFuture</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">initialSettleFuture</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">readinessFuture</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">    </span><span class="n">SettableFuture</span><span class="o">&lt;</span><span class="n">Empty</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">readinessFuture</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">readinessFuture</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;unchecked&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">L</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">DOMDataTreeChangeListener</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ListenerRegistration</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">registerProxyListener</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">YangInstanceIdentifier</span><span class="w"> </span><span class="n">shardLookup</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">YangInstanceIdentifier</span><span class="w"> </span><span class="n">insideShard</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">DOMDataTreeChangeListener</span><span class="w"> </span><span class="n">delegate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">shardLookup</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;shardLookup should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">insideShard</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;insideShard should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">delegate</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;delegate should not be null&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">shardName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getShardStrategyFactory</span><span class="p">().</span><span class="na">getStrategy</span><span class="p">(</span><span class="n">shardLookup</span><span class="p">).</span><span class="na">findShard</span><span class="p">(</span><span class="n">shardLookup</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Registering tree listener: {} for tree: {} shard: {}, path inside shard: {}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">delegate</span><span class="p">,</span><span class="n">shardLookup</span><span class="p">,</span><span class="w"> </span><span class="n">shardName</span><span class="p">,</span><span class="w"> </span><span class="n">insideShard</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// wrap this in the ClusteredDOMDataTreeChangeLister interface</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// since we always want clustered registration</span><span class="w"></span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">DataTreeChangeListenerProxy</span><span class="o">&lt;</span><span class="n">DOMDataTreeChangeListener</span><span class="o">&gt;</span><span class="w"> </span><span class="n">listenerRegistrationProxy</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">DataTreeChangeListenerProxy</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">actorUtils</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClusteredDOMDataTreeChangeListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDataTreeChanged</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">DataTreeCandidate</span><span class="o">&gt;</span><span class="w"> </span><span class="n">changes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="n">delegate</span><span class="p">.</span><span class="na">onDataTreeChanged</span><span class="p">(</span><span class="n">changes</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">                    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">                    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onInitialData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="n">delegate</span><span class="p">.</span><span class="na">onInitialData</span><span class="p">();</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">},</span><span class="w"> </span><span class="n">insideShard</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">listenerRegistrationProxy</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">shardName</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">ListenerRegistration</span><span class="o">&lt;</span><span class="n">L</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">listenerRegistrationProxy</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="nf">initialSettleTime</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">DatastoreContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actorUtils</span><span class="p">.</span><span class="na">getDatastoreContext</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getInitialSettleTimeoutMultiplier</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Duration</span><span class="p">.</span><span class="na">Inf</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="na">getShardLeaderElectionTimeout</span><span class="p">().</span><span class="na">duration</span><span class="p">().</span><span class="na">$times</span><span class="p">(</span><span class="n">multiplier</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

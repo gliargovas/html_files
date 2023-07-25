@@ -136,74 +136,46 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm"> * See the License for the specific language governing permissions and</span>
-<span class="cm"> * limitations under the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">com.floplizard.guice</span><span class="p">;</span><span class="w"></span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">ru.vyarus.dropwizard.guice.module.context.unique.item</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions.checkNotNull</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Injector</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.sun.jersey.spi.container.servlet.WebConfig</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">io.dropwizard.setup.Environment</span><span class="p">;</span><span class="w"></span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.AbstractModule</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * A Guice based Jersey container that can pull resources out of the dropwizard environment.</span>
+<span class="cm"> * Base class for unique modules: only one module instance must be accepted and all others considered duplicate.</span>
+<span class="cm"> * Note that class only properly implements equals method so guicey deduplication mechanism could filter other</span>
+<span class="cm"> * instances. It is not required to use this class to grant module uniqueness - you may directly implement equals</span>
+<span class="cm"> * method in your module.</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * Classed are compared by name to properly detect classes from different class loaders.</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * Also, note that guice silently ignores duplicate bindings and so in most cases it would be able to</span>
+<span class="cm"> * handle duplicate modules properly. This class may be used for cases when bindings registered by module</span>
+<span class="cm"> * instances are not equal (e.g. register something by instance or produce other side effects).</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * If module requires access to dropwizard specific project (via</span>
+<span class="cm"> * {@link ru.vyarus.dropwizard.guice.module.support.DropwizardAwareModule}) then use</span>
+<span class="cm"> * {@link UniqueDropwizardAwareModule} instead.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author Vyacheslav Rusakov</span>
+<span class="cm"> * @see ru.vyarus.dropwizard.guice.GuiceBundle.Builder#duplicateConfigDetector(</span>
+<span class="cm"> * ru.vyarus.dropwizard.guice.module.context.unique.DuplicateConfigDetector)</span>
+<span class="cm"> * @since 13.07.2019</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">class</span> <span class="nc">DropwizardGuiceContainer</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">GuiceContainer</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EQ_COMPARING_CLASS_NAMES&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UniqueModule</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractModule</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;BAD_PRACTICE&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Inject</span><span class="w"></span>
-<span class="w">    </span><span class="n">DropwizardGuiceContainer</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Injector</span><span class="w"> </span><span class="n">injector</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">injector</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">checkNotNull</span><span class="p">(</span><span class="n">environment</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;environment is null&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">resourceConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environment</span><span class="p">.</span><span class="na">jersey</span><span class="p">().</span><span class="na">getResourceConfig</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// only one module instance allowed</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// intentionally check by class name to also detect instances from different class loaders</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">ResourceConfig</span><span class="w"> </span><span class="nf">getDefaultResourceConfig</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">props</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">WebConfig</span><span class="w"> </span><span class="n">webConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resourceConfig</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// for data structures relying on hash first, all equal instances must have the same hash to avoid side effects</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">().</span><span class="na">hashCode</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

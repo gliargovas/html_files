@@ -238,14 +238,371 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
-<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm"> * contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm"> * this work for additional information regarding copyright ownership.</span>
+<span class="cm"> * The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm"> * (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm"> * the License.  You may obtain a copy of the License at</span>
 <span class="cm"> *</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *    http://www.apache.org/licenses/LICENSE-2.0</span>
 <span class="cm"> *</span>
 <span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
 <span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
@@ -254,133 +611,488 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl.operations</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.gobblin.service.modules.orchestration</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.internal.nio.IOUtil</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.internal.serialization.Data</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataInput</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.nio.ObjectDataOutput</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.OverflowPolicy</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl.RingbufferContainer</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.operationservice.BackupAwareOperation</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.operationservice.MutatingOperation</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.operationservice.Notifier</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.operationservice.Operation</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.spi.impl.operationservice.WaitNotifyKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.codahale.metrics.Meter</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.codahale.metrics.Timer</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.OverflowPolicy.FAIL</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.ringbuffer.impl.RingbufferDataSerializerHook.ADD_ALL_OPERATION</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.annotations.VisibleForTesting</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.inject.Inject</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.typesafe.config.Config</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.zaxxer.hikari.HikariDataSource</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.inject.Singleton</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.sql.DataSource</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.extern.slf4j.Slf4j</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.configuration.ConfigurationKeys</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.exception.QuotaExceededException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.metastore.MysqlStateStore</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.runtime.metrics.RuntimeMetrics</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.service.ServiceConfigKeys</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.service.modules.flowgraph.Dag</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.service.modules.spec.JobExecutionPlan</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.gobblin.util.ConfigUtils</span><span class="p">;</span><span class="w"></span>
+
 
 <span class="cm">/**</span>
-<span class="cm"> * Adds a batch of items to the ring buffer. The master node will add the items into the ring buffer, generating sequence IDs.</span>
-<span class="cm"> * The backup operation will put the items under the generated sequence IDs that the master generated. This is to avoid</span>
-<span class="cm"> * differences in ring buffer data structures.</span>
+<span class="cm"> * An implementation of {@link UserQuotaManager} that stores quota usage in mysql.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AddAllOperation</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractRingBufferOperation</span><span class="w"></span>
-<span class="w">        </span><span class="kd">implements</span><span class="w"> </span><span class="n">Notifier</span><span class="p">,</span><span class="w"> </span><span class="n">BackupAwareOperation</span><span class="p">,</span><span class="w"> </span><span class="n">MutatingOperation</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Slf4j</span><span class="w"></span>
+<span class="nd">@Singleton</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MysqlUserQuotaManager</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractUserQuotaManager</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CONFIG_PREFIX</span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MysqlUserQuotaManager&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MysqlQuotaStore</span><span class="w"> </span><span class="n">quotaStore</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RunningDagIdsStore</span><span class="w"> </span><span class="n">runningDagIds</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Meter</span><span class="w"> </span><span class="n">quotaExceedsRequests</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Meter</span><span class="w"> </span><span class="n">failedQuotaCheck</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OverflowPolicy</span><span class="w"> </span><span class="n">overflowPolicy</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Data</span><span class="o">[]</span><span class="w"> </span><span class="n">items</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">lastSequence</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AddAllOperation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Inject</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">MysqlUserQuotaManager</span><span class="p">(</span><span class="n">Config</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">super</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Config</span><span class="w"> </span><span class="n">quotaStoreConfig</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="na">hasPath</span><span class="p">(</span><span class="n">CONFIG_PREFIX</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">quotaStoreConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">config</span><span class="p">.</span><span class="na">getConfig</span><span class="p">(</span><span class="n">CONFIG_PREFIX</span><span class="p">).</span><span class="na">withFallback</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Please specify the config for MysqlUserQuotaManager&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createQuotaStore</span><span class="p">(</span><span class="n">quotaStoreConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runningDagIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createRunningDagStore</span><span class="p">(</span><span class="n">quotaStoreConfig</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">failedQuotaCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">metricContext</span><span class="p">.</span><span class="na">contextAwareMeter</span><span class="p">(</span><span class="n">RuntimeMetrics</span><span class="p">.</span><span class="na">GOBBLIN_MYSQL_QUOTA_MANAGER_UNEXPECTED_ERRORS</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">quotaExceedsRequests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">metricContext</span><span class="p">.</span><span class="na">contextAwareMeter</span><span class="p">(</span><span class="n">RuntimeMetrics</span><span class="p">.</span><span class="na">GOBBLIN_MYSQL_QUOTA_MANAGER_QUOTA_REQUESTS_EXCEEDED</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AddAllOperation</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Data</span><span class="o">[]</span><span class="w"> </span><span class="n">items</span><span class="p">,</span><span class="w"> </span><span class="n">OverflowPolicy</span><span class="w"> </span><span class="n">overflowPolicy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">items</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">overflowPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">overflowPolicy</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">addDagId</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runningDagIds</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">RingbufferContainer</span><span class="w"> </span><span class="n">ringbuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRingBufferContainer</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">containsDagId</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">runningDagIds</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">overflowPolicy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">FAIL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ringbuffer</span><span class="p">.</span><span class="na">remainingCapacity</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lastSequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">removeDagId</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">runningDagIds</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This implementation does not need to update quota usage when the service restarts or it&#39;s leadership status changes</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Dag</span><span class="o">&lt;</span><span class="n">JobExecutionPlan</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dags</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkQuota</span><span class="p">(</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Dag</span><span class="p">.</span><span class="na">DagNode</span><span class="o">&lt;</span><span class="n">JobExecutionPlan</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dagNodes</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="p">.</span><span class="na">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">Timer</span><span class="p">.</span><span class="na">Context</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">metricContext</span><span class="p">.</span><span class="na">timer</span><span class="p">(</span><span class="n">RuntimeMetrics</span><span class="p">.</span><span class="na">GOBBLIN_MYSQL_QUOTA_MANAGER_TIME_TO_CHECK_QUOTA</span><span class="p">).</span><span class="na">time</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Dag</span><span class="p">.</span><span class="na">DagNode</span><span class="o">&lt;</span><span class="n">JobExecutionPlan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dagNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">dagNodes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">QuotaCheck</span><span class="w"> </span><span class="n">quotaCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">increaseAndCheckQuota</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="o">!</span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">proxyUserCheck</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">requesterCheck</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">flowGroupCheck</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">connection</span><span class="p">.</span><span class="na">rollback</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="n">quotaExceedsRequests</span><span class="p">.</span><span class="na">mark</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QuotaExceededException</span><span class="p">(</span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">requesterMessage</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">failedQuotaCheck</span><span class="p">.</span><span class="na">mark</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">lastSequence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ringbuffer</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">items</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">incrementJobCount</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="p">.</span><span class="na">increaseCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">decrementJobCount</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="p">.</span><span class="na">decreaseCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">QuotaCheck</span><span class="w"> </span><span class="nf">increaseAndCheckQuota</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">Dag</span><span class="p">.</span><span class="na">DagNode</span><span class="o">&lt;</span><span class="n">JobExecutionPlan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dagNode</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">QuotaCheck</span><span class="w"> </span><span class="n">quotaCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QuotaCheck</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">requesterMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Dag is already being tracked, no need to double increment for retries and multihop flows</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">containsDagId</span><span class="p">(</span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">generateDagId</span><span class="p">(</span><span class="n">dagNode</span><span class="p">).</span><span class="na">toString</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">quotaCheck</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">addDagId</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">generateDagId</span><span class="p">(</span><span class="n">dagNode</span><span class="p">).</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afterRun</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">reportReliableTopicPublish</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">proxyUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getJobSpec</span><span class="p">().</span><span class="na">getConfig</span><span class="p">(),</span><span class="w"> </span><span class="n">AzkabanProjectConfig</span><span class="p">.</span><span class="na">USER_TO_PROXY</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">flowGroup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getJobSpec</span><span class="p">().</span><span class="na">getConfig</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">ConfigurationKeys</span><span class="p">.</span><span class="na">FLOW_GROUP_KEY</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">specExecutorUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getSpecExecutorUri</span><span class="p">(</span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">proxyUserCheck</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">proxyUser</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getCurrentAttempts</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">proxyQuotaIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">incrementJobCountAndCheckQuota</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getUserQuotaKey</span><span class="p">(</span><span class="n">proxyUser</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">),</span><span class="w"> </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">proxyUser</span><span class="p">),</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">USER_COUNT</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">proxyUserCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">proxyQuotaIncrement</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// proxy user quota check succeeds</span><span class="w"></span>
+<span class="w">      </span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">setProxyUserCheck</span><span class="p">(</span><span class="n">proxyUserCheck</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">proxyUserCheck</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// add 1 to proxyUserIncrement since proxyQuotaIncrement is the count before the increment</span><span class="w"></span>
+<span class="w">        </span><span class="n">requesterMessage</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;Quota exceeded for proxy user %s on executor %s : quota=%s, requests above quota=%d%n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">proxyUser</span><span class="p">,</span><span class="w"> </span><span class="n">specExecutorUri</span><span class="p">,</span><span class="w"> </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">proxyUser</span><span class="p">),</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">proxyQuotaIncrement</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">proxyUser</span><span class="p">)));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">getResponse</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">lastSequence</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">serializedRequesters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getSerializedRequesterList</span><span class="p">(</span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">requesterCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldNotify</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">lastSequence</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">WaitNotifyKey</span><span class="w"> </span><span class="nf">getNotifiedKey</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">getRingbufferWaitNotifyKey</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">shouldBackup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">lastSequence</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getSyncBackupCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">RingbufferContainer</span><span class="w"> </span><span class="n">ringbuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRingBufferContainer</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ringbuffer</span><span class="p">.</span><span class="na">getConfig</span><span class="p">().</span><span class="na">getBackupCount</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAsyncBackupCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">RingbufferContainer</span><span class="w"> </span><span class="n">ringbuffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRingBufferContainer</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ringbuffer</span><span class="p">.</span><span class="na">getConfig</span><span class="p">().</span><span class="na">getAsyncBackupCount</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Operation</span><span class="w"> </span><span class="nf">getBackupOperation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AddAllBackupOperation</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">lastSequence</span><span class="p">,</span><span class="w"> </span><span class="n">items</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getClassId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ADD_ALL_OPERATION</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeInternal</span><span class="p">(</span><span class="n">ObjectDataOutput</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">writeInternal</span><span class="p">(</span><span class="n">out</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeInt</span><span class="p">(</span><span class="n">overflowPolicy</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">writeInt</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Data</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">IOUtil</span><span class="p">.</span><span class="na">writeData</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getCurrentAttempts</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">uniqueRequesters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getDistinctUniqueRequesters</span><span class="p">(</span><span class="n">serializedRequesters</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requester</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">uniqueRequesters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">userQuotaIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">incrementJobCountAndCheckQuota</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getUserQuotaKey</span><span class="p">(</span><span class="n">requester</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">requester</span><span class="p">),</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">REQUESTER_COUNT</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">thisRequesterCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userQuotaIncrement</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// user quota check succeeds</span><span class="w"></span>
+<span class="w">        </span><span class="n">requesterCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requesterCheck</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">thisRequesterCheck</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">setRequesterCheck</span><span class="p">(</span><span class="n">requesterCheck</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">thisRequesterCheck</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">requesterMessage</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Quota exceeded for requester %s on executor %s : quota=%s, requests above quota=%d%n. &quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">requester</span><span class="p">,</span><span class="w"> </span><span class="n">specExecutorUri</span><span class="p">,</span><span class="w"> </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">requester</span><span class="p">),</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">userQuotaIncrement</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">getQuotaForUser</span><span class="p">(</span><span class="n">requester</span><span class="p">)));</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">readInternal</span><span class="p">(</span><span class="n">ObjectDataInput</span><span class="w"> </span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">readInternal</span><span class="p">(</span><span class="n">in</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">flowGroupCheck</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">overflowPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OverflowPolicy</span><span class="p">.</span><span class="na">getById</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="na">readInt</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getCurrentAttempts</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">flowGroupQuotaIncrement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">incrementJobCountAndCheckQuota</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getFlowGroupQuotaKey</span><span class="p">(</span><span class="n">flowGroup</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">),</span><span class="w"> </span><span class="n">getQuotaForFlowGroup</span><span class="p">(</span><span class="n">flowGroup</span><span class="p">),</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">FLOWGROUP_COUNT</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">flowGroupCheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flowGroupQuotaIncrement</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">setFlowGroupCheck</span><span class="p">(</span><span class="n">flowGroupCheck</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">flowGroupCheck</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">requesterMessage</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Quota exceeded for flowgroup %s on executor %s : quota=%s, requests above quota=%d%n&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">flowGroup</span><span class="p">,</span><span class="w"> </span><span class="n">specExecutorUri</span><span class="p">,</span><span class="w"> </span><span class="n">getQuotaForFlowGroup</span><span class="p">(</span><span class="n">flowGroup</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">flowGroupQuotaIncrement</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">getQuotaForFlowGroup</span><span class="p">(</span><span class="n">flowGroup</span><span class="p">)));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readInt</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Data</span><span class="o">[</span><span class="n">length</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">items</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IOUtil</span><span class="p">.</span><span class="na">readData</span><span class="p">(</span><span class="n">in</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">quotaCheck</span><span class="p">.</span><span class="na">setRequesterMessage</span><span class="p">(</span><span class="n">requesterMessage</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">quotaCheck</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">incrementJobCountAndCheckQuota</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">keyQuota</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">currentCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">incrementJobCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentCount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">keyQuota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">currentCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">currentCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Decrement the quota by one for the proxy user and requesters corresponding to the provided {@link Dag.DagNode}.</span>
+<span class="cm">   * Returns true if the dag existed in the set of running dags and was removed successfully</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">releaseQuota</span><span class="p">(</span><span class="n">Dag</span><span class="p">.</span><span class="na">DagNode</span><span class="o">&lt;</span><span class="n">JobExecutionPlan</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dagNode</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="p">.</span><span class="na">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">boolean</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">removeDagId</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">generateDagId</span><span class="p">(</span><span class="n">dagNode</span><span class="p">).</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">proxyUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getJobSpec</span><span class="p">().</span><span class="na">getConfig</span><span class="p">(),</span><span class="w"> </span><span class="n">AzkabanProjectConfig</span><span class="p">.</span><span class="na">USER_TO_PROXY</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">proxyUser</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">proxyUserKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getUserQuotaKey</span><span class="p">(</span><span class="n">proxyUser</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">decrementJobCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">proxyUserKey</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">USER_COUNT</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">flowGroup</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">          </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">dagNode</span><span class="p">.</span><span class="na">getValue</span><span class="p">().</span><span class="na">getJobSpec</span><span class="p">().</span><span class="na">getConfig</span><span class="p">(),</span><span class="w"> </span><span class="n">ConfigurationKeys</span><span class="p">.</span><span class="na">FLOW_GROUP_KEY</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">decrementJobCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getFlowGroupQuotaKey</span><span class="p">(</span><span class="n">flowGroup</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">),</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">FLOWGROUP_COUNT</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">serializedRequesters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getSerializedRequesterList</span><span class="p">(</span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requester</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getDistinctUniqueRequesters</span><span class="p">(</span><span class="n">serializedRequesters</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">String</span><span class="w"> </span><span class="n">requesterKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DagManagerUtils</span><span class="p">.</span><span class="na">getUserQuotaKey</span><span class="p">(</span><span class="n">requester</span><span class="p">,</span><span class="w"> </span><span class="n">dagNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">decrementJobCount</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">requesterKey</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">REQUESTER_COUNT</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Failed to release quota for requester list &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">serializedRequesters</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">connection</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">quotaStore</span><span class="p">.</span><span class="na">getCount</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Creating an instance of MysqlQuotaStore.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">MysqlQuotaStore</span><span class="w"> </span><span class="nf">createQuotaStore</span><span class="p">(</span><span class="n">Config</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">quotaStoreTableName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="n">ServiceConfigKeys</span><span class="p">.</span><span class="na">QUOTA_STORE_DB_TABLE_KEY</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">ServiceConfigKeys</span><span class="p">.</span><span class="na">DEFAULT_QUOTA_STORE_DB_TABLE</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MysqlStateStore</span><span class="p">.</span><span class="na">newDataSource</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MysqlQuotaStore</span><span class="p">(</span><span class="n">dataSource</span><span class="p">,</span><span class="w"> </span><span class="n">quotaStoreTableName</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">RunningDagIdsStore</span><span class="w"> </span><span class="nf">createRunningDagStore</span><span class="p">(</span><span class="n">Config</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">quotaStoreTableName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConfigUtils</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="n">ServiceConfigKeys</span><span class="p">.</span><span class="na">RUNNING_DAG_IDS_DB_TABLE_KEY</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">ServiceConfigKeys</span><span class="p">.</span><span class="na">DEFAULT_RUNNING_DAG_IDS_DB_TABLE</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MysqlStateStore</span><span class="p">.</span><span class="na">newDataSource</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RunningDagIdsStore</span><span class="p">(</span><span class="n">dataSource</span><span class="p">,</span><span class="w"> </span><span class="n">quotaStoreTableName</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MysqlQuotaStore</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tableName</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">GET_USER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">GET_REQUESTER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">GET_FLOWGROUP_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">INCREASE_USER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">INCREASE_REQUESTER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">INCREASE_FLOW_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DECREASE_USER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DECREASE_REQUESTER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DECREASE_FLOWGROUP_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DELETE_USER_SQL</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MysqlQuotaStore</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tableName</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">tableName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableName</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">GET_USER_COUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT user_count FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE name = ? FOR UPDATE&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">GET_REQUESTER_COUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT requester_count FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE name = ? FOR UPDATE&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">GET_FLOWGROUP_COUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT flowgroup_count FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE name = ? FOR UPDATE&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">INCREASE_USER_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INSERT INTO &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (name, user_count) VALUES (?, 1) &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;ON DUPLICATE KEY UPDATE user_count=user_count+1&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">INCREASE_REQUESTER_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INSERT INTO &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (name, requester_count) VALUES (?, 1) &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;ON DUPLICATE KEY UPDATE requester_count=requester_count+1&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">INCREASE_FLOW_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INSERT INTO &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (name, flowgroup_count) VALUES (?, 1) &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;ON DUPLICATE KEY UPDATE flowgroup_count=flowgroup_count+1&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">DECREASE_USER_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UPDATE &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; SET user_count=GREATEST(0, user_count-1) WHERE name = ?&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">DECREASE_REQUESTER_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UPDATE &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; SET requester_count=GREATEST(0, requester_count-1) WHERE name = ?&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">DECREASE_FLOWGROUP_COUNT_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UPDATE &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; SET flowgroup_count=flowgroup_count-1 WHERE name = ?&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">DELETE_USER_SQL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DELETE FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE name = ? AND user_count&lt;1 AND flowgroup_count&lt;1&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">//Increase the length of name as we include the executor uri in it</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">createQuotaTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CREATE TABLE IF NOT EXISTS &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (name VARCHAR(500) CHARACTER SET latin1 NOT NULL, &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;user_count INT NOT NULL DEFAULT 0, requester_count INT NOT NULL DEFAULT 0, flowgroup_count INT NOT NULL DEFAULT 0, &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;PRIMARY KEY (name), &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;UNIQUE INDEX ind (name))&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"> </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">createStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">createQuotaTable</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">createStatement</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// TODO: revisit use of connection test query following verification of successful connection pool migration:</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//   If your driver supports JDBC4 we strongly recommend not setting this property. This is for &quot;legacy&quot; drivers</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//   that do not support the JDBC4 Connection.isValid() API; see:</span><span class="w"></span>
+<span class="w">        </span><span class="c1">//   https://github.com/brettwooldridge/HikariCP#gear-configuration-knobs-baby</span><span class="w"></span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Failure in creating table {}. Validation query is set to {} Exception is {}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">tableName</span><span class="p">,</span><span class="w"> </span><span class="p">((</span><span class="n">HikariDataSource</span><span class="p">)</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">dataSource</span><span class="p">).</span><span class="na">getConnectionTestQuery</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns count of countType for the name. if the row does not exist, returns zero.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">countType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CountType</span><span class="p">.</span><span class="na">USER_COUNT</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">GET_USER_COUNT</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GET_FLOWGROUP_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">queryStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">selectStatement</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">queryStatement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queryStatement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;failure retrieving count from user/flowGroup &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">increaseCount</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">selectStatement</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">increaseStatement</span><span class="p">;</span><span class="w"></span>
+
+
+<span class="w">      </span><span class="k">switch</span><span class="p">(</span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">USER_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_USER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">increaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INCREASE_USER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">REQUESTER_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_REQUESTER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">increaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INCREASE_REQUESTER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">FLOWGROUP_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_FLOWGROUP_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">increaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INCREASE_FLOW_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Invalid count type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">selectStatement</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">increaseStatement</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement1</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement2</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statement1</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement2</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">rs</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">decreaseCount</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">CountType</span><span class="w"> </span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">selectStatement</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">decreaseStatement</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">switch</span><span class="p">(</span><span class="n">countType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">USER_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_USER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">decreaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DECREASE_USER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">REQUESTER_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_REQUESTER_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">decreaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DECREASE_REQUESTER_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">FLOWGROUP_COUNT</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="n">selectStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GET_FLOWGROUP_COUNT</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">decreaseStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DECREASE_FLOWGROUP_COUNT_SQL</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Invalid count type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">countType</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">selectStatement</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">decreaseStatement</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">DELETE_USER_SQL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement1</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement2</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement3</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statement1</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement2</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement3</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Decrement job count was called for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; when the count was already zero/absent.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">rs</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RunningDagIdsStore</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tableName</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">CONTAINS_DAG_ID</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ADD_DAG_ID</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">REMOVE_DAG_ID</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RunningDagIdsStore</span><span class="p">(</span><span class="n">DataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tableName</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">tableName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableName</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">CONTAINS_DAG_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT EXISTS(SELECT * FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE dagId = ?)&quot;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">ADD_DAG_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INSERT INTO &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (dagId) VALUES (?) &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">REMOVE_DAG_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;DELETE FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; WHERE dagId = ?&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">createQuotaTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CREATE TABLE IF NOT EXISTS &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (dagId VARCHAR(500) CHARACTER SET latin1 NOT NULL, &quot;</span><span class="w"></span>
+<span class="w">          </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;PRIMARY KEY (dagId), UNIQUE INDEX ind (dagId))&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"> </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">createStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">createQuotaTable</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">createStatement</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Failure creation table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tableName</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * returns true if the DagID is already present in the running dag store</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@VisibleForTesting</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataSource</span><span class="p">.</span><span class="na">getConnection</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">queryStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">CONTAINS_DAG_ID</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">queryStatement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queryStatement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">rs</span><span class="p">.</span><span class="na">getBoolean</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Could not find if the dag &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dagId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is already running.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">ADD_DAG_ID</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Failure adding dag &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dagId</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">dagId</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">REMOVE_DAG_ID</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">statement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dagId</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statement</span><span class="p">.</span><span class="na">executeUpdate</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Could not remove dag &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dagId</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

@@ -284,399 +284,195 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.fest.test_cases</span><span class="p">;</span><span class="w"></span>
+<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2008-2022, Hazelcast, Inc. All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm"> * you may not use this file except in compliance with the License.</span>
+<span class="cm"> * You may obtain a copy of the License at</span>
+<span class="cm"> *</span>
+<span class="cm"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> *</span>
+<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm"> * See the License for the specific language governing permissions and</span>
+<span class="cm"> * limitations under the License.</span>
+<span class="cm"> */</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Optional</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Lists</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.io.ByteStreams</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.Uninterruptibles</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.FailOnThreadViolationRepaintManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.GuiActionRunner</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.GuiQuery</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.fixture.FrameFixture</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.testing.FestSwingTestCaseTemplate</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.After</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.Before</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.BeforeClass</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Configuration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Configurations</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Yaml</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.WalletMode</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.WalletSummary</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.error_reporting.ExceptionHandler</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.CoreEvents</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.ShutdownEvent</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.exchanges.ExchangeKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.BackupManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.InstallationManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.services.CoreServices</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.HardwareWalletClient</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.HardwareWalletService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.testing.WalletSummaryFixtures</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.testing.hardware_wallet_fixtures.HardwareWalletFixture</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.MultiBitHD</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.views.MainView</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.*</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.Generated</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.custom.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hazelcast.logging.Logger</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.fest.swing.timing.Pause.pause</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.ClientMessage.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">com.hazelcast.client.impl.protocol.codec.builtin.FixedSizeTypesCodec.*</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/*</span>
+<span class="cm"> * This file is auto-generated by the Hazelcast Client Protocol Code Generator.</span>
+<span class="cm"> * To change this file, edit the templates or the protocol</span>
+<span class="cm"> * definitions on the https://github.com/hazelcast/hazelcast-client-protocol</span>
+<span class="cm"> * and regenerate it.</span>
+<span class="cm"> */</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * &lt;p&gt;Test suite for Swing UI functional tests:&lt;/p&gt;</span>
-<span class="cm"> * &lt;ul&gt;</span>
-<span class="cm"> * &lt;li&gt;Handles startup sequence&lt;/li&gt;</span>
-<span class="cm"> * &lt;li&gt;Handles soft shutdown&lt;/li&gt;</span>
-<span class="cm"> * &lt;/ul&gt;</span>
-<span class="cm"> *</span>
-<span class="cm"> * @since 0.0.1</span>
+<span class="cm"> * Adds an continuous entry listener for this map. The listener will be notified for map add/remove/update/evict</span>
+<span class="cm"> * events filtered by the given predicate.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractFestTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">FestSwingTestCaseTemplate</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Generated</span><span class="p">(</span><span class="s">&quot;9419750f523318406ad613ebfabd77e8&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReplicatedMapAddEntryListenerToKeyWithPredicateCodec</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0D0A00</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">854528</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0D0A01</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">854529</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_LOCAL_ONLY_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">REQUEST_LOCAL_ONLY_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BOOLEAN_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_BACKUP_ACKS_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">BYTE_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EVENT_ENTRY_EVENT_TYPE_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EVENT_ENTRY_UUID_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVENT_ENTRY_EVENT_TYPE_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EVENT_ENTRY_NUMBER_OF_AFFECTED_ENTRIES_FIELD_OFFSET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVENT_ENTRY_UUID_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">UUID_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EVENT_ENTRY_INITIAL_FRAME_SIZE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVENT_ENTRY_NUMBER_OF_AFFECTED_ENTRIES_FIELD_OFFSET</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">INT_SIZE_IN_BYTES</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//hex: 0x0D0A02</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">EVENT_ENTRY_MESSAGE_TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">854530</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">FrameFixture</span><span class="w"> </span><span class="n">window</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="w"> </span><span class="n">testObject</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@BeforeClass</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUpOnce</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">FailOnThreadViolationRepaintManager</span><span class="p">.</span><span class="na">install</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * Create a local wallet backup</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param walletSummary The wallet summary</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws IOException If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createLocalBackup</span><span class="p">(</span><span class="n">WalletSummary</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Create a local backup of the empty wallet so that there is one to load</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">createLocalBackup</span><span class="p">(</span><span class="n">walletSummary</span><span class="p">.</span><span class="na">getWalletId</span><span class="p">(),</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">ABANDON_TREZOR_PASSWORD</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Before</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Make this message stand out</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;FEST: New test case set up.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow unrestricted operation</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// This will force the use of a temporary directory for application configuration</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// ensuring that existing configurations and wallets are untouched</span><span class="w"></span>
-<span class="w">    </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">unrestricted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the configuration</span><span class="w"></span>
-<span class="w">    </span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configurations</span><span class="p">.</span><span class="na">newDefaultConfiguration</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@After</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tearDown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Make this message stand out</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;FEST: Test complete. Firing &#39;SOFT&#39; shutdown before tear down.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Don&#39;t crash the JVM</span><span class="w"></span>
-<span class="w">    </span><span class="n">CoreEvents</span><span class="p">.</span><span class="na">fireShutdownEvent</span><span class="p">(</span><span class="n">ShutdownEvent</span><span class="p">.</span><span class="na">ShutdownType</span><span class="p">.</span><span class="na">SOFT</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow time for the app to terminate and be garbage collected</span><span class="w"></span>
-<span class="w">    </span><span class="n">pause</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the hardware wallet services to ensure they can be restarted</span><span class="w"></span>
-<span class="w">    </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">stopHardwareWalletServices</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;FEST: Application cleanup should have finished. Performing final cleanup.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">testObject</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">window</span><span class="p">.</span><span class="na">cleanUp</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the installation manager</span><span class="w"></span>
-<span class="w">    </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">(</span><span class="n">ShutdownEvent</span><span class="p">.</span><span class="na">ShutdownType</span><span class="p">.</span><span class="na">SOFT</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Cold start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an empty application directory&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">arrangeFresh</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging fresh environment...&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Warm start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an application directory containing the empty wallet fixture and an accepted licence&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">WalletSummary</span><span class="w"> </span><span class="nf">arrangeEmpty</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging empty wallet fixture environment with hardwareWalletFixtureType: {} ...&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Get the temporary application directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Copy the standard MBHD cacerts</span><span class="w"></span>
-<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">cacerts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="s">&quot;/mbhd-cacerts&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">CA_CERTS_NAME</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">ByteStreams</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">cacerts</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Initialise the backup manager</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">initialise</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Add the empty wallet fixture</span><span class="w"></span>
-<span class="w">    </span><span class="n">WalletSummary</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">walletSummary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createEmptyTrezorHardWalletFixture</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">walletSummary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createEmptyMBHDSoftWalletFixture</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">ReplicatedMapAddEntryListenerToKeyWithPredicateCodec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestParameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Name of the Replicated Map</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Warm start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an application directory containing a standard wallet fixture containing real transactions and contacts&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">arrangeStandard</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Key with which the specified value is to be associated.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging standard wallet fixture environment...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The predicate for filtering entries</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">predicate</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// Get the temporary application directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Copy the standard MBHD cacerts</span><span class="w"></span>
-<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">cacerts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="s">&quot;/mbhd-cacerts&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">CA_CERTS_NAME</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">ByteStreams</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">cacerts</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Initialise the backup manager to use the temporary directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">initialise</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Add the restored wallet fixture</span><span class="w"></span>
-<span class="w">    </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createStandardMBHDSoftWalletFixture</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Handles the ongoing process of application set up&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUpAfterArrange</span><span class="p">(</span><span class="w"></span>
-<span class="w">          </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">WalletMode</span><span class="w"> </span><span class="n">walletMode</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Setup after arrange with hardware wallet environment&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// Get the hardware wallet client for the test case</span><span class="w"></span>
-<span class="w">      </span><span class="n">HardwareWalletClient</span><span class="w"> </span><span class="n">mockClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getClient</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// Inject it into the hardware wallet service</span><span class="w"></span>
-<span class="w">      </span><span class="n">HardwareWalletService</span><span class="w"> </span><span class="n">hardwareWalletService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HardwareWalletService</span><span class="p">(</span><span class="n">mockClient</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// Create a suitable ordering based on the wallet mode</span><span class="w"></span>
-<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">hardwareWalletServices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Lists</span><span class="p">.</span><span class="na">newArrayList</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">walletMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">TREZOR</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">hardwareWalletService</span><span class="p">));</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">KEEP_KEY</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">hardwareWalletService</span><span class="p">));</span><span class="w"></span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="c1">// Ensure CoreServices uses it instead of creating one</span><span class="w"></span>
-<span class="w">      </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">setHardwareWalletServices</span><span class="p">(</span><span class="n">hardwareWalletServices</span><span class="p">);</span><span class="w"></span>
-
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * if true fires events that originated from this node only, otherwise fires all events</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">localOnly</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Reset locale to en_US&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Always reset back to en_US</span><span class="w"></span>
-<span class="w">    </span><span class="n">Locale</span><span class="p">.</span><span class="na">setDefault</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Create standard configuration (no exchange)&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Always start without an exchange and with cloud backups</span><span class="w"></span>
-<span class="w">    </span><span class="n">Configuration</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configurations</span><span class="p">.</span><span class="na">newDefaultConfiguration</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">configuration</span><span class="p">.</span><span class="na">getBitcoin</span><span class="p">().</span><span class="na">setCurrentExchange</span><span class="p">(</span><span class="n">ExchangeKey</span><span class="p">.</span><span class="na">NONE</span><span class="p">.</span><span class="na">name</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">festCloudBackupDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">().</span><span class="na">getAbsolutePath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/fest-cloud-backups&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">configuration</span><span class="p">.</span><span class="na">getAppearance</span><span class="p">().</span><span class="na">setCloudBackupLocation</span><span class="p">(</span><span class="n">festCloudBackupDirectory</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Persist the new configuration ready for reading later</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">fos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getConfigurationFile</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">Yaml</span><span class="p">.</span><span class="na">writeYaml</span><span class="p">(</span><span class="n">fos</span><span class="p">,</span><span class="w"> </span><span class="n">configuration</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">ExceptionHandler</span><span class="p">.</span><span class="na">handleThrowable</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeRequest</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">predicate</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">localOnly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setContainsSerializedDataInRequest</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setRetryable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">setOperationName</span><span class="p">(</span><span class="s">&quot;ReplicatedMap.AddEntryListenerToKeyWithPredicate&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">REQUEST_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_LOCAL_ONLY_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">localOnly</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">predicate</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Starting MultiBit HD...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ReplicatedMapAddEntryListenerToKeyWithPredicateCodec</span><span class="p">.</span><span class="na">RequestParameters</span><span class="w"> </span><span class="nf">decodeRequest</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">RequestParameters</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestParameters</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">localOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeBoolean</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_LOCAL_ONLY_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">StringCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="n">iterator</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// Start MultiBit HD within FEST (mimic main method but split sequence)</span><span class="w"></span>
-<span class="w">    </span><span class="n">testObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">testObject</span><span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeResponse</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">RESPONSE_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">MainView</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GuiActionRunner</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">GuiQuery</span><span class="o">&lt;</span><span class="n">MainView</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">protected</span><span class="w"> </span><span class="n">MainView</span><span class="w"> </span><span class="nf">executeInEDT</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;FEST initialising UI...&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">testObject</span><span class="p">.</span><span class="na">initialiseUIViews</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * A unique string  which is used as a key to remove the listener.</span>
+<span class="cm">     */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="nf">decodeResponse</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">RESPONSE_RESPONSE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ClientMessage</span><span class="w"> </span><span class="nf">encodeEntryEvent</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">mergingValue</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">eventType</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfAffectedEntries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">createForEncode</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">EVENT_ENTRY_INITIAL_FRAME_SIZE</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">UNFRAGMENTED_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">initialFrame</span><span class="p">.</span><span class="na">flags</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">IS_EVENT_FLAG</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_MESSAGE_TYPE</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">PARTITION_ID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_EVENT_TYPE_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">eventType</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_UUID_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">encodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_NUMBER_OF_AFFECTED_ENTRIES_FIELD_OFFSET</span><span class="p">,</span><span class="w"> </span><span class="n">numberOfAffectedEntries</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">encodeNullable</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">encode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">encodeNullable</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">encode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">encodeNullable</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">encode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">encodeNullable</span><span class="p">(</span><span class="n">clientMessage</span><span class="p">,</span><span class="w"> </span><span class="n">mergingValue</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">encode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractEventHandler</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="n">ClientMessage</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">messageType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">getMessageType</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">ForwardFrameIterator</span><span class="w"> </span><span class="n">iterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientMessage</span><span class="p">.</span><span class="na">frameIterator</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messageType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EVENT_ENTRY_MESSAGE_TYPE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">ClientMessage</span><span class="p">.</span><span class="na">Frame</span><span class="w"> </span><span class="n">initialFrame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iterator</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">eventType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_EVENT_TYPE_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeUUID</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_UUID_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfAffectedEntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">decodeInt</span><span class="p">(</span><span class="n">initialFrame</span><span class="p">.</span><span class="na">content</span><span class="p">,</span><span class="w"> </span><span class="n">EVENT_ENTRY_NUMBER_OF_AFFECTED_ENTRIES_FIELD_OFFSET</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">decodeNullable</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">decode</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">decodeNullable</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">decode</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">oldValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">decodeNullable</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">decode</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">mergingValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CodecUtil</span><span class="p">.</span><span class="na">decodeNullable</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span><span class="w"> </span><span class="n">DataCodec</span><span class="p">::</span><span class="n">decode</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">handleEntryEvent</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="n">mergingValue</span><span class="p">,</span><span class="w"> </span><span class="n">eventType</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">numberOfAffectedEntries</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">Logger</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="kd">super</span><span class="p">.</span><span class="na">getClass</span><span class="p">()).</span><span class="na">finest</span><span class="p">(</span><span class="s">&quot;Unknown message type received on event handler :&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">messageType</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">});</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Creating FEST frame fixture&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FrameFixture</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Show the frame to test at 100,100 (unavoidable)</span><span class="w"></span>
-<span class="w">    </span><span class="n">window</span><span class="p">.</span><span class="na">show</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;FEST setup complete&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow time for UI to render</span><span class="w"></span>
-<span class="w">    </span><span class="n">Uninterruptibles</span><span class="p">.</span><span class="na">sleepUninterruptibly</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * @param key Key of the entry event.</span>
+<span class="cm">         * @param value Value of the entry event.</span>
+<span class="cm">         * @param oldValue Old value of the entry event.</span>
+<span class="cm">         * @param mergingValue Incoming merging value of the entry event.</span>
+<span class="cm">         * @param eventType Type of the entry event. Possible values are</span>
+<span class="cm">         *                  ADDED(1)</span>
+<span class="cm">         *                  REMOVED(2)</span>
+<span class="cm">         *                  UPDATED(4)</span>
+<span class="cm">         *                  EVICTED(8)</span>
+<span class="cm">         *                  EXPIRED(16)</span>
+<span class="cm">         *                  EVICT_ALL(32)</span>
+<span class="cm">         *                  CLEAR_ALL(64)</span>
+<span class="cm">         *                  MERGED(128)</span>
+<span class="cm">         *                  INVALIDATION(256)</span>
+<span class="cm">         *                  LOADED(512)</span>
+<span class="cm">         * @param uuid UUID of the member that dispatches the event.</span>
+<span class="cm">         * @param numberOfAffectedEntries Number of entries affected by this event.</span>
+<span class="cm">         */</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">handleEntryEvent</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">hazelcast</span><span class="p">.</span><span class="na">internal</span><span class="p">.</span><span class="na">serialization</span><span class="p">.</span><span class="na">Data</span><span class="w"> </span><span class="n">mergingValue</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">eventType</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">UUID</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfAffectedEntries</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

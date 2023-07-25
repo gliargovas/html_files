@@ -272,8 +272,266 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">175</span>
 <span class="normal">176</span>
 <span class="normal">177</span>
-<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright 2019 SPF4J.</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Copyright (c) 2001-2017, Zoltan Farkas All Rights Reserved.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is free software; you can redistribute it and/or</span>
+<span class="cm"> * modify it under the terms of the GNU Lesser General Public</span>
+<span class="cm"> * License as published by the Free Software Foundation; either</span>
+<span class="cm"> * version 2.1 of the License, or (at your option) any later version.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This library is distributed in the hope that it will be useful,</span>
+<span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="cm"> * GNU General Public License for more details.</span>
+<span class="cm"> *</span>
+<span class="cm"> * You should have received a copy of the GNU Lesser General Public</span>
+<span class="cm"> * License along with this program; if not, write to the Free Software</span>
+<span class="cm"> * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Additionally licensed with:</span>
 <span class="cm"> *</span>
 <span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="cm"> * you may not use this file except in compliance with the License.</span>
@@ -287,168 +545,394 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * See the License for the specific language governing permissions and</span>
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.spf4j.avro.schema</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.spf4j.ui</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//CHECKSTYLE:OFF</span><span class="w"></span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.primitives.Ints</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.Dimension</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.UncheckedIOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Enumeration</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.BoxLayout</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.JFileChooser</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.JPanel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.tree.DefaultMutableTreeNode</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.tree.DefaultTreeModel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.tree.TreePath</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.jfree.chart.ChartPanel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.jfree.chart.JFreeChart</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.base.Pair</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.base.SuppressForbiden</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gnu.trove.set.hash.THashSet</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.Component</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.charset.StandardCharsets</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Instant</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.JTree</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.tree.DefaultTreeCellRenderer</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.avro.Schema</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.avro.generic.GenericDatumWriter</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.avro.csv.CsvEncoder</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.base.avro.AvroCloseableIterable</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.io.Csv</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.io.csv.CsvWriter</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.perf.TimeSeriesRecord</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.perf.impl.ms.tsdb.AvroMeasurementStoreReader</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.tsdb2.Charts2</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.tsdb2.avro.Observation</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
 <span class="cm"> *</span>
-<span class="cm"> * @author Zoltan Farkas</span>
+<span class="cm"> * @author zoly</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">SchemaDiff</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;FCBL_FIELD_COULD_BE_LOCAL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MStoreViewJInternalFrame</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JInternalFrame</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">enum</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_TYPES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_FIXED_SIZE</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_NAMES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_ENUM_VALUES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">SCHEMA_MISSING_LEFT</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">SCHEMA_MISSING_RIGHT</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">FIELD_MISSING_LEFT</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">FIELD_MISSING_RIGHT</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_LOGICAL_TYPES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_SCHEMA_PROPERTIES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERRENT_SCHEMA_DOC</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_FIELD_DEFAULTS</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERENT_FIELD_PROPERTIES</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">DIFFERRENT_FIELD_DOC</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AvroMeasurementStoreReader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Creates new form TSDBViewJInternalFrame</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressForbiden</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// false positive</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">MStoreViewJInternalFrame</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">tsDb</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">super</span><span class="p">(</span><span class="n">tsDb</span><span class="p">.</span><span class="na">getPath</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tsDb</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">setName</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">initComponents</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fileName</span><span class="p">.</span><span class="na">endsWith</span><span class="p">(</span><span class="s">&quot;.tabledef.avro&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AvroMeasurementStoreReader</span><span class="p">(</span><span class="n">tsDb</span><span class="p">.</span><span class="na">toPath</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Not a tabledef.avro file &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tsDb</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">Schema</span><span class="o">&gt;</span><span class="w"> </span><span class="n">measurements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getMeasurements</span><span class="p">((</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">startDateMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">AvroCloseableIterable</span><span class="o">&lt;</span><span class="n">Observation</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getObservations</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Observation</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">scan</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obs</span><span class="p">.</span><span class="na">getRelTimeStamp</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">startDateMillis</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">startDateMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ts</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultMutableTreeNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gNodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultMutableTreeNode</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Schema</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">measurements</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">groupName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getProp</span><span class="p">(</span><span class="n">TimeSeriesRecord</span><span class="p">.</span><span class="na">RAW_NAME</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pair</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">groupName</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pair</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultMutableTreeNode</span><span class="p">(</span><span class="n">info</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">root</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">groupName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pair</span><span class="p">.</span><span class="na">getFirst</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">gNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gNodes</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">groupName</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">gNode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">gNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultMutableTreeNode</span><span class="p">(</span><span class="n">groupName</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">gNodes</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">groupName</span><span class="p">,</span><span class="w"> </span><span class="n">gNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">root</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">gNode</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultMutableTreeNode</span><span class="p">(</span><span class="n">info</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">gNode</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">child</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">setModel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DefaultTreeModel</span><span class="p">(</span><span class="n">root</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">setCellRenderer</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TreeCellRenderer</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">startDate</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">startDateMillis</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="nf">getPath</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TreeCellRenderer</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">DefaultTreeCellRenderer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">Type</span><span class="w"> </span><span class="nf">getDiffType</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getLeft</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getRight</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getLeftField</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getRightField</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">SchemaDiff</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SchemaDiffImpl</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;ITC_INHERITANCE_TYPE_CHECKING&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">getTreeCellRendererComponent</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">JTree</span><span class="w"> </span><span class="n">tree</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">selected</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">expanded</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">leaf</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">hasFocus</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">DefaultMutableTreeNode</span><span class="p">)</span><span class="w"> </span><span class="n">node</span><span class="p">).</span><span class="na">getUserObject</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">setText</span><span class="p">((</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Schema</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">setText</span><span class="p">(((</span><span class="n">Schema</span><span class="p">)</span><span class="w"> </span><span class="n">value</span><span class="p">).</span><span class="na">getName</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Unsupported object type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">SchemaDiff</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SchemaFieldDiffImpl</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The</span>
+<span class="cm">   * content of this method is always regenerated by the Form Editor.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;unchecked&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initComponents</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">rightPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JPanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainSplitPannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSplitPane</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">jPanel2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JPanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">jScrollPane1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JScrollPane</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">measurementTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JTree</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">chartPannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JScrollPane</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JToolBar</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">plotButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JButton</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">exportButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JButton</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">aggregationMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JTextField</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">startDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="w"> </span><span class="n">rightPanelLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">(</span><span class="n">rightPanel</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">rightPanel</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="n">rightPanelLayout</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">rightPanelLayout</span><span class="p">.</span><span class="na">setHorizontalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">rightPanelLayout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">448</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">rightPanelLayout</span><span class="p">.</span><span class="na">setVerticalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">rightPanelLayout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">306</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">setClosable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">setMaximizable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">setResizable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mainSplitPannel</span><span class="p">.</span><span class="na">setDividerSize</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainSplitPannel</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Dimension</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">setAutoscrolls</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">jScrollPane1</span><span class="p">.</span><span class="na">setViewportView</span><span class="p">(</span><span class="n">measurementTree</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="w"> </span><span class="n">jPanel2Layout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">(</span><span class="n">jPanel2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">jPanel2</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="n">jPanel2Layout</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">jPanel2Layout</span><span class="p">.</span><span class="na">setHorizontalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">jPanel2Layout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">jScrollPane1</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">DEFAULT_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">213</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">jPanel2Layout</span><span class="p">.</span><span class="na">setVerticalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">jPanel2Layout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">jScrollPane1</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">DEFAULT_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">684</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mainSplitPannel</span><span class="p">.</span><span class="na">setLeftComponent</span><span class="p">(</span><span class="n">jPanel2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainSplitPannel</span><span class="p">.</span><span class="na">setRightComponent</span><span class="p">(</span><span class="n">chartPannel</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">setFloatable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">setRollover</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">plotButton</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="s">&quot;Plot&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">plotButton</span><span class="p">.</span><span class="na">setFocusable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">plotButton</span><span class="p">.</span><span class="na">setHorizontalTextPosition</span><span class="p">(</span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SwingConstants</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">plotButton</span><span class="p">.</span><span class="na">setVerticalTextPosition</span><span class="p">(</span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SwingConstants</span><span class="p">.</span><span class="na">BOTTOM</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">plotButton</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">plotButtonActionPerformed</span><span class="p">(</span><span class="n">evt</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">plotButton</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">exportButton</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="s">&quot;Export&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">exportButton</span><span class="p">.</span><span class="na">setFocusable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">exportButton</span><span class="p">.</span><span class="na">setHorizontalTextPosition</span><span class="p">(</span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SwingConstants</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">exportButton</span><span class="p">.</span><span class="na">setVerticalTextPosition</span><span class="p">(</span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SwingConstants</span><span class="p">.</span><span class="na">BOTTOM</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">exportButton</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">exportButtonActionPerformed</span><span class="p">(</span><span class="n">evt</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">exportButton</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">aggregationMillis</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">aggregationMillis</span><span class="p">.</span><span class="na">setMinimumSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Dimension</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">aggregationMillis</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Dimension</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">aggregationMillis</span><span class="p">.</span><span class="na">addActionListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionListener</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">actionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">aggregationMillisActionPerformed</span><span class="p">(</span><span class="n">evt</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">aggregationMillis</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">startDate</span><span class="p">.</span><span class="na">setModel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SpinnerDateModel</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">startDate</span><span class="p">.</span><span class="na">setEditor</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="p">.</span><span class="na">DateEditor</span><span class="p">(</span><span class="n">startDate</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;yyyy-MM-dd HH:mm:ss&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">startDate</span><span class="p">.</span><span class="na">setMinimumSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">Dimension</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">28</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">startDate</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// NOI18N</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">startDate</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">endDate</span><span class="p">.</span><span class="na">setModel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">SpinnerDateModel</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">endDate</span><span class="p">.</span><span class="na">setEditor</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="p">.</span><span class="na">DateEditor</span><span class="p">(</span><span class="n">endDate</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;yyyy-MM-dd HH:mm:ss&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">jToolBar1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">endDate</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="w"> </span><span class="n">layout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">(</span><span class="n">getContentPane</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">getContentPane</span><span class="p">().</span><span class="na">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">layout</span><span class="p">.</span><span class="na">setHorizontalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">layout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">createSequentialGroup</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">addContainerGap</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">createSequentialGroup</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">jToolBar1</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">PREFERRED_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">627</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">PREFERRED_SIZE</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">))</span><span class="w"></span>
+<span class="w">          </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">mainSplitPannel</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">DEFAULT_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">695</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">addContainerGap</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">layout</span><span class="p">.</span><span class="na">setVerticalGroup</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">layout</span><span class="p">.</span><span class="na">createParallelGroup</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">LEADING</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">layout</span><span class="p">.</span><span class="na">createSequentialGroup</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">jToolBar1</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">PREFERRED_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">DEFAULT_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">PREFERRED_SIZE</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">addPreferredGap</span><span class="p">(</span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">LayoutStyle</span><span class="p">.</span><span class="na">RELATED</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">mainSplitPannel</span><span class="p">,</span><span class="w"> </span><span class="n">org</span><span class="p">.</span><span class="na">jdesktop</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">GroupLayout</span><span class="p">.</span><span class="na">DEFAULT_SIZE</span><span class="p">,</span><span class="w"> </span><span class="mi">688</span><span class="p">,</span><span class="w"> </span><span class="n">Short</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="na">addContainerGap</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">pack</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="c1">// &lt;/editor-fold&gt;//GEN-END:initComponents</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UP_UNUSED_PARAMETER&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">plotButtonActionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="c1">//GEN-FIRST:event_plotButtonActionPerformed</span><span class="w"></span>
+<span class="w">      </span><span class="n">TreePath</span><span class="o">[]</span><span class="w"> </span><span class="n">selectionPaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">getSelectionPaths</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">JPanel</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JPanel</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">content</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BoxLayout</span><span class="p">(</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="n">BoxLayout</span><span class="p">.</span><span class="na">Y_AXIS</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">chartPannel</span><span class="p">.</span><span class="na">setViewportView</span><span class="p">(</span><span class="n">content</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Schema</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selectedTables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSelectedTables</span><span class="p">(</span><span class="n">selectionPaths</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Schema</span><span class="w"> </span><span class="n">tableName</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">selectedTables</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">addChartToPanel</span><span class="p">(</span><span class="n">tableName</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UncheckedIOException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">chartPannel</span><span class="p">.</span><span class="na">repaint</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="c1">//GEN-LAST:event_plotButtonActionPerformed</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UP_UNUSED_PARAMETER&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">exportButtonActionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="c1">//GEN-FIRST:event_exportButtonActionPerformed</span><span class="w"></span>
+<span class="w">      </span><span class="n">TreePath</span><span class="o">[]</span><span class="w"> </span><span class="n">selectionPaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurementTree</span><span class="p">.</span><span class="na">getSelectionPaths</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Schema</span><span class="o">&gt;</span><span class="w"> </span><span class="n">selectedTables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSelectedTables</span><span class="p">(</span><span class="n">selectionPaths</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">selectedTables</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">JFileChooser</span><span class="w"> </span><span class="n">chooser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JFileChooser</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">chooser</span><span class="p">.</span><span class="na">setDialogType</span><span class="p">(</span><span class="n">JFileChooser</span><span class="p">.</span><span class="na">SAVE_DIALOG</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">returnVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chooser</span><span class="p">.</span><span class="na">showOpenDialog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">returnVal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">JFileChooser</span><span class="p">.</span><span class="na">APPROVE_OPTION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chooser</span><span class="p">.</span><span class="na">getSelectedFile</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Schema</span><span class="w"> </span><span class="n">metric</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">selectedTables</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">AvroCloseableIterable</span><span class="o">&lt;</span><span class="n">TimeSeriesRecord</span><span class="o">&gt;</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getMeasurementData</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">Instant</span><span class="p">.</span><span class="na">EPOCH</span><span class="p">,</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">CsvWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Csv</span><span class="p">.</span><span class="na">CSV</span><span class="p">.</span><span class="na">writer</span><span class="p">(</span><span class="n">Files</span><span class="p">.</span><span class="na">newBufferedWriter</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="na">toPath</span><span class="p">(),</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">));</span><span class="w"></span>
+<span class="w">              </span><span class="n">CsvEncoder</span><span class="w"> </span><span class="n">encoder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CsvEncoder</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">createArray</span><span class="p">(</span><span class="n">metric</span><span class="p">));</span><span class="w"></span>
+<span class="w">              </span><span class="n">encoder</span><span class="p">.</span><span class="na">writeHeader</span><span class="p">();</span><span class="w"></span>
+<span class="w">              </span><span class="n">GenericDatumWriter</span><span class="w"> </span><span class="n">dw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GenericDatumWriter</span><span class="p">(</span><span class="n">metric</span><span class="p">);</span><span class="w"></span>
+<span class="w">              </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">TimeSeriesRecord</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">obs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">dw</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="n">encoder</span><span class="p">);</span><span class="w"></span>
+<span class="w">              </span><span class="p">}</span><span class="w"></span>
+<span class="w">              </span><span class="n">encoder</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UncheckedIOException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="c1">//GEN-LAST:event_exportButtonActionPerformed</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;UP_UNUSED_PARAMETER&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">aggregationMillisActionPerformed</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">awt</span><span class="p">.</span><span class="na">event</span><span class="p">.</span><span class="na">ActionEvent</span><span class="w"> </span><span class="n">evt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="c1">//GEN-FIRST:event_aggregationMillisActionPerformed</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// TODO add your handling code here:</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="c1">//GEN-LAST:event_aggregationMillisActionPerformed</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Variables declaration - do not modify//GEN-BEGIN:variables</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JTextField</span><span class="w"> </span><span class="n">aggregationMillis</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JScrollPane</span><span class="w"> </span><span class="n">chartPannel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="w"> </span><span class="n">endDate</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JButton</span><span class="w"> </span><span class="n">exportButton</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JPanel</span><span class="w"> </span><span class="n">jPanel2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JScrollPane</span><span class="w"> </span><span class="n">jScrollPane1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JToolBar</span><span class="w"> </span><span class="n">jToolBar1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSplitPane</span><span class="w"> </span><span class="n">mainSplitPannel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JTree</span><span class="w"> </span><span class="n">measurementTree</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JButton</span><span class="w"> </span><span class="n">plotButton</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JPanel</span><span class="w"> </span><span class="n">rightPanel</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">javax</span><span class="p">.</span><span class="na">swing</span><span class="p">.</span><span class="na">JSpinner</span><span class="w"> </span><span class="n">startDate</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// End of variables declaration//GEN-END:variables</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;CLI_CONSTANT_LIST_INDEX&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Schema</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSelectedTables</span><span class="p">(</span><span class="nd">@Nullable</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">TreePath</span><span class="o">[]</span><span class="w"> </span><span class="n">selectionPaths</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">selectionPaths</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">EMPTY_SET</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Schema</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">THashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">TreePath</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">selectionPaths</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">pathArr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="na">getPath</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pathArr</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">colNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DefaultMutableTreeNode</span><span class="p">)</span><span class="w"> </span><span class="n">pathArr</span><span class="o">[</span><span class="n">pathArr</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colNode</span><span class="p">.</span><span class="na">getDepth</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">((</span><span class="n">Schema</span><span class="p">)</span><span class="w"> </span><span class="n">colNode</span><span class="p">.</span><span class="na">getUserObject</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Enumeration</span><span class="w"> </span><span class="n">childEnum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colNode</span><span class="p">.</span><span class="na">children</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">childEnum</span><span class="p">.</span><span class="na">hasMoreElements</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">DefaultMutableTreeNode</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">DefaultMutableTreeNode</span><span class="p">)</span><span class="w"> </span><span class="n">childEnum</span><span class="p">.</span><span class="na">nextElement</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="n">result</span><span class="p">.</span><span class="na">add</span><span class="p">((</span><span class="n">Schema</span><span class="p">)</span><span class="w"> </span><span class="n">child</span><span class="p">.</span><span class="na">getUserObject</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SchemaDiffImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SchemaDiff</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">SchemaDiffImpl</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addChartToPanel</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JPanel</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">Date</span><span class="p">)</span><span class="w"> </span><span class="n">startDate</span><span class="p">.</span><span class="na">getValue</span><span class="p">()).</span><span class="na">getTime</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">endTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">Date</span><span class="p">)</span><span class="w"> </span><span class="n">endDate</span><span class="p">.</span><span class="na">getValue</span><span class="p">()).</span><span class="na">getTime</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">aggMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Ints</span><span class="p">.</span><span class="na">tryParse</span><span class="p">(</span><span class="n">aggregationMillis</span><span class="p">.</span><span class="na">getText</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aggMillis</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">aggMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPath</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Charts2</span><span class="p">.</span><span class="na">canGenerateHeatChart</span><span class="p">(</span><span class="n">table</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">JFreeChart</span><span class="w"> </span><span class="n">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charts2</span><span class="p">.</span><span class="na">createHeatJFreeChart</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">startTime</span><span class="p">,</span><span class="w"> </span><span class="n">endTime</span><span class="p">,</span><span class="w"> </span><span class="n">aggMillis</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">ChartPanel</span><span class="w"> </span><span class="n">pannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChartPanel</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setDomainZoomable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setMouseZoomable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setRangeZoomable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setZoomAroundAnchor</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setZoomInFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setZoomOutFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">content</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pannel</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Charts2</span><span class="p">.</span><span class="na">canGenerateMinMaxAvgCount</span><span class="p">(</span><span class="n">table</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">JFreeChart</span><span class="w"> </span><span class="n">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charts2</span><span class="p">.</span><span class="na">createMinMaxAvgJFreeChart</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">startTime</span><span class="p">,</span><span class="w"> </span><span class="n">endTime</span><span class="p">,</span><span class="w"> </span><span class="n">aggMillis</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">ChartPanel</span><span class="w"> </span><span class="n">pannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChartPanel</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">content</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pannel</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="nf">getDiffType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getLeft</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Charts2</span><span class="p">.</span><span class="na">canGenerateCount</span><span class="p">(</span><span class="n">table</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">JFreeChart</span><span class="w"> </span><span class="n">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charts2</span><span class="p">.</span><span class="na">createCountJFreeChart</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="n">startTime</span><span class="p">,</span><span class="w"> </span><span class="n">endTime</span><span class="p">,</span><span class="w"> </span><span class="n">aggMillis</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">ChartPanel</span><span class="w"> </span><span class="n">pannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChartPanel</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">pannel</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">content</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pannel</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">JFreeChart</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createJFreeCharts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Charts2</span><span class="p">.</span><span class="na">createJFreeCharts</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="n">startTime</span><span class="p">,</span><span class="w"> </span><span class="n">endTime</span><span class="p">,</span><span class="w"> </span><span class="n">aggMillis</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">JFreeChart</span><span class="w"> </span><span class="n">chart</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">createJFreeCharts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">ChartPanel</span><span class="w"> </span><span class="n">pannel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ChartPanel</span><span class="p">(</span><span class="n">chart</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">pannel</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="p">));</span><span class="w"></span>
+<span class="w">        </span><span class="n">content</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">pannel</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getRight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getLeftField</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getRightField</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;SchemaDiff{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;path=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, type=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">type</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w">  </span><span class="s">&quot;, left=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">left</span><span class="p">.</span><span class="na">getFullName</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;, right=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="p">.</span><span class="na">getFullName</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-
-
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SchemaFieldDiffImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">SchemaDiff</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">SchemaFieldDiffImpl</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPath</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">path</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="nf">getDiffType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getLeft</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="w"> </span><span class="nf">getRight</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getLeftField</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">left</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Schema</span><span class="p">.</span><span class="na">Field</span><span class="w"> </span><span class="nf">getRightField</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;SchemaFieldDiff{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;path=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, type=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">type</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;, left=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;, right=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>
