@@ -95,288 +95,74 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="cm">&lt;!--</span>
-<span class="cm">~   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm">~   you may not use this file except in compliance with the License.</span>
-<span class="cm">~   You may obtain a copy of the License at</span>
-<span class="cm">~</span>
-<span class="cm">~   http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm">~</span>
-<span class="cm">~   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">~   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">~   See the License for the specific language governing permissions and</span>
-<span class="cm">~   limitations under the License.</span>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
+<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm">   this work for additional information regarding copyright ownership.</span>
+<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm">   the License.  You may obtain a copy of the License at</span>
+
+<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
+
+<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">   See the License for the specific language governing permissions and</span>
+<span class="cm">   limitations under the License.</span>
 <span class="cm">--&gt;</span>
+
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;mesos.internal.Messages&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Archive$Framework&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Archive&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticateMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticateMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationCompletedMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationCompletedMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationErrorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationErrorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationFailedMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationFailedMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationMechanismsMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationMechanismsMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStartMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStartMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStepMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStepMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$DeactivateFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorToFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExitedExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkErrorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkErrorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkExpiredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkToExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$HeartbeatMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$KillTaskMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$LaunchTasksMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$LostSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdReadyMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdReadyMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdUpdateResourcesMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReconcileTasksMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReconnectExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterProjdMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterProjdMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RescindResourceOfferMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ResourceOffersMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ResourceRequestMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReviveOffersMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RoleInfo$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RoleInfo&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RunTaskMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownExecutorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SlaveRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SlaveReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdate&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateAcknowledgementMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateRecord&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerRequest$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerRequest&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerResponse$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerResponse&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Task&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$TaskHealthStatus&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UnregisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UnregisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UpdateFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Snapshot&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Snapshot&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Diff&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules$Library&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules$Library$Module&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PingSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PingSlaveMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PongSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PongSlaveMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+
+ <span class="cm">&lt;!-- Ignore some irrelevant serialization warnings --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.SecondarySort$FirstGroupingComparator&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.SecondarySort$IntPair$Comparator&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+
+ <span class="cm">&lt;!-- Ignore the irrelevant resource cleanup warnings--&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.DBCountPageView&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;verify&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+ <span class="cm">&lt;!-- Ignore the irrelevant closure warnings--&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.dancing.Pentomino$Piece&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Ignore the irrelevant package protection warnings--&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.dancing.Pentomino&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;fourRotations&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;oneRotation&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;twoRotations&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+   <span class="cm">&lt;!-- Ignore the irrelevant right shift warnings, as only positive integers are given as input--&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.Unsigned16&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getHexDigit&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.TeraInputFormat&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

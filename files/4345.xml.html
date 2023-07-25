@@ -96,571 +96,70 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
 
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.</span>
 
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
+<span class="cm">    Copyright (c) 2012-2013 Oracle and/or its affiliates. All rights reserved.</span>
+
+<span class="cm">    The contents of this file are subject to the terms of either the GNU</span>
+<span class="cm">    General Public License Version 2 only (&quot;GPL&quot;) or the Common Development</span>
+<span class="cm">    and Distribution License(&quot;CDDL&quot;) (collectively, the &quot;License&quot;).  You</span>
+<span class="cm">    may not use this file except in compliance with the License.  You can</span>
+<span class="cm">    obtain a copy of the License at</span>
+<span class="cm">    https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html</span>
+<span class="cm">    or packager/legal/LICENSE.txt.  See the License for the specific</span>
+<span class="cm">    language governing permissions and limitations under the License.</span>
+
+<span class="cm">    When distributing the software, include this License Header Notice in each</span>
+<span class="cm">    file and include the License file at packager/legal/LICENSE.txt.</span>
+
+<span class="cm">    GPL Classpath Exception:</span>
+<span class="cm">    Oracle designates this particular file as subject to the &quot;Classpath&quot;</span>
+<span class="cm">    exception as provided by Oracle in the GPL Version 2 section of the License</span>
+<span class="cm">    file that accompanied this code.</span>
+
+<span class="cm">    Modifications:</span>
+<span class="cm">    If applicable, add the following below the License Header, with the fields</span>
+<span class="cm">    enclosed by brackets [] replaced by your own identifying information:</span>
+<span class="cm">    &quot;Portions Copyright [year] [name of copyright owner]&quot;</span>
+
+<span class="cm">    Contributor(s):</span>
+<span class="cm">    If you wish your version of this file to be governed by only the CDDL or</span>
+<span class="cm">    only the GPL Version 2, indicate your decision by adding &quot;[Contributor]</span>
+<span class="cm">    elects to include this software in this distribution under the [CDDL or GPL</span>
+<span class="cm">    Version 2] license.&quot;  If you don&#39;t indicate a single choice of license, a</span>
+<span class="cm">    recipient has the option to distribute your version of this file under</span>
+<span class="cm">    either the CDDL, the GPL Version 2 or to extend the choice of license to</span>
+<span class="cm">    its licensees as provided above.  However, if you add GPL Version 2 code</span>
+<span class="cm">    and therefore, elected the GPL Version 2 license, then the option applies</span>
+<span class="cm">    only if the new code is made subject to such option by the copyright</span>
+<span class="cm">    holder.</span>
+
 <span class="cm">--&gt;</span>
 
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-  <span class="cm">&lt;!-- Ignore PB Generated Code --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.proto&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.ipc\.RpcProtos.*&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.service.AbstractService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;JLM_JSR166_UTILCONCURRENT_MONITORENTER&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore unchecked Event casts --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.ContainerManagerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.application\.ApplicationImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.container\.ContainerImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.localizer\.LocalizedResource.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.localizer\.ResourceLocalizationService.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.monitor.ContainersMonitorImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmapp\.RMAppImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmapp\.attempt\.RMAppAttemptImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.rmapp.attempt.RMAppAttemptMetrics&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getLocalityStatistics&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.rmapp.attempt.RMAppAttemptMetrics&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;incNumAllocatedContainers&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.rmapp.RMAppImpl$AppRejectedTransition&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmcontainer\.RMContainerImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmnode\.RMNodeImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.RMAppManager.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.scheduler\.capacity\.CapacityScheduler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.scheduler\.fifo\.FifoScheduler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.logaggregation\.LogAggregationService.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.loghandler\.NonAggregatingLogHandler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainersLauncher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Object cast is based on the event type --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.timelineservice.NMTimelinePublisher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;publishApplicationEvent&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.timelineservice.NMTimelinePublisher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;publishLocalizationEvent&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.metrics.TimelineServiceV2Publisher$TimelineV2EventHandler&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore intentional switch fallthroughs --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.container.ContainerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;finished&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ContainerLocalizer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;localizeFiles&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore some irrelevant serialization warnings --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ResourceRetentionSet$LRUComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.exceptions.impl.pb.YarnRemoteExceptionPBImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;builder&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.util\.BuilderUtils.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.resource.Priority$Comparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.policy.FifoComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.policy.FairOrderingPolicy$FairComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">        These OS-dependent classes reference OS-specific files.</span>
+<span class="cm">    --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.policy.CompoundComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.policy.PriorityComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.policy.RecoveryComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.PartitionedQueueComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Ignore some irrelevant class name warning --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.api.records.SerializedException&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_CLASS_NOT_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.admin.servermgmt.services.LinuxService&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.admin.servermgmt.services.SMFService&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!-- Inconsistent sync warning - only start() is synchronized--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.logaggregation.LogAggregationService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.AllocationFileLoaderService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;allocFile&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - minimumAllocation is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.AbstractYarnScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;minimumAllocation&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FSSchedulerNode&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;reserveResource&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span> 
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - reinitialize read from other queue does not need sync--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.LeafQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteMaxCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;acls&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxApplications&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxApplicationsPerUser&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maximumCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;state&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userLimit&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userLimitFactor&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxAMResourcePerQueuePercent&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastClusterResource&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingOrderingPolicy&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingOPForRecoveredApps&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.ParentQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteMaxCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;acls&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maximumCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;state&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.AbstractCSQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteMaxCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;acls&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maximumCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;state&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;labelManager&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;defaultLabelExpression&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;accessibleLabels&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteNodeLabelCapacities&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reservationsContinueLooking&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacityByNodeLabels&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;authorizer&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;parent&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - scheduleAsynchronously is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;scheduleAsynchronously&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - updateInterval is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;updateInterval&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - callDurationMetrics is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;fsOpDurations&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Inconsistent sync warning - numRetries is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numRetries&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.recovery.RMStateStore&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;resourceManager&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.DelegationTokenRenewer&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;renewalTimer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;IS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.client.NMClientImpl$NMCommunicator&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;containerManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Don&#39;t care if putIfAbsent value is ignored --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.factories.impl.pb&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_OF_PUTIFABSENT_IGNORED&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Intended System.exit calls --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.webapp.Dispatcher$1&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.webapp.WebApps$Builder&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.DelegationTokenRenewer$DelegationTokenCancelThread&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.YarnUncaughtExceptionHandler&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.event.AsyncDispatcher$2&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- AsyncDispatcher will kill the process if there is an error dispatching --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.event.AsyncDispatcher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;dispatch&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.event.EventDispatcher$EventProcessor&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.NodeManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;initAndStartNodeManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
- 
-  <span class="cm">&lt;!-- Ignore heartbeat exception when killing localizer --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ContainerLocalizer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;localizeFiles&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore EI_EXPOSE_REP in PolicyProviders --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.authorize.RMPolicyProvider&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.security.authorize.NMPolicyProvider&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-
-  <span class="cm">&lt;!-- Ignore EI_EXPOSE_REP2 in Log services --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.logaggregation.AggregatedLogFormat$LogValue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.logaggregation.AppLogAggregatorImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-   <span class="cm">&lt;!-- /proc/mounts is always in the same place --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.util.CgroupsLCEResourcesHandler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;parseMtab&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- rmClient can be ignored as only code blocks outside of rpc calls need to be synchronized --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.client.AMRMClientImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;rmClient&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Null pointer exception needs to be ignored here as this is never going to occur. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.LocalResourcesTrackerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;decrementFileCountForLocalCacheDirectory&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Null pointer exception needs to be ignored here as this is never going to occur. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.LocalResourcesTrackerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getPathForLocalization&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- This type cast problem will never occur. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.LocalResourcesTrackerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore SerializedException does not extend Exception --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.api.records.SerializedException&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_CLASS_NOT_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Multithreaded correctness warnings need to be ignored here as this is for creating the singleton.--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.authorize.RMPolicyProvider&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DC_DOUBLECHECK&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- ApplicationClassLoader is deprecated and moved to hadoop-common; ignore</span>
-<span class="cm">       warning on the identical name as it should be removed later --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.util.ApplicationClassLoader&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-   <span class="cm">&lt;!-- It is only changed on re-initialization the warnings are for access from a test function. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.LeafQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reservationsContinueLooking&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.ParentQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reservationsContinueLooking&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!--</span>
-<span class="cm">  This code is meant to deserialize this way...subclasses of will need to</span>
-<span class="cm">  instantiate their own JsonSerDeser instances if they want to deserialize.</span>
-<span class="cm">  --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.registry.client.binding.JsonSerDeser&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UI_INHERITANCE_UNSAFE_GETRESOURCE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore the false alarms on DM_DEFAULT_ENCODING (encoding already set) --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.logaggregation.AggregatedLogFormat$LogReader&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore EI_EXPOSE_REP2 in timeline service --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.timeline.util.LeveldbUtils$KeyParser&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore unrelated RV_RETURN_VALUE_IGNORED_BAD_PRACTICE warnings. No need to wait for result from executor service --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.launcher.ContainersLauncher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.sharedcache.SharedCacheUploadService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.SchedulerApplicationAttempt&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;queue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;allocConf&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.SchedulerNode&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numContainers&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.AbstractCSQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numContainers&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.ParentQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numApplications&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.AbstractYarnScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverContainersOnNode&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.AbstractYarnScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;rmContext&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;applications&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;activitiesManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Ignore SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING warnings for Timeline Phoenix storage. --&gt;</span>
-  <span class="cm">&lt;!-- Since we&#39;re using dynamic columns, we have to generate SQL statements dynamically --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.timelineservice.storage.PhoenixOfflineAggregationWriterImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;storeEntityVariableLengthFields&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;writeAggregatedEntity&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-  <span class="cm">&lt;!-- Following fields are used in ErrorsAndWarningsBlock, which is not a part of analysis of findbugs --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.util.Log4jWarningErrorMetricsAppender$Element&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;count&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;timestampSeconds&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.api.records.ResourceRequest&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.api.records.impl.pb&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.webapp.dao.ActivityNodeInfo&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;allocationState&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;diagnostic&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;requestPriority&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;appPriority&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">        These uses of Logger are for CLI commands and so don&#39;t need</span>
+<span class="cm">        LogMessageInfo annotations.</span>
+<span class="cm">    --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.admin.servermgmt.cli.MonitorTask&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.admin.servermgmt.cli.StartServerHelper&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;GF_MISSING_LOGMESSAGE_INFO_ANNOTATION&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

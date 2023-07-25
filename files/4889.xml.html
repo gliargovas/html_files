@@ -95,500 +95,204 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!-- This file specifies a findbugs filter for excluding reports that</span>
-<span class="cm">     should not be considered errors.</span>
-
-<span class="cm">     The format of this file is documented at:</span>
-
-<span class="cm">       http://findbugs.sourceforge.net/manual/filter.html</span>
-
-<span class="cm">     When possible, please specify the full names of the bug codes,</span>
-<span class="cm">     using the pattern attribute, to make it clearer what reports are</span>
-<span class="cm">     being suppressed.  You can find a listing of codes at:</span>
-
-<span class="cm">       http://findbugs.sourceforge.net/bugDescriptions.html</span>
-<span class="cm">  --&gt;</span>
-
-<span class="nt">&lt;FindBugsFilter&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.kernel --&gt;</span>
-
-  <span class="cm">&lt;!-- Currently unused fields. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.IdentityCoordinatorImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;authenticatorSet&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- We&#39;re not doing anything for i18n --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.Kernel&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;&amp;lt;init&amp;gt;&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_CONVERT_CASE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.Kernel$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-  <span class="cm">&lt;!-- We call System exit if a shutdown takes too long. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.Kernel$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-     
-  <span class="cm">&lt;!-- AccessedObjectsDetail.getConflictingId is documented to return</span>
-<span class="cm">       null --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.LockingAccessCoordinator$LockerImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getConflictingId&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Return value can be ignored, since it always true. --&gt;</span>
-  <span class="cm">&lt;!-- Findbugs 1.2.1 lists this as RV_RETURN_VALUE_IGNORED, 1.3.0</span>
-<span class="cm">       has it as RV_RETURN_VALUE_IGNORED_BAD_PRACTICE --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.TransactionSchedulerImpl$TaskQueueImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.TransactionSchedulerImpl$TaskQueueImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Return value is intentionally being thrown out. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.TrackingAccessCoordinator&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;reportDetail&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.TrackingAccessCoordinator&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;reportDetail&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.kernel.schedule --&gt;</span>
-
-  <span class="cm">&lt;!-- Currently unused fields. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.schedule.WindowSchedulerQueue$QueueUser&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastScheduled&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Synchronization is OK.  Task reads/writes are protected by the cancelled </span>
-<span class="cm">       field and synchronization on the handle itself. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.kernel.schedule.RecurringTaskHandleImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;task&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.nio --&gt;</span>
-
-  <span class="cm">&lt;!-- It is OK to pass null to FutureTask.set to mark the future as</span>
-<span class="cm">       done; the parameter is not dereferenced --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.nio.DelegatingCompletionHandler&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;completed&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;start&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.profile --&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.profile.ProfileCollectorImpl$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.protocol.simple --&gt;</span>
-
-  <span class="cm">&lt;!-- Dead but overwritten parameter. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.protocol.simple.SimpleSgsProtocolImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;loginFailure&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Parameter</span> <span class="na">name=</span><span class="s">&quot;reason&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.protocol.simple.SimpleSgsRelocationProtocolImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;relocateFailure&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Parameter</span> <span class="na">name=</span><span class="s">&quot;reason&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IP_PARAMETER_IS_DEAD_BUT_OVERWRITTEN&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.data --&gt;</span>
-
-  <span class="cm">&lt;!-- OK if version field is not currently being read, it should still</span>
-<span class="cm">       be an instance field. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.DataServiceHeader&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;minorVersion&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SS_SHOULD_BE_STATIC&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth making an inner class static. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.DataServiceImpl$DelegatingScheduler$Handle&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_NEEDS_THIS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Intentionally falling through switch cases. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.ManagedReferenceImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;flush&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;removeObject&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Suppress a complaint about an unchecked cast that seems to be</span>
-<span class="cm">       caused by generic types --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.DataServiceImpl$ContextMap&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;checkContext&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.data.store --&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.DataStoreImpl$BasicScheduler$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Packages com.sun.sgs.impl.service.data.store.{bdb,je} --&gt;</span>
-
-  <span class="cm">&lt;!-- Cursor methods that are supposed to return null. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.bdb.BdbCursor&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.je.JeCursor&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getKey&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getValue&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Database methods that are supposed to return null. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.bdb.BdbDatabase&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.je.JeDatabase&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;get&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Testing methods to call via reflection --&gt;</span>  
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.bdb.BdbEnvironment&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.je.JeEnvironment&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getLockTimeoutMicros&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UPM_UNCALLED_PRIVATE_METHOD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- JeTransaction.SimpleXid.getBranchQualifier can return null. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.db.je.JeTransaction$SimpleXid&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getBranchQualifier&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.data.store.net --&gt;</span>
-
-  <span class="cm">&lt;!-- OK to ignore exceptions for optional socket settings. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.net.DataStoreClientRemote&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.net.DataStoreServerRemote$Handler&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setSocketOptions&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to catch reflection bugs with an Exception catch-all. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.data.store.net.DataStoreProtocol&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;checkResult&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.channel --&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$CloseEvent$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$CloseEvent$2&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$EventQueue$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$LeaveAllEvent$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$SendEvent$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$3&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$4&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$5&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$ChannelServerImpl$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$ChannelServiceRecoveryListener$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to declare serializable field as non-serializable interface. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServerWrapper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;server&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$ReassignCoordinatorsTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;channelIter&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$RemoveFailedNodeFromLocalChannelsTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;iter&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Thread is not created with a default empty run method. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$TaskHandlerThread&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_USELESS_THREAD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to ignore return value. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$Coordinator&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;removeExpiredMembershipEvents&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;cacheMembershipEvent&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to ignore some exceptions --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$NotifyTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;removeNodeIdFromChannel&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelImpl$CloseNotifyTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl$ChannelLeaveTask&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;cleanupIfNoLocalChannelMembership&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelWrapper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toString&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK that wait is not in a loop, because the operation&#39;s timeout</span>
-<span class="cm">   expires if the membership is not collected in a timely fashion. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.channel.ChannelServiceImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;collectChannelMembership&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;WA_NOT_IN_LOOP&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.session --&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionHandler$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionHandler$7&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionHandler$LoginTask$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionServiceImpl$5&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionServiceImpl$ClientSessionServiceRecoveryListener$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionServiceImpl$SessionServerImpl$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to declare serializable field as non-serializable interface. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;deliveries&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to declare serializable field as non-serializable interface. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionImpl$ListenerWrapper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;listener&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Thread is not created with a default empty run method. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionServiceImpl$FlushContextsThread&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_USELESS_THREAD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to ignore some exceptions. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionWrapper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toString&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- ClientSessionServiceImpl$CommitActions isn&#39;t serializable</span>
-<span class="cm">   so it doesn&#39;t need a serialVersionUid --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.session.ClientSessionServiceImpl$CommitActions&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_NO_SERIALVERSIONID&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.nodemap --&gt;</span>
-
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.nodemap.NodeMappingServerImpl$2&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.nodemap.NodeMappingServerImpl$3&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.nodemap.NodeMappingServerImpl$4&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.nodemap.affinity.dlpa --&gt;</span>
-  <span class="cm">&lt;!-- Not worth replacing an anonymous class with a static inner class. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.nodemap.affinity.dlpa.LabelPropagationServer$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.watchdog --&gt;</span>
-
-  <span class="cm">&lt;!-- Access to abortCause is safe due to checking current thread at beginning of method --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.transaction.TransactionImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;abortCause&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.service.watchdog --&gt;</span>
-
-  <span class="cm">&lt;!-- Thread is not created with a default empty run method. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.WatchdogServiceImpl$RenewThread&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.WatchdogServerImpl$NotifyClientsThread&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.WatchdogServerImpl$CheckExpirationThread&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_USELESS_THREAD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ok to use zero-length array to convert ConcurrentHashMap to array --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.WatchdogServerImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;chooseBackup&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ITA_INEFFICIENT_TO_ARRAY&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- OK to declare serializable field as non-serializable interface. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.NodeImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;client&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;primaryIds&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Currently unused fields. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.WatchdogServiceImpl$RecoveryCompletionHandler&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;listener&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Default value is ok for transient field --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.NodeImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;expiration&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Synchronization in setFailed and setHealth method is ok, nodeImpl</span>
-<span class="cm">       is retrieved from the DataService --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.service.watchdog.NodeImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;health&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;backupId&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;isAlive&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.util --&gt;</span>
-
-  <span class="cm">&lt;!-- BindingKeyedCollectionsImpl writes to static field in constructor --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.util.BindingKeyedCollectionsImpl&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;txnProxy&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- DataStreamUtil method ok to return null --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.util.DataStreamUtil&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;readBytes&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.impl.util.lock --&gt;</span>
-
-  <span class="cm">&lt;!-- LockManager.releaseLockInternal notifies the new owners, but </span>
-<span class="cm">       changing the owners list happened elsewhere --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.impl.util.lock.LockManager&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;releaseLockInternal&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NN_NAKED_NOTIFY&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-<span class="nt">&lt;/FindBugsFilter&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.ha.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.hdfs.server.namenode.FsImageProto.*&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.protocol&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
+<span class="cm">       is intentional to make a connection to be closed instantly. </span>
+<span class="cm">     --&gt;</span> 
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
+<span class="cm">       We have an input quoting filter that protects us.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- </span>
+<span class="cm">        core changes </span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">       getTmpInputStreams is pretty much like a stream constructor.</span>
+<span class="cm">       The newly created streams are not supposed to be closed in the constructor. So ignore</span>
+<span class="cm">       the OBL warning.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTmpInputStreams&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      ResponseProccessor is thread that is designed to catch RuntimeException.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      lastAppliedTxid is carefully unsynchronized in the BackupNode in a couple spots.</span>
+<span class="cm">      See the comments in BackupImage for justification.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImage&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastAppliedTxId&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      Findbugs doesn&#39;t realize that closing a FilterOutputStream pushes the close down to</span>
+<span class="cm">      wrapped streams, too.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImageFormat$Saver&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;save&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      the &#39;metrics&#39; member is sometimes used from synchronized blocks, sometimes not,</span>
+<span class="cm">      but it&#39;s only reset by test cases, so should be fine</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;metrics&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      This method isn&#39;t performance-critical and is much clearer to write as it&#39;s written.</span>
+<span class="cm">      --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BlockPoolManager&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doRefreshNamenodes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Don&#39;t complain about System.exit() being called from quit() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.MetaRecoveryContext&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;quit&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about recoverBlock equality check --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.DataNode&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverBlock&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- More complex cleanup logic confuses findbugs --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.server.Journal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persistPaxosData&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about LocalDatanodeInfo&#39;s anonymous class --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.BlockReaderLocal$LocalDatanodeInfo$1&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD_INNER_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Only one method increments numFailedVolumes and it is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsVolumeList&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numFailedVolumes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Access to pendingReceivedRequests is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BPServiceActor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;notifyNamenodeBlockImmediately&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingReceivedRequests&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+      <span class="cm">&lt;!-- Replace System.exit() call with ExitUtil.terminate() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.tools.JMXGet&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>    
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.ReplicaInfo&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setDirInternal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_STRING_CTOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.client.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK_EXCEPTION_PATH&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.client.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!-- Manually verified to be okay, we want to throw away the top bit here --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.CachedBlock&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getReplication&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.CacheDirective&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;insertInternal&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.blockmanagement.CacheReplicationMonitor&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSUtil&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;assertAllResultsEqual&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_LOAD_OF_KNOWN_NULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+ <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

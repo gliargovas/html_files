@@ -97,91 +97,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-          <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.google.gwt.core.client.GWTBridge&quot;</span> <span class="nt">/&gt;</span>
-          <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complain of unused field in class.</span>
-<span class="cm">      This is a GWT class and use to generate code</span>
-
-<span class="cm">      findbugs reason:</span>
-<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.RefreshActiveModel&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complain of unused field in class.</span>
-<span class="cm">      This is a GWT class and use to generate code</span>
-
-<span class="cm">      findbugs reason:</span>
-<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.SsoTokenChange&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complains about unused field(s) in this class.</span>
-<span class="cm">      This is a GWT class and used to generate code.</span>
-
-<span class="cm">      findbugs reason:</span>
-<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.AsyncOperationStarted&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complains about unused field(s) in this class.</span>
-<span class="cm">      This is a GWT class and used to generate code.</span>
-
-<span class="cm">      findbugs reason:</span>
-<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.AsyncOperationComplete&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complains about unused field(s) in this class.</span>
-<span class="cm">      This is a GWT class and used to generate code.</span>
-
-<span class="cm">      findbugs reason:</span>
-<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.EngineSessionRefreshed&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.AsyncQuery&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;converterCallback&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Supress inefficient &quot;new Boolean&quot; calls which are generated by GWT</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_BOOLEAN_CTOR&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complains that class is too big of analysis.</span>
-<span class="cm">      This class cannot be smaller since it should contain all the errors</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.AppErrors&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SKIPPED_CLASS_TOO_BIG&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

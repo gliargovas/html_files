@@ -95,18 +95,31 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cm">&lt;!--</span>
 
+<span class="cm">    Copyright (C) 2011 Everit Kft. (http://www.everit.org)</span>
+
+<span class="cm">    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm">    you may not use this file except in compliance with the License.</span>
+<span class="cm">    You may obtain a copy of the License at</span>
+
+<span class="cm">            http://www.apache.org/licenses/LICENSE-2.0</span>
+
+<span class="cm">    Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">    See the License for the specific language governing permissions and</span>
+<span class="cm">    limitations under the License.</span>
+
+<span class="cm">--&gt;</span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.github.susom.database.OptionsDefault&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;DMI,RV&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~org\.everit\.props\.ri\.schema\.qdsl.*&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Seems to be giving an incorrect error for this class about redundant null check --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.github.susom.database.When&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

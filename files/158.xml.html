@@ -95,46 +95,115 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+	<span class="cm">&lt;!-- antlr generated --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*\.antlr\.internal.*&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Lexer(\$.*)?&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~testdata\..*&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
 
-<span class="nt">&lt;FindBugsFilter&gt;</span>
+	<span class="cm">&lt;!-- seems to be a common move classes to another package --&gt;</span> 
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	<span class="cm">&lt;!-- &quot;==&quot; compare is desired - See https://bugs.eclipse.org/bugs/show_bug.cgi?id=225331 --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span>
+			<span class="na">name=</span><span class="s">&quot;org.eclipse.xtext.ui.editor.preferences.FixedScopedPreferenceStore&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setToDefault&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_STRINGS_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	<span class="cm">&lt;!-- &quot;==&quot; compare is desired --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span>
+			<span class="na">name=</span><span class="s">&quot;org.eclipse.xtext.impl.EnumLiteralDeclarationImpl&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getEnumLiteral&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES_USING_POINTER_EQUALITY&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	<span class="cm">&lt;!-- someArray.hashCode() is desired --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span>
+			<span class="na">name=</span><span class="s">&quot;org.eclipse.xtext.xbase.lib.ArrayExtensions&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_INVOKING_HASHCODE_ON_ARRAY&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	<span class="cm">&lt;!-- Deprecated --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.eclipse\.xtext\.generator\.MergeableManifes.*&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.eclipse.xtext.generator.ecore2xtext.FormatterFragment&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	<span class="cm">&lt;!-- Xtend generated: guava Objects.equal(x,null) should be a valid construct --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_NULL_ARG&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	<span class="cm">&lt;!-- API base line, can&#39;t workaround --&gt;</span>
+	<span class="nt">&lt;Match&gt;</span>
+		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.eclipse.xtext.util.ITextRegion&quot;</span> <span class="nt">/&gt;</span>
+		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	
+	
+	<span class="cm">&lt;!-- Some Examples:</span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class name=&quot;com.foobar.ClassNotToBeAnalyzed&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
 
-     <span class="nt">&lt;Match&gt;</span>
-         <span class="cm">&lt;!-- PMB_INSTANCE_BASED_THREAD_LOCAL cannot be suppresed with annotation for whatever reason --&gt;</span>
-        <span class="cm">&lt;!-- CD_CIRCULAR_DEPENDENCY is nuts in fb-contrib 6.6.2 --&gt;</span>
-        <span class="cm">&lt;!-- CRLF_INJECTION_LOGS this is irelevant, devs need to use good log appenders. --&gt;</span>
-        <span class="cm">&lt;!-- RFI_SET_ACCESSIBLE ... JDK 10 suposedly will drop this functionality.... will re-enable when moving to JDK 9 --&gt;</span>
-        <span class="cm">&lt;!-- FII_USE_FUNCTION_IDENTITY has a lot of false positives that are fixed in next fb-contrib --&gt;</span>
-        <span class="cm">&lt;!-- LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS is a valid use case with my prefered backends --&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS,FII_USE_FUNCTION_IDENTITY,RFI_SET_ACCESSIBLE,CRLF_INJECTION_LOGS,BL_BURYING_LOGIC,CD_CIRCULAR_DEPENDENCY,EXS_EXCEPTION_SOFTENING_HAS_CHECKED,UVA_USE_VAR_ARGS,URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD,MOM_MISLEADING_OVERLOAD_MODEL,EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS,PMB_INSTANCE_BASED_THREAD_LOCAL,OPM_OVERLY_PERMISSIVE_METHOD,IMC_IMMATURE_CLASS_NO_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class name=&quot;com.foobar.ClassWithSomeBugsMatched&quot; /&gt;</span>
+<span class="cm">		&lt;Bug code=&quot;DE,UrF,SIC&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
 
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;SECURITY&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+<span class="cm">	 Match all XYZ violations.</span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Bug code=&quot;XYZ&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
 
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Token.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+<span class="cm">	  Match all doublecheck violations in these methods of &quot;AnotherClass&quot;.  </span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class name=&quot;com.foobar.AnotherClass&quot; /&gt;</span>
+<span class="cm">		&lt;Or&gt;</span>
+<span class="cm">			&lt;Method name=&quot;nonOverloadedMethod&quot; /&gt;</span>
+<span class="cm">			&lt;Method name=&quot;frob&quot; params=&quot;int,java.lang.String&quot; returns=&quot;void&quot; /&gt;</span>
+<span class="cm">			&lt;Method name=&quot;blat&quot; params=&quot;&quot; returns=&quot;boolean&quot; /&gt;</span>
+<span class="cm">		&lt;/Or&gt;</span>
+<span class="cm">		&lt;Bug code=&quot;DC&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
 
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ZCompiler.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+<span class="cm">	  A method with a dead local store false positive (medium priority).  </span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class name=&quot;com.foobar.MyClass&quot; /&gt;</span>
+<span class="cm">		&lt;Method name=&quot;someMethod&quot; /&gt;</span>
+<span class="cm">		&lt;Bug pattern=&quot;DLS_DEAD_LOCAL_STORE&quot; /&gt;</span>
+<span class="cm">		&lt;Priority value=&quot;2&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
 
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ParseException([.].*)?&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*JavaCharStream([.].*)?&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CE_CLASS_ENVY,SEC_SIDE_EFFECT_CONSTRUCTOR,SIC_INNER_SHOULD_BE_STATIC_ANON,BC_UNCONFIRMED_CAST,PREDICTABLE_RANDOM&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
+<span class="cm">	All bugs in test classes, except for JUnit-specific bugs  </span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class name=&quot;~.*\.*Test&quot; /&gt;</span>
+<span class="cm">		&lt;Not&gt;</span>
+<span class="cm">			&lt;Bug code=&quot;IJU&quot; /&gt;</span>
+<span class="cm">		&lt;/Not&gt;</span>
+<span class="cm">	&lt;/Match&gt; --&gt;</span>
+	
+	<span class="cm">&lt;!-- </span>
+<span class="cm">	The following is not necessary when using findbugs 2.0.3</span>
+<span class="cm">	&lt;Match&gt;</span>
+<span class="cm">		&lt;Class</span>
+<span class="cm">			name=&quot;~.*\.impl\..*Impl&quot; /&gt;</span>
+<span class="cm">		&lt;Bug pattern=&quot;EC_UNRELATED_TYPES_USING_POINTER_EQUALITY&quot; /&gt;</span>
+<span class="cm">	&lt;/Match&gt;</span>
+<span class="cm">	 --&gt;</span>
 
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

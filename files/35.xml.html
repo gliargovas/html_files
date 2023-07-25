@@ -95,18 +95,52 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
 
+<span class="cm">    Copyright (c) 2011, salesforce.com, inc.</span>
+<span class="cm">    All rights reserved.</span>
+
+<span class="cm">    Redistribution and use in source and binary forms, with or without modification, are permitted provided</span>
+<span class="cm">    that the following conditions are met:</span>
+
+<span class="cm">       Redistributions of source code must retain the above copyright notice, this list of conditions and the</span>
+<span class="cm">       following disclaimer.</span>
+
+<span class="cm">       Redistributions in binary form must reproduce the above copyright notice, this list of conditions and</span>
+<span class="cm">       the following disclaimer in the documentation and/or other materials provided with the distribution.</span>
+
+<span class="cm">       Neither the name of salesforce.com, inc. nor the names of its contributors may be used to endorse or</span>
+<span class="cm">       promote products derived from this software without specific prior written permission.</span>
+
+<span class="cm">    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED</span>
+<span class="cm">    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span>
+<span class="cm">    PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR</span>
+<span class="cm">    ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED</span>
+<span class="cm">    TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span>
+<span class="cm">    HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING</span>
+<span class="cm">    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="cm">    POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="cm">--&gt;</span>
+
+<span class="nt">&lt;FindBugsFilter&gt;</span>
+  <span class="cm">&lt;!--</span>
+<span class="cm">  Skip transient field check for fields added by DataNucleus enhancer.</span>
+<span class="cm">  --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.github.susom.database.OptionsDefault&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;DMI,RV&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~com\.force\.sdk\.jpa\.entities.*&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~com\.force\.sdk\.jpa\.sample.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-
+  <span class="cm">&lt;!--</span>
+<span class="cm">  No need to implement a hasCode method for a test entity.</span>
+<span class="cm">  --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Seems to be giving an incorrect error for this class about redundant null check --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.github.susom.database.When&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.force.sdk.jpa.entities.ParentTestEntity&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;HE_EQUALS_USE_HASHCODE&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

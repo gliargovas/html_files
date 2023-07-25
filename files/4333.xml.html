@@ -95,32 +95,68 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
+
+<span class="cm">    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.</span>
+
+<span class="cm">    Copyright (c) 2011-2013 Oracle and/or its affiliates. All rights reserved.</span>
+
+<span class="cm">    The contents of this file are subject to the terms of either the GNU</span>
+<span class="cm">    General Public License Version 2 only (&quot;GPL&quot;) or the Common Development</span>
+<span class="cm">    and Distribution License(&quot;CDDL&quot;) (collectively, the &quot;License&quot;).  You</span>
+<span class="cm">    may not use this file except in compliance with the License.  You can</span>
+<span class="cm">    obtain a copy of the License at</span>
+<span class="cm">    https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html</span>
+<span class="cm">    or packager/legal/LICENSE.txt.  See the License for the specific</span>
+<span class="cm">    language governing permissions and limitations under the License.</span>
+
+<span class="cm">    When distributing the software, include this License Header Notice in each</span>
+<span class="cm">    file and include the License file at packager/legal/LICENSE.txt.</span>
+
+<span class="cm">    GPL Classpath Exception:</span>
+<span class="cm">    Oracle designates this particular file as subject to the &quot;Classpath&quot;</span>
+<span class="cm">    exception as provided by Oracle in the GPL Version 2 section of the License</span>
+<span class="cm">    file that accompanied this code.</span>
+
+<span class="cm">    Modifications:</span>
+<span class="cm">    If applicable, add the following below the License Header, with the fields</span>
+<span class="cm">    enclosed by brackets [] replaced by your own identifying information:</span>
+<span class="cm">    &quot;Portions Copyright [year] [name of copyright owner]&quot;</span>
+
+<span class="cm">    Contributor(s):</span>
+<span class="cm">    If you wish your version of this file to be governed by only the CDDL or</span>
+<span class="cm">    only the GPL Version 2, indicate your decision by adding &quot;[Contributor]</span>
+<span class="cm">    elects to include this software in this distribution under the [CDDL or GPL</span>
+<span class="cm">    Version 2] license.&quot;  If you don&#39;t indicate a single choice of license, a</span>
+<span class="cm">    recipient has the option to distribute your version of this file under</span>
+<span class="cm">    either the CDDL, the GPL Version 2 or to extend the choice of license to</span>
+<span class="cm">    its licensees as provided above.  However, if you add GPL Version 2 code</span>
+<span class="cm">    and therefore, elected the GPL Version 2 license, then the option applies</span>
+<span class="cm">    only if the new code is made subject to such option by the copyright</span>
+<span class="cm">    holder.</span>
+
+<span class="cm">--&gt;</span>
+
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-    <span class="cm">&lt;!-- Experimental and not fully vetted bug patterns --&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">         The File.setReadable call fails (by design) on Windows so we ignore</span>
+<span class="cm">         the return values from all these calls.  See the code for details.</span>
+<span class="cm">     --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CRLF_INJECTION_LOGS&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.v3.admin.LocalPasswordImpl&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;postConstruct&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">         These methods shut down the server on purpose.</span>
+<span class="cm">     --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;XXE_DOCUMENT&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;XPATH_INJECTION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;FORMAT_STRING_MANIPULATION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;WEAK_MESSAGE_DIGEST_SHA1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_CONVERT_CASE&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.v3.admin.RestartServer&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.enterprise.v3.admin.StopServer&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doExecute&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

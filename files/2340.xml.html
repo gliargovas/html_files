@@ -111,10 +111,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">   See the License for the specific language governing permissions and</span>
 <span class="cm">   limitations under the License.</span>
 <span class="cm">--&gt;</span>
-
 <span class="nt">&lt;FindBugsFilter&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.tools.proto&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
@@ -127,10 +129,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jspx&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
@@ -147,6 +145,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="cm">&lt;!-- </span>
+<span class="cm">       Further SaslException should be ignored during cleanup and</span>
+<span class="cm">       original exception should be re-thrown.</span>
+<span class="cm">     --&gt;</span> 
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.SaslRpcClient&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
 <span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
 <span class="cm">     --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
@@ -157,18 +163,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.taskdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.jobdetails_jsp&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;HRS_REQUEST_PARAMETER_TO_HTTP_HEADER&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.taskstats_jsp&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;HRS_REQUEST_PARAMETER_TO_HTTP_HEADER&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.jobtasks_jsp&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;HRS_REQUEST_PARAMETER_TO_HTTP_HEADER&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
      <span class="cm">&lt;!--</span>
 <span class="cm">       Ignore warnings where child class has the same name as</span>
 <span class="cm">       super class. Classes based on Old API shadow names from</span>
@@ -176,30 +170,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">     --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.lib.aggregate.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.join.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.SequenceFileInputFilter$Filter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.util.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.filecache.*&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="cm">&lt;!--</span>
@@ -226,20 +196,20 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.JobTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;clock&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task$TaskReporter&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.security.token.DelegationTokenRenewal$DelegationTokenCancelThread&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ProgramDriver&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;driver&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.RunJar&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
      <span class="cm">&lt;!--</span>
 <span class="cm">       We need to cast objects between old and new api objects</span>
 <span class="cm">     --&gt;</span>
@@ -257,33 +227,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
      <span class="nt">&lt;/Match&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.FileOutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;commitJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverTask&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.OutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;abortJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;commitJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;cleanupJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverTask&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskCompletionEvent&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setTaskStatus&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setTaskAttemptId&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.db.DBInputFormat$DBRecordReader&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;next&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
      <span class="cm">&lt;!--</span>
@@ -319,73 +262,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       org.apache.hadoop.mapred.IndexCache is thread-safe. It does not need</span>
-<span class="cm">       synchronous access. </span>
-<span class="cm">      --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;indexCache&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
     <span class="cm">&lt;!--</span>
-<span class="cm">      None of the following variables should be referenced by any thread</span>
-<span class="cm">      but the collection thread in MapTask</span>
+<span class="cm">      This is a spurious warning. Just ignore</span>
 <span class="cm">    --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;kvindex&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;bufferRemaining&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;equator&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!-- This is spurious. --&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer$SpillThread&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK_EXCEPTION_PATH&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.MergeThread&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;inputs&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.JobTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;updateTaskTrackerStatus&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">     This class is unlikely to get subclassed, so ignore</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.MergeManager&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SC_START_IN_CTOR&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      Do not bother if equals is not implemented. We will not need it here</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.ShuffleScheduler$Penalty&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;reportFatalError&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
      <span class="cm">&lt;!-- </span>
@@ -403,18 +286,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
      <span class="nt">&lt;/Match&gt;</span>
 
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KFSOutputStream&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;path&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KosmosFileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;initialize&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.Closeable&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
@@ -422,21 +293,6 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
      <span class="nt">&lt;Match&gt;</span>
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.AccessControlException&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.Utils&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;skip&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">        The compareTo method is actually a dummy method that just</span>
-<span class="cm">        throws excpetions. So, no need to override equals. Ignore</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.RecordTypeInfo&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
      <span class="nt">&lt;Match&gt;</span>
@@ -464,114 +320,160 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
-    <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskScheduler$QueueRefresher&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">       TFile</span>
+<span class="cm">     --&gt;</span>
+      <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Chunk$ChunkDecoder&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;close&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SR_NOT_CHECKED&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      The purpose of skip() is to drain remaining bytes of the chunk-encoded</span>
+<span class="cm">	  stream (one chunk at a time). The termination condition is checked by</span>
+<span class="cm">	  checkEOF().</span>
+<span class="cm">    --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Utils&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;writeVLong&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">	  The switch condition fall through is intentional and for performance</span>
+<span class="cm">	  purposes.</span>
+<span class="cm">    --&gt;</span>
 
     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.TeraInputFormat$1&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.log.EventCounter&quot;</span><span class="nt">/&gt;</span>
+      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.TeraOutputFormat$TeraOutputCommitter&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.metrics.jvm.EventCounter&quot;</span><span class="nt">/&gt;</span>
+      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.Unsigned16&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getHexDigit&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.ProtobufRpcEngineProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.ProtocolInfoProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.IpcConnectionContextProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+        <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.RpcHeaderProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.HAServiceProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.ZKFCProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.security\.proto\.SecurityProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.TestProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.proto\.RefreshCallQueueProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.proto\.GenericRefreshProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.tracing\.TraceAdminPB.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!--</span>
+<span class="cm">       Manually checked, misses child thread manually syncing on parent&#39;s intrinsic lock.</span>
+<span class="cm">    --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.metrics2.lib.MutableQuantiles&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;previousSnapshot&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">       The method uses a generic type T that extends two other types</span>
+<span class="cm">       T1 and T2. Findbugs complains of a cast from T1 to T2.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.DelegationTokenRenewer&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;removeRenewAction&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     
+     <span class="cm">&lt;!-- Inconsistent synchronization flagged by findbugs is not valid. --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;in&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       The switch condition for INITIATE is expected to fallthru to RESPONSE</span>
+<span class="cm">       to process initial sasl response token included in the INITIATE</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Server$Connection&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processSaslMessage&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
-     <span class="cm">&lt;!-- </span>
-<span class="cm">	   False positive of FindBugs complaining that initializationPoller and</span>
-<span class="cm">	   started were accessed through</span>
-<span class="cm">	   CapacitySchedulerQueueRefresher.refreshQueues without explicitly holding</span>
-<span class="cm">	   the lock of CapacityTaskScheduler. The lock is in fact acquired by</span>
-<span class="cm">	   JobTracker prior to calling QueueManager.refereshQueues - this is</span>
-<span class="cm">	   necessary to ensure the order of locking (TaskScheduler -&gt;</span>
-<span class="cm">	   QueueManager).</span>
-<span class="cm">     --&gt;</span> 
+     <span class="cm">&lt;!-- Synchronization performed on util.concurrent instance. --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.service.AbstractService&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;stop&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;JLM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.service.AbstractService&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;waitForServiceToStop&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;JLM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!--</span>
+<span class="cm">  OpenStack Swift FS module -closes streams in a different method</span>
+<span class="cm">  from where they are opened.</span>
+<span class="cm">  --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.CapacityTaskScheduler&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;initializationPoller&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.swift.snative.SwiftNativeOutputStream&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;uploadFileAttempt&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.CapacityTaskScheduler&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;started&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.swift.snative.SwiftNativeOutputStream&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;uploadFilePartAttempt&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
-  
-   <span class="cm">&lt;!-- Yarn excludes --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;computeSlotMillis&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DB_DUPLICATE_BRACHES&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- code from maven source, null value is checked at callee side. --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ComparableVersion$ListItem&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;compareTo&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;NP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.MRAppMaster$1&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.HttpExceptionUtils&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;validateResponse&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.LocalContainerLauncher$SubtaskRunner&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.app\.job\.impl\.TaskImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.app\.job\.impl\.JobImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.app\.job\.impl\.TaskAttemptImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.app\.recover\.RecoveryService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.app\.rm\.RMContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;computeSlotMillis&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DB_DUPLICATE_BRANCHES&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.proto&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.proto.*&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-   <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;mapResourceReqt&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;/Match&gt;</span>
-  
-   <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reduceResourceReqt&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;/Match&gt;</span>
-   <span class="cm">&lt;!--</span>
-<span class="cm">     The above 2 fields are accessed locally and only via methods that are synchronized. </span>
-<span class="cm">     --&gt;</span>
-  
- <span class="nt">&lt;/FindBugsFilter&gt;</span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

@@ -96,55 +96,29 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
-
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
-
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
-<span class="cm">--&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-  <span class="cm">&lt;!-- Workaround bugs in findbugs 1.3.9. See http://sourceforge.net/p/findbugs/bugs/918 for more details. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_ALWAYS_NULL&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.JarBuilder&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF_ALL_TARGETS_DANGEROUS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.PipeMapper&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.PipeReducer&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getFieldSeparator&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getInputSeparator&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;io.alakazam.servlets.tasks.GarbageCollectionTask&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;execute&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_GC&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;io.alakazam.Application&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;Se&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;io.alakazam.servlets.tasks.TaskServlet&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;Se&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;io.alakazam.servlets.assets.AssetServlet&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NULL_VALUE&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;io.alakazam.configuration.ConfigurationFactory&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

@@ -95,14 +95,27 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cm">&lt;!--</span>
+
+<span class="cm">    LICENSE</span>
+
+<span class="cm">    &quot;THE BEER-WARE LICENSE&quot; (Revision 43):</span>
+<span class="cm">    &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.</span>
+<span class="cm">    As long as you retain this notice you can do whatever you want with</span>
+<span class="cm">    this stuff. If we meet some day, and you think this stuff is worth it,</span>
+<span class="cm">    you can buy me a non alcohol free beer in return.</span>
+
+<span class="cm">    Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;</span>
+
+<span class="cm">--&gt;</span>
+<span class="cm">&lt;!-- Available bugs http://findbugs.sourceforge.net/bugDescriptions.html --&gt;</span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Or&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/Or&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!-- Argument are checked against negative numbers and will throw IllegalArgumentException. --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;de.weltraumschaf.jebnf.gfx.shapes.TestShape&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;shouldPaint&quot;</span> <span class="na">params=</span><span class="s">&quot;int,int&quot;</span> <span class="na">returns=</span><span class="s">&quot;boolean&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IM_BAD_CHECK_FOR_ODD&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

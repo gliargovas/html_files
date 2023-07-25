@@ -96,80 +96,102 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-  <span class="cm">&lt;!--</span>
-<span class="cm">    (c) Copyright 2012 WibiData, Inc.</span>
 
-<span class="cm">    See the NOTICE file distributed with this work for additional</span>
-<span class="cm">    information regarding copyright ownership.</span>
+<span class="cm">&lt;!--</span>
+<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm">  contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm">  this work for additional information regarding copyright ownership.</span>
+<span class="cm">  The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm">  (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm">  the License.  You may obtain a copy of the License at</span>
 
-<span class="cm">    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm">    you may not use this file except in compliance with the License.</span>
-<span class="cm">    You may obtain a copy of the License at</span>
+<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
 
-<span class="cm">        http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">   See the License for the specific language governing permissions and</span>
+<span class="cm">   limitations under the License.</span>
+<span class="cm">--&gt;</span>
 
-<span class="cm">    Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">    See the License for the specific language governing permissions and</span>
-<span class="cm">    limitations under the License.</span>
-<span class="cm">  --&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-
-  <span class="cm">&lt;!--</span>
-<span class="cm">    Bugs we don&#39;t care about globally.</span>
-<span class="cm">  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.hive.column.HiveColumnWriter&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.hive.record.HiveRecordWriter&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.conf.AllOptions&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.zk.ZooKeeperManager&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.examples.SimpleFailComputation&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.graph.GraphTaskManager$OverrideExceptionHandler&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.worker.BspServiceWorker&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.examples.SimpleCheckpoint$SimpleCheckpointComputation&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_OVERRIDING_EQUALS_NOT_SYMMETRIC&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.jython.wrappers.JythonWrapperBase&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_OVERRIDING_EQUALS_NOT_SYMMETRIC&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.jython.wrappers.JythonWritableWrapper&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.comm.netty.NettyClient&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;JLM_JSR166_UTILCONCURRENT_MONITORENTER&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
     <span class="nt">&lt;Or&gt;</span>
-      <span class="cm">&lt;!-- We never use Java Serialization, so ignore any Serializable findbugs warnings. --&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.comm.flow_control.CreditBasedFlowControl&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.comm.flow_control.CreditBasedFlowControl$2&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Or&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Suppress bugs in Avro generated classes. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]mapreduce[.]avro[.]generated[.].*&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;JLM_JSR166_UTILCONCURRENT_MONITORENTER&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Mappers/Reducers/Gatherers/Producers/Tools initialize in setup() so it&#39;s okay if their</span>
-<span class="cm">         constructors don&#39;t initialize an instance variable. --&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]mapreduce[.]bulkimport[.]impl[.].*Mapper&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]mapreduce[.]gather[.]impl[.].*Mapper&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]mapreduce[.]produce[.]impl[.].*Mapper&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.io.formats.PseudoRandomLocalEdgesHelper&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_ABSOLUTE_VALUE_OF_RANDOM_INT&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Command-line flags are initialized with FlagParser.parse(). --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]mapreduce[.]tools[.]KijiBulkLoad&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.master.BspServiceMaster&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- For performance, code returning the same array every time is correct. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.mapreduce.impl.KijiTableSplit&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.giraph.partition.PartitionBalancer$PartitionOwnerComparator&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Disable the equals check for HFileKeyValue --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.mapreduce.framework.HFileKeyValue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.giraph.function.primitive.PrimitiveRefs.*Ref&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.mapreduce.framework.HBaseKijiTableInputFormat$KijiTableRecordReader&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.mapreduce.framework.ConsistentHostOrderPolicy$1&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.mapreduce.framework.CassandraSubSplitCombiner$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span> <span class="nt">/&gt;</span>
+    <span class="cm">&lt;!-- Java Serialization is not used, so this is never an actual issue.</span>
+<span class="cm">      On the other hand, Kryo needs lambdas to be Serializable to work. --&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD,SE_COMPARATOR_SHOULD_BE_SERIALIZABLE,SE_NO_SERIALVERSIONID&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

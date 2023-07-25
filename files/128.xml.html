@@ -96,10 +96,46 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+
 <span class="nt">&lt;FindBugsFilter&gt;</span>
+
+     <span class="nt">&lt;Match&gt;</span>
+         <span class="cm">&lt;!-- PMB_INSTANCE_BASED_THREAD_LOCAL cannot be suppresed with annotation for whatever reason --&gt;</span>
+        <span class="cm">&lt;!-- CD_CIRCULAR_DEPENDENCY is nuts in fb-contrib 6.6.2 --&gt;</span>
+        <span class="cm">&lt;!-- CRLF_INJECTION_LOGS this is irelevant, devs need to use good log appenders. --&gt;</span>
+        <span class="cm">&lt;!-- RFI_SET_ACCESSIBLE ... JDK 10 suposedly will drop this functionality.... will re-enable when moving to JDK 9 --&gt;</span>
+        <span class="cm">&lt;!-- FII_USE_FUNCTION_IDENTITY has a lot of false positives that are fixed in next fb-contrib --&gt;</span>
+        <span class="cm">&lt;!-- LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS is a valid use case with my prefered backends --&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS,FII_USE_FUNCTION_IDENTITY,RFI_SET_ACCESSIBLE,CRLF_INJECTION_LOGS,BL_BURYING_LOGIC,CD_CIRCULAR_DEPENDENCY,EXS_EXCEPTION_SOFTENING_HAS_CHECKED,UVA_USE_VAR_ARGS,URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD,MOM_MISLEADING_OVERLOAD_MODEL,EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS,PMB_INSTANCE_BASED_THREAD_LOCAL,OPM_OVERLY_PERMISSIVE_METHOD,IMC_IMMATURE_CLASS_NO_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2,EI_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;SECURITY&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Token.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ZCompiler.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ParseException([.].*)?&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*JavaCharStream([.].*)?&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CE_CLASS_ENVY,SEC_SIDE_EFFECT_CONSTRUCTOR,SIC_INNER_SHOULD_BE_STATIC_ANON,BC_UNCONFIRMED_CAST,PREDICTABLE_RANDOM&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

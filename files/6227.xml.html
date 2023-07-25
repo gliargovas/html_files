@@ -95,278 +95,199 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
-
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
-
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
-<span class="cm">--&gt;</span>
-
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-  <span class="cm">&lt;!-- Ignore PB Generated Code --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.proto&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.ipc\.RpcProtos.*&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore unchecked Event casts --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.ContainerManagerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.application\.ApplicationImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.container\.ContainerImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.localizer\.LocalizedResource.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.localizer\.ResourceLocalizationService.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.monitor.ContainersMonitorImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmapp\.RMAppImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmapp\.attempt\.RMAppAttemptImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.rmapp.RMAppImpl$AppRejectedTransition&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmcontainer\.RMContainerImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.rmnode\.RMNodeImpl.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.RMAppManager.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.scheduler\.capacity\.CapacityScheduler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.resourcemanager\.scheduler\.fifo\.FifoScheduler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.logaggregation\.LogAggregationService.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.server\.nodemanager\.containermanager\.loghandler\.NonAggregatingLogHandler.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;handle&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-
-  <span class="cm">&lt;!-- Ignore intentional switch fallthroughs --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.container.ContainerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;finished&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ContainerLocalizer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;localizeFiles&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore some irrelevant serialization warnings --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ResourceRetentionSet$LRUComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.exceptions.impl.pb.YarnRemoteExceptionPBImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;builder&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.yarn\.util\.BuilderUtils.*&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.resource.Priority$Comparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Inconsistent sync warning - only start() is synchronized--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.logaggregation.LogAggregationService&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - reinitialize read from other queue does not need sync--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.LeafQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteMaxCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;acls&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxApplications&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxApplicationsPerUser&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maximumCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;state&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userLimit&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userLimitFactor&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.ParentQueue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;absoluteMaxCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;acls&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;capacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maximumCapacity&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;state&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- Inconsistent sync warning - minimumAllocation is only initialized once and never changed --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo.FifoScheduler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;minimumAllocation&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.DelegationTokenRenewer&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;renewalTimer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;IS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Don&#39;t care if putIfAbsent value is ignored --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.factories.impl.pb&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_OF_PUTIFABSENT_IGNORED&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Intended System.exit calls --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.webapp.Dispatcher$1&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.webapp.WebApps$Builder&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.DelegationTokenRenewer$DelegationTokenCancelThread&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.YarnUncaughtExceptionHandler&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- AsyncDispatcher will kill the process if there is an error dispatching --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.event.AsyncDispatcher&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;dispatch&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.ResourceManager$SchedulerEventDispatcher$EventProcessor&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.NodeManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;initAndStartNodeManager&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
- 
-  <span class="cm">&lt;!-- Ignore heartbeat exception when killing localizer --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.ContainerLocalizer&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;localizeFiles&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore EI_EXPOSE_REP in PolicyProviders --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.resourcemanager.security.authorize.RMPolicyProvider&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.security.authorize.NMPolicyProvider&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-
-  <span class="cm">&lt;!-- Ignore EI_EXPOSE_REP2 in Log services --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.logaggregation.AggregatedLogFormat$LogValue&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.logaggregation.AppLogAggregatorImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  
-   <span class="cm">&lt;!-- /proc/mounts is always in the same place --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.util.CgroupsLCEResourcesHandler&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;parseMtab&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- rmClient can be ignored as only code blocks outside of rpc calls need to be synchronized --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.client.AMRMClientImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;rmClient&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Null pointer exception needs to be ignored here as this is never going to occur. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.LocalResourcesTrackerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;decrementFileCountForLocalCacheDirectory&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Null pointer exception needs to be ignored here as this is never going to occur. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.server.nodemanager.containermanager.localizer.LocalResourcesTrackerImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getPathForLocalization&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- That code is auto generated --&gt;</span>
+      <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~com\.puppycrawl\.tools\.checkstyle\.grammar.*&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- We are not aware of encoding of files that user has, so using user encoding is ok --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.LineSeparatorOption&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_DEFAULT_ENCODING&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- see a reason of suppression at #910 --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.UniquePropertiesCheck$UniqueProperties&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- false-positive, as Map will return null if key is not found --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.indentation.LineWrappingHandler&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;collectFirstNodes&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- it is ok here, as business meaning of that cases is not the same,</span>
+<span class="cm">           it is occasional similarity --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyCheck&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;visitToken&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DB_DUPLICATE_SWITCH_CLAUSES&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- false positive, condition elements are not the same --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.indentation.LineWrappingHandler&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;collectFirstNodes&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RpC_REPEATED_CONDITIONAL_TEST&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- false positive, &quot;preceded&quot; is returned from method as result --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.whitespace.NoWhitespaceAfterCheck&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getPreceded&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- that CLI class so we need system exit code there, but only in main(...) method --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Main&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- have never been a case for years, Eclipse does not show any other classes</span>
+<span class="cm">           inherited from CommonASTWithHiddenTokens --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.DetailAstImpl&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- The structure of frames relies on the AST structure which relies on correct/compilable</span>
+<span class="cm">        java files. It is ok to have direct casts to subtypes there. Any problems at runtime do</span>
+<span class="cm">        mean serious problems in the algorithm or AST generation. --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST_OF_RETURN_VALUE&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="cm">&lt;!-- false positive, beginTree is a kind of constructor for Checks --&gt;</span>
+      <span class="nt">&lt;Or&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.OuterTypeFilenameCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!-- createJavadocNode is private and can not be launched without visitToken--&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.javadoc.AbstractJavadocCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!-- has only one public method and all initialized in that method--&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.MultilineDetector&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!-- beginProcessing() is kind of c-tor --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpMultilineCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!--Uses setters to set fields values--&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.api.AbstractCheck&quot;</span> <span class="nt">/&gt;</span>
+        <span class="cm">&lt;!-- We cannot modify fields since we won&#39;t have the values</span>
+<span class="cm">                to create the instance until the setters are called --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilter&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.filters.SuppressionXpathSingleFilter&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/Or&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!--</span>
+<span class="cm">         False-positive. ExternalResource cannot be null there.</span>
+<span class="cm">         FindBugs rise violation due to @Nullable annotation on &#39;apply&#39; method.</span>
+<span class="cm">         See</span>
+<span class="cm">         https://stevewall123.wordpress.com/2014/12/18/findbugs-warning-with-guavas-predicate-interface/</span>
+<span class="cm">         See</span>
+<span class="cm">         http://stackoverflow.com/questions/12422473/nullable-input-in-google-guava-function-interface-triggers-findbugs-warning</span>
+<span class="cm">         --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile$1&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;apply&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. Bugs reported even though casting is done only</span>
+<span class="cm">             after verification using instanceof --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.JavadocDetailNodeParser&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;parseJavadocAsDetailNode&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST_OF_RETURN_VALUE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Main&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;loadProperties&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- won&#39;t fix: field values are injected by picocli --&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Main&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.JavadocPropertiesGenerator&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_UNWRITTEN_FIELD&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_SHOULD_BE_FINAL&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_SHOULD_BE_REFACTORED_TO_BE_FINAL&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SS_SHOULD_BE_STATIC&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PackageNamesLoader&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;flushAndCloseOutStream&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;load&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.header.AbstractHeaderCheck&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;loadHeaderFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createOverridingProperties&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persist&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_GUARANTEED_DEREF_ON_EXCEPTION_PATH&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persist&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_PARAM_DEREF&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.TranslationCheck&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTranslationKeys&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_GUARANTEED_DEREF_ON_EXCEPTION_PATH&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/5403 --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.UniquePropertiesCheck&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processFiltered&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_GUARANTEED_DEREF_ON_EXCEPTION_PATH&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/6343 --&gt;</span>
+        <span class="nt">&lt;Class</span>
+        <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.OrderedPropertiesCheck$SequencedProperties&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!-- It is better to catch all exceptions since it can throw a runtime exception. --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.TranslationCheck&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTranslationKeys&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

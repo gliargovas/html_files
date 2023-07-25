@@ -112,28 +112,25 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">   limitations under the License.</span>
 <span class="cm">--&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-  <span class="cm">&lt;!--</span>
-<span class="cm">    Findbug is complaining about System.out being NULL</span>
-<span class="cm">  --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.crypto.key.kms.server.KMSWebApp&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_ALWAYS_NULL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.lib.service.instrumentation.InstrumentationService&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getToAdd&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!--</span>
-<span class="cm">    KMSWebApp is a webapp singleton managed by the servlet container via</span>
-<span class="cm">    ServletContextListener.</span>
-<span class="cm">  --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.crypto.key.kms.server.KMSWebApp&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.http.server.HttpFSServerWebApp&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;destroy&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!--</span>
-<span class="cm">    KMSWebApp does an exit to kill the servlet container if the initialization</span>
-<span class="cm">    fails.</span>
-<span class="cm">  --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.crypto.key.kms.server.KMSWebApp&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.lib.servlet.ServerWebApp&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;authority&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.lib.service.hadoop.FileSystemAccessService&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;closeFileSystem&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

@@ -95,15 +95,171 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Or&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
-            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;/Or&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+  <span class="cm">&lt;!--</span>
+<span class="cm">    (c) Copyright 2012 WibiData, Inc.</span>
+
+<span class="cm">    See the NOTICE file distributed with this work for additional</span>
+<span class="cm">    information regarding copyright ownership.</span>
+
+<span class="cm">    Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm">    you may not use this file except in compliance with the License.</span>
+<span class="cm">    You may obtain a copy of the License at</span>
+
+<span class="cm">        http://www.apache.org/licenses/LICENSE-2.0</span>
+
+<span class="cm">    Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">    distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">    See the License for the specific language governing permissions and</span>
+<span class="cm">    limitations under the License.</span>
+<span class="cm">  --&gt;</span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
+
+  <span class="cm">&lt;!--</span>
+<span class="cm">    Bugs we don&#39;t care about globally.</span>
+<span class="cm">  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="cm">&lt;!-- We never use Java Serialization, so ignore any Serializable findbugs warnings. --&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- Bugs in auto-generated Avro sources --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]avro[.].*&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!--</span>
+<span class="cm">    Other one-off exclusions.</span>
+<span class="cm">  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- I really do want to return the same array every time, for performance. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.KijiColumnName&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getFamilyBytes&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getQualifierBytes&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- I really do want to return the same array every time, for performance. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.HBaseColumnName&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- For performance, code returning the same array every time is correct. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.mapreduce.KijiTableSplit&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">       InMemoryTableKeyValueDatabase.getValue() distinguishes between null (missing table)</span>
+<span class="cm">       and a zero-length byte array value for a given key.</span>
+<span class="cm">    --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.InMemoryTableKeyValueDatabase&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Do not conflate null and the empty byte array: --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]impl[.]HashedEntityId&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]impl[.]HashPrefixedEntityId&quot;</span> <span class="nt">/&gt;</span>
+      <span class="cm">&lt;!-- null indicates a missing cell and is different from a cell with no bytes --&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]impl[.]hbase[.]HBaseKijiRowData&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]filter[.]KijiColumnRangeFilter&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]impl[.]cassandra[.]CassandraKijiRowData&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org[.]kiji[.]schema[.]impl[.]cassandra[.]CassandraSystemTable&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- This is used to create an immutable array --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.hbase.HBaseKiji&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ITA_INEFFICIENT_TO_ARRAY&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- mTableURI is initialized through flags with FlagParser.parse() --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.tools.SynthesizeUserDataTool&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- These fields get populated by the flag parser. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.tools.LayoutTool&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- These fields get populated by the flag parser. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.tools.DeleteTool&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- An absolute path to a ZooKeeper node is fine. --&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.layout.impl.ZooKeeperMonitor&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.zookeeper.ZooKeeperUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- Individual array elements are not mutated. --&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.layout.impl.ZooKeeperMonitor$LayoutTracker&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_REFERENCE_TO_ARRAY&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="cm">&lt;!-- FindBugs has a bug: http://sourceforge.net/p/findbugs/bugs/1139/</span>
+
+<span class="cm">         FindBugs is overly restrictive about nullable/notnull declarations on Guava&#39;s Function</span>
+<span class="cm">          class.</span>
+<span class="cm">     --&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.AvroCellEncoder$1&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.layout.AvroSchemaResolver&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.layout.SchemaTableAvroResolver&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.layout.AvroSchemaIdResolver&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.zookeeper.ZooKeeperUtils$1&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.hbase.HBasePagedKijiResult$PagedColumnIterable$1&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.hbase.ResultDecoders$GroupFamilyDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.hbase.ResultDecoders$MapFamilyDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.hbase.ResultDecoders$QualifiedColumnDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.CassandraKijiResult$1&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.CassandraKijiResult$2&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.CassandraKijiResultScanner$3&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.CassandraKijiResultScanner$5&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.CassandraKijiResultScanner$6&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$1&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$2&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$GroupFamilyDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$MapFamilyDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$MaxTimestampPredicate&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$MaxVersionsPredicate&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$MinTimestampPredicate&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$QualifiedColumnDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$RawRowKeyDecoder&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.kiji.schema.impl.cassandra.RowDecoders$RowKeyComponentsToEntityId&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

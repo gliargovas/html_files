@@ -96,45 +96,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.InteractiveAuthServlet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;service&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;DLS&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.service.SsoService&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthAuthorizeServlet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthTokenServlet&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthTokenInfoServlet&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthRevokeServlet&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.InteractiveAuthServlet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;service&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;RCN&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthTokenServlet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;issueTokenUsingHttpHeaders&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;RCN&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.core.sso.servlets.OAuthTokenServlet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;issueTokenForPasswd&quot;</span><span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;RCN&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

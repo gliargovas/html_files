@@ -97,38 +97,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;MALICIOUS_CODE&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.cs.IntegrationUtils&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.IntegrationUtils&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.engine.BasicStagingTest&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.entities.StagingRangeTest&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.cs.CsStagingTest&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;THROWS_METHOD_THROWS_CLAUSE_BASIC_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.imsweb.staging.eod.EodUpdateFromAPI&quot;</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

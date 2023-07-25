@@ -96,17 +96,14 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
-	<span class="nt">&lt;Match&gt;</span>
-		<span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~^net\.sinofool\.alipay\.thirdparty\..*&quot;</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;/Match&gt;</span>
-	<span class="nt">&lt;Match&gt;</span>
-		<span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;net.sinofool.alipay.dict&quot;</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;/Match&gt;</span>
-	<span class="nt">&lt;Match&gt;</span>
-		<span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;net.sinofool.alipay.AlipayResponseData&quot;</span> <span class="nt">/&gt;</span>
-		<span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getBoolean&quot;</span> <span class="nt">/&gt;</span>
-		<span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

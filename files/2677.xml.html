@@ -95,33 +95,216 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
-<span class="cm">  ~ Copyright 2020-2021 Equinix, Inc</span>
-<span class="cm">  ~ Copyright 2014-2021 The Billing Project, LLC</span>
-<span class="cm">  ~</span>
-<span class="cm">  ~ The Billing Project licenses this file to you under the Apache License, version 2.0</span>
-<span class="cm">  ~ (the &quot;License&quot;); you may not use this file except in compliance with the</span>
-<span class="cm">  ~ License.  You may obtain a copy of the License at:</span>
-<span class="cm">  ~</span>
-<span class="cm">  ~    http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm">  ~</span>
-<span class="cm">  ~ Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">  ~ distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span>
-<span class="cm">  ~ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the</span>
-<span class="cm">  ~ License for the specific language governing permissions and limitations</span>
-<span class="cm">  ~ under the License.</span>
-<span class="cm">  --&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.ha.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.hdfs.server.namenode.FsImageProto.*&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.protocol&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
+<span class="cm">       is intentional to make a connection to be closed instantly. </span>
+<span class="cm">     --&gt;</span> 
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
+<span class="cm">       We have an input quoting filter that protects us.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-<span class="nt">&lt;FindBugsFilter&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">        core changes </span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">       getTmpInputStreams is pretty much like a stream constructor.</span>
+<span class="cm">       The newly created streams are not supposed to be closed in the constructor. So ignore</span>
+<span class="cm">       the OBL warning.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTmpInputStreams&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      ResponseProccessor is thread that is designed to catch RuntimeException.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      lastAppliedTxid is carefully unsynchronized in the BackupNode in a couple spots.</span>
+<span class="cm">      See the comments in BackupImage for justification.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImage&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastAppliedTxId&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      Findbugs doesn&#39;t realize that closing a FilterOutputStream pushes the close down to</span>
+<span class="cm">      wrapped streams, too.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImageFormat$Saver&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;save&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      the &#39;metrics&#39; member is sometimes used from synchronized blocks, sometimes not,</span>
+<span class="cm">      but it&#39;s only reset by test cases, so should be fine</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;metrics&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">     We use a separate lock to protect modifications to journalSet so that</span>
+<span class="cm">     FSEditLog#selectInputStreams does not need to be a synchronized method.</span>
+<span class="cm">    --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="cm">&lt;!-- Legacy code --&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;journalSet&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      This method isn&#39;t performance-critical and is much clearer to write as it&#39;s written.</span>
+<span class="cm">      --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BlockPoolManager&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doRefreshNamenodes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Don&#39;t complain about System.exit() being called from quit() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.MetaRecoveryContext&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;quit&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about recoverBlock equality check --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.DataNode&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverBlock&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- More complex cleanup logic confuses findbugs --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.server.Journal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persistPaxosData&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about LocalDatanodeInfo&#39;s anonymous class --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.BlockReaderLocal$LocalDatanodeInfo$1&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD_INNER_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Only one method increments numFailedVolumes and it is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsVolumeList&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numFailedVolumes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Access to pendingReceivedRequests is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BPServiceActor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;notifyNamenodeBlockImmediately&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingReceivedRequests&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+      <span class="cm">&lt;!-- Replace System.exit() call with ExitUtil.terminate() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.tools.JMXGet&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>    
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.ReplicaInfo&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setDirInternal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_STRING_CTOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.shortcircuit.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK_EXCEPTION_PATH&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-        <span class="cm">&lt;!-- Legacy code --&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.shortcircuit.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
-<span class="nt">&lt;/FindBugsFilter&gt;</span>
+    <span class="cm">&lt;!-- Manually verified to be okay, we want to throw away the top bit here --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.CachedBlock&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getReplication&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.CacheDirective&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;insertInternal&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.blockmanagement.CacheReplicationMonitor&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSUtil&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;assertAllResultsEqual&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_LOAD_OF_KNOWN_NULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+ <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

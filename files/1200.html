@@ -95,637 +95,289 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2016 Cisco Systems, Inc. and others.  All rights reserved.</span>
-<span class="cm"> *</span>
-<span class="cm"> * This program and the accompanying materials are made available under the</span>
-<span class="cm"> * terms of the Eclipse Public License v1.0 which accompanies this distribution,</span>
-<span class="cm"> * and is available at http://www.eclipse.org/legal/epl-v10.html</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.databroker.actors.dds</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions.checkState</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Verify.verify</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">com.google.common.base.Verify.verifyNotNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.Objects.requireNonNull</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">akka.actor.ActorRef</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.ImmutableList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.primitives.UnsignedLong</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Iterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.LinkedHashMap</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.atomic.AtomicReferenceFieldUpdater</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.Lock</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.ReentrantLock</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Consumer</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.checkerframework.checker.lock.qual.GuardedBy</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.checkerframework.checker.lock.qual.Holding</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.eclipse.jdt.annotation.NonNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.client.AbstractClientConnection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.client.ClientActorContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.client.ConnectedClientConnection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.client.ConnectionEntry</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.CreateLocalHistoryRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.DestroyLocalHistoryRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.LocalHistoryRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.PurgeLocalHistoryRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.SkipTransactionsRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.commands.TransactionRequest</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.LocalHistoryIdentifier</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.Request</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.RequestException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.Response</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.controller.cluster.access.concepts.TransactionIdentifier</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.concepts.Identifiable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.data.tree.api.DataTreeSnapshot</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.opendaylight.yangtools.yang.data.tree.api.ReadOnlyDataTree</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
-
-<span class="cm">/**</span>
-<span class="cm"> * Per-connection representation of a local history. This class handles state replication across a single connection.</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Robert Varga</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProxyHistory</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Identifiable</span><span class="o">&lt;</span><span class="n">LocalHistoryIdentifier</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractLocal</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReadOnlyDataTree</span><span class="w"> </span><span class="n">dataTree</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">AbstractLocal</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReadOnlyDataTree</span><span class="w"> </span><span class="n">dataTree</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">dataTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">dataTree</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">DataTreeSnapshot</span><span class="w"> </span><span class="nf">takeSnapshot</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">dataTree</span><span class="p">.</span><span class="na">takeSnapshot</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractRemote</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">AbstractRemote</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Local</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractLocal</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AtomicReferenceFieldUpdater</span><span class="o">&lt;</span><span class="n">Local</span><span class="p">,</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">LAST_SEALED_UPDATER</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">                </span><span class="n">AtomicReferenceFieldUpdater</span><span class="p">.</span><span class="na">newUpdater</span><span class="p">(</span><span class="n">Local</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lastSealed&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="c1">// Tracks the last open and last sealed transaction. We need to track both in case the user ends up aborting</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// the open one and attempts to create a new transaction again.</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="w"> </span><span class="n">lastOpen</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="w"> </span><span class="n">lastSealed</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">Local</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReadOnlyDataTree</span><span class="w"> </span><span class="n">dataTree</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">dataTree</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">doCreateTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">checkState</span><span class="p">(</span><span class="n">lastOpen</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Proxy %s has %s currently open&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">lastOpen</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="c1">// Done transactions do not register on our radar on should not have any state associated.</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadOnlyProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">)</span><span class="w"></span>
-<span class="w">                        </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="c1">// onTransactionCompleted() runs concurrently</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="w"> </span><span class="n">localSealed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lastSealed</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">DataTreeSnapshot</span><span class="w"> </span><span class="n">baseSnapshot</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">localSealed</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">baseSnapshot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localSealed</span><span class="p">.</span><span class="na">getSnapshot</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">baseSnapshot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">takeSnapshot</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">snapshotOnly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadOnlyProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">baseSnapshot</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">lastOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">baseSnapshot</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} open transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">lastOpen</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">lastOpen</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSuccessor</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">createClient</span><span class="p">(</span><span class="n">parent</span><span class="p">(),</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">getIdentifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionAborted</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">lastOpen</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lastOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionCompleted</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">verify</span><span class="p">(</span><span class="n">tx</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalProxyTransaction</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unexpected transaction %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tx</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="w"></span>
-<span class="w">                    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">LAST_SEALED_UPDATER</span><span class="p">.</span><span class="na">compareAndSet</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">LocalReadWriteProxyTransaction</span><span class="p">)</span><span class="w"> </span><span class="n">tx</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Completed last sealed transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionSealed</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">checkState</span><span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">lastOpen</span><span class="p">));</span><span class="w"></span>
-<span class="w">            </span><span class="n">lastSealed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lastOpen</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">lastOpen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LocalSingle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractLocal</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">LocalSingle</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReadOnlyDataTree</span><span class="w"> </span><span class="n">dataTree</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">dataTree</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">doCreateTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">DataTreeSnapshot</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">takeSnapshot</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadOnlyProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshot</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
-<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">LocalReadWriteProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshot</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSuccessor</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">createSingle</span><span class="p">(</span><span class="n">parent</span><span class="p">(),</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">getIdentifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Remote</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractRemote</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Remote</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">doCreateTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RemoteProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">isDone</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSuccessor</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">createClient</span><span class="p">(</span><span class="n">parent</span><span class="p">(),</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">getIdentifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RemoteSingle</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractRemote</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">RemoteSingle</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">doCreateTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RemoteProxyTransaction</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">isDone</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSuccessor</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">createSingle</span><span class="p">(</span><span class="n">parent</span><span class="p">(),</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">getIdentifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RequestReplayException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RequestException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1L</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">RequestReplayException</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">format</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">super</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">format</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRetriable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReconnectCohort</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">ProxyReconnectCohort</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="nf">getIdentifier</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">identifier</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">replayRequests</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ConnectionEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">previousEntries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="c1">// First look for our Create message</span><span class="w"></span>
-<span class="w">            </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">ConnectionEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">previousEntries</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">ConnectionEntry</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">identifier</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getTarget</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">verify</span><span class="p">(</span><span class="n">req</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalHistoryRequest</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unexpected request %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">);</span><span class="w"></span>
-<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">CreateLocalHistoryRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="n">successor</span><span class="p">.</span><span class="na">connection</span><span class="p">.</span><span class="na">enqueueRequest</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getCallback</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getEnqueuedTicks</span><span class="p">());</span><span class="w"></span>
-<span class="w">                        </span><span class="n">it</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span><span class="w"></span>
-<span class="w">                        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">                    </span><span class="p">}</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;{} replaying messages to old proxy {} towards successor {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">successor</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">t</span><span class="p">.</span><span class="na">replayMessages</span><span class="p">(</span><span class="n">successor</span><span class="p">,</span><span class="w"> </span><span class="n">previousEntries</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="c1">// Forward any skipped transactions</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;{} forwarding skipped transactions towards successor {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">successor</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">successor</span><span class="p">.</span><span class="na">skipTransactions</span><span class="p">(</span><span class="n">local</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">skippedTransactions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="c1">// Now look for any finalizing messages</span><span class="w"></span>
-<span class="w">            </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">previousEntries</span><span class="p">.</span><span class="na">iterator</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">ConnectionEntry</span><span class="w"> </span><span class="n">e</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">identifier</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="na">getTarget</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">verify</span><span class="p">(</span><span class="n">req</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalHistoryRequest</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unexpected request %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">req</span><span class="p">);</span><span class="w"></span>
-<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">DestroyLocalHistoryRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="n">successor</span><span class="p">.</span><span class="na">connection</span><span class="p">.</span><span class="na">enqueueRequest</span><span class="p">(</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getCallback</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getEnqueuedTicks</span><span class="p">());</span><span class="w"></span>
-<span class="w">                        </span><span class="n">it</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span><span class="w"></span>
-<span class="w">                        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">                    </span><span class="p">}</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">finishReconnect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verifyNotNull</span><span class="p">(</span><span class="n">successor</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">t</span><span class="p">.</span><span class="na">finishReconnect</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Finished reconnecting proxy history {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">replayEntry</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ConnectionEntry</span><span class="w"> </span><span class="n">entry</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">ConnectionEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">replayTo</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="kd">throws</span><span class="w"> </span><span class="n">RequestException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lookupProxy</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="na">replayRequest</span><span class="p">((</span><span class="n">TransactionRequest</span><span class="o">&lt;?&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getCallback</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                    </span><span class="n">entry</span><span class="p">.</span><span class="na">getEnqueuedTicks</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalHistoryRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">replayTo</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">entry</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unhandled request &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">forwardEntry</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ConnectionEntry</span><span class="w"> </span><span class="n">entry</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">ConnectionEntry</span><span class="o">&gt;</span><span class="w"> </span><span class="n">forwardTo</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="kd">throws</span><span class="w"> </span><span class="n">RequestException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getRequest</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lookupProxy</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="na">forwardRequest</span><span class="p">((</span><span class="n">TransactionRequest</span><span class="o">&lt;?&gt;</span><span class="p">)</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getCallback</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">LocalHistoryRequest</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">forwardTo</span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">entry</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unhandled request &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">lookupProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="kd">throws</span><span class="w"> </span><span class="n">RequestReplayException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">proxy</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getTarget</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">proxy</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">proxy</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestReplayException</span><span class="p">(</span><span class="s">&quot;Failed to find proxy for %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">ProxyHistory</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Lock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@GuardedBy</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">TransactionIdentifier</span><span class="p">,</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">proxies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedHashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@GuardedBy</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="n">successor</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// List of transaction identifiers which were allocated by our parent history, but did not touch our shard. Each of</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// these represents a hole in otherwise-contiguous allocation of transactionIds. These holes are problematic, as</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// each of them prevents LeaderFrontendState.purgedHistories from coalescing, leading to a gradual heap exhaustion.</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// &lt;p&gt;</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// We keep these in an ArrayList for fast insertion, as that happens when we are otherwise idle. We translate these</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// into purge requests when:</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// - we are about to allocate a new transaction</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// - we get a successor proxy</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// - the list grows unreasonably long</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// TODO: we are tracking entire TransactionIdentifiers, but really only need to track the longs. Do that once we</span><span class="w"></span>
-<span class="w">    </span><span class="c1">//       have a {@code List&lt;long&gt;}.</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// FIXME: this is not tuneable, but perhaps should be</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// FIXME: default value deserves some explanation -- this affects depth of an RB Tree on the receiving end.</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">PURGE_SKIPPED_TXID_THRESHOLD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@GuardedBy</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">volatile</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">TransactionIdentifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">ProxyHistory</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">connection</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createClient</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ReadOnlyDataTree</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">getBackendInfo</span><span class="p">().</span><span class="na">flatMap</span><span class="p">(</span><span class="n">ShardBackendInfo</span><span class="p">::</span><span class="n">getDataTree</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dataTree</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Local</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">dataTree</span><span class="p">.</span><span class="na">get</span><span class="p">())</span><span class="w"></span>
-<span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Remote</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSingle</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="n">identifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ReadOnlyDataTree</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataTree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">getBackendInfo</span><span class="p">().</span><span class="na">flatMap</span><span class="p">(</span><span class="n">ShardBackendInfo</span><span class="p">::</span><span class="n">getDataTree</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dataTree</span><span class="p">.</span><span class="na">isPresent</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LocalSingle</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">dataTree</span><span class="p">.</span><span class="na">get</span><span class="p">())</span><span class="w"></span>
-<span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RemoteSingle</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">identifier</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Non-final for mocking</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LocalHistoryIdentifier</span><span class="w"> </span><span class="nf">getIdentifier</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">identifier</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientActorContext</span><span class="w"> </span><span class="nf">context</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">context</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">currentTime</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">currentTime</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ActorRef</span><span class="w"> </span><span class="nf">localActor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">localActor</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractClientHistory</span><span class="w"> </span><span class="nf">parent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">createTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">createTransactionProxy</span><span class="p">(</span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Non-final for mocking</span><span class="w"></span>
-<span class="w">    </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">createTransactionProxy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">successor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">successor</span><span class="p">.</span><span class="na">createTransactionProxy</span><span class="p">(</span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="n">isDone</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">proxyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">.</span><span class="na">getTransactionId</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">doCreateTransactionProxy</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">proxyId</span><span class="p">,</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="n">isDone</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">proxies</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">proxyId</span><span class="p">,</span><span class="w"> </span><span class="n">ret</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Allocated proxy {} for transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">proxyId</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">skipTransaction</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">successor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">successor</span><span class="p">.</span><span class="na">skipTransaction</span><span class="p">(</span><span class="n">txId</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">skippedTransactions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="n">local</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">txId</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Recorded skipped transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">txId</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">skipIfNeeded</span><span class="p">(</span><span class="n">local</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">skipIfNeeded</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">TransactionIdentifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">current</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">PURGE_SKIPPED_TXID_THRESHOLD</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">skippedTransactions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">doSkipTransactions</span><span class="p">(</span><span class="n">current</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">skipTransactions</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">TransactionIdentifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toSkip</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">successor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">successor</span><span class="p">.</span><span class="na">skipTransactions</span><span class="p">(</span><span class="n">toSkip</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">local</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">toSkip</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">skippedTransactions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toSkip</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="n">skipIfNeeded</span><span class="p">(</span><span class="n">local</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">skipTransactions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">local</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skippedTransactions</span><span class="p">;</span><span class="w"></span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">local</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">successor</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">skippedTransactions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">                    </span><span class="n">doSkipTransactions</span><span class="p">(</span><span class="n">local</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doSkipTransactions</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">TransactionIdentifier</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toSkip</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">txIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toSkip</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w"></span>
-<span class="w">            </span><span class="p">.</span><span class="na">mapToLong</span><span class="p">(</span><span class="n">TransactionIdentifier</span><span class="p">::</span><span class="n">getTransactionId</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="p">.</span><span class="na">distinct</span><span class="p">()</span><span class="w"></span>
-<span class="w">            </span><span class="p">.</span><span class="na">sorted</span><span class="p">()</span><span class="w"></span>
-<span class="w">            </span><span class="p">.</span><span class="na">mapToObj</span><span class="p">(</span><span class="n">UnsignedLong</span><span class="p">::</span><span class="n">fromLongBits</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="na">toImmutableList</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} skipping transactions {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">txIds</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">enqueueRequest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SkipTransactionsRequest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TransactionIdentifier</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">txIds</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="na">longValue</span><span class="p">()),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">localActor</span><span class="p">(),</span><span class="n">txIds</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">txIds</span><span class="p">.</span><span class="na">size</span><span class="p">())),</span><span class="w"> </span><span class="n">resp</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} confirmed transaction skip&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">currentTime</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">abortTransaction</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="c1">// Removal will be completed once purge completes</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} aborted transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">onTransactionAborted</span><span class="p">(</span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">completeTransaction</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="c1">// Removal will be completed once purge completes</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} completing transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">onTransactionCompleted</span><span class="p">(</span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">purgeTransaction</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">proxies</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">tx</span><span class="p">.</span><span class="na">getIdentifier</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} purged transaction {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">tx</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">successor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">successor</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} invoking destroy&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">sendRequest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DestroyLocalHistoryRequest</span><span class="p">(</span><span class="n">getIdentifier</span><span class="p">(),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">localActor</span><span class="p">()),</span><span class="w"></span>
-<span class="w">                </span><span class="k">this</span><span class="p">::</span><span class="n">onDestroyComplete</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">enqueueRequest</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">enqueuedTicks</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">skipTransactions</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">enqueueRequest</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">enqueuedTicks</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendRequest</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">TransactionRequest</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Consumer</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;&gt;</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">skipTransactions</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">connection</span><span class="p">.</span><span class="na">sendRequest</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:hiddenField&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">abstract</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="nf">doCreateTransactionProxy</span><span class="p">(</span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">TransactionIdentifier</span><span class="w"> </span><span class="n">txId</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">snapshotOnly</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isDone</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">(</span><span class="s">&quot;checkstyle:hiddenField&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">abstract</span><span class="w"> </span><span class="n">ProxyHistory</span><span class="w"> </span><span class="nf">createSuccessor</span><span class="p">(</span><span class="n">AbstractClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">connection</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UL_UNRELEASED_LOCK&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Lock is released asynchronously via the cohort&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ProxyReconnectCohort</span><span class="w"> </span><span class="nf">startReconnect</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ConnectedClientConnection</span><span class="o">&lt;</span><span class="n">ShardBackendInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newConnection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">successor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Proxy history &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; already has a successor&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">successor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createSuccessor</span><span class="p">(</span><span class="n">newConnection</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;History {} instantiated successor {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">successor</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="na">values</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">t</span><span class="p">.</span><span class="na">startReconnect</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReconnectCohort</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onDestroyComplete</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Response</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} destroy completed with {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">parent</span><span class="p">.</span><span class="na">onProxyDestroyed</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">sendRequest</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PurgeLocalHistoryRequest</span><span class="p">(</span><span class="n">getIdentifier</span><span class="p">(),</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">localActor</span><span class="p">()),</span><span class="w"></span>
-<span class="w">                </span><span class="k">this</span><span class="p">::</span><span class="n">onPurgeComplete</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onPurgeComplete</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Response</span><span class="o">&lt;?</span><span class="p">,</span><span class="w"> </span><span class="o">?&gt;</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Proxy {} purge completed with {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionAborted</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// No-op for most implementations</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionCompleted</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// No-op for most implementations</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Holding</span><span class="p">(</span><span class="s">&quot;lock&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">onTransactionSealed</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">AbstractProxyTransaction</span><span class="w"> </span><span class="n">tx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// No-op on most implementations</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="cm">&lt;!--</span>
+<span class="cm">~   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm">~   you may not use this file except in compliance with the License.</span>
+<span class="cm">~   You may obtain a copy of the License at</span>
+<span class="cm">~</span>
+<span class="cm">~   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">~</span>
+<span class="cm">~   Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">~   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">~   See the License for the specific language governing permissions and</span>
+<span class="cm">~   limitations under the License.</span>
+<span class="cm">--&gt;</span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;mesos.internal.Messages&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Archive$Framework&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Archive&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticateMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticateMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationCompletedMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationCompletedMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationErrorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationErrorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationFailedMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationFailedMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationMechanismsMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationMechanismsMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStartMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStartMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStepMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$AuthenticationStepMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$DeactivateFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExecutorToFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ExitedExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkErrorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkErrorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkExpiredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$FrameworkToExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$HeartbeatMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$KillTaskMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$LaunchTasksMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$LostSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdReadyMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdReadyMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ProjdUpdateResourcesMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReconcileTasksMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReconnectExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterProjdMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterProjdMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RegisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReregisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RescindResourceOfferMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ResourceOffersMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ResourceRequestMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ReviveOffersMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RoleInfo$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RoleInfo&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$RunTaskMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownExecutorMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownExecutorMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$ShutdownMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SlaveRegisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SlaveReregisteredMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdate&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateAcknowledgementMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$StatusUpdateRecord&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerRequest$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerRequest&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerResponse$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$SubmitSchedulerResponse&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Task&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$TaskHealthStatus&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UnregisterFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UnregisterSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$UpdateFrameworkMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Entry&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Expunge&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Snapshot&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Snapshot&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.state.State$Operation$Diff&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules$Library&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$Modules$Library$Module&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PingSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PingSlaveMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PongSlaveMessage&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&#39;mesos.internal.Messages$PongSlaveMessage$Builder&#39;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

@@ -95,179 +95,333 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright (c) 2001-2017, Zoltan Farkas All Rights Reserved.</span>
-<span class="cm"> *</span>
-<span class="cm"> * This library is free software; you can redistribute it and/or</span>
-<span class="cm"> * modify it under the terms of the GNU Lesser General Public</span>
-<span class="cm"> * License as published by the Free Software Foundation; either</span>
-<span class="cm"> * version 2.1 of the License, or (at your option) any later version.</span>
-<span class="cm"> *</span>
-<span class="cm"> * This library is distributed in the hope that it will be useful,</span>
-<span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="cm"> * GNU General Public License for more details.</span>
-<span class="cm"> *</span>
-<span class="cm"> * You should have received a copy of the GNU Lesser General Public</span>
-<span class="cm"> * License along with this program; if not, write to the Free Software</span>
-<span class="cm"> * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Additionally licensed with:</span>
-<span class="cm"> *</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm"> * See the License for the specific language governing permissions and</span>
-<span class="cm"> * limitations under the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.spf4j.perf.impl.acc</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nullable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.perf.MeasurementAccumulator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.perf.MeasurementsInfo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.perf.impl.MeasurementsInfoImpl</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.tsdb2.avro.Aggregation</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.spf4j.tsdb2.avro.MeasurementType</span><span class="p">;</span><span class="w"></span>
-
-<span class="cm">/**</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author zoly</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MinMaxAvgAccumulator</span><span class="w"></span>
-<span class="w">    </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractMeasurementAccumulator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">MEASUREMENTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;count&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;total&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;min&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;max&quot;</span><span class="p">};</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">[]</span><span class="w"> </span><span class="n">AGGS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">Aggregation</span><span class="p">.</span><span class="na">SUM</span><span class="p">,</span><span class="w"> </span><span class="n">Aggregation</span><span class="p">.</span><span class="na">SUM</span><span class="p">,</span><span class="w"> </span><span class="n">Aggregation</span><span class="p">.</span><span class="na">MIN</span><span class="p">,</span><span class="w"> </span><span class="n">Aggregation</span><span class="p">.</span><span class="na">MAX</span><span class="p">};</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">counter</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">min</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">max</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MeasurementsInfo</span><span class="w"> </span><span class="n">info</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">MinMaxAvgAccumulator</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">measuredEntity</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">counter</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MeasurementsInfoImpl</span><span class="p">(</span><span class="n">measuredEntity</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="n">MEASUREMENTS</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;count&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">,</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">,</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="n">AGGS</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="n">MeasurementType</span><span class="p">.</span><span class="na">SUMMARY</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MinMaxAvgAccumulator</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">measuredEntity</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">(</span><span class="n">measuredEntity</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">unitOfMeasurement</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getUnitOfMeasurement</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="na">getMeasurementUnit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">record</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">measurement</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">measurement</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">counter</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">measurement</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">measurement</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">measurement</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Nullable</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">counter</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">};</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;CLI_CONSTANT_LIST_INDEX&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NOS_NON_OWNED_SYNCHRONIZATION&quot;</span><span class="w"> </span><span class="p">})</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeasurementAccumulator</span><span class="w"> </span><span class="nf">aggregate</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">MeasurementAccumulator</span><span class="w"> </span><span class="n">mSource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mSource</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">MinMaxAvgAccumulator</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">MinMaxAvgAccumulator</span><span class="p">)</span><span class="w"> </span><span class="n">mSource</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="n">measurements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">measurements</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="p">.</span><span class="na">getMeasuredEntity</span><span class="p">(),</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="p">.</span><span class="na">getDescription</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                    </span><span class="n">getUnitOfMeasurement</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                    </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">measurements</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">measurements</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">measurements</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">),</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="n">measurements</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">));</span><span class="w"></span>
-<span class="w">                </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">createClone</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">           </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Cannot aggregate &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; with &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mSource</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="w"> </span><span class="nf">createClone</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="p">.</span><span class="na">getMeasuredEntity</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="p">.</span><span class="na">getDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">getUnitOfMeasurement</span><span class="p">(),</span><span class="w"> </span><span class="n">counter</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeasurementAccumulator</span><span class="w"> </span><span class="nf">createLike</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">entity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">info</span><span class="p">.</span><span class="na">getDescription</span><span class="p">(),</span><span class="w"> </span><span class="n">getUnitOfMeasurement</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MeasurementsInfo</span><span class="w"> </span><span class="nf">getInfo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">info</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Nullable</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">MinMaxAvgAccumulator</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createClone</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Long</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@Nullable</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="o">[]</span><span class="w"> </span><span class="nf">getThenReset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">final</span><span class="w"> </span><span class="n">MinMaxAvgAccumulator</span><span class="w"> </span><span class="n">vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reset</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vals</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">vals</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;MinMaxAvgAccumulator{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;counter=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, total=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, min=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">min</span><span class="w"></span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, max=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, info=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="p">}</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_RANDOM_USED_ONLY_ONCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_GETCLASS_AND_CLASS_CONSTANT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;FI_FINALIZER_ONLY_NULLS_FIELDS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;GC_UNCHECKED_TYPE_IN_GENERIC_CALL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ISC_INSTANTIATE_STATIC_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;JCIP_FIELD_ISNT_FINAL_IN_IMMUTABLE_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_CLONE_COULD_RETURN_NULL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_CLASS_NOT_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_FIELD_NAMING_CONVENTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_METHOD_NAMING_CONVENTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_VERY_CONFUSING_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SI_INSTANCE_BEFORE_FINALS_ASSIGNED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SW_SWING_METHODS_INVOKED_IN_SWING_THREAD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_INNER_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UI_INHERITANCE_UNSAFE_GETRESOURCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BOA_BADLY_OVERRIDDEN_ADAPTER&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_BAD_SHIFT_AMOUNT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BX_UNBOXED_AND_COERCED_FOR_TERNARY_OPERATOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE_IN_RETURN&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_STORE_OF_CLASS_LITERAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_USING_REMOVEALL_TO_CLEAR_COLLECTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_ANNOTATION_IS_NOT_VISIBLE_TO_REFLECTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IJU_BAD_SUITE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IJU_NO_TESTS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RE_CANT_USE_FILE_SEPARATOR_AS_REGULAR_EXPRESSION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RE_POSSIBLE_UNINTENDED_PATTERN&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIO_SUPERFLUOUS_INSTANCEOF&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;TQ_MAYBE_SOURCE_VALUE_REACHES_ALWAYS_SINK&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;TQ_MAYBE_SOURCE_VALUE_REACHES_NEVER_SINK&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;TQ_NEVER_VALUE_USED_WHERE_ALWAYS_REQUIRED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UMAC_UNCALLABLE_METHOD_OF_ANONYMOUS_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UR_UNINIT_READ&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VA_PRIMITIVE_ARRAY_PASSED_TO_OBJECT_VARARG&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_CONVERT_CASE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;FI_PUBLIC_SHOULD_BE_PROTECTED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_STATIC_REP2&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_CANNOT_BE_FINAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_FINAL_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_MUTABLE_ARRAY&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_MUTABLE_HASHTABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_OOI_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_SHOULD_BE_FINAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DC_DOUBLECHECK&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NN_NAKED_NOTIFY&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SP_SPIN_ON_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;STCAL_INVOKE_ON_STATIC_CALENDAR_INSTANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;STCAL_INVOKE_ON_STATIC_DATE_FORMAT_INSTANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;STCAL_STATIC_CALENDAR_INSTANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;STCAL_STATIC_SIMPLE_DATE_FORMAT_INSTANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;HSC_HUGE_SHARED_STRING_CONSTANT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ITA_INEFFICIENT_TO_ARRAY&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SBSC_USE_STRINGBUFFER_CONCATENATION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_ANON&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC_NEEDS_THIS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SS_SHOULD_BE_STATIC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UPM_UNCALLED_PRIVATE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UUF_UNUSED_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;WMI_WRONG_MAP_ITERATOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_CONSTANT_DB_PASSWORD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_EMPTY_DB_PASSWORD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_BAD_CAST_TO_ABSTRACT_COLLECTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_BAD_CAST_TO_CONCRETE_COLLECTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE_OF_NULL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_UNSUPPORTED_METHOD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_UNUSUAL&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VA_FORMAT_STRING_BAD_CONVERSION_TO_BOOLEAN&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH_MIGHT_BE_INFEASIBLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NS_DANGEROUS_NON_SHORT_CIRCUIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NS_NON_SHORT_CIRCUIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PZLA_PREFER_ZERO_LENGTH_ARRAYS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;QF_QUESTIONABLE_FOR_LOOP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_CHECK_FOR_POSITIVE_INDEXOF&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_DONT_JUST_NULL_CHECK_READLINE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_NO_DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_PRIVATE_READ_RESOLVE_NOT_INHERITED&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;XFB_XML_FACTORY_BYPASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

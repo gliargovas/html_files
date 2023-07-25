@@ -95,7 +95,8 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="cm">&lt;!--</span>
 <span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
 <span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
 <span class="cm">   this work for additional information regarding copyright ownership.</span>
@@ -111,364 +112,141 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm">   See the License for the specific language governing permissions and</span>
 <span class="cm">   limitations under the License.</span>
 <span class="cm">--&gt;</span>
+
+<span class="cm">&lt;!--</span>
+<span class="cm">  This file contains some false positive bugs detected by findbugs. Their</span>
+<span class="cm">  false positive nature has been analyzed individually and they have been</span>
+<span class="cm">  put here to instruct findbugs it must ignore them.</span>
+<span class="cm">--&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.proto&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.tools.proto&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
-<span class="cm">       is intentional to make a connection to be closed instantly. </span>
-<span class="cm">     --&gt;</span> 
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Further SaslException should be ignored during cleanup and</span>
-<span class="cm">       original exception should be re-thrown.</span>
-<span class="cm">     --&gt;</span> 
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.SaslRpcClient&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.taskdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings where child class has the same name as</span>
-<span class="cm">       super class. Classes based on Old API shadow names from</span>
-<span class="cm">       new API. Should go off after HADOOP-1.0</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings for usage of System.exit. This is</span>
-<span class="cm">       required and have been well thought out</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Child$2&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.JobTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addHostToNodeMapping&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;done&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;statusUpdate&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task$TaskReporter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ProgramDriver&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;driver&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.RunJar&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We need to cast objects between old and new api objects</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.OutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We intentionally do the get name from the inner class</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskTracker$MapEventsFetcherThread&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IA_AMBIGUOUS_INVOCATION_OF_INHERITED_OR_OUTER_METHOD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.FileOutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignoring this warning as resolving this would need a non-trivial change in code </span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorBaseDescriptor&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;configure&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxNumItems&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Comes from org.apache.jasper.runtime.ResourceInjector. Cannot do much.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.jobqueue_005fdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_resourceInjector&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Storing textInputFormat and then passing it as a parameter. Safe to ignore.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_STORE_OF_CLASS_LITERAL&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Can remove this after the upgrade to findbugs1.3.8</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.db.DBInputFormat&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">      This is a spurious warning. Just ignore</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;kvindex&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
 
-     <span class="cm">&lt;!-- </span>
-<span class="cm">        core changes </span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.FileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;checkPath&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_STRINGS_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.Closeable&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.AccessControlException&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ProcfsBasedProcessTree&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Streaming, Examples</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.StreamUtil$TaskId&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.DBCountPageView&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;verify&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.ContextFactory&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setAttributes&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       TFile</span>
-<span class="cm">     --&gt;</span>
-      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Chunk$ChunkDecoder&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;close&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SR_NOT_CHECKED&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">      The purpose of skip() is to drain remaining bytes of the chunk-encoded</span>
-<span class="cm">	  stream (one chunk at a time). The termination condition is checked by</span>
-<span class="cm">	  checkEOF().</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Utils&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;writeVLong&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">	  The switch condition fall through is intentional and for performance</span>
-<span class="cm">	  purposes.</span>
-<span class="cm">    --&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.log.EventCounter&quot;</span><span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.metrics.jvm.EventCounter&quot;</span><span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.ProtobufRpcEngineProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.ProtocolInfoProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.IpcConnectionContextProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-        <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.RpcHeaderProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.HAServiceProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.ZKFCProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.security\.proto\.SecurityProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.TestProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.proto\.RefreshCallQueueProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.proto\.GenericRefreshProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">       Manually checked, misses child thread manually syncing on parent&#39;s intrinsic lock.</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.metrics2.lib.MutableQuantiles&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;previousSnapshot&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       The method uses a generic type T that extends two other types</span>
-<span class="cm">       T1 and T2. Findbugs complains of a cast from T1 to T2.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.DelegationTokenRenewer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;removeRenewAction&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     
-     <span class="cm">&lt;!-- Inconsistent synchronization flagged by findbugs is not valid. --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;in&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       The switch condition for INITIATE is expected to fallthru to RESPONSE</span>
-<span class="cm">       to process initial sasl response token included in the INITIATE</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Server$Connection&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processSaslMessage&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!-- Synchronization performed on util.concurrent instance. --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.service.AbstractService&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;stop&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;JLM&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.service.AbstractService&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;waitForServiceToStop&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;JLM&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!--</span>
-<span class="cm">  OpenStack Swift FS module -closes streams in a different method</span>
-<span class="cm">  from where they are opened.</span>
-<span class="cm">  --&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.swift.snative.SwiftNativeOutputStream&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;uploadFileAttempt&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.swift.snative.SwiftNativeOutputStream&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;uploadFilePartAttempt&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!-- code from maven source, null value is checked at callee side. --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ComparableVersion$ListItem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;compareTo&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;NP&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
+  <span class="cm">&lt;!-- Reason: Optimization to use == --&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.HttpExceptionUtils&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;validateResponse&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.BooleanUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toBoolean&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toBooleanObject&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_PARAMETER_STRING_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.BooleanUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toBoolean&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RC_REF_COMPARISON_BAD_PRACTICE_BOOLEAN&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
 
+  <span class="cm">&lt;!-- Reason: Behavior documented in javadoc --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.BooleanUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;negate&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toBooleanObject&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: base class cannot be changed and field is properly checked against null so behavior is OK --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.text.ExtendedMessageFormat&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;applyPattern&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UR_UNINIT_READ_CALLED_FROM_SUPER_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: Optimization to use == --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.StringUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;indexOfDifference&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;compare&quot;</span> <span class="na">params=</span><span class="s">&quot;java.lang.String,java.lang.String,boolean&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;compareIgnoreCase&quot;</span> <span class="na">params=</span><span class="s">&quot;java.lang.String,java.lang.String,boolean&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_PARAMETER_STRING_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: Very much intended to do a fall through on the switch --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.math.NumberUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: Very much intended to do a fall through on the switch --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.DateUtils&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getFragment&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: toProperString is lazily loaded --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.math.Fraction&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;toProperString&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: It does call super.clone(), but via a subsequent method --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.text.StrTokenizer&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;clone&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IDIOM_NO_SUPER_CALL&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: Testing shows that new Integer(...) etc is quicker than Integer.valueOf --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_NUMBER_CTOR&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: FindBugs 2.0.2 used in maven-findbugs-plugin 2.5.2 seems to have problems with detection of default cases</span>
+<span class="cm">   in switch statements. All the excluded methods have switch statements that conatin a default case. --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.math.NumberUtils&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createNumber&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_NO_DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.text.ExtendedMessageFormat&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;insertFormats&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_NO_DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="cm">&lt;!-- Reason: FindBugs does not correctly recognize default branches in switch statements without break statements.</span>
+<span class="cm">   See, e.g., the report at https://sourceforge.net/p/findbugs/bugs/1298 --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.FastDateParser&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getStrategy&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;simpleQuote&quot;</span> <span class="na">params=</span><span class="s">&quot;java.lang.StringBuilder, java.lang.String&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_NO_DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: FindBugs cannot correctly recognize default branches in switch statements without break statements.</span>
+<span class="cm">   See, e.g., the report at https://sourceforge.net/p/findbugs/bugs/1298 --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.FastDatePrinter&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;appendFullDigits&quot;</span> <span class="na">params=</span><span class="s">&quot;java.lang.Appendable, int, int&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_NO_DEFAULT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: The fallthrough on the swich statement is intentional --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.FastDatePrinter&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;appendFullDigits&quot;</span> <span class="na">params=</span><span class="s">&quot;java.lang.Appendable, int, int&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+
+  <span class="cm">&lt;!-- Reason: Internal class that is used only as a key for an internal FormatCache. For this reason we can</span>
+<span class="cm">   be sure, that equals will never be called with null or types other than MultipartKey.</span>
+<span class="cm">  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.FormatCache$MultipartKey&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_EQUALS_METHOD_SHOULD_WORK_FOR_ALL_OBJECTS&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.lang3.time.FormatCache$MultipartKey&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;equals&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_EQUALS_SHOULD_HANDLE_NULL_ARGUMENT&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

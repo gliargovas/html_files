@@ -95,455 +95,82 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">dev.morphia.aggregation</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!-- This file specifies a findbugs filter for excluding reports that</span>
+<span class="cm">     should not be considered errors.</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Collectors</span><span class="p">;</span><span class="w"></span>
+<span class="cm">     The format of this file is documented at:</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.mongodb.ServerAddress</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.mongodb.ServerCursor</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.mongodb.client.MongoCollection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.mongodb.client.MongoCursor</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.mongodb.lang.Nullable</span><span class="p">;</span><span class="w"></span>
+<span class="cm">       http://findbugs.sourceforge.net/manual/filter.html</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.DatastoreImpl</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.expressions.Expressions</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.expressions.impls.DocumentExpression</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.expressions.impls.Expression</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.AddFields</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.AutoBucket</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Bucket</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.ChangeStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.CollectionStats</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Count</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.CurrentOp</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Densify</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Documents</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Facet</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Fill</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.GeoNear</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.GraphLookup</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Group</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.IndexStats</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Limit</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Lookup</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Match</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Merge</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Out</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.PlanCacheStats</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Projection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Redact</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.ReplaceRoot</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.ReplaceWith</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Sample</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Set</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.SetWindowFields</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Skip</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Sort</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.SortByCount</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Stage</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.UnionWith</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Unset</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.aggregation.stages.Unwind</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.annotations.internal.MorphiaInternal</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.mapping.codec.pojo.EntityModel</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.mapping.codec.reader.DocumentReader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.mapping.codec.writer.DocumentWriter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.query.filters.Filter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dev.morphia.query.internal.MorphiaCursor</span><span class="p">;</span><span class="w"></span>
+<span class="cm">     When possible, please specify the full names of the bug codes,</span>
+<span class="cm">     using the pattern attribute, to make it clearer what reports are</span>
+<span class="cm">     being suppressed.  You can find a listing of codes at:</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="cm">       http://findbugs.sourceforge.net/bugDescriptions.html</span>
+<span class="cm">  --&gt;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bson.Document</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bson.codecs.Codec</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bson.codecs.DecoderContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bson.codecs.EncoderContext</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
 
-<span class="cm">/**</span>
-<span class="cm"> * @param &lt;T&gt;</span>
-<span class="cm"> * @morphia.internal</span>
-<span class="cm"> * @since 2.0</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="nd">@MorphiaInternal</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AggregationImpl</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AggregationImpl</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+  <span class="cm">&lt;!-- Package com.sun.sgs.app.util --&gt;</span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DatastoreImpl</span><span class="w"> </span><span class="n">datastore</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MongoCollection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">collection</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Stage</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+  <span class="cm">&lt;!-- Testing methods to call via reflection. --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashMap&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getAvgTreeDepth&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getMaxTreeDepth&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getMinTreeDepth&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UPM_UNCALLED_PRIVATE_METHOD&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Creates an instance.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param datastore  the datastore</span>
-<span class="cm">     * @param collection the source collection</span>
-<span class="cm">     * @morphia.internal</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@MorphiaInternal</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AggregationImpl</span><span class="p">(</span><span class="n">DatastoreImpl</span><span class="w"> </span><span class="n">datastore</span><span class="p">,</span><span class="w"> </span><span class="n">MongoCollection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">collection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">datastore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datastore</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">collection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+  <span class="cm">&lt;!-- OK if version fields are not currently being read, they should</span>
+<span class="cm">       still be instance fields. --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashMap&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashSet&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;minorVersion&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SS_SHOULD_BE_STATIC&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">    </span><span class="cm">/**</span>
-<span class="cm">     * Creates an instance.</span>
-<span class="cm">     *</span>
-<span class="cm">     * @param datastore  the datastore</span>
-<span class="cm">     * @param source     the source type</span>
-<span class="cm">     * @param collection the source collection</span>
-<span class="cm">     * @morphia.internal</span>
-<span class="cm">     */</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@MorphiaInternal</span><span class="w"></span>
-<span class="w">    </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AggregationImpl</span><span class="p">(</span><span class="n">DatastoreImpl</span><span class="w"> </span><span class="n">datastore</span><span class="p">,</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">MongoCollection</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">collection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">datastore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datastore</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">source</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">collection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+  <span class="cm">&lt;!-- The root fields of these classes are initialized the the default</span>
+<span class="cm">       value (null) and set lazily. --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashMap$EntrySet&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashMap$KeySet&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableHashMap$Values&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;root&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">autoBucket</span><span class="p">(</span><span class="n">AutoBucket</span><span class="w"> </span><span class="n">bucket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">bucket</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+  <span class="cm">&lt;!-- OK to declare ManagedReference as serializable field --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Field</span> <span class="na">type=</span><span class="s">&quot;com.sun.sgs.app.ManagedReference&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Field</span> <span class="na">type=</span><span class="s">&quot;com.sun.sgs.app.ManagedReference[]&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">bucket</span><span class="p">(</span><span class="n">Bucket</span><span class="w"> </span><span class="n">bucket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">bucket</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+  <span class="cm">&lt;!-- ScalableDeque knowingly breaks the equals contract internally</span>
+<span class="cm">       to support random access removals.  This is completely</span>
+<span class="cm">       hidden from the user and so we are allowing it here --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableDeque$Element&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.app.util.ScalableDeque$ElementMatcher&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+    <span class="nt">&lt;Or&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Or&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">collStats</span><span class="p">(</span><span class="n">CollectionStats</span><span class="w"> </span><span class="n">stats</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">stats</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Count</span><span class="p">(</span><span class="n">name</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">currentOp</span><span class="p">(</span><span class="n">CurrentOp</span><span class="w"> </span><span class="n">currentOp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">currentOp</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">densify</span><span class="p">(</span><span class="n">Densify</span><span class="w"> </span><span class="n">densify</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">densify</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">documents</span><span class="p">(</span><span class="n">DocumentExpression</span><span class="p">...</span><span class="w"> </span><span class="n">documents</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">Documents</span><span class="p">.</span><span class="na">documents</span><span class="p">(</span><span class="n">documents</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MorphiaCursor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resultType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">MongoCursor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cursor</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pipeline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pipeline</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">LOG</span><span class="p">.</span><span class="na">isDebugEnabled</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;pipeline = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pipeline</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">datastore</span><span class="p">.</span><span class="na">getMapper</span><span class="p">().</span><span class="na">isMappable</span><span class="p">(</span><span class="n">resultType</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">resultType</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">collection</span><span class="p">.</span><span class="na">getDocumentClass</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">MongoCollection</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="n">collection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">collection</span><span class="p">.</span><span class="na">withDocumentClass</span><span class="p">(</span><span class="n">Document</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">MongoCursor</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="na">aggregate</span><span class="p">(</span><span class="n">pipeline</span><span class="p">).</span><span class="na">iterator</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="n">EntityModel</span><span class="w"> </span><span class="n">entityModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datastore</span><span class="p">.</span><span class="na">getMapper</span><span class="p">().</span><span class="na">getEntityModel</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">collection</span><span class="p">.</span><span class="na">getDocumentClass</span><span class="p">());</span><span class="w"></span>
-<span class="w">            </span><span class="n">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MappingCursor</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">datastore</span><span class="p">.</span><span class="na">getCodecRegistry</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">resultType</span><span class="p">),</span><span class="w"></span>
-<span class="w">                    </span><span class="n">entityModel</span><span class="p">.</span><span class="na">getDiscriminatorKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">cursor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="na">aggregate</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span><span class="w"> </span><span class="n">resultType</span><span class="p">).</span><span class="na">iterator</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MorphiaCursor</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">cursor</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MorphiaCursor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resultType</span><span class="p">,</span><span class="w"> </span><span class="n">AggregationOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MorphiaCursor</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(),</span><span class="w"> </span><span class="n">datastore</span><span class="p">,</span><span class="w"> </span><span class="n">collection</span><span class="p">,</span><span class="w"> </span><span class="n">resultType</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">iterator</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">facet</span><span class="p">(</span><span class="n">Facet</span><span class="w"> </span><span class="n">facet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">facet</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">Fill</span><span class="w"> </span><span class="n">fill</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">fill</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">geoNear</span><span class="p">(</span><span class="n">GeoNear</span><span class="w"> </span><span class="n">near</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">near</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">graphLookup</span><span class="p">(</span><span class="n">GraphLookup</span><span class="w"> </span><span class="n">lookup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">lookup</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">group</span><span class="p">(</span><span class="n">Group</span><span class="w"> </span><span class="n">group</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">group</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">indexStats</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">IndexStats</span><span class="p">.</span><span class="na">indexStats</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">limit</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">limit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">Limit</span><span class="p">.</span><span class="na">limit</span><span class="p">(</span><span class="n">limit</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">lookup</span><span class="p">(</span><span class="n">Lookup</span><span class="w"> </span><span class="n">lookup</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">lookup</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">match</span><span class="p">(</span><span class="n">Filter</span><span class="p">...</span><span class="w"> </span><span class="n">filters</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stages</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span><span class="w"></span>
-<span class="w">                    </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">getName</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;$eq&quot;</span><span class="p">))</span><span class="w"></span>
-<span class="w">                    </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">entityType</span><span class="p">(</span><span class="n">source</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">Match</span><span class="p">.</span><span class="na">match</span><span class="p">(</span><span class="n">filters</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="n">Merge</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="n">merge</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">merge</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">collection</span><span class="p">.</span><span class="na">aggregate</span><span class="p">(</span><span class="n">pipeline</span><span class="p">())</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">toCollection</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="n">Merge</span><span class="o">&lt;</span><span class="n">M</span><span class="o">&gt;</span><span class="w"> </span><span class="n">merge</span><span class="p">,</span><span class="w"> </span><span class="n">AggregationOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">merge</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">.</span><span class="na">getType</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Document</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(),</span><span class="w"> </span><span class="n">datastore</span><span class="p">,</span><span class="w"> </span><span class="n">collection</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">toCollection</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">out</span><span class="p">(</span><span class="n">Out</span><span class="o">&lt;</span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">out</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">collection</span><span class="p">.</span><span class="na">aggregate</span><span class="p">(</span><span class="n">pipeline</span><span class="p">())</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">toCollection</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">out</span><span class="p">(</span><span class="n">Out</span><span class="o">&lt;</span><span class="n">O</span><span class="o">&gt;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">AggregationOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">out</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="p">.</span><span class="na">type</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Document</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">pipeline</span><span class="p">(),</span><span class="w"> </span><span class="n">datastore</span><span class="p">,</span><span class="w"> </span><span class="n">collection</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">).</span><span class="na">toCollection</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">planCacheStats</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">PlanCacheStats</span><span class="p">.</span><span class="na">planCacheStats</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span><span class="n">Projection</span><span class="w"> </span><span class="n">projection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">projection</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">redact</span><span class="p">(</span><span class="n">Redact</span><span class="w"> </span><span class="n">redact</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">redact</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">replaceRoot</span><span class="p">(</span><span class="n">ReplaceRoot</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">root</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">replaceWith</span><span class="p">(</span><span class="n">ReplaceWith</span><span class="w"> </span><span class="n">with</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">with</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">sample</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">Sample</span><span class="p">.</span><span class="na">sample</span><span class="p">(</span><span class="n">sample</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">addFields</span><span class="p">(</span><span class="n">AddFields</span><span class="w"> </span><span class="n">fields</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">fields</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="n">Set</span><span class="w"> </span><span class="n">set</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">set</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">setWindowFields</span><span class="p">(</span><span class="n">SetWindowFields</span><span class="w"> </span><span class="n">fields</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">fields</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">skip</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">skip</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">Skip</span><span class="p">.</span><span class="na">skip</span><span class="p">(</span><span class="n">skip</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="n">Sort</span><span class="w"> </span><span class="n">sort</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">sort</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">sortByCount</span><span class="p">(</span><span class="n">Expression</span><span class="w"> </span><span class="n">sort</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">SortByCount</span><span class="p">.</span><span class="na">sortByCount</span><span class="p">(</span><span class="n">sort</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">unionWith</span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">Stage</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">Stage</span><span class="p">...</span><span class="w"> </span><span class="n">others</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UnionWith</span><span class="p">(</span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">Expressions</span><span class="p">.</span><span class="na">toList</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">others</span><span class="p">)));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">unionWith</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">collection</span><span class="p">,</span><span class="w"> </span><span class="n">Stage</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">Stage</span><span class="p">...</span><span class="w"> </span><span class="n">others</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UnionWith</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span><span class="w"> </span><span class="n">Expressions</span><span class="p">.</span><span class="na">toList</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">others</span><span class="p">)));</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">unset</span><span class="p">(</span><span class="n">Unset</span><span class="w"> </span><span class="n">unset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">unset</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">unwind</span><span class="p">(</span><span class="n">Unwind</span><span class="w"> </span><span class="n">unwind</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">unwind</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="w"> </span><span class="nf">changeStream</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">ChangeStream</span><span class="p">.</span><span class="na">changeStream</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Aggregation</span><span class="w"> </span><span class="nf">changeStream</span><span class="p">(</span><span class="n">ChangeStream</span><span class="w"> </span><span class="n">stream</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">addStage</span><span class="p">(</span><span class="n">stream</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="nd">@SuppressWarnings</span><span class="p">({</span><span class="w"> </span><span class="s">&quot;unchecked&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rawtypes&quot;</span><span class="w"> </span><span class="p">})</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pipeline</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">stages</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">Codec</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datastore</span><span class="p">.</span><span class="na">getCodecRegistry</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span><span class="w"></span>
-<span class="w">                    </span><span class="n">DocumentWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DocumentWriter</span><span class="p">(</span><span class="n">datastore</span><span class="p">.</span><span class="na">getMapper</span><span class="p">());</span><span class="w"></span>
-<span class="w">                    </span><span class="n">codec</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">EncoderContext</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">build</span><span class="p">());</span><span class="w"></span>
-<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">writer</span><span class="p">.</span><span class="na">getDocument</span><span class="p">();</span><span class="w"></span>
-<span class="w">                </span><span class="p">})</span><span class="w"></span>
-<span class="w">                </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addStage</span><span class="p">(</span><span class="n">Stage</span><span class="w"> </span><span class="n">stage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">stage</span><span class="p">.</span><span class="na">aggregation</span><span class="p">(</span><span class="k">this</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">stages</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">stage</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MappingCursor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MongoCursor</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MongoCursor</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="n">results</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Codec</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codec</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">discriminator</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">MappingCursor</span><span class="p">(</span><span class="n">MongoCursor</span><span class="o">&lt;</span><span class="n">Document</span><span class="o">&gt;</span><span class="w"> </span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">Codec</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">codec</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">discriminator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">results</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">codec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codec</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">discriminator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">discriminator</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">results</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">hasNext</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="na">hasNext</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="nf">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">results</span><span class="p">.</span><span class="na">next</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">available</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="na">available</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@Nullable</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="nf">tryNext</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">hasNext</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="nd">@Nullable</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">ServerCursor</span><span class="w"> </span><span class="nf">getServerCursor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="na">getServerCursor</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">ServerAddress</span><span class="w"> </span><span class="nf">getServerAddress</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">results</span><span class="p">.</span><span class="na">getServerAddress</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="nf">map</span><span class="p">(</span><span class="n">Document</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">next</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">discriminator</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">codec</span><span class="p">.</span><span class="na">decode</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DocumentReader</span><span class="p">(</span><span class="n">next</span><span class="p">),</span><span class="w"> </span><span class="n">DecoderContext</span><span class="p">.</span><span class="na">builder</span><span class="p">().</span><span class="na">build</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="p">}</span><span class="w"></span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

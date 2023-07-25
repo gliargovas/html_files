@@ -95,74 +95,48 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><span class="cm">&lt;!--</span>
+<span class="cm"> Copyright (c) 2014 - 2016 Upwards Northwards Software Limited</span>
+<span class="cm"> All rights reserved.</span>
 
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm"> Redistribution and use in source and binary forms, with or without</span>
+<span class="cm"> modification, are permitted provided that the following conditions are met:</span>
+<span class="cm"> 1. Redistributions of source code must retain the above copyright</span>
+<span class="cm"> notice, this list of conditions and the following disclaimer.</span>
+<span class="cm"> 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="cm"> notice, this list of conditions and the following disclaimer in the</span>
+<span class="cm"> documentation and/or other materials provided with the distribution.</span>
+<span class="cm"> 3. All advertising materials mentioning features or use of this software</span>
+<span class="cm"> must display the following acknowledgement:</span>
+<span class="cm"> This product includes software developed by Upwards Northwards Software Limited.</span>
+<span class="cm"> 4. Neither the name of Upwards Northwards Software Limited nor the</span>
+<span class="cm"> names of its contributors may be used to endorse or promote products</span>
+<span class="cm"> derived from this software without specific prior written permission.</span>
 
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
+<span class="cm"> THIS SOFTWARE IS PROVIDED BY UPWARDS NORTHWARDS SOFTWARE LIMITED &#39;&#39;AS IS&#39;&#39; AND ANY</span>
+<span class="cm"> EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED</span>
+<span class="cm"> WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</span>
+<span class="cm"> DISCLAIMED. IN NO EVENT SHALL THE UPWARDS NORTHWARDS SOFTWARE LIMITED BE LIABLE FOR ANY</span>
+<span class="cm"> DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES</span>
+<span class="cm"> (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="cm"> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND</span>
+<span class="cm"> ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span>
+<span class="cm"> (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS</span>
+<span class="cm"> SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 <span class="cm">--&gt;</span>
-
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-
- <span class="cm">&lt;!-- Ignore some irrelevant serialization warnings --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.SecondarySort$FirstGroupingComparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.SecondarySort$IntPair$Comparator&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-
- <span class="cm">&lt;!-- Ignore the irrelevant resource cleanup warnings--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.DBCountPageView&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;verify&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
- <span class="cm">&lt;!-- Ignore the irrelevant closure warnings--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.dancing.Pentomino$Piece&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- Ignore the irrelevant package protection warnings--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.dancing.Pentomino&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;fourRotations&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;oneRotation&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;twoRotations&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-   <span class="cm">&lt;!-- Ignore the irrelevant right shift warnings, as only positive integers are given as input--&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.Unsigned16&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getHexDigit&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.terasort.TeraInputFormat&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*\.R\$.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*\.Manifest\$.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*\.*Test&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Not&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;IJU&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Not&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

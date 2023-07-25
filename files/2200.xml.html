@@ -96,303 +96,248 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
+<span class="cm">  ~ Copyright 2008-present MongoDB, Inc.</span>
+<span class="cm">  ~</span>
+<span class="cm">  ~ Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="cm">  ~ you may not use this file except in compliance with the License.</span>
+<span class="cm">  ~ You may obtain a copy of the License at</span>
+<span class="cm">  ~</span>
+<span class="cm">  ~   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">  ~</span>
+<span class="cm">  ~ Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">  ~ distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">  ~ See the License for the specific language governing permissions and</span>
+<span class="cm">  ~ limitations under the License.</span>
+<span class="cm">  --&gt;</span>
 
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
-
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
-<span class="cm">--&gt;</span>
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
-<span class="cm">       is intentional to make a connection to be closed instantly. </span>
-<span class="cm">     --&gt;</span> 
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Further SaslException should be ignored during cleanup and</span>
-<span class="cm">       original exception should be re-thrown.</span>
-<span class="cm">     --&gt;</span> 
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.SaslRpcClient&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.taskdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings where child class has the same name as</span>
-<span class="cm">       super class. Classes based on Old API shadow names from</span>
-<span class="cm">       new API. Should go off after HADOOP-1.0</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings for usage of System.exit. This is</span>
-<span class="cm">       required and have been well thought out</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Child$2&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.JobTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addHostToNodeMapping&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;done&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;statusUpdate&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task$TaskReporter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We need to cast objects between old and new api objects</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.OutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We intentionally do the get name from the inner class</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskTracker$MapEventsFetcherThread&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IA_AMBIGUOUS_INVOCATION_OF_INHERITED_OR_OUTER_METHOD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.FileOutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignoring this warning as resolving this would need a non-trivial change in code </span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorBaseDescriptor&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;configure&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxNumItems&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Comes from org.apache.jasper.runtime.ResourceInjector. Cannot do much.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.jobqueue_005fdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_resourceInjector&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Storing textInputFormat and then passing it as a parameter. Safe to ignore.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_STORE_OF_CLASS_LITERAL&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Can remove this after the upgrade to findbugs1.3.8</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.db.DBInputFormat&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">      This is a spurious warning. Just ignore</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;kvindex&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!-- </span>
-<span class="cm">        core changes </span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.FileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;checkPath&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_STRINGS_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KFSOutputStream&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;path&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KosmosFileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;initialize&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.Closeable&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.AccessControlException&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.Utils&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;skip&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">        The compareTo method is actually a dummy method that just</span>
-<span class="cm">        throws excpetions. So, no need to override equals. Ignore</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.RecordTypeInfo&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ProcfsBasedProcessTree&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Streaming, Examples</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.StreamUtil$TaskId&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.DBCountPageView&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;verify&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.ContextFactory&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setAttributes&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       TFile</span>
-<span class="cm">     --&gt;</span>
-      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Chunk$ChunkDecoder&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;close&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SR_NOT_CHECKED&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">      The purpose of skip() is to drain remaining bytes of the chunk-encoded</span>
-<span class="cm">	  stream (one chunk at a time). The termination condition is checked by</span>
-<span class="cm">	  checkEOF().</span>
-<span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.file.tfile.Utils&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;writeVLong&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SF_SWITCH_FALLTHROUGH&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">	  The switch condition fall through is intentional and for performance</span>
-<span class="cm">	  purposes.</span>
-<span class="cm">    --&gt;</span>
-
+    <span class="cm">&lt;!-- specific excludes which should be fixed --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.log.EventCounter&quot;</span><span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.JSONWriterSettings&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.metrics.jvm.EventCounter&quot;</span><span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- backward compatibility --&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.HadoopRpcProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.ProtocolInfoProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.IpcConnectionContextProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-        <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ipc\.protobuf\.RpcPayloadHeaderProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.HAServiceProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="cm">&lt;!-- protobuf generated code --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.ha\.proto\.ZKFCProtocolProtos.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;EI,EI2&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 
- <span class="nt">&lt;/FindBugsFilter&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.types.ObjectId&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_RANDOM_USED_ONLY_ONCE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.AwsAuthenticator$AwsSaslClient&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_RANDOM_USED_ONLY_ONCE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.ScramShaAuthenticator$DefaultRandomStringGenerator&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_RANDOM_USED_ONLY_ONCE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.codecs.BsonValueCodecProvider&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getBsonTypeClassMap&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_EXPOSE_REP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- these specific issues are deliberate design decisions --&gt;</span>
+
+    <span class="cm">&lt;!-- Deliberately ignoring this, as the check for a null SSLParameters is actually necessary.</span>
+<span class="cm">         See https://jira.mongodb.org/browse/JAVA-2876 for details. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.client.internal.KeyManagementService&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;enableHostNameVerification&quot;</span> <span class="na">params=</span><span class="s">&quot;javax.net.ssl.SSLSocket&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Deliberately ignoring this, as many BSONObject subclasses don&#39;t do it --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;com.mongodb&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Deliberately ignoring return value of CountDownLatch.await --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.BaseCluster&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- The underlying call to GridFSInputFile closes the file --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.gridfs.GridFS&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createFile&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.File&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.DocumentCodec&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.mongodb.DatabaseTestCase&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.mongodb.FunctionalSpecification&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.DatabaseTestCase&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MS_PKGPROTECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.types.StringRangeSet$NumberStringComparator&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Special handling of clone method for cloneable BsonValue subclasses.  By design, they don&#39;t call super.clone() --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.BsonArray&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;clone&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IDIOM_NO_SUPER_CALL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.BsonDocument&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;clone&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IDIOM_NO_SUPER_CALL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.BsonDocumentWrapper&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;clone&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IDIOM_NO_SUPER_CALL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.RawBsonArray&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;clone&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CN_IDIOM_NO_SUPER_CALL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.bson.codecs.jsr310.Jsr310CodecProvider&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Test exclusions --&gt;</span>
+    <span class="cm">&lt;!-- All bugs in test classes, except for JUnit-specific bugs --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*\.*Test&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Not&gt;</span>
+            <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;IJU&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Not&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Deliberate use of an unused field in the Person POJO class --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.acceptancetest.crud.pojo.Person&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SS_SHOULD_BE_STATIC&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Spock tests seem to fail the serial version ID test when stubbing.  Annoying. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Source</span> <span class="na">name=</span><span class="s">&quot;~.*\.groovy&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_NO_SERIALVERSIONID,LI_LAZY_INIT_STATIC,EQ_UNUSUAL,IT_NO_SUCH_ELEMENT,RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Strange findbugs issues --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Source</span> <span class="na">name=</span><span class="s">&quot;~.*ClusterSettingsSpecification\.groovy&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RANGE_ARRAY_INDEX&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.internal.connection.AbstractByteBufBsonDocument.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_BOOLEAN_RETURN_NULL&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.client.ClientSession.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.reactivestreams.client.ClientSession.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.internal.async.client.ClientSession.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.async.client.internal.AsyncCryptConnection.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Spotbugs assumes that SSLSocket#getSSLParameters never returns null, when that is not the case for all JDKs --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.SocketStreamHelper&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.client.internal.CryptConnection&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;retain&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~com.mongodb.reactivestreams.client.internal.crypt.*&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;retain&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Caused by Java 11 generating a null check on try with resources.</span>
+<span class="cm">         See https://github.com/spotbugs/spotbugs/issues/756 for details. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- AWS use UNIX-style line endings --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.AuthorizationHeader&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VA_FORMAT_STRING_USES_NEWLINE&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- The method is a wrapper for `Condition.await`, naturally it does not call it in a loop. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.DefaultConnectionPool$OpenConcurrencyLimiter&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;awaitNanos&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;WA_AWAIT_NOT_IN_LOOP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- The checker fails to see that the code prevents concurrent incrementation by using exclusive locking. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.DefaultConnectionPool$StateAndGeneration&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;generation&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.ConcurrentPool$StateAndPermits&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;permits&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!-- Non-short-circuit operators are used intentionally. --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.ConcurrentPool$StateAndPermits&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;acquirePermit&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NS_DANGEROUS_NON_SHORT_CIRCUIT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.mongodb.internal.connection.DefaultConnectionPool$OpenConcurrencyLimiter&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;acquirePermitOrGetAvailableOpenedConnection&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NS_NON_SHORT_CIRCUIT&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

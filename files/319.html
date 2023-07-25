@@ -95,75 +95,48 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Copyright 2018 SPF4J.</span>
-<span class="cm"> *</span>
-<span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="cm"> * you may not use this file except in compliance with the License.</span>
-<span class="cm"> * You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm"> * See the License for the specific language governing permissions and</span>
-<span class="cm"> * limitations under the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.spf4j.failsafe</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.Callable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="nt">&lt;FindBugsFilter&gt;</span>
 
-<span class="cm">/**</span>
-<span class="cm"> *</span>
-<span class="cm"> * @author Zoltan Farkas</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServerCall</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+     <span class="nt">&lt;Match&gt;</span>
+         <span class="cm">&lt;!-- PMB_INSTANCE_BASED_THREAD_LOCAL cannot be suppresed with annotation for whatever reason --&gt;</span>
+        <span class="cm">&lt;!-- CD_CIRCULAR_DEPENDENCY is nuts in fb-contrib 6.6.2 --&gt;</span>
+        <span class="cm">&lt;!-- CRLF_INJECTION_LOGS this is irelevant, devs need to use good log appenders. --&gt;</span>
+        <span class="cm">&lt;!-- RFI_SET_ACCESSIBLE ... JDK 10 suposedly will drop this functionality.... will re-enable when moving to JDK 9 --&gt;</span>
+        <span class="cm">&lt;!-- FII_USE_FUNCTION_IDENTITY has a lot of false positives that are fixed in next fb-contrib --&gt;</span>
+        <span class="cm">&lt;!-- LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS is a valid use case with my prefered backends --&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS,FII_USE_FUNCTION_IDENTITY,RFI_SET_ACCESSIBLE,CRLF_INJECTION_LOGS,BL_BURYING_LOGIC,CD_CIRCULAR_DEPENDENCY,EXS_EXCEPTION_SOFTENING_HAS_CHECKED,UVA_USE_VAR_ARGS,URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD,MOM_MISLEADING_OVERLOAD_MODEL,EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS,PMB_INSTANCE_BASED_THREAD_LOCAL,OPM_OVERLY_PERMISSIVE_METHOD,IMC_IMMATURE_CLASS_NO_EQUALS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">ServerCall</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;SECURITY&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Token.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ZCompiler.*&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">ServerCall</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="n">server</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Request</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ParseException([.].*)?&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Invoking {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">Response</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">server</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Finished {}, returning {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Errored {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">ex</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*JavaCharStream([.].*)?&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Server</span><span class="w"> </span><span class="nf">getServer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Request</span><span class="w"> </span><span class="nf">getRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">request</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;ServerCall{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;request=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CE_CLASS_ENVY,SEC_SIDE_EFFECT_CONSTRUCTOR,SIC_INNER_SHOULD_BE_STATIC_ANON,BC_UNCONFIRMED_CAST,PREDICTABLE_RANDOM&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
 
-<span class="p">}</span><span class="w"></span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

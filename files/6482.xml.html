@@ -96,332 +96,357 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="cm">&lt;!--</span>
+<span class="cm">         findbugs complain that when returning Boolean type we should return only True</span>
+<span class="cm">         or False and not null.</span>
+<span class="cm">         In this case we do have the third option i.e. null</span>
+<span class="cm">        --&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.plugin.jsni.JsFunctionResultHelper&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getResultAsBoolean&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;NP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.UpdateMainContentLayout&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.proto&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.RevealOverlayContent&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.ha.proto&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.DynamicMainAdded&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.protocol&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.popup.CloseDynamicPopup&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainClusterPresenter$ClusterSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainDataCenterPresenter$DataCenterSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainDiskPresenter$DiskSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainEventPresenter$EventSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainHostPresenter$HostSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
-<span class="cm">       is intentional to make a connection to be closed instantly. </span>
-<span class="cm">     --&gt;</span> 
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainNetworkPresenter$NetworkSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- </span>
-<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
-<span class="cm">       We have an input quoting filter that protects us.</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainPoolPresenter$PoolSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainProviderPresenter$ProviderSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings where child class has the same name as</span>
-<span class="cm">       super class. Classes based on Old API shadow names from</span>
-<span class="cm">       new API. Should go off after HADOOP-1.0</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.mapred.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainSessionPresenter$SessionSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignore warnings for usage of System.exit. This is</span>
-<span class="cm">       required and have been well thought out</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Child$2&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainQuotaPresenter$QuotaSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.JobTracker&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addHostToNodeMapping&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainStoragePresenter$StorageSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Or&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;done&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;statusUpdate&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;/Or&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainTemplatePresenter$TemplateSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.Task$TaskReporter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainUserPresenter$UserSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We need to cast objects between old and new api objects</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.OutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainVirtualMachinePresenter$VirtualMachineSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       We intentionally do the get name from the inner class</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.TaskTracker$MapEventsFetcherThread&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IA_AMBIGUOUS_INVOCATION_OF_INHERITED_OR_OUTER_METHOD&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.system.MessageReceived&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and is used to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.FileOutputCommitter&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_WRONG_PACKAGE_INTENTIONAL&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.uicommon.model.SystemTreeModelProvider$SystemTreeSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Ignoring this warning as resolving this would need a non-trivial change in code </span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorBaseDescriptor&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;configure&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxNumItems&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainEngineErrataPresenter$ErrataSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Comes from org.apache.jasper.runtime.ResourceInjector. Cannot do much.</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.jobqueue_005fdetails_jsp&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_resourceInjector&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainVolumePresenter$VolumeSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Storing textInputFormat and then passing it as a parameter. Safe to ignore.</span>
-<span class="cm">     --&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of using Boolean constructor instead of Boolean.valueOf</span>
+<span class="cm">        This class is GWT generated code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        Dm: Method invokes inefficient Boolean constructor; use Boolean.valueOf(...) instead (DM_BOOLEAN_CTOR)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.aggregate.ValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createValueAggregatorJob&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_STORE_OF_CLASS_LITERAL&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.UpdateMainContentLayoutEvent&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;hashCode&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_BOOLEAN_CTOR&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Can remove this after the upgrade to findbugs1.3.8</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.lib.db.DBInputFormat&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getSplits&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
+
     <span class="cm">&lt;!--</span>
-<span class="cm">      This is a spurious warning. Just ignore</span>
+<span class="cm">      findbugs complain of unused field in class.</span>
+<span class="cm">      This is a GWT class and use to generate code</span>
+
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
 <span class="cm">    --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.MapTask$MapOutputBuffer&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;kvindex&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!-- </span>
-<span class="cm">        core changes </span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.FileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;checkPath&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ES_COMPARING_STRINGS_WITH_EQ&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KFSOutputStream&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;path&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.fs.kfs.KosmosFileSystem&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;initialize&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.io.Closeable&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.security.AccessControlException&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.Utils&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;skip&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
+   <span class="nt">&lt;Match&gt;</span>
+     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.section.main.presenter.MainVnicProfilePresenter$VnicProfileSelectionChange&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/Match&gt;</span>
 
      <span class="cm">&lt;!--</span>
-<span class="cm">        The compareTo method is actually a dummy method that just</span>
-<span class="cm">        throws excpetions. So, no need to override equals. Ignore</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.meta.RecordTypeInfo&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.util.ProcfsBasedProcessTree&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DMI_HARDCODED_ABSOLUTE_FILENAME&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       Streaming, Examples</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.streaming.StreamUtil$TaskId&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.examples.DBCountPageView&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;verify&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">       getTmpInputStreams is pretty much like a stream constructor.</span>
-<span class="cm">       The newly created streams are not supposed to be closed in the constructor. So ignore</span>
-<span class="cm">       the OBL warning.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTmpInputStreams&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">      ResponseProccessor is thread that is designed to catch RuntimeException.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSClient$DFSOutputStream$DataStreamer$ResponseProcessor&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">      lastAppliedTxid is carefully unsynchronized in the BackupNode in a couple spots.</span>
-<span class="cm">      See the comments in BackupImage for justification.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImage&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastAppliedTxId&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">      Findbugs doesn&#39;t realize that closing a FilterOutputStream pushes the close down to</span>
-<span class="cm">      wrapped streams, too.</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImageFormat$Saver&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;save&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">      the &#39;metrics&#39; member is sometimes used from synchronized blocks, sometimes not,</span>
-<span class="cm">      but it&#39;s only reset by test cases, so should be fine</span>
-<span class="cm">     --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;metrics&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!--</span>
-<span class="cm">      This method isn&#39;t performance-critical and is much clearer to write as it&#39;s written.</span>
+<span class="cm">      Suppress current instance methods assigning values to static variables</span>
 <span class="cm">      --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BlockPoolManager&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doRefreshNamenodes&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.uicommon.model.TaskFirstRowModelProvider&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- Don&#39;t complain about System.exit() being called from quit() --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.MetaRecoveryContext&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;quit&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.widget.table.cell.CustomSelectionCell&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.widget.tags.TagItemCell&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
-     <span class="cm">&lt;!-- Don&#39;t complain about recoverBlock equality check --&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">     Ignore all the unconfirmed casts in this module.</span>
+<span class="cm">     Unfortunately, these warnings are currently inherit to the design,</span>
+<span class="cm">     and handling them on an individual basis just adds noise to the</span>
+<span class="cm">     process.</span>
+<span class="cm">     --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+    <span class="cm">&lt;!--</span>
+<span class="cm">      Ignore non-static inner classes.</span>
+<span class="cm">      This pattern is used by GWT-generated code, which we have no control of</span>
+<span class="cm">      --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.DataNode&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverBlock&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SIC_INNER_SHOULD_BE_STATIC&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
-     <span class="cm">&lt;!-- More complex cleanup logic confuses findbugs --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.ApplicationConstants&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SKIPPED_CLASS_TOO_BIG&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+       <span class="cm">&lt;!--</span>
+<span class="cm">        findbugs complain of unused field in class.</span>
+<span class="cm">        This is a GWT class and use to generate code</span>
+
+<span class="cm">        findbugs reason:</span>
+<span class="cm">        UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">       --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.server.Journal&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persistPaxosData&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.webadmin.uicommon.model.TagModelProvider$TagActivationChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- Don&#39;t complain about LocalDatanodeInfo&#39;s anonymous class --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.BlockReaderLocal$LocalDatanodeInfo$1&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD_INNER_CLASS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- Only one method increments numFailedVolumes and it is synchronized --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsVolumeList&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numFailedVolumes&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- Access to pendingReceivedRequests is synchronized --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BPServiceActor&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;notifyNamenodeBlockImmediately&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingReceivedRequests&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="cm">&lt;!-- The &quot;LightWeight&quot; classes are explicitly not thread safe --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.util.LightWeightGSet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;modification&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.util.LightWeightHashSet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;modification&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.util.LightWeightLinkedSet&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;modification&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
- <span class="nt">&lt;/FindBugsFilter&gt;</span>
+<span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

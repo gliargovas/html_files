@@ -96,57 +96,13 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <h2></h2>
 
 <div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      Suppress current instance methods assigning values to static variables</span>
-<span class="cm">      --&gt;</span>
     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.uicommonweb.Configurator&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.uicommonweb.models.datacenters.DataCenterNetworkListModel&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-       <span class="cm">&lt;!--</span>
-<span class="cm">        findbugs complains about loading known null to a variable</span>
-<span class="cm">        in this case we are using it for equals check and its intended</span>
-
-<span class="cm">        NP: Load of known null value (NP_LOAD_OF_KNOWN_NULL_VALUE)</span>
-<span class="cm">       --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.uicommonweb.models.hosts.HostSetupNetworksModel&quot;</span> <span class="nt">/&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;NP&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-     <span class="cm">&lt;!--</span>
-<span class="cm">      Ignore all the unconfirmed casts in this module.</span>
-<span class="cm">      Unfortunately, these warnings are currently inherit to the design,</span>
-<span class="cm">      and handling them on an individual basis just adds noise to the</span>
-<span class="cm">      process.</span>
-<span class="cm">      --&gt;</span>
-     <span class="nt">&lt;Match&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">     Ignore all the questionable casts from Collection to abstract collection in this module.</span>
-<span class="cm">     Unfortunately, these warnings are currently inherit to the design, ListModel base items are</span>
-<span class="cm">     of a type Collection and many times need to be cast to a List for sorting purposes etc.</span>
-<span class="cm">     Handling those on an individual basis just adds noise to the process.</span>
-<span class="cm">    --&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_BAD_CAST_TO_ABSTRACT_COLLECTION&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="cm">&lt;!--</span>
-<span class="cm">      findbugs complains about an unusual equals, which is correct, I have a special equals that can take</span>
-<span class="cm">      a flag to make it behave differently. So the normal equal calls the special one with the default flag.</span>
-<span class="cm">    --&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.uicommonweb.models.SystemTreeItemModel&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_UNUSUAL&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>

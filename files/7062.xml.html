@@ -95,38 +95,15 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cm">&lt;!-- This file specifies a findbugs filter for excluding reports that</span>
-<span class="cm">     should not be considered errors.</span>
-
-<span class="cm">     The format of this file is documented at:</span>
-
-<span class="cm">       http://findbugs.sourceforge.net/manual/filter.html</span>
-
-<span class="cm">     When possible, please specify the full names of the bug codes,</span>
-<span class="cm">     using the pattern attribute, to make it clearer what reports are</span>
-<span class="cm">     being suppressed.  You can find a listing of codes at:</span>
-
-<span class="cm">       http://findbugs.sourceforge.net/bugDescriptions.html</span>
-<span class="cm">  --&gt;</span>
-
-<span class="nt">&lt;FindBugsFilter&gt;</span>
-
-  <span class="cm">&lt;!-- Package com.sun.sgs.system --&gt;</span>
-
-  <span class="cm">&lt;!-- Intentionally ignoring possible IOException. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.system.Boot$1&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;closeStream&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DE_MIGHT_IGNORE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="cm">&lt;!-- The version field is included for future use. --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.sun.sgs.system.ExtJarGraph$JarNode&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;version&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;URF_UNREAD_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Or&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.lenition.rosette.R.*&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Binding&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Fixture&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/Or&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE,MALICIOUS_CODE,STYLE,SECURITY,CORRECTNESS,MT_CORRECTNESS,BAD_PRACTICE,I18N&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

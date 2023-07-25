@@ -95,47 +95,61 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!--</span>
+<span class="cm">  ~ Licensed to the Apache Software Foundation (ASF) under one or more</span>
+<span class="cm">  ~ contributor license agreements.  See the NOTICE file distributed with</span>
+<span class="cm">  ~ this work for additional information regarding copyright ownership.</span>
+<span class="cm">  ~ The ASF licenses this file to You under the Apache License, Version 2.0</span>
+<span class="cm">  ~ (the &quot;License&quot;); you may not use this file except in compliance with</span>
+<span class="cm">  ~ the License.  You may obtain a copy of the License at</span>
+<span class="cm">  ~</span>
+<span class="cm">  ~    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="cm">  ~</span>
+<span class="cm">  ~ Unless required by applicable law or agreed to in writing, software</span>
+<span class="cm">  ~ distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="cm">  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="cm">  ~ See the License for the specific language governing permissions and</span>
+<span class="cm">  ~ limitations under the License.</span>
+<span class="cm">  --&gt;</span>
 
 <span class="nt">&lt;FindBugsFilter&gt;</span>
-
-     <span class="nt">&lt;Match&gt;</span>
-         <span class="cm">&lt;!-- PMB_INSTANCE_BASED_THREAD_LOCAL cannot be suppresed with annotation for whatever reason --&gt;</span>
-        <span class="cm">&lt;!-- CD_CIRCULAR_DEPENDENCY is nuts in fb-contrib 6.6.2 --&gt;</span>
-        <span class="cm">&lt;!-- CRLF_INJECTION_LOGS this is irelevant, devs need to use good log appenders. --&gt;</span>
-        <span class="cm">&lt;!-- RFI_SET_ACCESSIBLE ... JDK 10 suposedly will drop this functionality.... will re-enable when moving to JDK 9 --&gt;</span>
-        <span class="cm">&lt;!-- FII_USE_FUNCTION_IDENTITY has a lot of false positives that are fixed in next fb-contrib --&gt;</span>
-        <span class="cm">&lt;!-- LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS is a valid use case with my prefered backends --&gt;</span>
-       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;LO_INCORRECT_NUMBER_OF_ANCHOR_PARAMETERS,FII_USE_FUNCTION_IDENTITY,RFI_SET_ACCESSIBLE,CRLF_INJECTION_LOGS,BL_BURYING_LOGIC,CD_CIRCULAR_DEPENDENCY,EXS_EXCEPTION_SOFTENING_HAS_CHECKED,UVA_USE_VAR_ARGS,URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD,MOM_MISLEADING_OVERLOAD_MODEL,EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS,PMB_INSTANCE_BASED_THREAD_LOCAL,OPM_OVERLY_PERMISSIVE_METHOD,IMC_IMMATURE_CLASS_NO_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;SECURITY&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Token.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ZCompiler.*&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*ParseException([.].*)?&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*JavaCharStream([.].*)?&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-    <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*Test([.].*)?&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CE_CLASS_ENVY,SEC_SIDE_EFFECT_CONSTRUCTOR,SIC_INNER_SHOULD_BE_STATIC_ANON,BC_UNCONFIRMED_CAST,PREDICTABLE_RANDOM&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
-
-
+  <span class="cm">&lt;!--</span>
+<span class="cm">    Allow a class to hold or return mutable objects. While this has obvious risks, it is much too</span>
+<span class="cm">    common a pattern to treat as a bug.</span>
+<span class="cm">  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;EI, EI2&quot;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+   <span class="cm">&lt;!-- Ignore &quot;UrF: Unread public/protected field (URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD)&quot; since it is mostly false positives  --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UrF&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+  <span class="cm">&lt;!-- Ignore &quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS: shadows the simple name of the superclass&quot; --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+  <span class="cm">&lt;!-- Ignore &quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE: shadows the simple name of implemented interface&quot; --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_INTERFACE&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+	<span class="cm">&lt;!-- Ignore org.apache.gobblin.audit.values.auditor as the package is still a WIP --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.gobblin\.audit\.values\.auditor.*&quot;</span> <span class="nt">/&gt;</span>
+	<span class="nt">&lt;/Match&gt;</span>
+  <span class="cm">&lt;!-- Ignored until https://github.com/linkedin/gobblin/issues/969 has been resolved --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.gobblin\.metastore\.database\.DatabaseJobHistoryStoreV.*&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SQL_PREPARED_STATEMENT_GENERATED_FROM_NONCONSTANT_STRING&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="cm">&lt;!-- Ignored until https://github.com/linkedin/gobblin/issues/976 has been resolved --&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.gobblin.source.jdbc.JdbcExtractor&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION,ODR_OPEN_DATABASE_RESOURCE&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
+  <span class="nt">&lt;Match&gt;</span>
+    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.gobblin.compaction.verify.CompactionTimeRangeVerifier&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

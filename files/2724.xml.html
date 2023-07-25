@@ -95,255 +95,216 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;FindBugsFilter&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- That code is auto generated --&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;~com\.puppycrawl\.tools\.checkstyle\.grammar.*&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- see a reason of suppression at #910 --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.UniquePropertiesCheck$UniqueProperties&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Main&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;loadProperties&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;load&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PropertyCacheFile&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persist&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.ant.CheckstyleAntTask&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;createOverridingProperties&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.OrderedPropertiesCheck&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processFiltered&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.TranslationCheck&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTranslationKeys&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.UniquePropertiesCheck&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;processFiltered&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- till https://github.com/spotbugs/spotbugs/issues/1338 fails on java11+ --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.meta.MetadataGeneratorUtil&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;dumpMetadata&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- There is some empty methods in AbstractCheck/AbstractJavadocCheck.</span>
-<span class="cm">         Making them abstract requires too much boilerplate in subclasses. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ACEM_ABSTRACT_CLASS_EMPTY_METHODS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Till https://github.com/mebigfatguy/fb-contrib/issues/296</span>
-<span class="cm">         @Nullable annotation is good idea in general, but requires extra dependencies. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;AI_ANNOTATION_ISSUES_NEEDS_NULLABLE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- have never been a case for years, Eclipse does not show any other classes</span>
-<span class="cm">           inherited from CommonASTWithHiddenTokens --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.DetailAstImpl&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- The structure of frames relies on the AST structure which relies on correct/compilable</span>
-<span class="cm">           java files. It is ok to have direct casts to subtypes there. Any problems at runtime do</span>
-<span class="cm">           mean serious problems in the algorithm or AST generation. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST_OF_RETURN_VALUE&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Till https://github.com/mebigfatguy/fb-contrib/issues/309 --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;CE_CLASS_ENVY&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- These fields are restricted caches which must remain populated until the process ends. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PMB_POSSIBLE_MEMORY_BLOAT&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.PackageObjectFactory&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.SuppressWarningsHolder&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- false positive, beginTree is a kind of constructor for Checks --&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.DeclarationOrderCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.MatchXpathCheck&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.OuterTypeFilenameCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- createJavadocNode is private and can not be launched without visitToken --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.javadoc.AbstractJavadocCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- has only one public method and all initialized in that method --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.MultilineDetector&quot;</span> <span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- beginProcessing() is kind of c-tor --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpMultilineCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.regexp.RegexpSinglelineCheck&quot;</span> <span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- Uses setters to set fields values.</span>
-<span class="cm">           This is part of the public API, so it&#39;s hard to refactor. --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.api.AbstractCheck$FileContext&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck$FileContext&quot;</span> <span class="nt">/&gt;</span>
-      <span class="cm">&lt;!-- We cannot modify fields since we won&#39;t have the values</span>
-<span class="cm">             to create the instance until the setters are called --&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.filters.SuppressionSingleFilter&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.filters.SuppressionXpathSingleFilter&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- false-positive. Bugs reported even though casting is done only</span>
-<span class="cm">           after verification using instanceof --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.JavadocDetailNodeParser&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;parseJavadocAsDetailNode&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST_OF_RETURN_VALUE&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/pull/6343 --&gt;</span>
-    <span class="nt">&lt;Class</span>
-    <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.OrderedPropertiesCheck$SequencedProperties&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_DOESNT_OVERRIDE_EQUALS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- It is better to catch all exceptions since it can throw a runtime exception. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.TranslationCheck&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTranslationKeys&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- false-positive. See details at https://github.com/checkstyle/checkstyle/issues/8262 --&gt;</span>
-    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;$jacocoData&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_TRANSIENT_FIELD_NOT_RESTORED&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Creates too many false positives on classes stored in sets/maps</span>
-<span class="cm">         which require multiple objects to be stored. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;FCBL_FIELD_COULD_BE_LOCAL&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Runtime#exit(int) used in Main#main to return the exit code to the system. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Main&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MDM_RUNTIME_EXIT_OR_HALT&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- False positive as we override and enforce final so no more overrides. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;COM_COPIED_OVERRIDDEN_METHOD&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.javadoc.AbstractJavadocCheck&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;finishTree&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Check is broken and does not clearly report where the fault is.</span>
-<span class="cm">         Suppressed until https://github.com/mebigfatguy/fb-contrib/issues/408 --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;WOC_WRITE_ONLY_COLLECTION_FIELD&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Creates too many false positives on orElseGet calls. --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OI_OPTIONAL_ISSUES_USES_ORELSEGET_WITH_NULL&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Must scan entire list to find the best item. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderCheck&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getGroupNumber&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SLS_SUSPICIOUS_LOOP_SEARCH&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Better to use DetailAstImpl here to avoid needless dependency of API package. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.JavaAstVisitor&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;addLastSibling&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OCP_OVERLY_CONCRETE_PARAMETER&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Unable to resolve the item. --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;findLastChildWhichContainsSpecifiedToken&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SLS_SUSPICIOUS_LOOP_SEARCH&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Till https://github.com/mebigfatguy/fb-contrib/issues/329 --&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Checker&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.TreeWalker&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getExternalResourceLocations&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- For recursive code, the size is difficult to determine.</span>
-<span class="cm">         It is better to use the default allocation size. --&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.JavaAstVisitor&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.meta.JavadocMetadataScraper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;PSC_PRESIZE_COLLECTIONS&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="cm">&lt;!-- After https://github.com/checkstyle/checkstyle/issues/11140</span>
-<span class="cm">       there should be one section per one bug pattern, with list of allowed classes or methods --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;</span>
-<span class="s">      CLI_CONSTANT_LIST_INDEX,</span>
-<span class="s">      EXS_EXCEPTION_SOFTENING_NO_CHECKED,</span>
-<span class="s">      EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS,</span>
-<span class="s">      FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY,</span>
-<span class="s">      IMC_IMMATURE_CLASS_BAD_SERIALVERSIONUID,</span>
-<span class="s">      IMC_IMMATURE_CLASS_NO_EQUALS,</span>
-<span class="s">      IMC_IMMATURE_CLASS_NO_TOSTRING,</span>
-<span class="s">      IMC_IMMATURE_CLASS_PRINTSTACKTRACE,</span>
-<span class="s">      MOM_MISLEADING_OVERLOAD_MODEL,</span>
-<span class="s">      NFF_NON_FUNCTIONAL_FIELD,</span>
-<span class="s">      NMCS_NEEDLESS_MEMBER_COLLECTION_SYNCHRONIZATION,</span>
-<span class="s">      OPM_OVERLY_PERMISSIVE_METHOD,</span>
-<span class="s">      PMB_INSTANCE_BASED_THREAD_LOCAL,</span>
-<span class="s">      SEO_SUBOPTIMAL_EXPRESSION_ORDER,</span>
-<span class="s">      STT_STRING_PARSING_A_FIELD,</span>
-<span class="s">      WEM_WEAK_EXCEPTION_MESSAGING,</span>
-<span class="s">      &quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Till https://github.com/spotbugs/spotbugs/issues/1601 --&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP,EI_EXPOSE_REP2&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Till https://github.com/spotbugs/spotbugs/issues/1867 --&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.gui.ListToTreeSelectionModelWrapper&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="cm">&lt;!-- Checks and filters are treated differently. --&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.Checker&quot;</span><span class="nt">/&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.puppycrawl.tools.checkstyle.TreeWalker&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ITC_INHERITANCE_TYPE_CHECKING&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-<span class="nt">&lt;/FindBugsFilter&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.record.compiler.generated&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.ha.proto&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.hdfs.server.namenode.FsImageProto.*&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.protocol&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_COMPARATOR_SHOULD_BE_SERIALIZABLE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~.*_jsp&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DLS_DEAD_LOCAL_STORE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;_jspx_dependants&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_UNWRITTEN_FIELD&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Inconsistent synchronization for Client.Connection.out is</span>
+<span class="cm">       is intentional to make a connection to be closed instantly. </span>
+<span class="cm">     --&gt;</span> 
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.ipc.Client$Connection&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;out&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- </span>
+<span class="cm">       Ignore Cross Scripting Vulnerabilities</span>
+<span class="cm">       We have an input quoting filter that protects us.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;XSS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;HRS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- </span>
+<span class="cm">        core changes </span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org.apache.hadoop.*&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;MS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">       getTmpInputStreams is pretty much like a stream constructor.</span>
+<span class="cm">       The newly created streams are not supposed to be closed in the constructor. So ignore</span>
+<span class="cm">       the OBL warning.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getTmpInputStreams&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      ResponseProccessor is thread that is designed to catch RuntimeException.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer$ResponseProcessor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;run&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;REC_CATCH_EXCEPTION&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!--</span>
+<span class="cm">      lastAppliedTxid is carefully unsynchronized in the BackupNode in a couple spots.</span>
+<span class="cm">      See the comments in BackupImage for justification.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImage&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;lastAppliedTxId&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      Findbugs doesn&#39;t realize that closing a FilterOutputStream pushes the close down to</span>
+<span class="cm">      wrapped streams, too.</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSImageFormat$Saver&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;save&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      the &#39;metrics&#39; member is sometimes used from synchronized blocks, sometimes not,</span>
+<span class="cm">      but it&#39;s only reset by test cases, so should be fine</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;metrics&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">     We use a separate lock to protect modifications to journalSet so that</span>
+<span class="cm">     FSEditLog#selectInputStreams does not need to be a synchronized method.</span>
+<span class="cm">    --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.FSEditLog&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;journalSet&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      This method isn&#39;t performance-critical and is much clearer to write as it&#39;s written.</span>
+<span class="cm">      --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BlockPoolManager&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doRefreshNamenodes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">category=</span><span class="s">&quot;PERFORMANCE&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Don&#39;t complain about System.exit() being called from quit() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.MetaRecoveryContext&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;quit&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_EXIT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about recoverBlock equality check --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.DataNode&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;recoverBlock&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EC_UNRELATED_TYPES&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- More complex cleanup logic confuses findbugs --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.qjournal.server.Journal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;persistPaxosData&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+
+     <span class="cm">&lt;!-- Don&#39;t complain about LocalDatanodeInfo&#39;s anonymous class --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.BlockReaderLocal$LocalDatanodeInfo$1&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SE_BAD_FIELD_INNER_CLASS&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Only one method increments numFailedVolumes and it is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsVolumeList&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;numFailedVolumes&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!-- Access to pendingReceivedRequests is synchronized --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.BPServiceActor&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;notifyNamenodeBlockImmediately&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;pendingReceivedRequests&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;VO_VOLATILE_INCREMENT&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+      <span class="cm">&lt;!-- Replace System.exit() call with ExitUtil.terminate() --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.tools.JMXGet&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;main&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_NULL_ON_SOME_PATH&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>    
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.datanode.ReplicaInfo&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setDirInternal&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_STRING_CTOR&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.shortcircuit.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK_EXCEPTION_PATH&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.shortcircuit.DfsClientShmManager$EndpointShmManager&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;allocSlot&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UL_UNRELEASED_LOCK&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!-- Manually verified to be okay, we want to throw away the top bit here --&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.namenode.CachedBlock&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;getReplication&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;ICAST_QUESTIONABLE_UNSIGNED_RIGHT_SHIFT&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.protocol.CacheDirective&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;insertInternal&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;BC_UNCONFIRMED_CAST&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.server.blockmanagement.CacheReplicationMonitor&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.hdfs.DFSUtil&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;assertAllResultsEqual&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NP_LOAD_OF_KNOWN_NULL_VALUE&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
+
+ <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>
 </html>

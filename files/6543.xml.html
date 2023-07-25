@@ -95,100 +95,93 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span class="cm">&lt;!--</span>
-<span class="cm">   Licensed to the Apache Software Foundation (ASF) under one or more</span>
-<span class="cm">   contributor license agreements.  See the NOTICE file distributed with</span>
-<span class="cm">   this work for additional information regarding copyright ownership.</span>
-<span class="cm">   The ASF licenses this file to You under the Apache License, Version 2.0</span>
-<span class="cm">   (the &quot;License&quot;); you may not use this file except in compliance with</span>
-<span class="cm">   the License.  You may obtain a copy of the License at</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;FindBugsFilter&gt;</span>
+    <span class="nt">&lt;Match&gt;</span>
+          <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;com.google.gwt.core.client.GWTBridge&quot;</span> <span class="nt">/&gt;</span>
+          <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;NM_SAME_SIMPLE_NAME_AS_SUPERCLASS&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Match&gt;</span>
 
-<span class="cm">       http://www.apache.org/licenses/LICENSE-2.0</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complain of unused field in class.</span>
+<span class="cm">      This is a GWT class and use to generate code</span>
 
-<span class="cm">   Unless required by applicable law or agreed to in writing, software</span>
-<span class="cm">   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="cm">   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="cm">   See the License for the specific language governing permissions and</span>
-<span class="cm">   limitations under the License.</span>
-<span class="cm">--&gt;</span>
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.RefreshActiveModel&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-<span class="cm">&lt;!--</span>
-<span class="cm">  This file contains some false positive bugs detected by findbugs. Their</span>
-<span class="cm">  false positive nature has been analyzed individually and they have been</span>
-<span class="cm">  put here to instruct findbugs it must ignore them.</span>
-<span class="cm">--&gt;</span>
-<span class="nt">&lt;FindBugsFilter&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complain of unused field in class.</span>
+<span class="cm">      This is a GWT class and use to generate code</span>
 
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.SsoTokenChange&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!--  See discussion on https://issues.apache.org/jira/browse/IO-215 --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.FileUtils&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doCopyDirectory&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.File,java.io.File,java.io.FileFilter,boolean,java.util.List&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;doCopyFile&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.File,java.io.File,boolean&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complains about unused field(s) in this class.</span>
+<span class="cm">      This is a GWT class and used to generate code.</span>
 
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.AsyncOperationStarted&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!--</span>
-<span class="cm">       Ignoring the return from mkdirs() is a false positives since the</span>
-<span class="cm">       following line in both those methods checks for the existence of</span>
-<span class="cm">       the directory and throws an exception if it doesn&#39;t exist. </span>
-<span class="cm">    --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.FileUtils&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;moveDirectoryToDirectory&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.File,java.io.File,boolean&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;moveFileToDirectory&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.File,java.io.File,boolean&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complains about unused field(s) in this class.</span>
+<span class="cm">      This is a GWT class and used to generate code.</span>
 
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.AsyncOperationComplete&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!--</span>
-<span class="cm">      FileEntry is used internally by FileAlterationObserver to refresh and</span>
-<span class="cm">      update the state of files it is monitoring and in that context this is</span>
-<span class="cm">      not an issue. If people re-use it elsewhere then they need to</span>
-<span class="cm">      take care - but its not its primary purpose here and so its OK</span>
-<span class="cm">    --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.monitor.FileEntry&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;setChildren&quot;</span> <span class="na">params=</span><span class="s">&quot;org.apache.commons.io.monitor.FileEntry[]&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+    <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complains about unused field(s) in this class.</span>
+<span class="cm">      This is a GWT class and used to generate code.</span>
 
+<span class="cm">      findbugs reason:</span>
+<span class="cm">      UuF: Unused field (UUF_UNUSED_FIELD)</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.communication.EngineSessionRefreshed&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">code=</span><span class="s">&quot;UuF&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!--  See discussion on https://issues.apache.org/jira/browse/IO-214 --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.output.ByteArrayOutputStream&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.AsyncQuery&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;converterCallback&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;UWF_NULL_FIELD&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
+     <span class="cm">&lt;!--</span>
+<span class="cm">       Supress inefficient &quot;new Boolean&quot; calls which are generated by GWT</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;DM_BOOLEAN_CTOR&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 
-  <span class="cm">&lt;!-- This is a false positive since close() does nothing in the Stream implementation being used --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.output.ByteArrayOutputStream&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;toBufferedInputStream&quot;</span> <span class="na">params=</span><span class="s">&quot;java.io.InputStream&quot;</span> <span class="na">returns=</span><span class="s">&quot;java.io.InputStream&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OS_OPEN_STREAM&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-
-  <span class="cm">&lt;!--  See discussion on https://issues.apache.org/jira/browse/IO-216 --&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.output.LockableFileWriter&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;close&quot;</span> <span class="na">params=</span><span class="s">&quot;&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;RV_RETURN_VALUE_IGNORED_BAD_PRACTICE&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-
-  <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.commons.io.output.DeferredFileOutputStream&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;thresholdReached&quot;</span> <span class="na">params=</span><span class="s">&quot;&quot;</span> <span class="na">returns=</span><span class="s">&quot;void&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Or&gt;</span>
-    <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
+     <span class="cm">&lt;!--</span>
+<span class="cm">      findbugs complains that class is too big of analysis.</span>
+<span class="cm">      This class cannot be smaller since it should contain all the errors</span>
+<span class="cm">     --&gt;</span>
+     <span class="nt">&lt;Match&gt;</span>
+       <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.ovirt.engine.ui.frontend.AppErrors&quot;</span> <span class="nt">/&gt;</span>
+       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SKIPPED_CLASS_TOO_BIG&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;/Match&gt;</span>
 <span class="nt">&lt;/FindBugsFilter&gt;</span>
 </pre></div>
 </body>

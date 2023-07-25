@@ -368,19 +368,12 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
        <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.MergeManagerImpl&quot;</span> <span class="nt">/&gt;</span>
        <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SC_START_IN_CTOR&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
-    <span class="cm">&lt;!--</span>
-<span class="cm">     This class is unlikely to get subclassed, so ignore</span>
-<span class="cm">    --&gt;</span>
-    <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.ShuffleSchedulerImpl&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SC_START_IN_CTOR&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;/Match&gt;</span>
 
     <span class="cm">&lt;!--</span>
 <span class="cm">      Do not bother if equals is not implemented. We will not need it here</span>
 <span class="cm">    --&gt;</span>
      <span class="nt">&lt;Match&gt;</span>
-      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.ShuffleSchedulerImpl$Penalty&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.task.reduce.ShuffleScheduler$Penalty&quot;</span> <span class="nt">/&gt;</span>
       <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;EQ_COMPARETO_USE_OBJECT_EQUALS&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;/Match&gt;</span>
 
@@ -555,50 +548,29 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
     <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.yarn.proto&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   <span class="nt">&lt;Match&gt;</span>
-    <span class="nt">&lt;Package</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.hs.proto&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;/Match&gt;</span>
-  <span class="nt">&lt;Match&gt;</span>
     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;~org\.apache\.hadoop\.mapreduce\.v2\.proto.*&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/Match&gt;</span>
   
-   <span class="cm">&lt;!--</span>
-<span class="cm">     The below fields are accessed locally and only via methods that are synchronized. </span>
-<span class="cm">     --&gt;</span>
    <span class="nt">&lt;Match&gt;</span>
      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Or&gt;</span>
       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;mapResourceReqt&quot;</span> <span class="nt">/&gt;</span>
+     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/Match&gt;</span>
+  
+   <span class="nt">&lt;Match&gt;</span>
+     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.rm.RMContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reduceResourceReqt&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;maxReduceRampupLimit&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;reduceSlowStart&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Or&gt;</span>
      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
    <span class="nt">&lt;/Match&gt;</span>
-   <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.local.LocalContainerAllocator&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Or&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;retryInterval&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;retrystartTime&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;/Or&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;/Match&gt;</span>
-   <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;commitThreadCancelTimeoutMs&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;/Match&gt;</span>
+   <span class="cm">&lt;!--</span>
+<span class="cm">     The above 2 fields are accessed locally and only via methods that are synchronized. </span>
+<span class="cm">     --&gt;</span>
  
    <span class="nt">&lt;Match&gt;</span>
      <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.ShuffleHandler&quot;</span> <span class="nt">/&gt;</span>
       <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;sslFileBufferSize&quot;</span> <span class="nt">/&gt;</span>
      <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;IS2_INCONSISTENT_SYNC&quot;</span> <span class="nt">/&gt;</span>
    <span class="nt">&lt;/Match&gt;</span> 
-
-   <span class="nt">&lt;Match&gt;</span>
-     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapred.ClientServiceDelegate&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;Method</span> <span class="na">name=</span><span class="s">&quot;invoke&quot;</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;Bug</span> <span class="na">pattern=</span><span class="s">&quot;SWL_SLEEP_WITH_LOCK_HELD&quot;</span> <span class="nt">/&gt;</span>
-   <span class="nt">&lt;/Match&gt;</span>
    
   <span class="nt">&lt;Match&gt;</span>
     <span class="nt">&lt;Class</span> <span class="na">name=</span><span class="s">&quot;org.apache.hadoop.mapreduce.util.ProcessTree&quot;</span> <span class="nt">/&gt;</span>
