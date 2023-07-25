@@ -258,169 +258,471 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">161</span>
 <span class="normal">162</span>
 <span class="normal">163</span>
-<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.hubspot.singularity.data.history</span><span class="p">;</span><span class="w"></span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.hubspot.singularity</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.ExtendedTaskState</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.OrderDirection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.SingularityDeployHistory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.SingularityRequestHistory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.SingularityTaskHistory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.singularity.SingularityTaskIdHistory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.annotation.JsonCreator</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.annotation.JsonProperty</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.MoreObjects</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Predicate</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.mesos.Resources</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.hubspot.mesos.SingularityMesosArtifact</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.v3.oas.annotations.media.Schema</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Optional</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.CompletableFuture</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.inject.Inject</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.annotation.Nonnull</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NoopHistoryManager</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HistoryManager</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Overrides and settings for a particular task being launched&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SingularityPendingTask</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SingularityPendingTaskId</span><span class="w"> </span><span class="n">pendingTaskId</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">cmdLineArgsList</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">actionId</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Inject</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">NoopHistoryManager</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saveRequestHistoryUpdate</span><span class="p">(</span><span class="n">SingularityRequestHistory</span><span class="w"> </span><span class="n">requestHistory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">(</span><span class="s">&quot;NoopHistoryManager can not save&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saveTaskHistory</span><span class="p">(</span><span class="n">SingularityTaskHistory</span><span class="w"> </span><span class="n">taskHistory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">(</span><span class="s">&quot;NoopHistoryManager can not save&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saveDeployHistory</span><span class="p">(</span><span class="n">SingularityDeployHistory</span><span class="w"> </span><span class="n">deployHistory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">(</span><span class="s">&quot;NoopHistoryManager can not save&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">SingularityDeployHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDeployHistory</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">deployId</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">SingularityPendingTask</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">matchingRequest</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="w"></span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">getPendingTaskId</span><span class="p">().</span><span class="na">getRequestId</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">requestId</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityDeployHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getDeployHistoryForRequest</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitStart</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitCount</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Predicate</span><span class="o">&lt;</span><span class="n">SingularityPendingTask</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">matchingDeploy</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">deployId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">getPendingTaskId</span><span class="p">().</span><span class="na">getDeployId</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">deployId</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getDeployHistoryForRequestCount</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityTaskIdHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getTaskIdHistory</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">deployId</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NULL_PARAM_DEREF_NONVIRTUAL&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityPendingTask</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">SingularityPendingTaskId</span><span class="w"> </span><span class="n">pendingTaskId</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">cmdLineArgsList</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">host</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ExtendedTaskState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lastTaskStatus</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">startedBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">startedAfter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">updatedBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">updatedAfter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">OrderDirection</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orderDirection</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">limitStart</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitCount</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">actionId</span><span class="w"></span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">pendingTaskId</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">cmdLineArgsList</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">user</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">actionId</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getTaskIdHistoryCount</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">deployId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">host</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ExtendedTaskState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lastTaskStatus</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">startedBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">startedAfter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">updatedBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">updatedAfter</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@JsonCreator</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">SingularityPendingTask</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;pendingTaskId&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">SingularityPendingTaskId</span><span class="w"> </span><span class="n">pendingTaskId</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;cmdLineArgsList&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">cmdLineArgsList</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;runId&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runId</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;skipHealthchecks&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;message&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;resources&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="n">resources</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;s3UploaderAdditionalFiles&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;runAsUserOverride&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;envOverrides&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;requiredSlaveAttributeOverrides&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredSlaveAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;allowedSlaveAttributeOverrides&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedSlaveAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;extraArtifacts&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="s">&quot;actionId&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">actionId</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;requiredAgentAttributeOverrides&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nd">@JsonProperty</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;allowedAgentAttributeOverrides&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"></span>
 <span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">pendingTaskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pendingTaskId</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">cmdLineArgsList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmdLineArgsList</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">skipHealthchecks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">resources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">s3UploaderAdditionalFiles</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">runAsUserOverride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">envOverrides</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">envOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">envOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">requiredAgentAttributeOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">      </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="n">requiredSlaveAttributeOverrides</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">allowedAgentAttributeOverrides</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">      </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">MoreObjects</span><span class="p">.</span><span class="na">firstNonNull</span><span class="p">(</span><span class="n">allowedSlaveAttributeOverrides</span><span class="p">,</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyMap</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Objects</span><span class="p">.</span><span class="na">nonNull</span><span class="p">(</span><span class="n">extraArtifacts</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">extraArtifacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">extraArtifacts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">actionId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actionId</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">SingularityTaskHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getTaskHistory</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">taskId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">equals</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">getClass</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">SingularityPendingTask</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SingularityPendingTask</span><span class="p">)</span><span class="w"> </span><span class="n">o</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">pendingTaskId</span><span class="p">,</span><span class="w"> </span><span class="n">that</span><span class="p">.</span><span class="na">pendingTaskId</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">SingularityTaskHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getTaskHistoryByRunId</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">runId</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">empty</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hashCode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">hash</span><span class="p">(</span><span class="n">pendingTaskId</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;The user who triggered the launch of this task&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A unique id for the request to launch this task&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">SingularityPendingTaskId</span><span class="w"> </span><span class="nf">getPendingTaskId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pendingTaskId</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Extra command line arguments for this particular task&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">getCmdLineArgsList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cmdLineArgsList</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;An optional unique run id associated with this task&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRunId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runId</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;If `true`, do not run healthchecks for this task and immediately consider it healthy&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSkipHealthchecks</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">skipHealthchecks</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;An optional message for the launch of this task&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">message</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Optional overrides to the resources requested for this task&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;resources sepcified in the deploy associated with this task&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Resources</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getResources</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resources</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A list of additional files for the SingularityS3Uploader to upload&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityS3UploaderFile</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getS3UploaderAdditionalFiles</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">s3UploaderAdditionalFiles</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Override the system user this task will be run as&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRunAsUserOverride</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">runAsUserOverride</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Environment variable overrides for this particular task&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getEnvOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">envOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Required slave attribute overrides for this particular task. These will be applied on top of any requiredSlaveAttributes that are defined at the SingularityRequest level.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequiredAgentAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Allowed slave attribute overrides for this particular task. These will be applied on top of any allowedSlaveAttributes that are defined at the SingularityRequest level.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAllowedAgentAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Required slave attribute overrides for this particular task. These will be applied on top of any requiredSlaveAttributes that are defined at the SingularityRequest level.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequiredSlaveAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">requiredAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Allowed slave attribute overrides for this particular task. These will be applied on top of any allowedSlaveAttributes that are defined at the SingularityRequest level.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getAllowedSlaveAttributeOverrides</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">allowedAgentAttributeOverrides</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A list of additional artifacts to download for this particular task&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityMesosArtifact</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getExtraArtifacts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">extraArtifacts</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="nd">@Schema</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;An optional unique id associated with the launch of this task&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">  </span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getActionId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">actionId</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">SingularityRequestHistory</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequestHistory</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createdBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createdAfter</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">OrderDirection</span><span class="o">&gt;</span><span class="w"> </span><span class="n">orderDirection</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitStart</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitCount</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;SingularityPendingTask{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;pendingTaskId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">pendingTaskId</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, cmdLineArgsList=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">cmdLineArgsList</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, user=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">user</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, runId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">runId</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, skipHealthchecks=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">skipHealthchecks</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, message=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">message</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, resources=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">resources</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, s3UploaderAdditionalFiles=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">s3UploaderAdditionalFiles</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, runAsUserOverride=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">runAsUserOverride</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, envOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">envOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, requiredAgentAttributeOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">requiredAgentAttributeOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, allowedAgentAttributeOverrides=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">allowedAgentAttributeOverrides</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, extraArtifacts&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">extraArtifacts</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;, actionId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="n">actionId</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;}&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getRequestHistoryCount</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequestHistoryLike</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestIdLike</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitStart</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">limitCount</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getRequestIdsInTaskHistory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">emptyList</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getUnpurgedTaskHistoryCountByRequestBefore</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="n">before</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">purgeTaskHistory</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">requestId</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">limit</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Date</span><span class="o">&gt;</span><span class="w"> </span><span class="n">purgeBefore</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">deleteRowInsteadOfUpdate</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Integer</span><span class="w"> </span><span class="n">maxPurgeCount</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UnsupportedOperationException</span><span class="p">(</span><span class="s">&quot;NoopHistoryManager can not update/delete&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="s">&quot;NP_NONNULL_PARAM_VIOLATION&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// https://github.com/findbugsproject/findbugs/issues/79</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">Void</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">startHistoryBackfill</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">batchSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">completedFuture</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">purgeRequestHistory</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">purgeDeployHistory</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

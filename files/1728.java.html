@@ -235,7 +235,47 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
-<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
 <span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
 <span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
 <span class="cm"> * distributed with this work for additional information</span>
@@ -253,128 +293,168 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="cm"> * specific language governing permissions and limitations</span>
 <span class="cm"> * under the License.</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.miniclusterImpl</span><span class="p">;</span><span class="w"></span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.harness.conf</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertNotNull</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">java.nio.charset.StandardCharsets.UTF_8</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.Objects.requireNonNull</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.FileReader</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map.Entry</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Properties</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.AccumuloClient</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.Scanner</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.admin.TableOperations</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.security.tokens.PasswordToken</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.manager.thrift.ManagerGoalState</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.manager.thrift.ManagerMonitorInfo</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.manager.thrift.ManagerState</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.metadata.MetadataTable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.metadata.RootTable</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.security.Authorizations</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.minicluster.ServerType</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.FileUtils</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.AfterAll</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.BeforeAll</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Timeout</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Iterators</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.harness.AccumuloClusterHarness.ClusterType</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
 
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;paths not set by user input&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MiniAccumuloClusterImplTest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">testDir</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * Base class for extracting configuration values from Java Properties</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AccumuloClusterPropertyConfiguration</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">AccumuloClusterConfiguration</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">      </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AccumuloClusterPropertyConfiguration</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">MiniAccumuloClusterImpl</span><span class="w"> </span><span class="n">accumulo</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACCUMULO_IT_PROPERTIES_FILE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accumulo.it.properties&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACCUMULO_CLUSTER_TYPE_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accumulo.it.cluster.type&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NUM_TSERVERS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACCUMULO_MINI_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accumulo.it.cluster.mini.&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACCUMULO_STANDALONE_PREFIX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accumulo.it.cluster.standalone.&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">TEST_TABLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">testTableID</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">ACCUMULO_CLUSTER_CLIENT_CONF_KEY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;accumulo.it.cluster.clientconf&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@BeforeAll</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setupMiniCluster</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">baseDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&quot;user.dir&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/target/mini-tests&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">baseDir</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">baseDir</span><span class="p">.</span><span class="na">isDirectory</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">testDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">baseDir</span><span class="p">,</span><span class="w"> </span><span class="n">MiniAccumuloClusterImplTest</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">FileUtils</span><span class="p">.</span><span class="na">deleteQuietly</span><span class="p">(</span><span class="n">testDir</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">testDir</span><span class="p">.</span><span class="na">mkdir</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">AccumuloClusterPropertyConfiguration</span><span class="w"> </span><span class="nf">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">MiniAccumuloConfigImpl</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">MiniAccumuloConfigImpl</span><span class="p">(</span><span class="n">testDir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;superSecret&quot;</span><span class="p">).</span><span class="na">setJDWPEnabled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// expressly set number of tservers since we assert it later, in case the default changes</span><span class="w"></span>
-<span class="w">    </span><span class="n">config</span><span class="p">.</span><span class="na">setNumTservers</span><span class="p">(</span><span class="n">NUM_TSERVERS</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">accumulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MiniAccumuloClusterImpl</span><span class="p">(</span><span class="n">config</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">accumulo</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// create a table to ensure there are some entries in the !0 table</span><span class="w"></span>
-<span class="w">    </span><span class="n">AccumuloClient</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumulo</span><span class="p">.</span><span class="na">createAccumuloClient</span><span class="p">(</span><span class="s">&quot;root&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PasswordToken</span><span class="p">(</span><span class="s">&quot;superSecret&quot;</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">TableOperations</span><span class="w"> </span><span class="n">tableops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">tableOperations</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">tableops</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">TEST_TABLE</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">testTableID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tableops</span><span class="p">.</span><span class="na">tableIdMap</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">TEST_TABLE</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">clusterTypeValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">clientConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">propertyFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_IT_PROPERTIES_FILE</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="na">createScanner</span><span class="p">(</span><span class="n">TEST_TABLE</span><span class="p">,</span><span class="w"> </span><span class="n">Authorizations</span><span class="p">.</span><span class="na">EMPTY</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">Iterators</span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">iterator</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Timeout</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testAccurateProcessListReturned</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ServerType</span><span class="p">,</span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ProcessReference</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">procs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumulo</span><span class="p">.</span><span class="na">getProcesses</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">procs</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">ServerType</span><span class="p">.</span><span class="na">GARBAGE_COLLECTOR</span><span class="p">));</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ServerType</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ServerType</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="n">ServerType</span><span class="p">.</span><span class="na">MANAGER</span><span class="p">,</span><span class="w"> </span><span class="n">ServerType</span><span class="p">.</span><span class="na">TABLET_SERVER</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">ServerType</span><span class="p">.</span><span class="na">ZOOKEEPER</span><span class="p">})</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">procs</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">t</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ProcessReference</span><span class="o">&gt;</span><span class="w"> </span><span class="n">procRefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">procs</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">assertTrue</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">procRefs</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ProcessReference</span><span class="w"> </span><span class="n">procRef</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">procRefs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">procRef</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">propertyFile</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Check for properties provided in a file</span><span class="w"></span>
+<span class="w">      </span><span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">propertyFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">Properties</span><span class="w"> </span><span class="n">fileProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">UTF_8</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">fileProperties</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clusterTypeValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileProperties</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_CLUSTER_TYPE_KEY</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">clientConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileProperties</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_CLUSTER_CLIENT_CONF_KEY</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Could not read properties from file: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">propertyFile</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;No properties file found in {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ACCUMULO_IT_PROPERTIES_FILE</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clusterTypeValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">clusterTypeValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_CLUSTER_TYPE_KEY</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clientConf</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">clientConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_CLUSTER_CLIENT_CONF_KEY</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ClusterType</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clusterTypeValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClusterType</span><span class="p">.</span><span class="na">MINI</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ClusterType</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">clusterTypeValue</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Using {} cluster type from system properties&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">MINI</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// we&#39;ll let no client conf pass through and expect that the caller will set it after MAC is</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// started</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AccumuloMiniClusterConfiguration</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">STANDALONE</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clientConf</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;Expected client configuration to be provided: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ACCUMULO_CLUSTER_CLIENT_CONF_KEY</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">File</span><span class="w"> </span><span class="n">clientConfFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">clientConf</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">clientConfFile</span><span class="p">.</span><span class="na">exists</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">clientConfFile</span><span class="p">.</span><span class="na">isFile</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">              </span><span class="s">&quot;Client configuration should be a normal file: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientConfFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StandaloneAccumuloClusterConfiguration</span><span class="p">(</span><span class="n">clientConfFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;Clusters other than MiniAccumuloCluster are not yet implemented&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Timeout</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saneMonitorInfo</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">ManagerMonitorInfo</span><span class="w"> </span><span class="n">stats</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumulo</span><span class="p">.</span><span class="na">getManagerMonitorInfo</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path provided by test&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getConfiguration</span><span class="p">(</span><span class="n">ClusterType</span><span class="w"> </span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">requireNonNull</span><span class="p">(</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">MINI</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACCUMULO_MINI_PREFIX</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">STANDALONE</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ACCUMULO_STANDALONE_PREFIX</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Unknown ClusterType: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">propertyFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">ACCUMULO_IT_PROPERTIES_FILE</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check for properties provided in a file</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">propertyFile</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">File</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">propertyFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="na">exists</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">isFile</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">canRead</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Properties</span><span class="w"> </span><span class="n">fileProperties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">FileReader</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileReader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">UTF_8</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Could not read properties from specified file: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">propertyFile</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reader</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">fileProperties</span><span class="p">.</span><span class="na">load</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">loadFromProperties</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">fileProperties</span><span class="p">,</span><span class="w"> </span><span class="n">configuration</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Could not load properties from specified file: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">propertyFile</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Could not close reader&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Load any properties specified directly in the system properties</span><span class="w"></span>
+<span class="w">    </span><span class="n">loadFromProperties</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getProperties</span><span class="p">(),</span><span class="w"> </span><span class="n">configuration</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">configuration</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">loadFromProperties</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">desiredPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">Properties</span><span class="w"> </span><span class="n">properties</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">configuration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">properties</span><span class="p">.</span><span class="na">entrySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">()</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">String</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tServerInfo</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tServerInfo</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NUM_TSERVERS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getKey</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">desiredPrefix</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">configuration</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ManagerState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validStates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">ManagerState</span><span class="p">.</span><span class="na">values</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">ManagerGoalState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">validGoals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="n">ManagerGoalState</span><span class="p">.</span><span class="na">values</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">validStates</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">state</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;manager state should be valid.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">validGoals</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">goalState</span><span class="p">),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;manager goal state should be in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">validGoals</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;. is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">goalState</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;should have a table map.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">RootTable</span><span class="p">.</span><span class="na">ID</span><span class="p">.</span><span class="na">canonical</span><span class="p">()),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;root table should exist in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">MetadataTable</span><span class="p">.</span><span class="na">ID</span><span class="p">.</span><span class="na">canonical</span><span class="p">()),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;meta table should exist in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">testTableID</span><span class="p">),</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;our test table should exist in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tableMap</span><span class="p">.</span><span class="na">keySet</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">stats</span><span class="p">.</span><span class="na">tServerInfo</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;there should be tservers.&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">NUM_TSERVERS</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="p">.</span><span class="na">tServerInfo</span><span class="p">.</span><span class="na">size</span><span class="p">());</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@AfterAll</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tearDownMiniCluster</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">accumulo</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

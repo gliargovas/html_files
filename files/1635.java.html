@@ -228,138 +228,142 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
-<span class="normal">134</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events</span><span class="p">;</span><span class="w"></span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Optional</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bitcoinj.core.Address</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bitcoinj.core.Coin</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.bitcoinj.core.Transaction</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.CoreMessageKey</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * &lt;p&gt;Event to provide the following to UIEventbus subscribers:&lt;/p&gt;</span>
-<span class="cm"> * &lt;ul&gt;</span>
-<span class="cm"> * &lt;li&gt;Success/ failure of send bitcoins&lt;/li&gt;</span>
-<span class="cm"> * &lt;/ul&gt;</span>
-<span class="cm"> * &lt;p&gt;This is an infrequent event&lt;/p&gt;</span>
-<span class="cm"> *</span>
-<span class="cm"> * @since 0.0.1</span>
+<span class="cm"> * The status of a payment</span>
+<span class="cm"> * This wraps a RAGStatus and has a depth and detail description information</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BitcoinSentEvent</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CoreEvent</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Transaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transaction</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Coin</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Coin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">miningFeePaid</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">destinationAddress</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">changeAddress</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">sendWasSuccessful</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">sendFailureReason</span><span class="p">;</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PaymentStatus</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * The RAG status for the payment</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RAGStatus</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * The localisation key for the status text for the payment. This will typically be the localisation key for &#39;Unconfirmed&#39;, &quot;Confirmed by 2 blocks&quot;, &quot;Dead&quot; etc</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">statusKey</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * The localisation data for the status text for the payment</span>
 <span class="cm">   * TODO Consider a List&lt;String&gt; instead</span>
+<span class="cm">  */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">statusData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * @param status    The RAG status for quick assessment</span>
+<span class="cm">   * @param statusKey The localisation key for the status text for the payment. This will typically be the localisation key for &#39;Unconfirmed&#39;, &quot;Confirmed by 2 blocks&quot;, &quot;Dead&quot; etc</span>
 <span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">sendFailureReasonData</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">  </span><span class="c1">// The fix for this is more complex than leaving it in place</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">BitcoinSentEvent</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Transaction</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transaction</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Address</span><span class="w"> </span><span class="n">destinationAddress</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Coin</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Address</span><span class="w"> </span><span class="n">changeAddress</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Coin</span><span class="o">&gt;</span><span class="w"> </span><span class="n">miningFeePaid</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">sendWasSuccessful</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">sendFailureReason</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">sendFailureReasonData</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">transaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transaction</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">miningFeePaid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">miningFeePaid</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">destinationAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">destinationAddress</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">changeAddress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">changeAddress</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">sendWasSuccessful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendWasSuccessful</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">sendFailureReason</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendFailureReason</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">sendFailureReasonData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sendFailureReasonData</span><span class="p">;</span><span class="w"></span>
-
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">PaymentStatus</span><span class="p">(</span><span class="n">RAGStatus</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">statusKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">statusKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statusKey</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The transaction associated with this event</span>
+<span class="cm">   * @return The RAG status for quick assessment</span>
 <span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Transaction</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getTransaction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">transaction</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">RAGStatus</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// not set</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * @return The depth in the blockchain</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getDepth</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDepth</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The payment amount without fees</span>
+<span class="cm">   * @return The core message key providing the appropriate status message (e.g. &quot;Confirmed by several blocks&quot; etc)</span>
 <span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Coin</span><span class="w"> </span><span class="nf">getAmount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="nf">getStatusKey</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">statusKey</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The mining fee paid</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Coin</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getMiningFeePaid</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">miningFeePaid</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The destination address</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nf">getDestinationAddress</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">destinationAddress</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The change address (can also be used for a refund)</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nf">getChangeAddress</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">changeAddress</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return True if the send was successful</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSendWasSuccessful</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sendWasSuccessful</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * @return The reason for the failure</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="nf">getSendFailureReason</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sendFailureReason</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="c1">// The fix for this is more complex than leaving it in place</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// The fix to this would introduce more problems than the danger</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// it potentially presents</span><span class="w"></span>
 <span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">getSendFailureReasonData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sendFailureReasonData</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="nf">getStatusData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">statusData</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@Override</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;BitcoinSentEvent{&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;transaction=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">transaction</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, amount=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, destinationAddress=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">destinationAddress</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, changeAddress=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">changeAddress</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, miningFeePaid=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">miningFeePaid</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, sendWasSuccessful=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sendWasSuccessful</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, sendFailureReason=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sendFailureReason</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="s">&quot;, sendFailureReasonData=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">sendFailureReasonData</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
-<span class="w">      </span><span class="sc">&#39;}&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// The fix to this would introduce more problems than the danger</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// it potentially presents</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setStatusData</span><span class="p">(</span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">statusData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">statusData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statusData</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Order as RED &lt; PINK &lt; AMBER &lt; GREEN &lt; EMPTY and then order by the depth within GREEN</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param other the PaymentStatus to compare to</span>
+<span class="cm">   *</span>
+<span class="cm">   * @return the relative order (as per Comparable)</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compareToWithOrdinal</span><span class="p">(</span><span class="n">PaymentStatus</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getStatus</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">RED</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">RED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">PINK</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">RED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">PINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">AMBER</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">RED</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">PINK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">AMBER</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">GREEN</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">RED</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">PINK</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">AMBER</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">GREEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">compare</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getDepth</span><span class="p">(),</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="na">getDepth</span><span class="p">());</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">EMPTY</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="na">getStatus</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RAGStatus</span><span class="p">.</span><span class="na">EMPTY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

@@ -499,410 +499,530 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">402</span>
 <span class="normal">403</span>
 <span class="normal">404</span>
-<span class="normal">405</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
-<span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
-<span class="cm"> * distributed with this work for additional information</span>
-<span class="cm"> * regarding copyright ownership.  The ASF licenses this file</span>
-<span class="cm"> * to you under the Apache License, Version 2.0 (the</span>
-<span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
-<span class="cm"> * with the License.  You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> *   https://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing,</span>
-<span class="cm"> * software distributed under the License is distributed on an</span>
-<span class="cm"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="cm"> * KIND, either express or implied.  See the License for the</span>
-<span class="cm"> * specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile</span><span class="p">;</span><span class="w"></span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.ui</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit.MILLISECONDS</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit.SECONDS</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.StringWriter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.UncheckedIOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.SecureRandom</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ThreadPoolExecutor</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.sample.Sampler</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.AccumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.DefaultConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.crypto.CryptoFactoryLoader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.ArrayByteSequence</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.ByteSequence</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Key</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Range</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Value</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.FileSKVIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.blockfile.impl.CachableBlockFile</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.blockfile.impl.CachableBlockFile.CachableBuilder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile.RFile.Reader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile.bcfile.BCFile</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.iterators.SortedKeyValueIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.iteratorsImpl.system.ColumnFamilySkippingIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.sample.impl.SamplerConfigurationImpl</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.sample.impl.SamplerFactory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.util.threads.ThreadPools</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.lang3.mutable.MutableInt</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.conf.Configuration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.FSDataOutputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.FileSystem</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.Path</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Optional</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Preconditions</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.Uninterruptibles</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.commons.concurrent.SafeExecutors</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Configurations</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.WalletSummary</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.CoreEvents</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.ShutdownEvent</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.logging.LoggingFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.HttpsManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.InstallationManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.WalletManager</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.services.CoreServices</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.utils.OSUtils</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.HardwareWalletService</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.events.HardwareWalletEvents</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.audio.Sounds</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.controllers.HeaderController</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.controllers.MainController</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.events.controller.ControllerEvents</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.events.view.ViewEvents</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.platform.GenericApplicationFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.platform.GenericApplicationSpecification</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.services.ExternalDataListeningService</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.views.MainView</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.views.themes.ThemeKey</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.views.themes.Themes</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.plaf.nimbus.NimbusLookAndFeel</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.swing.text.DefaultEditorKit</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.*</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.awt.event.KeyEvent</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w"></span>
 
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;paths not set by user input&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MultiThreadedRFileTest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * &lt;p&gt;Main entry point to the application&lt;/p&gt;</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MultiBitHD</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SecureRandom</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">MultiThreadedRFileTest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ByteSequence</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="c1">//////////////////////////// NO STATIC VARIABLES ALLOWED IN THIS CLASS! ////////////////////////</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkIndex</span><span class="p">(</span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">FileSKVIterator</span><span class="w"> </span><span class="n">indexIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getIndex</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// See initialiseSystemProperties for explanation</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">Key</span><span class="w"> </span><span class="n">lastKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Special case logger that is not static</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">MultiBitHD</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">MainController</span><span class="w"> </span><span class="n">mainController</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="na">getFirstKey</span><span class="p">().</span><span class="na">compareTo</span><span class="p">(</span><span class="n">lastKey</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="s">&quot;First key out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getFirstKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="c1">////////////////////////////////////////////////////////////////////////////////////////////////</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">indexIter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Main entry point to the application&lt;/p&gt;</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param args None specified</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lastKey</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Indext out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// These are called at the first line to avoid any other class loading</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// interfering with them</span><span class="w"></span>
+<span class="w">    </span><span class="n">initialiseSystemProperties</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">lastKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">indexIter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">reader</span><span class="p">.</span><span class="na">getLastKey</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">lastKey</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Last key out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getLastKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Hand over to an instance to simplify FEST tests</span><span class="w"></span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="w"> </span><span class="n">multiBitHD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">multiBitHD</span><span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="n">args</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Failed to start so issue a hard shutdown</span><span class="w"></span>
+<span class="w">      </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">(</span><span class="n">ShutdownEvent</span><span class="p">.</span><span class="na">ShutdownType</span><span class="p">.</span><span class="na">HARD</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Initialise the UI views in the EDT, Nimbus etc</span><span class="w"></span>
+<span class="w">      </span><span class="n">SwingUtilities</span><span class="p">.</span><span class="na">invokeLater</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Runnable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">          </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">multiBitHD</span><span class="p">.</span><span class="na">initialiseUIViews</span><span class="p">();</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">});</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestRFile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Initialise any system properties that need to be in place before any other</span>
+<span class="cm">   * classes are loaded</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialiseSystemProperties</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">conf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Configuration</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Writer</span><span class="w"> </span><span class="n">writer</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FSDataOutputStream</span><span class="w"> </span><span class="n">dos</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SortedKeyValueIterator</span><span class="o">&lt;</span><span class="n">Key</span><span class="p">,</span><span class="n">Value</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">deepCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Fix for &quot;TimSort&quot; clipboard failure - https://github.com/keepkey/multibit-hd/issues/645</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Suggested by https://www.java.net/node/700601</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// See also http://stackoverflow.com/a/26829874/396747 for more details on ordering at startup</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Verified that java.util.Arrays has not been loaded at this stage</span><span class="w"></span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;java.util.Arrays.useLegacyMergeSort&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TestRFile</span><span class="p">(</span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultConfiguration</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Fix for Windows / Java 7 / VPN bug</span><span class="w"></span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;java.net.preferIPv4Stack&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rfile</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">fs</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Fix for version.txt not visible for Java 7</span><span class="w"></span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;jsse.enableSNIExtension&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="nf">deepCopy</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestRFile</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="c1">// does not copy any writer resources. This would be for read only.</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Reader</span><span class="p">)</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rfile</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ColumnFamilySkippingIterator</span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">deepCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">checkIndex</span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">copy</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">openWriter</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">startDLG</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deepCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Cannot open writer on a deep copy&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rfile</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="na">createTempFile</span><span class="p">(</span><span class="s">&quot;TestRFile&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.rf&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">BCFile</span><span class="p">.</span><span class="na">Writer</span><span class="w"> </span><span class="n">_cbw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BCFile</span><span class="p">.</span><span class="na">Writer</span><span class="p">(</span><span class="n">dos</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">conf</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">CryptoFactoryLoader</span><span class="p">.</span><span class="na">getServiceForServer</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">SamplerConfigurationImpl</span><span class="w"> </span><span class="n">samplerConfig</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">          </span><span class="n">SamplerConfigurationImpl</span><span class="p">.</span><span class="na">newSamplerConfig</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Sampler</span><span class="w"> </span><span class="n">sampler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">samplerConfig</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">sampler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SamplerFactory</span><span class="p">.</span><span class="na">newSampler</span><span class="p">(</span><span class="n">samplerConfig</span><span class="p">,</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Writer</span><span class="p">(</span><span class="n">_cbw</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">samplerConfig</span><span class="p">,</span><span class="w"> </span><span class="n">sampler</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">startDLG</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">startDefaultLocalityGroup</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeWriter</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deepCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Cannot open writer on a deepcopy&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">writer</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">openReader</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">defaultConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultConfiguration</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// the caches used to obfuscate the multithreaded issues</span><span class="w"></span>
-<span class="w">      </span><span class="n">CachableBuilder</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CachableBuilder</span><span class="p">().</span><span class="na">fsPath</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">).</span><span class="na">conf</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="p">.</span><span class="na">cryptoService</span><span class="p">(</span><span class="n">CryptoFactoryLoader</span><span class="p">.</span><span class="na">getServiceForServer</span><span class="p">(</span><span class="n">defaultConf</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Reader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CachableBlockFile</span><span class="p">.</span><span class="na">Reader</span><span class="p">(</span><span class="n">b</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ColumnFamilySkippingIterator</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">checkIndex</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeReader</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="nf">newKey</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cf</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cq</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cv</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">ts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cf</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cq</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cv</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">ts</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Start this instance of MultiBit HD&lt;/p&gt;</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param args The command line arguments</span>
+<span class="cm">   *</span>
+<span class="cm">   * @return True if the application started successfully, false if a shutdown is required</span>
+<span class="cm">   *</span>
+<span class="cm">   * @throws Exception If something goes wrong</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the logging factory (see later for instance) to get console logging up fast</span><span class="w"></span>
+<span class="w">    </span><span class="n">LoggingFactory</span><span class="p">.</span><span class="na">bootstrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Get the configuration fast (Bitcoin URI processing relies on it)</span><span class="w"></span>
+<span class="w">    </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">bootstrap</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Analyse the command line</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">args</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">args</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Show the command line arguments</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">args</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;MultiBit launched with args[{}]: &#39;{}&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Provide empty arguments to avoid potential NPEs</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;No command line arguments&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check for another instance as soon as possible</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ExternalDataListeningService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">externalDataListeningService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initialiseListeningService</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">externalDataListeningService</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Prepare the CA certs (run on a separate thread)</span><span class="w"></span>
+<span class="w">    </span><span class="n">initialiseCaCerts</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start core services (logging, environment alerts, configuration, Bitcoin URI handling etc)</span><span class="w"></span>
+<span class="w">    </span><span class="n">initialiseCore</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Create controllers so that the generic app can access listeners</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">initialiseUIControllers</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">// Required to shut down</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Must be OK to be here</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="nf">newValue</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Value</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Stopping MultiBit HD&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mainController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Final purge in case anything gets missed</span><span class="w"></span>
+<span class="w">    </span><span class="n">ViewEvents</span><span class="p">.</span><span class="na">unsubscribeAll</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">ControllerEvents</span><span class="p">.</span><span class="na">unsubscribeAll</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">CoreEvents</span><span class="p">.</span><span class="na">unsubscribeAll</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">HardwareWalletEvents</span><span class="p">.</span><span class="na">unsubscribeAll</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">conf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * @param args The command line arguments</span>
+<span class="cm">   *</span>
+<span class="cm">   * @return The external data listening service if it could be started successfully, absent implies another instance</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">ExternalDataListeningService</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">initialiseListeningService</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Determine if another instance is running and shutdown if this is the case</span><span class="w"></span>
+<span class="w">    </span><span class="n">ExternalDataListeningService</span><span class="w"> </span><span class="n">externalDataListeningService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ExternalDataListeningService</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;information put into error message is safe and used for testing&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testMultipleReaders</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Throwable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">threadExceptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">synchronizedList</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">MutableInt</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stackTrace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">externalDataListeningService</span><span class="p">.</span><span class="na">start</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">externalDataListeningService</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestRFile</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Must have failed to be here</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">absent</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">writeData</span><span class="p">(</span><span class="n">trfBase</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Initialise the CA certs&lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;DM_EXIT&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialiseCaCerts</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">trfBase</span><span class="p">.</span><span class="na">openReader</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Initialising CA certs...&quot;</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">validate</span><span class="p">(</span><span class="n">trfBase</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="kd">final</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBaseCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBase</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">      </span><span class="n">validate</span><span class="p">(</span><span class="n">trfBaseCopy</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// now start up multiple RFile deepcopies</span><span class="w"></span>
-<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">maxThreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MultiThreadedRFileTestThread&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">ThreadPoolExecutor</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ThreadPools</span><span class="p">.</span><span class="na">getServerThreadPools</span><span class="p">().</span><span class="na">createThreadPool</span><span class="p">(</span><span class="n">maxThreads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">maxThreads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">SECONDS</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBase</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">trfBaseCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="n">trf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBaseCopy</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="n">validate</span><span class="p">(</span><span class="n">trf</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">threadExceptions</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Execute the CA certificates download on a separate thread to avoid slowing</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// the startup time</span><span class="w"></span>
+<span class="w">      </span><span class="n">SafeExecutors</span><span class="p">.</span><span class="na">newSingleThreadExecutor</span><span class="p">(</span><span class="s">&quot;install-cacerts&quot;</span><span class="p">).</span><span class="na">submit</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">Runnable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">          </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">HttpsManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">installCACertificates</span><span class="p">(</span><span class="w"></span>
+<span class="w">              </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">(),</span><span class="w"></span>
+<span class="w">              </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">CA_CERTS_NAME</span><span class="p">,</span><span class="w"></span>
+<span class="w">              </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="c1">// Use default host list</span><span class="w"></span>
+<span class="w">              </span><span class="kc">false</span><span class="w"> </span><span class="c1">// Do not force loading if they are already present</span><span class="w"></span>
+<span class="w">            </span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">};</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxThreads</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">pool</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">runnable</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">pool</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">pool</span><span class="p">.</span><span class="na">awaitTermination</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w"> </span><span class="n">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">threadExceptions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getMessage</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messages</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">messages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="na">increment</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">messages</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MutableInt</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">StringWriter</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringWriter</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrintWriter</span><span class="p">(</span><span class="n">string</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">(</span><span class="n">writer</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">stackTrace</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="p">.</span><span class="na">getBuffer</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">closeReader</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">messages</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">messages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">message</span><span class="p">),</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stackTrace</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">message</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">threadExceptions</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trf</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">random</span><span class="p">.</span><span class="na">ints</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">part</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Range</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">Key</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;No record found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;Invalid key found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopValue</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;Invalid value found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; after &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UncheckedIOException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">});</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">Range</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">((</span><span class="n">Key</span><span class="p">)</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">Key</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;No record found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Invalid key found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopValue</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Invalid value found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">();</span><span class="w"></span>
-<span class="w">          </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; after &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SecurityException</span><span class="w"> </span><span class="n">se</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Security exception: {} {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getName</span><span class="p">(),</span><span class="w"> </span><span class="n">se</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeData</span><span class="p">(</span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBase</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">trfBase</span><span class="p">.</span><span class="na">openWriter</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Initialise the UI controllers once all the core services are in place&lt;/p&gt;</span>
+<span class="cm">   * &lt;p&gt;This creates the singleton controllers that respond to generic events&lt;/p&gt;</span>
+<span class="cm">   * &lt;p&gt;At this stage none of the following will be running:&lt;/p&gt;</span>
+<span class="cm">   * &lt;ul&gt;</span>
+<span class="cm">   * &lt;li&gt;Themes or views&lt;/li&gt;</span>
+<span class="cm">   * &lt;li&gt;Wallet service&lt;/li&gt;</span>
+<span class="cm">   * &lt;li&gt;Backup service&lt;/li&gt;</span>
+<span class="cm">   * &lt;li&gt;Bitcoin network service&lt;/li&gt;</span>
+<span class="cm">   * &lt;/ul&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">initialiseUIControllers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OSUtils</span><span class="p">.</span><span class="na">isWindowsXPOrEarlier</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Windows XP or earlier detected. Forcing shutdown.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">JOptionPane</span><span class="p">.</span><span class="na">showMessageDialog</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;This version of Windows is not supported for security reasons.\nPlease upgrade.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Error&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">JOptionPane</span><span class="p">.</span><span class="na">ERROR_MESSAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Including the other controllers avoids dangling references during a soft shutdown</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MainController</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">HeaderController</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the hardware wallet support to allow credentials screen to be selected</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainController</span><span class="p">.</span><span class="na">handleHardwareWallets</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Set the tooltip delay to be slightly longer</span><span class="w"></span>
+<span class="w">    </span><span class="n">ToolTipManager</span><span class="p">.</span><span class="na">sharedInstance</span><span class="p">().</span><span class="na">setInitialDelay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Must be OK to be here</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Initialise the UI once all the core services are in place&lt;/p&gt;</span>
+<span class="cm">   * &lt;p&gt;This creates the singleton views and controllers that respond to configuration</span>
+<span class="cm">   * and theme changes&lt;/p&gt;</span>
+<span class="cm">   * &lt;p&gt;At this stage none of the following will be running:&lt;/p&gt;</span>
+<span class="cm">   * &lt;ul&gt;</span>
+<span class="cm">   * &lt;li&gt;Wallet service&lt;/li&gt;</span>
+<span class="cm">   * &lt;li&gt;Backup service&lt;/li&gt;</span>
+<span class="cm">   * &lt;li&gt;Bitcoin network service&lt;/li&gt;</span>
+<span class="cm">   * &lt;/ul&gt;</span>
+<span class="cm">   * &lt;p&gt;Once the UI renders, control passes to the &lt;code&gt;MainController&lt;/code&gt; to</span>
+<span class="cm">   * respond to the wizard close event which will trigger ongoing initialisation.&lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;DM_EXIT&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">MainView</span><span class="w"> </span><span class="nf">initialiseUIViews</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Initialising UI...&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Preconditions</span><span class="p">.</span><span class="na">checkNotNull</span><span class="p">(</span><span class="n">mainController</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&#39;mainController&#39; must be present. FEST will cause this if another instance is running.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Preconditions</span><span class="p">.</span><span class="na">checkState</span><span class="p">(</span><span class="n">SwingUtilities</span><span class="p">.</span><span class="na">isEventDispatchThread</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Must execute on EDT. Check calling environment.&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Give MultiBit Hardware a chance to process any attached hardware wallet</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// and for MainController to subsequently process the events</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// The delay observed in reality and FEST tests ranges from 1400-2200ms and if</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// not included results in wiped hardware wallets being missed on startup</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Starting the clock for hardware wallet initialisation&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">hardwareInitialisationTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Perform time consuming tasks to use the hardware initialisation time to best effect</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Prepare platform-specific integration (protocol handlers, quit events etc)</span><span class="w"></span>
+<span class="w">    </span><span class="n">initialiseGenericApp</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Pre-load sound library</span><span class="w"></span>
+<span class="w">    </span><span class="n">Sounds</span><span class="p">.</span><span class="na">initialise</span><span class="p">();</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">startNewLocalityGroup</span><span class="p">(</span><span class="s">&quot;locality&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">Collections</span><span class="p">.</span><span class="na">singleton</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayByteSequence</span><span class="p">(</span><span class="n">getCf</span><span class="p">(</span><span class="n">locality</span><span class="p">))));</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Set look and feel (expect ~1000ms to perform this)</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Loading Nimbus LaF...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">UIManager</span><span class="p">.</span><span class="na">setLookAndFeel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">NimbusLookAndFeel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Require configurable error feedback through beeps</span><span class="w"></span>
+<span class="w">        </span><span class="nd">@Override</span><span class="w"></span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">provideErrorFeedback</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">component</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="p">.</span><span class="na">getSound</span><span class="p">().</span><span class="na">isAlertSound</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kd">super</span><span class="p">.</span><span class="na">provideErrorFeedback</span><span class="p">(</span><span class="n">component</span><span class="p">);</span><span class="w"></span>
 <span class="w">          </span><span class="p">}</span><span class="w"></span>
+
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">UnsupportedLookAndFeelException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Falling back to cross platform LaF...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">UIManager</span><span class="p">.</span><span class="na">setLookAndFeel</span><span class="p">(</span><span class="n">UIManager</span><span class="p">.</span><span class="na">getCrossPlatformLookAndFeelClassName</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ClassNotFoundException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">InstantiationException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">UnsupportedLookAndFeelException</span><span class="w"> </span><span class="n">e1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;No look and feel available. MultiBit HD requires Java 7 or higher.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">startDefaultLocalityGroup</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;LaF loaded OK&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// This must be performed immediately after the LaF has been set</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OSUtils</span><span class="p">.</span><span class="na">isMac</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Applying OSX key bindings...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Ensure the correct name is displayed in the application menu</span><span class="w"></span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;com.apple.mrj.application.apple.menu.about.name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;multiBit HD&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">// Ensure OSX key bindings are used for copy, paste etc</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Use the Nimbus keys and ensure this occurs before any component creation</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;EditorPane.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;FormattedTextField.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;PasswordField.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;TextField.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;TextPane.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">addOSXKeyStrokes</span><span class="p">((</span><span class="n">InputMap</span><span class="p">)</span><span class="w"> </span><span class="n">UIManager</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;TextArea.focusInputMap&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Ensure that we are using the configured theme (must be after key bindings)</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Switching theme...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ThemeKey</span><span class="w"> </span><span class="n">themeKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ThemeKey</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="p">.</span><span class="na">getAppearance</span><span class="p">().</span><span class="na">getCurrentTheme</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">Themes</span><span class="p">.</span><span class="na">switchTheme</span><span class="p">(</span><span class="n">themeKey</span><span class="p">.</span><span class="na">theme</span><span class="p">());</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Building MainView...&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Build a new MainView</span><span class="w"></span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">MainView</span><span class="w"> </span><span class="n">mainView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MainView</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainController</span><span class="p">.</span><span class="na">setMainView</span><span class="p">(</span><span class="n">mainView</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Checking for pre-existing wallets...&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check for any pre-existing wallets in the application directory</span><span class="w"></span>
+<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">applicationDataDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="w"> </span><span class="n">walletDirectories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletManager</span><span class="p">.</span><span class="na">findWalletDirectories</span><span class="p">(</span><span class="n">applicationDataDirectory</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">WalletSummary</span><span class="o">&gt;</span><span class="w"> </span><span class="n">softWalletSummaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletManager</span><span class="p">.</span><span class="na">getSoftWalletSummaries</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="p">.</span><span class="na">getLocale</span><span class="p">()));</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check for fresh install</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">noWallets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">walletDirectories</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">noSoftWallets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">softWalletSummaries</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// HardwareWalletService needs HARDWARE_INITIALISATION_TIME milliseconds to initialise so sleep the rest</span><span class="w"></span>
+<span class="w">    </span><span class="n">conditionallySleep</span><span class="p">(</span><span class="n">hardwareInitialisationTime</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">deviceAttached</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">deviceWiped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check hardware wallet situation after first initialisation (may not be present or ready)</span><span class="w"></span>
+<span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">useFirstReadyHardwareWalletService</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardwareWalletService</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Hardware wallet must be attached to be present</span><span class="w"></span>
+<span class="w">      </span><span class="n">deviceAttached</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">hardwareWalletService</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">isWalletPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Wiped hardware wallet detected&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Must show the welcome wizard in hardware wallet mode</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// regardless of wallet or licence situation</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// MainController should have handled the events</span><span class="w"></span>
+<span class="w">        </span><span class="n">deviceWiped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">closeWriter</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="nf">getKey</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;r000&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">cf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCf</span><span class="p">(</span><span class="n">locality</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">cq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cq&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pad</span><span class="p">(</span><span class="n">index</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Determine if welcome wizard should show</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">showWelcomeWizard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">deviceAttached</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">deviceWiped</span><span class="p">)</span><span class="w"> </span><span class="c1">// We have a wiped hardware wallet so need to initialise</span><span class="w"></span>
+<span class="w">      </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">noSoftWallets</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">deviceAttached</span><span class="p">)</span><span class="w"> </span><span class="c1">// No soft wallets and no hardware wallet so need to create/restore one</span><span class="w"></span>
+<span class="w">      </span><span class="o">||</span><span class="w"> </span><span class="n">noWallets</span><span class="p">;</span><span class="w"> </span><span class="c1">// No wallets at all so need to create/restore one (either hard or soft)</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newKey</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">cf</span><span class="p">,</span><span class="w"> </span><span class="n">cq</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">pad</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">valStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">valStr</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;000&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;00&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">showWelcomeWizard</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Showing the welcome wizard&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">mainView</span><span class="p">.</span><span class="na">setShowExitingWelcomeWizard</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">mainView</span><span class="p">.</span><span class="na">setShowExitingCredentialsWizard</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Showing the credentials wizard&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">mainView</span><span class="p">.</span><span class="na">setShowExitingCredentialsWizard</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">mainView</span><span class="p">.</span><span class="na">setShowExitingWelcomeWizard</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Provide a backdrop to the user and trigger the showing of the wizard</span><span class="w"></span>
+<span class="w">    </span><span class="n">mainView</span><span class="p">.</span><span class="na">refresh</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;MainView is ready&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// See the MainController wizard hide event for the next stage</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mainView</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="nf">getValue</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newValue</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Initialise the platform-specific services&lt;/p&gt;</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialiseGenericApp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">GenericApplicationSpecification</span><span class="w"> </span><span class="n">specification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GenericApplicationSpecification</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">specification</span><span class="p">.</span><span class="na">getOpenURIEventListeners</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">mainController</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">specification</span><span class="p">.</span><span class="na">getOpenFilesEventListeners</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">mainController</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">specification</span><span class="p">.</span><span class="na">getPreferencesEventListeners</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">mainController</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">specification</span><span class="p">.</span><span class="na">getAboutEventListeners</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">mainController</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">specification</span><span class="p">.</span><span class="na">getQuitEventListeners</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">mainController</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">GenericApplicationFactory</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">buildGenericApplication</span><span class="p">(</span><span class="n">specification</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCf</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;cf&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Initialise the core services&lt;/p&gt;</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param args The command line arguments</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialiseCore</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Initialising Core...&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Start the core services</span><span class="w"></span>
+<span class="w">    </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">main</span><span class="p">(</span><span class="n">args</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * &lt;p&gt;Apply OSX key strokes to input map for consistent UX&lt;/p&gt;</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param inputMap The input map for the Swing component</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addOSXKeyStrokes</span><span class="p">(</span><span class="n">InputMap</span><span class="w"> </span><span class="n">inputMap</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Undo and redo require more complex handling</span><span class="w"></span>
+<span class="w">    </span><span class="n">inputMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">KeyStroke</span><span class="p">.</span><span class="na">getKeyStroke</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">VK_C</span><span class="p">,</span><span class="w"> </span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">ALT_DOWN_MASK</span><span class="p">),</span><span class="w"> </span><span class="n">DefaultEditorKit</span><span class="p">.</span><span class="na">copyAction</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">inputMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">KeyStroke</span><span class="p">.</span><span class="na">getKeyStroke</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">VK_X</span><span class="p">,</span><span class="w"> </span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">META_DOWN_MASK</span><span class="p">),</span><span class="w"> </span><span class="n">DefaultEditorKit</span><span class="p">.</span><span class="na">cutAction</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">inputMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">KeyStroke</span><span class="p">.</span><span class="na">getKeyStroke</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">VK_V</span><span class="p">,</span><span class="w"> </span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">META_DOWN_MASK</span><span class="p">),</span><span class="w"> </span><span class="n">DefaultEditorKit</span><span class="p">.</span><span class="na">pasteAction</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">inputMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">KeyStroke</span><span class="p">.</span><span class="na">getKeyStroke</span><span class="p">(</span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">VK_A</span><span class="p">,</span><span class="w"> </span><span class="n">KeyEvent</span><span class="p">.</span><span class="na">META_DOWN_MASK</span><span class="p">),</span><span class="w"> </span><span class="n">DefaultEditorKit</span><span class="p">.</span><span class="na">selectAllAction</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/**</span>
+<span class="cm">   * Allow a delay of HARDWARE_INITIALISATION_TIME from the startTime</span>
+<span class="cm">   *</span>
+<span class="cm">   * @param startTime The reference time from which to measure the amount of sleep from</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">conditionallySleep</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">startTime</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// Check if Trezor is required</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="p">.</span><span class="na">isTrezor</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">HARDWARE_INITIALISATION_TIME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span><span class="w">  </span><span class="c1">// milliseconds</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">timeSpent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">startTime</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">timeSpent</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">HARDWARE_INITIALISATION_TIME</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">long</span><span class="w"> </span><span class="n">sleepFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HARDWARE_INITIALISATION_TIME</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">timeSpent</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Sleep for an extra {} milliseconds to allow hardware wallets to initialise&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sleepFor</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">Uninterruptibles</span><span class="p">.</span><span class="na">sleepUninterruptibly</span><span class="p">(</span><span class="n">sleepFor</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Finished sleep&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;No need for extra sleep time to allow hardware wallets to initialise&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>
 </body>

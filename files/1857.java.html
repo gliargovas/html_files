@@ -499,409 +499,727 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <span class="normal">402</span>
 <span class="normal">403</span>
 <span class="normal">404</span>
-<span class="normal">405</span></pre></div></td><td class="code"><div><pre><span></span><span class="cm">/*</span>
-<span class="cm"> * Licensed to the Apache Software Foundation (ASF) under one</span>
-<span class="cm"> * or more contributor license agreements.  See the NOTICE file</span>
-<span class="cm"> * distributed with this work for additional information</span>
-<span class="cm"> * regarding copyright ownership.  The ASF licenses this file</span>
-<span class="cm"> * to you under the Apache License, Version 2.0 (the</span>
-<span class="cm"> * &quot;License&quot;); you may not use this file except in compliance</span>
-<span class="cm"> * with the License.  You may obtain a copy of the License at</span>
-<span class="cm"> *</span>
-<span class="cm"> *   https://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="cm"> *</span>
-<span class="cm"> * Unless required by applicable law or agreed to in writing,</span>
-<span class="cm"> * software distributed under the License is distributed on an</span>
-<span class="cm"> * &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY</span>
-<span class="cm"> * KIND, either express or implied.  See the License for the</span>
-<span class="cm"> * specific language governing permissions and limitations</span>
-<span class="cm"> * under the License.</span>
-<span class="cm"> */</span><span class="w"></span>
-<span class="kn">package</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile</span><span class="p">;</span><span class="w"></span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">it.zielke.moji</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit.MILLISECONDS</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit.SECONDS</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertTrue</span><span class="p">;</span><span class="w"></span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.BufferedReader</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.File</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.PrintWriter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.StringWriter</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.UncheckedIOException</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.SecureRandom</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collection</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Collections</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.InputStreamReader</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.OutputStream</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.MalformedURLException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.Socket</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URL</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.UnknownHostException</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.text.Normalizer</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ThreadPoolExecutor</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Vector</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.client.sample.Sampler</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.AccumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.conf.DefaultConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.crypto.CryptoFactoryLoader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.ArrayByteSequence</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.ByteSequence</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Key</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Range</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.data.Value</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.FileSKVIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.blockfile.impl.CachableBlockFile</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.blockfile.impl.CachableBlockFile.CachableBuilder</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile.RFile.Reader</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.file.rfile.bcfile.BCFile</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.iterators.SortedKeyValueIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.iteratorsImpl.system.ColumnFamilySkippingIterator</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.sample.impl.SamplerConfigurationImpl</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.sample.impl.SamplerFactory</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.accumulo.core.util.threads.ThreadPools</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.lang3.mutable.MutableInt</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.conf.Configuration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.FSDataOutputStream</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.FileSystem</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.hadoop.fs.Path</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.Charsets</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.FileUtils</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.apache.commons.io.FilenameUtils</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
+<span class="cm">/**</span>
+<span class="cm"> * Client for communicating with the MOSS server socket. Handles the</span>
+<span class="cm"> * configuration, sending of files and receiving results.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SocketClient</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">MESSAGE_UNKNOWN_LANGUAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MOSS Server does not recognize this programming language&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">DEFAULT_LANGUAGE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;java&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">STARTING_SETID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
 
-<span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PATH_TRAVERSAL_IN&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;paths not set by user input&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MultiThreadedRFileTest</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Socket</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">Stage</span><span class="w"> </span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">DISCONNECTED</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SecureRandom</span><span class="w"> </span><span class="n">random</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">MultiThreadedRFileTest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Collection</span><span class="o">&lt;</span><span class="n">ByteSequence</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userID</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">language</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">setID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STARTING_SETID</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">optM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">optD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">optX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">optN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">optC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="n">resultURL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">supportedLanguages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;java&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;ml&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pascal&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ada&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lisp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;schema&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;haskell&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;fortran&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;ascii&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;vhdl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;perl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;matlab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mips&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;prolog&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="s">&quot;spice&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;vb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;csharp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;modula2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a8086&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;javascript&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;plsql&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">checkIndex</span><span class="p">(</span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">FileSKVIterator</span><span class="w"> </span><span class="n">indexIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getIndex</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">BufferedReader</span><span class="w"> </span><span class="n">in</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">Key</span><span class="w"> </span><span class="n">lastKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Construct socket client with default host, port and programming language</span>
+<span class="cm">	 * of the source files to be uploaded. Default language is Java.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">SocketClient</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;moss.stanford.edu&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7690</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DEFAULT_LANGUAGE</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="na">getFirstKey</span><span class="p">().</span><span class="na">compareTo</span><span class="p">(</span><span class="n">lastKey</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="s">&quot;First key out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getFirstKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Construct socket client by setting a server and port.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param server</span>
+<span class="cm">	 *            host name or IP of the MOSS server</span>
+<span class="cm">	 * @param port</span>
+<span class="cm">	 *            port of the MOSS server</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">SocketClient</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">server</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">indexIter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Construct socket client by setting a server name and port as well as the</span>
+<span class="cm">	 * programming language of the source files.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param server</span>
+<span class="cm">	 *            host name or IP of the MOSS server</span>
+<span class="cm">	 * @param port</span>
+<span class="cm">	 *            port of the MOSS server</span>
+<span class="cm">	 * @param language</span>
+<span class="cm">	 *            programming language of all source files</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="nf">SocketClient</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">server</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">(</span><span class="n">server</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">language</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lastKey</span><span class="p">.</span><span class="na">compareTo</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">())</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Indext out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Close connection to the MOSS server gracefully.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="cm">/*</span>
+<span class="cm">		 * do not check stage here so clients can close a connection in any</span>
+<span class="cm">		 * situation.</span>
+<span class="cm">		 */</span><span class="w"></span>
+<span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;end\n&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">out</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">			</span><span class="n">in</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">			</span><span class="n">socket</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MossException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">DISCONNECTED</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">lastKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">indexIter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">());</span><span class="w"></span>
-<span class="w">        </span><span class="n">indexIter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Connect to the MOSS server and set the input and output streams for</span>
+<span class="cm">	 * communication.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @throws UnknownHostException</span>
+<span class="cm">	 *             if host resolution fails</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if setting up the input streams fails</span>
+<span class="cm">	 * @throws SecurityException</span>
+<span class="cm">	 *             if a connection is disallowed by your security manager</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">connect</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">UnknownHostException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"></span>
+<span class="w">			</span><span class="n">SecurityException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">DISCONNECTED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Client is already connected&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Socket</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">server</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">port</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">socket</span><span class="p">.</span><span class="na">setKeepAlive</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="p">.</span><span class="na">getOutputStream</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BufferedReader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">InputStreamReader</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="na">getInputStream</span><span class="p">(),</span><span class="w"></span>
+<span class="w">				</span><span class="n">Charsets</span><span class="p">.</span><span class="na">US_ASCII</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_INITIALIZATION</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">reader</span><span class="p">.</span><span class="na">getLastKey</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">lastKey</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Last key out of order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">getLastKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastKey</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * @return the current internal stage of the client.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">Stage</span><span class="w"> </span><span class="nf">getCurrentStage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">currentStage</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestRFile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Increment the set ID internally. Do not increment this manually unless</span>
+<span class="cm">	 * you have a good reason. Might be removed in the future.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @return the last set ID, before this increment.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@Deprecated</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getIncSetID</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">setID</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Configuration</span><span class="w"> </span><span class="n">conf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Configuration</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Writer</span><span class="w"> </span><span class="n">writer</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FSDataOutputStream</span><span class="w"> </span><span class="n">dos</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">SortedKeyValueIterator</span><span class="o">&lt;</span><span class="n">Key</span><span class="p">,</span><span class="n">Value</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iter</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="n">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">deepCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getLanguage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">language</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TestRFile</span><span class="p">(</span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">accumuloConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultConfiguration</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getOptC</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">optC</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">close</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rfile</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">fs</span><span class="p">.</span><span class="na">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getOptD</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">optD</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="nf">deepCopy</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestRFile</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="c1">// does not copy any writer resources. This would be for read only.</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Reader</span><span class="p">)</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rfile</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ColumnFamilySkippingIterator</span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">copy</span><span class="p">.</span><span class="na">deepCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getOptM</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">optM</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">checkIndex</span><span class="p">(</span><span class="n">copy</span><span class="p">.</span><span class="na">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">copy</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">getOptN</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">optN</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">openWriter</span><span class="p">(</span><span class="kt">boolean</span><span class="w"> </span><span class="n">startDLG</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deepCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Cannot open writer on a deep copy&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rfile</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">rfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">File</span><span class="p">.</span><span class="na">createTempFile</span><span class="p">(</span><span class="s">&quot;TestRFile&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.rf&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">BCFile</span><span class="p">.</span><span class="na">Writer</span><span class="w"> </span><span class="n">_cbw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BCFile</span><span class="p">.</span><span class="na">Writer</span><span class="p">(</span><span class="n">dos</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gz&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">conf</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">CryptoFactoryLoader</span><span class="p">.</span><span class="na">getServiceForServer</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">SamplerConfigurationImpl</span><span class="w"> </span><span class="n">samplerConfig</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">          </span><span class="n">SamplerConfigurationImpl</span><span class="p">.</span><span class="na">newSamplerConfig</span><span class="p">(</span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Sampler</span><span class="w"> </span><span class="n">sampler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">samplerConfig</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">sampler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SamplerFactory</span><span class="p">.</span><span class="na">newSampler</span><span class="p">(</span><span class="n">samplerConfig</span><span class="p">,</span><span class="w"> </span><span class="n">accumuloConfiguration</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Writer</span><span class="p">(</span><span class="n">_cbw</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">samplerConfig</span><span class="p">,</span><span class="w"> </span><span class="n">sampler</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getOptX</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">optX</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">startDLG</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">startDefaultLocalityGroup</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getPort</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">port</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeWriter</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deepCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IOException</span><span class="p">(</span><span class="s">&quot;Cannot open writer on a deepcopy&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">writer</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">dos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * @return the URL which points to the plagiarism report, located on the</span>
+<span class="cm">	 *         MOSS web server.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="nf">getResultURL</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">resultURL</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">openReader</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">FileSystem</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileSystem</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;file://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rfile</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">defaultConf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DefaultConfiguration</span><span class="p">.</span><span class="na">getInstance</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getServer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="c1">// the caches used to obfuscate the multithreaded issues</span><span class="w"></span>
-<span class="w">      </span><span class="n">CachableBuilder</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CachableBuilder</span><span class="p">().</span><span class="na">fsPath</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">).</span><span class="na">conf</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="p">.</span><span class="na">cryptoService</span><span class="p">(</span><span class="n">CryptoFactoryLoader</span><span class="p">.</span><span class="na">getServiceForServer</span><span class="p">(</span><span class="n">defaultConf</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RFile</span><span class="p">.</span><span class="na">Reader</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CachableBlockFile</span><span class="p">.</span><span class="na">Reader</span><span class="p">(</span><span class="n">b</span><span class="p">));</span><span class="w"></span>
-<span class="w">      </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ColumnFamilySkippingIterator</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getSetID</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">setID</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">checkIndex</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">Socket</span><span class="w"> </span><span class="nf">getSocket</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">closeReader</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">reader</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * @return a list of supported programming languages by the MOSS server.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSupportedLanguages</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">supportedLanguages</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="nf">newKey</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cf</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cq</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cv</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">ts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Key</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cf</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cq</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">cv</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(),</span><span class="w"> </span><span class="n">ts</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getUserID</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">userID</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="nf">newValue</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Value</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Read a single line of the server&#39;s response.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @return the line read</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if it was not possible to read from the socket</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">readFromServer</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">readLine</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">AccumuloConfiguration</span><span class="w"> </span><span class="n">conf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Shortcut method to connect to the MOSS server, send all initialization</span>
+<span class="cm">	 * parameters and set the programming language of all source files. Call</span>
+<span class="cm">	 * this before uploading any files.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 *             if the MOSS server returns an error</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if there is a (network) error while reading the server</span>
+<span class="cm">	 *             response</span>
+<span class="cm">	 * @throws UnknownHostException</span>
+<span class="cm">	 *             if host resolution fails</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">UnknownHostException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">connect</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendInitialization</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendLanguage</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;information put into error message is safe and used for testing&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Test</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testMultipleReaders</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Throwable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">threadExceptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Collections</span><span class="p">.</span><span class="na">synchronizedList</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">MutableInt</span><span class="o">&gt;</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stackTrace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Generic function for sending all kinds of commands to the server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param objects</span>
+<span class="cm">	 *            object array consisting of parameters which should be sent to</span>
+<span class="cm">	 *            the server</span>
+<span class="cm">	 * @return the generated string which was actually sent to the server</span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 *             if the server response is unexpected</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sendCommand</span><span class="p">(</span><span class="n">Object</span><span class="p">...</span><span class="w"> </span><span class="n">objects</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// TODO test</span><span class="w"></span>
+<span class="w">		</span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">commandStrings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">commandArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[</span><span class="n">commandStrings</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">objects</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w"></span>
+<span class="w">			</span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
 
-<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TestRFile</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">commandStrings</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">sendCommandStrings</span><span class="p">(</span><span class="n">commandStrings</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="n">commandArray</span><span class="p">));</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">writeData</span><span class="p">(</span><span class="n">trfBase</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Generic function for sending all kinds of commands to the server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param strings</span>
+<span class="cm">	 *            string array consisting of parameters which should be sent to</span>
+<span class="cm">	 *            the server</span>
+<span class="cm">	 * @return the generated string which was actually sent to the server</span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sendCommandStrings</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">strings</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strings</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;Failed to send command because it was empty.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">sb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strings</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">			</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">strings</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">sb</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">()).</span><span class="na">getBytes</span><span class="p">(</span><span class="n">Charsets</span><span class="p">.</span><span class="na">US_ASCII</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="n">out</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="s">&quot;Failed to send command: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">trfBase</span><span class="p">.</span><span class="na">openReader</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sends initialization commands to the server. Needs to be called after</span>
+<span class="cm">	 * connecting to the server but before sending any files.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendInitialization</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_INITIALIZATION</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;Cannot send initialization. Client is either already initialized or not connected yet.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;moss&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">userID</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;directory&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">optD</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">optX</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;maxmatches&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">optM</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;show&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">optN</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_LANGUAGE</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">validate</span><span class="p">(</span><span class="n">trfBase</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// this client only uses directory mode right now.</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// public void setOptD(int optD) {</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// this.optD = optD;</span><span class="w"></span>
+<span class="w">	</span><span class="c1">// }</span><span class="w"></span>
 
-<span class="w">      </span><span class="kd">final</span><span class="w"> </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBaseCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBase</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sends a command to the server to define the programming language of all</span>
+<span class="cm">	 * source files. The language must be set beforehand using setLanguage().</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @see it.zielke.moji.SocketClient#setLanguage(String)</span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 *             if this language is not supported by the MOSS server</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if there is an error while reading the server answer</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendLanguage</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_LANGUAGE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;Language already sent or client is not initialized yet.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="s">&quot;language&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">language</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// confirm valid language server-side</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">serverString</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="n">serverString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readFromServer</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">serverString</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="w">				</span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">serverString</span><span class="p">.</span><span class="na">trim</span><span class="p">().</span><span class="na">toLowerCase</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ENGLISH</span><span class="p">)</span><span class="w"></span>
+<span class="w">						</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;yes&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="n">MESSAGE_UNKNOWN_LANGUAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_FILES</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">validate</span><span class="p">(</span><span class="n">trfBaseCopy</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sends a command to the server to define the programming language of all</span>
+<span class="cm">	 * source files.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param language</span>
+<span class="cm">	 *            the programming language of all source files</span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 *             if this language is not supported by the MOSS server</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if there is an error while reading the server answer</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendLanguage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">setLanguage</span><span class="p">(</span><span class="n">language</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendLanguage</span><span class="p">();</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="c1">// now start up multiple RFile deepcopies</span><span class="w"></span>
-<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">maxThreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;MultiThreadedRFileTestThread&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">ThreadPoolExecutor</span><span class="w"> </span><span class="n">pool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ThreadPools</span><span class="p">.</span><span class="na">getServerThreadPools</span><span class="p">().</span><span class="na">createThreadPool</span><span class="p">(</span><span class="n">maxThreads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">maxThreads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">SECONDS</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Runnable</span><span class="w"> </span><span class="n">runnable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBase</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="kd">synchronized</span><span class="w"> </span><span class="p">(</span><span class="n">trfBaseCopy</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">              </span><span class="n">trf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trfBaseCopy</span><span class="p">.</span><span class="na">deepCopy</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="n">validate</span><span class="p">(</span><span class="n">trf</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">threadExceptions</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">t</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">};</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxThreads</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">pool</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">runnable</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">pool</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">pool</span><span class="p">.</span><span class="na">awaitTermination</span><span class="p">(</span><span class="n">Long</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">,</span><span class="w"> </span><span class="n">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sends a command to tell the server that all files have been uploaded and</span>
+<span class="cm">	 * the search for plagiarism can start. Waits for an answer from the server</span>
+<span class="cm">	 * which may take some minutes.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @throws MossException</span>
+<span class="cm">	 *             if there is an error when receiving results from the MOSS</span>
+<span class="cm">	 *             server</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if the server communication fails</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendQuery</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_QUERY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;Cannot send query at this time. Connection is either not initialized or already closed&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">setID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="s">&quot;You did not upload any files yet&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="n">sendCommand</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ENGLISH</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s %d %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;query&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">optC</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_RESULTS</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="c1">// Query submitted, waiting for server&#39;s response</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readFromServer</span><span class="p">();</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="kc">null</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">result</span><span class="w"></span>
+<span class="w">				</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ENGLISH</span><span class="p">).</span><span class="na">startsWith</span><span class="p">(</span><span class="s">&quot;http&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="k">this</span><span class="p">.</span><span class="na">resultURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">URL</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">trim</span><span class="p">());</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MalformedURLException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="w"></span>
+<span class="w">						</span><span class="s">&quot;MOSS submission failed. The server did not return a valid URL with detection results.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">						</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
+<span class="w">			</span><span class="p">}</span><span class="w"></span>
+<span class="w">			</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_END</span><span class="p">;</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;MOSS submission failed. The server did not return a valid URL with detection results.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Throwable</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">threadExceptions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getClass</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; : &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="na">getMessage</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messages</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">messages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="na">increment</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">messages</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MutableInt</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">StringWriter</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringWriter</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">PrintWriter</span><span class="w"> </span><span class="n">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PrintWriter</span><span class="p">(</span><span class="n">string</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">(</span><span class="n">writer</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">writer</span><span class="p">.</span><span class="na">flush</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="n">stackTrace</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span><span class="w"> </span><span class="n">string</span><span class="p">.</span><span class="na">getBuffer</span><span class="p">().</span><span class="na">toString</span><span class="p">());</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">closeReader</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Set the programming language of all source files.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param language</span>
+<span class="cm">	 *            the programming language in which source file is written in.</span>
+<span class="cm">	 *            Valid programming languages are: c, cc, java, ml, pascal, ada,</span>
+<span class="cm">	 *            lisp, schema, haskell, fortran, ascii, vhdl, perl, matlab,</span>
+<span class="cm">	 *            python, mips, prolog, spice, vb, csharp, modula2, a8086,</span>
+<span class="cm">	 *            javascript and plsql.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setLanguage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">MossException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">supportedLanguages</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">language</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MossException</span><span class="p">(</span><span class="n">MESSAGE_UNKNOWN_LANGUAGE</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">language</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">messages</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;{}: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">messages</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">message</span><span class="p">),</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">LOG</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stackTrace</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">message</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sets a comment string which is attached to the MOSS report. Individual</span>
+<span class="cm">	 * reports can then easily be distinguished.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param optC</span>
+<span class="cm">	 *            comment string</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOptC</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">optC</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">optC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optC</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">threadExceptions</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">());</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Set the maximum amount of times a source code passage may appear before</span>
+<span class="cm">	 * it is ignored and treated as base code. This is a good way to detect</span>
+<span class="cm">	 * base/template code usage within students&#39; solutions while uploading base</span>
+<span class="cm">	 * code is unsupported by this client. Corresponds to the -m parameter of</span>
+<span class="cm">	 * the original client.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param optM</span>
+<span class="cm">	 *            times a passage may appear before it is ignored</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOptM</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">optM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">optM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optM</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trf</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">random</span><span class="p">.</span><span class="na">ints</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">part</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Range</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Sets how many matches should be displayed in the MOSS results. Default is</span>
+<span class="cm">	 * 250.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param optN</span>
+<span class="cm">	 *            how many matches to display</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOptN</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">optN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">optN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optN</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">Key</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;No record found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;Invalid key found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopValue</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;Invalid value found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">            </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">();</span><span class="w"></span>
-<span class="w">            </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; after &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Setting this value to 1 enables the experimental MOSS server. This is</span>
+<span class="cm">	 * pretty much untested. Default is 0.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param optX</span>
+<span class="cm">	 *            0 or 1. 0: regular MOSS server, 1: experimental MOSS server.</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setOptX</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">optX</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">optX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optX</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UncheckedIOException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setPort</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">port</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">Range</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Range</span><span class="p">((</span><span class="n">Key</span><span class="p">)</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">seek</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">EMPTY_COL_FAMS</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setServer</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">server</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">server</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">Key</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">Key</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">Value</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;No record found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Invalid key found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopValue</span><span class="p">(),</span><span class="w"></span>
-<span class="w">              </span><span class="s">&quot;Invalid value found for row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; locality &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">();</span><span class="w"></span>
-<span class="w">          </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setSocket</span><span class="p">(</span><span class="n">Socket</span><span class="w"> </span><span class="n">socket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">socket</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">hasTop</span><span class="p">(),</span><span class="w"></span>
-<span class="w">          </span><span class="s">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">trf</span><span class="p">.</span><span class="na">iter</span><span class="p">.</span><span class="na">getTopKey</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; after &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">range</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Set the MOSS user id for authentication with the MOSS server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param userID</span>
+<span class="cm">	 *            your personalized ID to authenticate with. It should look like</span>
+<span class="cm">	 *            /[0-9]+/ and is available on the MOSS page located at</span>
+<span class="cm">	 *            http://theory.stanford.edu/~aiken/moss/</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUserID</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userID</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">this</span><span class="p">.</span><span class="na">userID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userID</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">writeData</span><span class="p">(</span><span class="n">TestRFile</span><span class="w"> </span><span class="n">trfBase</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">trfBase</span><span class="p">.</span><span class="na">openWriter</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Uploads a single file to the MOSS server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param file</span>
+<span class="cm">	 *            the source code file to be uploaded</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if the file could not be read</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">uploadFile</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">uploadFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">locality</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">startNewLocalityGroup</span><span class="p">(</span><span class="s">&quot;locality&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">Collections</span><span class="p">.</span><span class="na">singleton</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ArrayByteSequence</span><span class="p">(</span><span class="n">getCf</span><span class="p">(</span><span class="n">locality</span><span class="p">))));</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">          </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Uploads a single base file to the MOSS server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param file</span>
+<span class="cm">	 *            the base file to be uploaded</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if the file could not be read</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">uploadBaseFile</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">uploadFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">startDefaultLocalityGroup</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">part</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2048</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">trfBase</span><span class="p">.</span><span class="na">writer</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">getKey</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">getValue</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">trfBase</span><span class="p">.</span><span class="na">closeWriter</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="cm">/**</span>
+<span class="cm">	 * Uploads a single file to the MOSS server.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @param file</span>
+<span class="cm">	 *            the source code file to be uploaded</span>
+<span class="cm">	 * @param isBaseFile</span>
+<span class="cm">	 *            true is base file. false otherwise.</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 *             if the file could not be read</span>
+<span class="cm">	 */</span><span class="w"></span>
+<span class="w">	</span><span class="nd">@edu.umd.cs.findbugs.annotations.SuppressWarnings</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;VA_FORMAT_STRING_USES_NEWLINE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">justification</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;We do want platform-independent newline here.&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">uploadFile</span><span class="p">(</span><span class="n">File</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isBaseFile</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_FILES</span><span class="w"></span>
+<span class="w">				</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">currentStage</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_QUERY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">			</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="w"></span>
+<span class="w">					</span><span class="s">&quot;Cannot upload file. Client is either not initialized properly or the connection is already closed&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="p">}</span><span class="w"></span>
+<span class="w">		</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">fileBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FileUtils</span><span class="p">.</span><span class="na">readFileToByteArray</span><span class="p">(</span><span class="n">file</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalizeFilename</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">uploadString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">ENGLISH</span><span class="p">,</span><span class="w"></span>
+<span class="w">				</span><span class="s">&quot;file %d %s %d %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// format:</span><span class="w"></span>
+<span class="w">				</span><span class="n">isBaseFile</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">getIncSetID</span><span class="p">(),</span><span class="w"> </span><span class="c1">// 1. setID</span><span class="w"></span>
+<span class="w">				</span><span class="n">language</span><span class="p">,</span><span class="w"> </span><span class="c1">// 2. language</span><span class="w"></span>
+<span class="w">				</span><span class="n">fileBytes</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="c1">// 3. size</span><span class="w"></span>
+<span class="w">				</span><span class="cm">/*</span>
+<span class="cm">				 * Use Unix-style path to remain consistent. TODO test this with</span>
+<span class="cm">				 * non-local files, e.g. on network shares</span>
+<span class="cm">				 */</span><span class="w"></span>
+<span class="w">				</span><span class="n">filename</span><span class="p">);</span><span class="w"> </span><span class="c1">// 4. file path</span><span class="w"></span>
+<span class="w">		</span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;uploading file: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">uploadString</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">Charsets</span><span class="p">.</span><span class="na">US_ASCII</span><span class="p">));</span><span class="w"></span>
+<span class="w">		</span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Key</span><span class="w"> </span><span class="nf">getKey</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;r000&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">part</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">cf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCf</span><span class="p">(</span><span class="n">locality</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">cq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cq&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pad</span><span class="p">(</span><span class="n">index</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">currentStage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Stage</span><span class="p">.</span><span class="na">AWAITING_QUERY</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newKey</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">cf</span><span class="p">,</span><span class="w"> </span><span class="n">cq</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">pad</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">valStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">val</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">valStr</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;000&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;00&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">default</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">valStr</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="nf">getValue</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">newValue</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getCf</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">locality</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;cf&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">locality</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">normalizeFilename</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">		</span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Normalizer</span><span class="p">.</span><span class="na">normalize</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">Normalizer</span><span class="p">.</span><span class="na">Form</span><span class="p">.</span><span class="na">NFD</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FilenameUtils</span><span class="p">.</span><span class="na">normalizeNoEndSeparator</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">				</span><span class="p">.</span><span class="na">replaceAll</span><span class="p">(</span><span class="s">&quot;[^\\p{ASCII}]&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="p">}</span><span class="w"></span>
 
 <span class="p">}</span><span class="w"></span>
 </pre></div></td></tr></table></div>

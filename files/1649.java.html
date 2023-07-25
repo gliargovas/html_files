@@ -95,586 +95,156 @@ body .il { color: #666666 } /* Literal.Number.Integer.Long */
 <body>
 <h2></h2>
 
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
-<span class="normal">  2</span>
-<span class="normal">  3</span>
-<span class="normal">  4</span>
-<span class="normal">  5</span>
-<span class="normal">  6</span>
-<span class="normal">  7</span>
-<span class="normal">  8</span>
-<span class="normal">  9</span>
-<span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
-<span class="normal"> 29</span>
-<span class="normal"> 30</span>
-<span class="normal"> 31</span>
-<span class="normal"> 32</span>
-<span class="normal"> 33</span>
-<span class="normal"> 34</span>
-<span class="normal"> 35</span>
-<span class="normal"> 36</span>
-<span class="normal"> 37</span>
-<span class="normal"> 38</span>
-<span class="normal"> 39</span>
-<span class="normal"> 40</span>
-<span class="normal"> 41</span>
-<span class="normal"> 42</span>
-<span class="normal"> 43</span>
-<span class="normal"> 44</span>
-<span class="normal"> 45</span>
-<span class="normal"> 46</span>
-<span class="normal"> 47</span>
-<span class="normal"> 48</span>
-<span class="normal"> 49</span>
-<span class="normal"> 50</span>
-<span class="normal"> 51</span>
-<span class="normal"> 52</span>
-<span class="normal"> 53</span>
-<span class="normal"> 54</span>
-<span class="normal"> 55</span>
-<span class="normal"> 56</span>
-<span class="normal"> 57</span>
-<span class="normal"> 58</span>
-<span class="normal"> 59</span>
-<span class="normal"> 60</span>
-<span class="normal"> 61</span>
-<span class="normal"> 62</span>
-<span class="normal"> 63</span>
-<span class="normal"> 64</span>
-<span class="normal"> 65</span>
-<span class="normal"> 66</span>
-<span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
-<span class="normal"> 80</span>
-<span class="normal"> 81</span>
-<span class="normal"> 82</span>
-<span class="normal"> 83</span>
-<span class="normal"> 84</span>
-<span class="normal"> 85</span>
-<span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
-<span class="normal"> 89</span>
-<span class="normal"> 90</span>
-<span class="normal"> 91</span>
-<span class="normal"> 92</span>
-<span class="normal"> 93</span>
-<span class="normal"> 94</span>
-<span class="normal"> 95</span>
-<span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span>
-<span class="normal">177</span>
-<span class="normal">178</span>
-<span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
-<span class="normal">219</span>
-<span class="normal">220</span>
-<span class="normal">221</span>
-<span class="normal">222</span>
-<span class="normal">223</span>
-<span class="normal">224</span>
-<span class="normal">225</span>
-<span class="normal">226</span>
-<span class="normal">227</span>
-<span class="normal">228</span>
-<span class="normal">229</span>
-<span class="normal">230</span>
-<span class="normal">231</span>
-<span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
-<span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
-<span class="normal">252</span>
-<span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
-<span class="normal">260</span>
-<span class="normal">261</span>
-<span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
-<span class="normal">271</span>
-<span class="normal">272</span>
-<span class="normal">273</span>
-<span class="normal">274</span>
-<span class="normal">275</span>
-<span class="normal">276</span>
-<span class="normal">277</span>
-<span class="normal">278</span>
-<span class="normal">279</span>
-<span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.fest.test_cases</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events</span><span class="p">;</span><span class="w"></span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.base.Optional</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.collect.Lists</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.io.ByteStreams</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.common.util.concurrent.Uninterruptibles</span><span class="p">;</span><span class="w"></span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">edu.umd.cs.findbugs.annotations.SuppressFBWarnings</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.FailOnThreadViolationRepaintManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.GuiActionRunner</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.edt.GuiQuery</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.fixture.FrameFixture</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.fest.swing.testing.FestSwingTestCaseTemplate</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.After</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.Before</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.BeforeClass</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Configuration</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Configurations</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.config.Yaml</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.WalletMode</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.WalletSummary</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.error_reporting.ExceptionHandler</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.CoreEvents</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.events.ShutdownEvent</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.exchanges.ExchangeKey</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.BackupManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.managers.InstallationManager</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.services.CoreServices</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.HardwareWalletClient</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.hardware.core.HardwareWalletService</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.testing.WalletSummaryFixtures</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.testing.hardware_wallet_fixtures.HardwareWalletFixture</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.MultiBitHD</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.ui.views.MainView</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.*</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span><span class="w"></span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w"></span>
-
-<span class="kn">import static</span><span class="w"> </span><span class="nn">org.fest.swing.timing.Pause.pause</span><span class="p">;</span><span class="w"></span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.multibit.hd.core.dto.CoreMessageKey</span><span class="p">;</span><span class="w"></span>
 
 <span class="cm">/**</span>
-<span class="cm"> * &lt;p&gt;Test suite for Swing UI functional tests:&lt;/p&gt;</span>
+<span class="cm"> * &lt;p&gt;Event to provide the following to UIEventbus subscribers:&lt;/p&gt;</span>
 <span class="cm"> * &lt;ul&gt;</span>
-<span class="cm"> * &lt;li&gt;Handles startup sequence&lt;/li&gt;</span>
-<span class="cm"> * &lt;li&gt;Handles soft shutdown&lt;/li&gt;</span>
+<span class="cm"> * &lt;li&gt;Success/ failure of export transactions and payment requests&lt;/li&gt;</span>
 <span class="cm"> * &lt;/ul&gt;</span>
+<span class="cm"> * &lt;p&gt;This is an infrequent event&lt;/p&gt;</span>
 <span class="cm"> *</span>
 <span class="cm"> * @since 0.0.1</span>
 <span class="cm"> */</span><span class="w"></span>
-<span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractFestTest</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">FestSwingTestCaseTemplate</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ExportPerformedEvent</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CoreEvent</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">transactionsExportFilename</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">FrameFixture</span><span class="w"> </span><span class="n">window</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">mbhdPaymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="w"> </span><span class="n">testObject</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@BeforeClass</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUpOnce</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">exportWasSuccessful</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">FailOnThreadViolationRepaintManager</span><span class="p">.</span><span class="na">install</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">exportFailureReasonKey</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * Create a local wallet backup</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param walletSummary The wallet summary</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws IOException If something goes wrong</span>
+<span class="cm">   * TODO Consider using List&lt;String&gt; instead</span>
 <span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">createLocalBackup</span><span class="p">(</span><span class="n">WalletSummary</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Create a local backup of the empty wallet so that there is one to load</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">createLocalBackup</span><span class="p">(</span><span class="n">walletSummary</span><span class="p">.</span><span class="na">getWalletId</span><span class="p">(),</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">ABANDON_TREZOR_PASSWORD</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">exportFailureReasonData</span><span class="p">;</span><span class="w"></span>
 
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@Before</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// The fix for this is more complex than leaving it in place</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP2&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">ExportPerformedEvent</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">transactionsExportFilename</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">mbhdPaymentRequestsExportFilename</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">paymentRequestsExportFilename</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">exportWasSuccessful</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="n">exportFailureReasonKey</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">exportFailureReasonData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="w">    </span><span class="c1">// Make this message stand out</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;FEST: New test case set up.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow unrestricted operation</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// This will force the use of a temporary directory for application configuration</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// ensuring that existing configurations and wallets are untouched</span><span class="w"></span>
-<span class="w">    </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">unrestricted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the configuration</span><span class="w"></span>
-<span class="w">    </span><span class="n">Configurations</span><span class="p">.</span><span class="na">currentConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configurations</span><span class="p">.</span><span class="na">newDefaultConfiguration</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="nd">@After</span><span class="w"></span>
-<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">tearDown</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// Make this message stand out</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;FEST: Test complete. Firing &#39;SOFT&#39; shutdown before tear down.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Don&#39;t crash the JVM</span><span class="w"></span>
-<span class="w">    </span><span class="n">CoreEvents</span><span class="p">.</span><span class="na">fireShutdownEvent</span><span class="p">(</span><span class="n">ShutdownEvent</span><span class="p">.</span><span class="na">ShutdownType</span><span class="p">.</span><span class="na">SOFT</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow time for the app to terminate and be garbage collected</span><span class="w"></span>
-<span class="w">    </span><span class="n">pause</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the hardware wallet services to ensure they can be restarted</span><span class="w"></span>
-<span class="w">    </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">stopHardwareWalletServices</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;FEST: Application cleanup should have finished. Performing final cleanup.&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">testObject</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">window</span><span class="p">.</span><span class="na">cleanUp</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Reset the installation manager</span><span class="w"></span>
-<span class="w">    </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">shutdownNow</span><span class="p">(</span><span class="n">ShutdownEvent</span><span class="p">.</span><span class="na">ShutdownType</span><span class="p">.</span><span class="na">SOFT</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Cold start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an empty application directory&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">arrangeFresh</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging fresh environment...&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">transactionsExportFilename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transactionsExportFilename</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">mbhdPaymentRequestsExportFilename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mbhdPaymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">paymentRequestsExportFilename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">exportWasSuccessful</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exportWasSuccessful</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">exportFailureReasonKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exportFailureReasonKey</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">exportFailureReasonData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exportFailureReasonData</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Warm start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an application directory containing the empty wallet fixture and an accepted licence&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="n">WalletSummary</span><span class="w"> </span><span class="nf">arrangeEmpty</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging empty wallet fixture environment with hardwareWalletFixtureType: {} ...&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Get the temporary application directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Copy the standard MBHD cacerts</span><span class="w"></span>
-<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">cacerts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="s">&quot;/mbhd-cacerts&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">CA_CERTS_NAME</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">ByteStreams</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">cacerts</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Initialise the backup manager</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">initialise</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Add the empty wallet fixture</span><span class="w"></span>
-<span class="w">    </span><span class="n">WalletSummary</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">walletSummary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createEmptyTrezorHardWalletFixture</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">walletSummary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createEmptyMBHDSoftWalletFixture</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">walletSummary</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isExportWasSuccessful</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">exportWasSuccessful</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Warm start&lt;/p&gt;</span>
-<span class="cm">   * &lt;p&gt;Starts MultiBit HD with an application directory containing a standard wallet fixture containing real transactions and contacts&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @param hardwareWalletFixture The hardware wallet fixture</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE&quot;</span><span class="p">})</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">arrangeStandard</span><span class="p">(</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Arranging standard wallet fixture environment...&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Get the temporary application directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Copy the standard MBHD cacerts</span><span class="w"></span>
-<span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">cacerts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AbstractFestTest</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getResourceAsStream</span><span class="p">(</span><span class="s">&quot;/mbhd-cacerts&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">CA_CERTS_NAME</span><span class="p">));</span><span class="w"></span>
-<span class="w">    </span><span class="n">ByteStreams</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">cacerts</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Initialise the backup manager to use the temporary directory</span><span class="w"></span>
-<span class="w">    </span><span class="n">BackupManager</span><span class="p">.</span><span class="na">INSTANCE</span><span class="p">.</span><span class="na">initialise</span><span class="p">(</span><span class="n">applicationDirectory</span><span class="p">,</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">File</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Add the restored wallet fixture</span><span class="w"></span>
-<span class="w">    </span><span class="n">WalletSummaryFixtures</span><span class="p">.</span><span class="na">createStandardMBHDSoftWalletFixture</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Continue with the set up</span><span class="w"></span>
-<span class="w">    </span><span class="n">setUpAfterArrange</span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"> </span><span class="n">WalletMode</span><span class="p">.</span><span class="na">TREZOR</span><span class="p">);</span><span class="w"></span>
-
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">CoreMessageKey</span><span class="w"> </span><span class="nf">getExportFailureReasonKey</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">exportFailureReasonKey</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">  </span><span class="cm">/**</span>
-<span class="cm">   * &lt;p&gt;Handles the ongoing process of application set up&lt;/p&gt;</span>
-<span class="cm">   *</span>
-<span class="cm">   * @throws Exception If something goes wrong</span>
-<span class="cm">   */</span><span class="w"></span>
-<span class="w">  </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUpAfterArrange</span><span class="p">(</span><span class="w"></span>
-<span class="w">          </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletFixture</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">,</span><span class="w"></span>
-<span class="w">          </span><span class="n">WalletMode</span><span class="w"> </span><span class="n">walletMode</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// The fix for this is more complex than leaving it in place</span><span class="w"></span>
+<span class="w">  </span><span class="nd">@SuppressFBWarnings</span><span class="p">({</span><span class="s">&quot;EI_EXPOSE_REP&quot;</span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="nf">getExportFailureReasonData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">exportFailureReasonData</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getTransactionsExportFilename</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">transactionsExportFilename</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Setup after arrange with hardware wallet environment&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getMBHDPaymentRequestsExportFilename</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mbhdPaymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">      </span><span class="c1">// Get the hardware wallet client for the test case</span><span class="w"></span>
-<span class="w">      </span><span class="n">HardwareWalletClient</span><span class="w"> </span><span class="n">mockClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hardwareWalletFixture</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getClient</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// Inject it into the hardware wallet service</span><span class="w"></span>
-<span class="w">      </span><span class="n">HardwareWalletService</span><span class="w"> </span><span class="n">hardwareWalletService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HardwareWalletService</span><span class="p">(</span><span class="n">mockClient</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">      </span><span class="c1">// Create a suitable ordering based on the wallet mode</span><span class="w"></span>
-<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">hardwareWalletServices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Lists</span><span class="p">.</span><span class="na">newArrayList</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">walletMode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">TREZOR</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">hardwareWalletService</span><span class="p">));</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">KEEP_KEY</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="o">&lt;</span><span class="n">HardwareWalletService</span><span class="o">&gt;</span><span class="n">absent</span><span class="p">());</span><span class="w"></span>
-<span class="w">          </span><span class="n">hardwareWalletServices</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">hardwareWalletService</span><span class="p">));</span><span class="w"></span>
-<span class="w">          </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="c1">// Ensure CoreServices uses it instead of creating one</span><span class="w"></span>
-<span class="w">      </span><span class="n">CoreServices</span><span class="p">.</span><span class="na">setHardwareWalletServices</span><span class="p">(</span><span class="n">hardwareWalletServices</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Reset locale to en_US&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Always reset back to en_US</span><span class="w"></span>
-<span class="w">    </span><span class="n">Locale</span><span class="p">.</span><span class="na">setDefault</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;Create standard configuration (no exchange)&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Always start without an exchange and with cloud backups</span><span class="w"></span>
-<span class="w">    </span><span class="n">Configuration</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configurations</span><span class="p">.</span><span class="na">newDefaultConfiguration</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">configuration</span><span class="p">.</span><span class="na">getBitcoin</span><span class="p">().</span><span class="na">setCurrentExchange</span><span class="p">(</span><span class="n">ExchangeKey</span><span class="p">.</span><span class="na">NONE</span><span class="p">.</span><span class="na">name</span><span class="p">());</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">festCloudBackupDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getOrCreateApplicationDataDirectory</span><span class="p">().</span><span class="na">getAbsolutePath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/fest-cloud-backups&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">configuration</span><span class="p">.</span><span class="na">getAppearance</span><span class="p">().</span><span class="na">setCloudBackupLocation</span><span class="p">(</span><span class="n">festCloudBackupDirectory</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Persist the new configuration ready for reading later</span><span class="w"></span>
-<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">FileOutputStream</span><span class="w"> </span><span class="n">fos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="n">InstallationManager</span><span class="p">.</span><span class="na">getConfigurationFile</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">Yaml</span><span class="p">.</span><span class="na">writeYaml</span><span class="p">(</span><span class="n">fos</span><span class="p">,</span><span class="w"> </span><span class="n">configuration</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">ExceptionHandler</span><span class="p">.</span><span class="na">handleThrowable</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Starting MultiBit HD...&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Start MultiBit HD within FEST (mimic main method but split sequence)</span><span class="w"></span>
-<span class="w">    </span><span class="n">testObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MultiBitHD</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">testObject</span><span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">MainView</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GuiActionRunner</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="k">new</span><span class="w"> </span><span class="n">GuiQuery</span><span class="o">&lt;</span><span class="n">MainView</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="kd">protected</span><span class="w"> </span><span class="n">MainView</span><span class="w"> </span><span class="nf">executeInEDT</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">          </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;FEST initialising UI...&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="n">testObject</span><span class="p">.</span><span class="na">initialiseUIViews</span><span class="p">();</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">      </span><span class="p">});</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Creating FEST frame fixture&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FrameFixture</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Show the frame to test at 100,100 (unavoidable)</span><span class="w"></span>
-<span class="w">    </span><span class="n">window</span><span class="p">.</span><span class="na">show</span><span class="p">();</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;FEST setup complete&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="w">    </span><span class="c1">// Allow time for UI to render</span><span class="w"></span>
-<span class="w">    </span><span class="n">Uninterruptibles</span><span class="p">.</span><span class="na">sleepUninterruptibly</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">MILLISECONDS</span><span class="p">);</span><span class="w"></span>
-
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPaymentRequestsExportFilename</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">paymentRequestsExportFilename</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 
 <span class="p">}</span><span class="w"></span>
